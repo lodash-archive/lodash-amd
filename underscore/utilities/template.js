@@ -102,7 +102,7 @@ define(['../objects/defaults', './escape', '../internals/escapeStringChar', '../
    */
   function template(text, data, options) {
     var _ = templateSettings.imports._,
-        settings = _.templateSettings;
+        settings = _.templateSettings || templateSettings;
 
     text || (text = '');
     options = defaults({}, options, settings);

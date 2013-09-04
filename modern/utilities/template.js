@@ -119,7 +119,7 @@ define(['../objects/defaults', './escape', '../internals/escapeStringChar', '../
     // http://ejohn.org/blog/javascript-micro-templating/
     // and Laura Doktorova's doT.js
     // https://github.com/olado/doT
-    var settings = templateSettings.imports._.templateSettings;
+    var settings = templateSettings.imports._.templateSettings || templateSettings;
     text || (text = '');
 
     // avoid missing dependencies when `iteratorTemplate` is not defined
