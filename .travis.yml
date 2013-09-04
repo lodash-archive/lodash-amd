@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "0.6"
+  - "0.10"
+env:
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../lodash.js&loader=curl'"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../lodash.js&loader=dojo'"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../lodash.js&loader=requirejs'"
+git:
+  depth: 1
+branches:
+  only:
+    - master
+script:
+  - "git clone --depth=1 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash/"
+  - $TEST_COMMAND
