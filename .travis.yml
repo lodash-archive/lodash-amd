@@ -3,12 +3,12 @@ node_js:
   - "0.6"
   - "0.10"
 env:
-  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../compat/lodash.js&loader=curl'"
-  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../compat/lodash.js&loader=dojo'"
-  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../compat/lodash.js&loader=requirejs'"
-  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=curl'"
-  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=dojo'"
-  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js 'node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=requirejs'"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../compat/lodash.js&loader=curl"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../compat/lodash.js&loader=dojo"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../compat/lodash.js&loader=requirejs"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=curl"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=dojo"
+  - TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=requirejs"
 git:
   depth: 1
 branches:
