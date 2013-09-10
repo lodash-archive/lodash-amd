@@ -21,5 +21,13 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/lodash/lodash-amd.git"
+  },
+  "volo": {
+    "type": "directory",
+    "ignore": [
+      ".*",
+      "*.md",
+      "node_modules"
+    ]
   }
 }
