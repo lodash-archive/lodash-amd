@@ -2,11 +2,14 @@
  * @license
  * Lo-Dash 1.3.1 <http://lodash.com/>
  * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
- * Based on Underscore.js 1.5.1 <http://underscorejs.org/LICENSE>
+ * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isArray', '../utilities/random', './shuffle', './toArray'], function(isArray, random, shuffle, toArray) {
+define(['../objects/isString', '../utilities/random', './shuffle', '../support', '../objects/values'], function(isString, random, shuffle, support, values) {
+
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeMax = Math.max,
@@ -32,11 +35,14 @@ define(['../objects/isArray', '../utilities/random', './shuffle', './toArray'], 
    * // => [3, 1]
    */
   function sample(collection, n, guard) {
-    if (!isArray(collection)) {
-      collection = toArray(collection);
+    var length = collection ? collection.length : 0;
+    if (typeof length != 'number') {
+      collection = values(collection);
+    } else if (support.unindexedChars && isString(collection)) {
+      collection = collection.split('');
     }
     if (n == null || guard) {
-      return collection[random(collection.length - 1)];
+      return collection ? collection[random(length - 1)] : undefined;
     }
     var result = shuffle(collection);
     result.length = nativeMin(nativeMax(0, n), result.length);
