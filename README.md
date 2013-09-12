@@ -2,6 +2,20 @@
 
 A collection of Lo-Dash methods as AMD modules.
 
+## Packages
+
+Define a build as `lodash` (instead of `lodash-amd/{build}`)
+
+```js
+require({
+  'packages': [
+    { 'name': 'lodash', 'location': 'lodash-amd/modern', 'main': 'lodash' }
+  ]
+}, ['lodash/collections/forEach'], function(forEach){
+  // use forEach
+});
+```
+
 ## Author
 
 | [![twitter/jdalton](http://gravatar.com/avatar/299a3d891ff1920b69c364d061007043?s=70)](http://twitter.com/jdalton "Follow @jdalton on Twitter") |
