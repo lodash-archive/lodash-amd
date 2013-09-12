@@ -22,7 +22,6 @@ Easily migrate underscore code to lodash code.
 
 ```js
 require({
-  require({
   'packages': [
     { 'name': 'lodash', 'location': 'lodash-amd/modern', 'main': 'lodash' },
     { 'name': 'underscore', 'location': 'lodash-amd/underscore', 'main': 'lodash' }
