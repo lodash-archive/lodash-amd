@@ -44,7 +44,6 @@ Eventually, when underscore compatibility is no longer needed, just switch your 
 
 ```js
 require({
-  require({
   'packages': [
     { 'name': 'lodash', 'location': 'lodash-amd/modern', 'main': 'lodash' },
     { 'name': 'underscore', 'location': 'lodash-amd/modern', 'main': 'lodash' }
