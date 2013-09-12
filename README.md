@@ -4,7 +4,7 @@ A collection of Lo-Dash methods as AMD modules.
 
 ## Packages
 
-Define a build as `lodash` (instead of `lodash-amd/{build}`)
+Define a build as `'lodash'` (instead of `'lodash-amd/{build}'`)
 
 ```js
 require({
@@ -14,6 +14,43 @@ require({
 }, ['lodash/collections/forEach'], function(forEach){
   // use forEach
 });
+```
+
+## Migrations
+
+Easily migrate underscore code to lodash code.
+
+```js
+require({
+  require({
+  'packages': [
+    { 'name': 'lodash', 'location': 'lodash-amd/modern', 'main': 'lodash' },
+    { 'name': 'underscore', 'location': 'lodash-amd/underscore', 'main': 'lodash' }
+  ]
+}, [], function(){});
+```
+
+When working with code that must have underscore compatibility, just import the `'underscore'` dependency.
+If you don't need underscore compatibility and want the benefits of lodash, import `'lodash'` dependency.
+You can even mix and match.
+
+```js
+define(['underscore', 'lodash/collections/transform'], function(_, transform){
+  // use _ prefixed code with underscore
+  // use transform from lodash
+});
+```
+
+Eventually, when underscore compatibility is no longer needed, just switch your `packages` configuration.
+
+```js
+require({
+  require({
+  'packages': [
+    { 'name': 'lodash', 'location': 'lodash-amd/modern', 'main': 'lodash' },
+    { 'name': 'underscore', 'location': 'lodash-amd/modern', 'main': 'lodash' }
+  ]
+}, [], function(){});
 ```
 
 ## Author
