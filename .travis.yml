@@ -24,7 +24,7 @@ branches:
 script:
   - "git clone --depth=1 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli"
   - "git clone --depth=1 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
-  - "mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../ && npm install . && cd ../../"
+  - "mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../"
   - "node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./legacy"
   - "node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./mobile"
   - $TEST_COMMAND
