@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./getObject', './reNative', './releaseObject'], function(getObject, reNative, releaseObject) {
+define(['./getObject', './noop', './reNative', './releaseObject'], function(getObject, noop, reNative, releaseObject) {
 
   /** Used for native method references */
   var objectProto = Object.prototype;
