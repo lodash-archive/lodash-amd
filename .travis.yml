@@ -23,8 +23,8 @@ branches:
     - master
 script:
   - "git clone --depth=1 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
-  - "$BUILD && git clone --depth=1 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli"
-  - "$BUILD && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../"
-  - "$BUILD && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./legacy"
-  - "$BUILD && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./mobile"
+  - "$BUILD && git clone --depth=1 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
+  - "$BUILD && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../ || true"
+  - "$BUILD && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./legacy || true"
+  - "$BUILD && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./mobile || true"
   - $TEST_COMMAND
