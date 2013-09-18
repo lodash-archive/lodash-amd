@@ -38,7 +38,8 @@ define(['../internals/reNative'], function(reNative) {
    * // => true
    */
   var isArray = nativeIsArray || function(value) {
-    return (value && typeof value == 'object') ? toString.call(value) == arrayClass : false;
+    return value && typeof value == 'object' && typeof value.length == 'number' &&
+      toString.call(value) == arrayClass || false;
   };
 
   return isArray;
