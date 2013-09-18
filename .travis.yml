@@ -10,12 +10,12 @@ env:
   - BUILD=false TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=curl"
   - BUILD=false TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=dojo"
   - BUILD=false TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../modern/lodash.js&loader=requirejs"
-  - BUILD=true  TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../legacy/lodash.js&loader=curl"
-  - BUILD=true  TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../legacy/lodash.js&loader=dojo"
-  - BUILD=true  TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../legacy/lodash.js&loader=requirejs"
-  - BUILD=true  TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../mobile/lodash.js&loader=curl"
-  - BUILD=true  TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../mobile/lodash.js&loader=dojo"
-  - BUILD=true  TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../mobile/lodash.js&loader=requirejs"
+  - BUILD="legacy" TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../legacy/lodash.js&loader=curl"
+  - BUILD="legacy" TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../legacy/lodash.js&loader=dojo"
+  - BUILD="legacy" TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../legacy/lodash.js&loader=requirejs"
+  - BUILD="mobile" TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../mobile/lodash.js&loader=curl"
+  - BUILD="mobile" TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../mobile/lodash.js&loader=dojo"
+  - BUILD="mobile" TEST_COMMAND="phantomjs ./node_modules/lodash/test/test.js node_modules/lodash/test/index.html?modularize&build=../../../mobile/lodash.js&loader=requirejs"
 git:
   depth: 1
 branches:
@@ -23,8 +23,8 @@ branches:
     - master
 script:
   - "git clone --depth=1 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
-  - "$BUILD && git clone --depth=1 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
-  - "$BUILD && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../ || true"
-  - "$BUILD && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./legacy || true"
-  - "$BUILD && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./mobile || true"
+  - "[ $BUILD != false ] && git clone --depth=1 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
+  - "[ $BUILD != false ] && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../ || true"
+  - "[ $BUILD == 'legacy' ] && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./legacy || true"
+  - "[ $BUILD == 'mobile' ] && node ./node_modules/lodash-cli/bin/lodash modularize exports=amd -o ./mobile || true"
   - $TEST_COMMAND
