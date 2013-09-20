@@ -54,7 +54,7 @@ define(['../objects/assign', '../collections/forEach', '../objects/forOwn', './g
    *
    * @private
    * @param {*} value The value to clone.
-   * @param {boolean} [deep=false] A flag to indicate a deep clone.
+   * @param {boolean} [deep=false] Specify a deep clone.
    * @param {Function} [callback] The function to customize cloning values.
    * @param {Array} [stackA=[]] Tracks traversed source objects.
    * @param {Array} [stackB=[]] Associates clones with source counterparts.
