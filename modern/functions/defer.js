@@ -12,10 +12,13 @@ define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNat
   var undefined;
 
   /** Detect free variable `exports` */
-  var freeExports = objectTypes[typeof exports] && exports;
+  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
 
   /** Detect free variable `module` */
-  var freeModule = objectTypes[typeof module] && module && module.exports == freeExports && module;
+  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+
+  /** Detect the popular CommonJS extension `module.exports` */
+  var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
 
   /**
    * Used for `Array` method references.
@@ -62,7 +65,7 @@ define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNat
     return setTimeout(function() { func.apply(undefined, args); }, 1);
   }
   // use `setImmediate` if available in Node.js
-  if (isV8 && freeModule && typeof setImmediate == 'function') {
+  if (isV8 && moduleExports && typeof setImmediate == 'function') {
     defer = function(func) {
       if (!isFunction(func)) {
         throw new TypeError;
