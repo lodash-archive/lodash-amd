@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/isObject', '../objects/keys'], function(baseCreateCallback, isObject, keys) {
+define(['../internals/baseCreateCallback', '../objects/keys'], function(baseCreateCallback, keys) {
 
   /**
    * Produces a callback bound to an optional `thisArg`. If `func` is a property

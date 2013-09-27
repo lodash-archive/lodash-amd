@@ -6,7 +6,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./debounce', '../internals/getObject', '../objects/isFunction', '../objects/isObject', '../internals/releaseObject'], function(debounce, getObject, isFunction, isObject, releaseObject) {
+define(['./debounce', '../objects/isFunction', '../objects/isObject'], function(debounce, isFunction, isObject) {
+
+  /** Used as an internal `_.debounce` options object */
+  var debounceOptions = {
+    'leading': false,
+    'maxWait': 0,
+    'trailing': false
+  };
 
   /**
    * Creates a function that, when executed, will only call the `func` function
@@ -52,13 +59,11 @@ define(['./debounce', '../internals/getObject', '../objects/isFunction', '../obj
       leading = 'leading' in options ? options.leading : leading;
       trailing = 'trailing' in options ? options.trailing : trailing;
     }
-    options = getObject();
-    options.leading = leading;
-    options.maxWait = wait;
-    options.trailing = trailing;
+    debounceOptions.leading = leading;
+    debounceOptions.maxWait = wait;
+    debounceOptions.trailing = trailing;
 
-    var result = debounce(func, wait, options);
-    releaseObject(options);
+    var result = debounce(func, wait, debounceOptions);
     return result;
   }
 

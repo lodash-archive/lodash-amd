@@ -33,7 +33,7 @@ define(['./assign', '../internals/baseCreateCallback', './isArray', './isObject'
    * @param {boolean} [deep=false] Specify a deep clone.
    * @param {Function} [callback] The function to customize cloning values.
    * @param {*} [thisArg] The `this` binding of `callback`.
-   * @returns {*} Returns the cloned `value`.
+   * @returns {*} Returns the cloned value.
    * @example
    *
    * var stooges = [

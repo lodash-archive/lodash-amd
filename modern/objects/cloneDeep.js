@@ -25,7 +25,7 @@ define(['../internals/baseClone', '../internals/baseCreateCallback'], function(b
    * @param {*} value The value to deep clone.
    * @param {Function} [callback] The function to customize cloning values.
    * @param {*} [thisArg] The `this` binding of `callback`.
-   * @returns {*} Returns the deep cloned `value`.
+   * @returns {*} Returns the deep cloned value.
    * @example
    *
    * var stooges = [

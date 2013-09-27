@@ -6,7 +6,15 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./getObject', './noop', './reNative', './releaseObject'], function(getObject, noop, reNative, releaseObject) {
+define(['./noop', './reNative'], function(noop, reNative) {
+
+  /** Used as the property descriptor for `__bindData__` */
+  var descriptor = {
+    'configurable': false,
+    'enumerable': false,
+    'value': null,
+    'writable': false
+  };
 
   /** Used for native method references */
   var objectProto = Object.prototype;
@@ -28,10 +36,8 @@ define(['./getObject', './noop', './reNative', './releaseObject'], function(getO
    * @param {*} value The value to set.
    */
   var setBindData = !defineProperty ? noop : function(func, value) {
-    var descriptor = getObject();
     descriptor.value = value;
     defineProperty(func, '__bindData__', descriptor);
-    releaseObject(descriptor);
   };
 
   return setBindData;
