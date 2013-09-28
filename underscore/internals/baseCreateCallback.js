@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/bind', '../utilities/identity', '../support'], function(bind, identity, support) {
+define(['../functions/bind', '../utilities/identity'], function(bind, identity) {
 
   /**
    * The base implementation of `_.createCallback` without support for creating
