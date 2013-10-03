@@ -17,8 +17,8 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   var arrayRef = [];
 
   /**
-   * Creates a `lodash` object which wraps the given value to enable method
-   * chaining.
+   * Creates a `lodash` object which wraps the given value to enable intuitive
+   * method chaining.
    *
    * In addition to Lo-Dash methods, wrappers also have the following `Array` methods:
    * `concat`, `join`, `pop`, `push`, `reverse`, `shift`, `slice`, `sort`, `splice`,
@@ -51,6 +51,8 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    *
    * The wrapper functions `first` and `last` return wrapped values when `n` is
    * provided, otherwise they return unwrapped values.
+   *
+   * Explicit chaining can be enabled by using the `_.chain` method.
    *
    * @name _
    * @constructor

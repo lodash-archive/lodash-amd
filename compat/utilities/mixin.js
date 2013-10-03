@@ -55,9 +55,12 @@ define(['../collections/forEach', '../objects/functions', '../objects/isFunction
 
           push.apply(args, arguments);
           var result = func.apply(object, args);
-          return (value && typeof value == 'object' && value === result)
-            ? this
-            : new ctor(result);
+          if (value && typeof value == 'object' && value === result) {
+            return this;
+          }
+          result = new ctor(result);
+          result.__chain__ = this.__chain__;
+          return result;
         };
       }
     });

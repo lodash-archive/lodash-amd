@@ -9,7 +9,7 @@
 define([], function() {
 
   /**
-   * Enables method chaining on the wrapper object.
+   * Enables explicit method chaining on the wrapper object.
    *
    * @name chain
    * @memberOf _
@@ -17,11 +17,21 @@ define([], function() {
    * @returns {*} Returns the wrapper object.
    * @example
    *
-   * var sum = _([1, 2, 3])
-   *     .chain()
-   *     .reduce(function(sum, num) { return sum + num; })
-   *     .value()
-   * // => 6`
+   * var stooges = [
+   *   { 'name': 'moe', 'age': 40 },
+   *   { 'name': 'larry', 'age': 50 }
+   * ];
+   *
+   * // without explicit chaining
+   * _(stooges).first();
+   * // => { 'name': 'moe', 'age': 40 }
+   *
+   * // with explicit chaining
+   * _(stooges).chain()
+   *   .first()
+   *   .pick('age')
+   *   .value()
+   * // => { 'age': 40 }
    */
   function wrapperChain() {
     this.__chain__ = true;
