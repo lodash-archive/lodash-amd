@@ -8,9 +8,6 @@
  */
 define(['./isArguments', './isObject', '../internals/reNative', '../internals/shimKeys', '../support'], function(isArguments, isObject, reNative, shimKeys, support) {
 
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeKeys = reNative.test(nativeKeys = Object.keys) && nativeKeys;
 

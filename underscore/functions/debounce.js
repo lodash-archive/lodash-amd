@@ -11,9 +11,6 @@ define(['../objects/isFunction', '../objects/isObject', '../internals/reNative']
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
 
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
   /** Native method shortcuts */
   var now = reNative.test(now = Date.now) && now || function() { return +new Date; };
 
