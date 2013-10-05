@@ -71,7 +71,7 @@ define(['./createObject', '../objects/isFunction', '../objects/isObject', './reN
       isPartialRight = partialRightArgs = false;
     }
     var bindData = func && func.__bindData__;
-    if (bindData) {
+    if (bindData && bindData !== true) {
       if (isBind && !(bindData[1] & 1)) {
         bindData[4] = thisArg;
       }
