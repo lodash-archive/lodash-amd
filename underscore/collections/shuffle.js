@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forEach', '../utilities/random'], function(forEach, random) {
+define(['../internals/baseRandom', './forEach'], function(baseRandom, forEach) {
 
   /**
    * Creates an array of shuffled values, using a version of the Fisher-Yates
@@ -28,7 +28,7 @@ define(['./forEach', '../utilities/random'], function(forEach, random) {
         result = Array(typeof length == 'number' ? length : 0);
 
     forEach(collection, function(value) {
-      var rand = random(++index);
+      var rand = baseRandom(0, ++index);
       result[index] = result[rand];
       result[rand] = value;
     });

@@ -6,10 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define([], function() {
-
-  /** Native method shortcuts */
-  var floor = Math.floor;
+define(['../internals/baseRandom'], function(baseRandom) {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeMin = Math.min,
@@ -66,10 +63,11 @@ define([], function() {
     } else {
       max = +max || 0;
     }
-    var rand = nativeRandom();
-    return (floating || min % 1 || max % 1)
-      ? nativeMin(min + (rand * (max - min + parseFloat('1e-' + ((rand +'').length - 1)))), max)
-      : min + floor(rand * (max - min + 1));
+    if (floating || min % 1 || max % 1) {
+      var rand = nativeRandom();
+      return nativeMin(min + (rand * (max - min + parseFloat('1e-' + ((rand +'').length - 1)))), max);
+    }
+    return baseRandom(min, max);
   }
 
   return random;
