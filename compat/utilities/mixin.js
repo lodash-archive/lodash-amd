@@ -36,11 +36,11 @@ define(['../collections/forEach', '../objects/functions', '../objects/isFunction
    *   }
    * });
    *
-   * _.capitalize('moe');
-   * // => 'Moe'
+   * _.capitalize('fred');
+   * // => 'Fred'
    *
-   * _('moe').capitalize();
-   * // => 'Moe'
+   * _('fred').capitalize();
+   * // => 'Fred'
    */
   function mixin(object, source) {
     var ctor = object,

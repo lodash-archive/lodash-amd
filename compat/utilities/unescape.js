@@ -20,8 +20,8 @@ define(['../objects/keys', '../internals/reEscapedHtml', '../internals/unescapeH
    * @returns {string} Returns the unescaped string.
    * @example
    *
-   * _.unescape('Moe, Larry &amp; Curly');
-   * // => 'Moe, Larry & Curly'
+   * _.unescape('Fred, Barney &amp; Pebbles');
+   * // => 'Fred, Barney & Pebbles'
    */
   function unescape(string) {
     return string == null ? '' : String(string).replace(reEscapedHtml, unescapeHtmlChar);

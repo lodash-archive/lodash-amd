@@ -27,7 +27,7 @@ define(['../internals/objectTypes'], function(objectTypes) {
    * @returns {boolean} Returns `true` if the `value` is a regular expression, else `false`.
    * @example
    *
-   * _.isRegExp(/moe/);
+   * _.isRegExp(/fred/);
    * // => true
    */
   function isRegExp(value) {

@@ -21,8 +21,8 @@ define(['../collections/max', '../collections/pluck'], function(max, pluck) {
    * @returns {Array} Returns a new array of grouped elements.
    * @example
    *
-   * _.zip(['moe', 'larry'], [30, 40], [true, false]);
-   * // => [['moe', 30, true], ['larry', 40, false]]
+   * _.zip(['fred', 'barney'], [30, 40], [true, false]);
+   * // => [['fred', 30, true], ['barney', 40, false]]
    */
   function zip() {
     var array = arguments.length > 1 ? arguments : arguments[0],

@@ -18,8 +18,8 @@ define([], function() {
    * @returns {*} Returns `value`.
    * @example
    *
-   * var moe = { 'name': 'moe' };
-   * moe === _.identity(moe);
+   * var object = { 'name': 'fred' };
+   * object === _.identity(object);
    * // => true
    */
   function identity(value) {

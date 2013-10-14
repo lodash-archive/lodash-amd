@@ -19,8 +19,8 @@ define(['../internals/escapeHtmlChar', '../objects/keys', '../internals/reUnesca
    * @returns {string} Returns the escaped string.
    * @example
    *
-   * _.escape('Moe, Larry & Curly');
-   * // => 'Moe, Larry &amp; Curly'
+   * _.escape('Fred, Wilma, & Pebbles');
+   * // => 'Fred, Wilma, &amp; Pebbles'
    */
   function escape(string) {
     return string == null ? '' : String(string).replace(reUnescapedHtml, escapeHtmlChar);

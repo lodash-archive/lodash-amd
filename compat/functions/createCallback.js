@@ -23,9 +23,9 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objec
    * @returns {Function} Returns a callback function.
    * @example
    *
-   * var stooges = [
-   *   { 'name': 'moe', 'age': 40 },
-   *   { 'name': 'larry', 'age': 50 }
+   * var characters = [
+   *   { 'name': 'barney', 'age': 36 },
+   *   { 'name': 'fred',   'age': 40 }
    * ];
    *
    * // wrap to create custom callback shorthands
@@ -36,8 +36,8 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objec
    *   };
    * });
    *
-   * _.filter(stooges, 'age__gt45');
-   * // => [{ 'name': 'larry', 'age': 50 }]
+   * _.filter(characters, 'age__gt38');
+   * // => [{ 'name': 'fred', 'age': 40 }]
    */
   function createCallback(func, thisArg, argCount) {
     var type = typeof func;

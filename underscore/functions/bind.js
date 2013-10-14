@@ -37,9 +37,9 @@ define(['../internals/createBound', '../internals/reNative'], function(createBou
    *   return greeting + ' ' + this.name;
    * };
    *
-   * func = _.bind(func, { 'name': 'moe' }, 'hi');
+   * func = _.bind(func, { 'name': 'fred' }, 'hi');
    * func();
-   * // => 'hi moe'
+   * // => 'hi fred'
    */
   function bind(func, thisArg) {
     return arguments.length > 2

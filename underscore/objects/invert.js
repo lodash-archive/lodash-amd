@@ -18,8 +18,8 @@ define(['./keys'], function(keys) {
    * @returns {Object} Returns the created inverted object.
    * @example
    *
-   *  _.invert({ 'first': 'moe', 'second': 'larry' });
-   * // => { 'moe': 'first', 'larry': 'second' }
+   *  _.invert({ 'first': 'fred', 'second': 'barney' });
+   * // => { 'fred': 'first', 'barney': 'second' }
    */
   function invert(object) {
     var index = -1,
