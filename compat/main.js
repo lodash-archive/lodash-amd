@@ -131,7 +131,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.forEachRight = collections.forEachRight;
   lodash.forIn = objects.forIn;
   lodash.forInRight = objects.forInRight;
-  lodash.forOwn = objects.forOwn;
+  lodash.forOwn = forOwn;
   lodash.forOwnRight = objects.forOwnRight;
   lodash.functions = objects.functions;
   lodash.groupBy = collections.groupBy;
@@ -206,7 +206,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.identity = utilities.identity;
   lodash.indexOf = arrays.indexOf;
   lodash.isArguments = objects.isArguments;
-  lodash.isArray = objects.isArray;
+  lodash.isArray = isArray;
   lodash.isBoolean = objects.isBoolean;
   lodash.isDate = objects.isDate;
   lodash.isElement = objects.isElement;
@@ -223,7 +223,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.isString = objects.isString;
   lodash.isUndefined = objects.isUndefined;
   lodash.lastIndexOf = arrays.lastIndexOf;
-  lodash.mixin = utilities.mixin;
+  lodash.mixin = mixin;
   lodash.noConflict = utilities.noConflict;
   lodash.parseInt = utilities.parseInt;
   lodash.random = utilities.random;
