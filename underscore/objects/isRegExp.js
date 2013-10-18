@@ -31,7 +31,7 @@ define(['../internals/objectTypes'], function(objectTypes) {
    * // => true
    */
   function isRegExp(value) {
-    return (value && objectTypes[typeof value]) ? toString.call(value) == regexpClass : false;
+    return value && objectTypes[typeof value] && toString.call(value) == regexpClass || false;
   }
 
   return isRegExp;

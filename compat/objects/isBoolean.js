@@ -31,7 +31,8 @@ define([], function() {
    * // => false
    */
   function isBoolean(value) {
-    return value === true || value === false || toString.call(value) == boolClass;
+    return value === true || value === false ||
+      value && typeof value == 'object' && toString.call(value) == boolClass || false;
   }
 
   return isBoolean;

@@ -19,7 +19,7 @@ define([], function() {
    * @example
    *
    * var object = { 'name': 'fred' };
-   * object === _.identity(object);
+   * _.identity(object) === object;
    * // => true
    */
   function identity(value) {

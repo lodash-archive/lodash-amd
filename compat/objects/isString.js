@@ -31,7 +31,8 @@ define([], function() {
    * // => true
    */
   function isString(value) {
-    return typeof value == 'string' || toString.call(value) == stringClass;
+    return typeof value == 'string' ||
+      value && typeof value == 'object' && toString.call(value) == stringClass || false;
   }
 
   return isString;
