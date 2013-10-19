@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/createObject', './forOwn', './isArray'], function(baseCreateCallback, baseEach, createObject, forOwn, isArray) {
+define(['../internals/baseCreateCallback', '../internals/baseEach', './create', './forOwn', './isArray'], function(baseCreateCallback, baseEach, create, forOwn, isArray) {
 
   /**
    * An alternative to `_.reduce` this method transforms `object` to a new
@@ -19,7 +19,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
    * @static
    * @memberOf _
    * @category Objects
-   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Array|Object} object The object to iterate over.
    * @param {Function} [callback=identity] The function called per iteration.
    * @param {*} [accumulator] The custom accumulator value.
    * @param {*} [thisArg] The `this` binding of `callback`.
@@ -41,8 +41,6 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
    */
   function transform(object, callback, accumulator, thisArg) {
     var isArr = isArray(object);
-    callback = baseCreateCallback(callback, thisArg, 4);
-
     if (accumulator == null) {
       if (isArr) {
         accumulator = [];
@@ -50,12 +48,15 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
         var ctor = object && object.constructor,
             proto = ctor && ctor.prototype;
 
-        accumulator = createObject(proto);
+        accumulator = create(proto);
       }
     }
-    (isArr ? baseEach : forOwn)(object, function(value, index, object) {
-      return callback(accumulator, value, index, object);
-    });
+    if (callback) {
+      callback = baseCreateCallback(callback, thisArg, 4);
+      (isArr ? baseEach : forOwn)(object, function(value, index, object) {
+        return callback(accumulator, value, index, object);
+      });
+    }
     return accumulator;
   }
 

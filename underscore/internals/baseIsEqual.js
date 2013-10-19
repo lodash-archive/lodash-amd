@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './objectTypes', './reNative'], function(forIn, indicatorObject, isFunction, objectTypes, reNative) {
+define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './objectTypes'], function(forIn, indicatorObject, isFunction, objectTypes) {
 
   /** `Object#toString` result shortcuts */
   var arrayClass = '[object Array]',
@@ -23,9 +23,6 @@ define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './obj
   /** Native method shortcuts */
   var hasOwnProperty = objectProto.hasOwnProperty,
       toString = objectProto.toString;
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeCreate = reNative.test(nativeCreate = Object.create) && nativeCreate;
 
   /**
    * The base implementation of `_.isEqual`, without support for `thisArg` binding,
@@ -88,7 +85,7 @@ define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './obj
 
       if (ctorA != ctorB &&
             !(isFunction(ctorA) && ctorA instanceof ctorA && isFunction(ctorB) && ctorB instanceof ctorB) &&
-            (!nativeCreate || ('constructor' in a && 'constructor' in b))
+            ('constructor' in a && 'constructor' in b)
           ) {
         return false;
       }

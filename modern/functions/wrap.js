@@ -6,18 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction'], function(isFunction) {
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /** Native method shortcuts */
-  var push = arrayRef.push;
+define(['../internals/createBound'], function(createBound) {
 
   /**
    * Creates a function that provides `value` to the wrapper function as its
@@ -40,14 +29,7 @@ define(['../objects/isFunction'], function(isFunction) {
    * // => '<div>Fred, Wilma, &amp; Pebbles</div>'
    */
   function wrap(value, wrapper) {
-    if (!isFunction(wrapper)) {
-      throw new TypeError;
-    }
-    return function() {
-      var args = [value];
-      push.apply(args, arguments);
-      return wrapper.apply(this, args);
-    };
+    return createBound(wrapper, 16, [value]);
   }
 
   return wrap;
