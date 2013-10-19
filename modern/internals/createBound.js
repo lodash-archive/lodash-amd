@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/create', '../objects/isFunction', '../objects/isObject', './reNative', './setBindData', '../support'], function(create, isFunction, isObject, reNative, setBindData, support) {
+define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNative', './setBindData', '../support'], function(baseCreate, isFunction, isObject, reNative, setBindData, support) {
 
   /**
    * Used for `Array` method references.
@@ -127,7 +127,7 @@ define(['../objects/create', '../objects/isFunction', '../objects/isObject', './
         }
         if (this instanceof bound) {
           // ensure `new bound` is an instance of `func`
-          thisBinding = create(func.prototype);
+          thisBinding = baseCreate(func.prototype);
 
           // mimic the constructor's `return` behavior
           // http://es5.github.io/#x13.2.2

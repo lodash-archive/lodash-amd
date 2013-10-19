@@ -6,10 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./assign', './isObject', '../internals/noop', '../internals/reNative'], function(assign, isObject, noop, reNative) {
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeCreate = reNative.test(nativeCreate = Object.create) && nativeCreate;
+define(['./assign', '../internals/baseCreate'], function(assign, baseCreate) {
 
   /**
    * Creates an object that inherits from the given `prototype` object. If a
@@ -43,20 +40,8 @@ define(['./assign', './isObject', '../internals/noop', '../internals/reNative'],
    * // => true
    */
   function create(prototype, properties) {
-    var result = isObject(prototype) ? nativeCreate(prototype) : {};
+    var result = baseCreate(prototype);
     return properties ? assign(result, properties) : result;
-  }
-  // fallback for browsers without `Object.create`
-  if (!nativeCreate) {
-    create = function(prototype) {
-      if (isObject(prototype)) {
-        noop.prototype = prototype;
-        var result = new noop;
-        noop.prototype = null;
-      }
-      result || (result = {});
-      return properties ? assign(result, properties) : result;
-    };
   }
 
   return create;
