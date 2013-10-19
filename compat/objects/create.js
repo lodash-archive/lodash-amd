@@ -6,18 +6,21 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isObject', '../internals/noop', '../internals/reNative'], function(isObject, noop, reNative) {
+define(['./assign', './isObject', '../internals/noop', '../internals/reNative'], function(assign, isObject, noop, reNative) {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeCreate = reNative.test(nativeCreate = Object.create) && nativeCreate;
 
   /**
-   * Creates a new object with the specified `prototype`.
+   * Creates an object that inherits from the given `prototype` object. If a
+   * `properties` object is provided its own enumerable properties are assigned
+   * to the created object.
    *
    * @static
    * @memberOf _
    * @category Objects
-   * @param {Object} prototype The prototype object.
+   * @param {Object} prototype The object to inherit from.
+   * @param {Object} [properties] The properties to assign to the object.
    * @returns {Object} Returns the new object.
    * @example
    *
@@ -30,8 +33,7 @@ define(['./isObject', '../internals/noop', '../internals/reNative'], function(is
    *   Shape.call(this);
    * }
    *
-   * Circle.prototype = _.create(Shape.prototype);
-   * Circle.prototype.constructor = Circle;
+   * Circle.prototype = _.create(Shape.prototype, { 'constructor': Circle });
    *
    * var circle = new Circle;
    * circle instanceof Circle
@@ -40,8 +42,9 @@ define(['./isObject', '../internals/noop', '../internals/reNative'], function(is
    * circle instanceof Shape
    * // => true
    */
-  function create(prototype) {
-    return isObject(prototype) ? nativeCreate(prototype) : {};
+  function create(prototype, properties) {
+    var result = isObject(prototype) ? nativeCreate(prototype) : {};
+    return properties ? assign(result, properties) : result;
   }
   // fallback for browsers without `Object.create`
   if (!nativeCreate) {
@@ -51,7 +54,8 @@ define(['./isObject', '../internals/noop', '../internals/reNative'], function(is
         var result = new noop;
         noop.prototype = null;
       }
-      return result || {};
+      result || (result = {});
+      return properties ? assign(result, properties) : result;
     };
   }
 
