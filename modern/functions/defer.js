@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNative', '../internals/slice'], function(isFunction, objectTypes, reNative, slice) {
+define(['../objects/isFunction', '../internals/isV8', '../internals/nativeBind', '../internals/objectTypes', '../internals/reNative', '../internals/slice'], function(isFunction, isV8, nativeBind, objectTypes, reNative, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -19,25 +19,6 @@ define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNat
 
   /** Detect the popular CommonJS extension `module.exports` */
   var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
-
-  var nativeBind = (function() {
-    // Narwhal doesn't accept `undefined` as the `thisArg`
-    try {
-      var result = toString.bind;
-      return reNative.test(result) && result.bind() && result;
-    } catch(e) { }
-    return false;
-  }());
-
-  /** Detect various environments */
-  var isIeOpera = reNative.test(window.attachEvent),
-      isV8 = nativeBind && !/\n|true/.test(nativeBind + isIeOpera);
 
   /**
    * Defers executing the `func` function until the current call stack has cleared.

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNative', './setBindData', './slice', '../support'], function(baseCreate, isFunction, isObject, reNative, setBindData, slice, support) {
+define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './nativeBind', './reNative', './setBindData', './slice', '../support'], function(baseCreate, isFunction, isObject, nativeBind, reNative, setBindData, slice, support) {
 
   /**
    * Used for `Array` method references.
@@ -16,24 +16,9 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
    */
   var arrayRef = [];
 
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
-
   /** Native method shortcuts */
   var push = arrayRef.push,
       unshift = arrayRef.unshift;
-
-  var nativeBind = (function() {
-    // Narwhal doesn't accept `undefined` as the `thisArg`
-    try {
-      var result = toString.bind;
-      return reNative.test(result) && result.bind() && result;
-    } catch(e) { }
-    return false;
-  }());
 
   /**
    * Creates a function that, when called, either curries or invokes `func`

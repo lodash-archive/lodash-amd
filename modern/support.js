@@ -6,29 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./internals/reNative'], function(reNative) {
+define(['./internals/isV8', './internals/nativeBind', './internals/reNative'], function(isV8, nativeBind, reNative) {
 
   /** Used to detect functions containing a `this` reference */
   var reThis = /\bthis\b/;
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
-
-  var nativeBind = (function() {
-    // Narwhal doesn't accept `undefined` as the `thisArg`
-    try {
-      var result = toString.bind;
-      return reNative.test(result) && result.bind() && result;
-    } catch(e) { }
-    return false;
-  }());
-
-  /** Detect various environments */
-  var isIeOpera = reNative.test(window.attachEvent),
-      isV8 = nativeBind && !/\n|true/.test(nativeBind + isIeOpera);
 
   /**
    * An object used to flag environments features.
