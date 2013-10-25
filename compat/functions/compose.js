@@ -22,7 +22,7 @@ define(['../objects/isFunction'], function(isFunction) {
    * @example
    *
    * var realNameMap = {
-   *   'pebbles': 'jerome'
+   *   'pebbles': 'penelope'
    * };
    *
    * var format = function(name) {
@@ -36,7 +36,7 @@ define(['../objects/isFunction'], function(isFunction) {
    *
    * var welcome = _.compose(greet, format);
    * welcome('pebbles');
-   * // => 'Hiya Jerome!'
+   * // => 'Hiya Penelope!'
    */
   function compose() {
     var funcs = arguments,

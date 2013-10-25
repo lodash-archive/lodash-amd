@@ -6,18 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./assign', '../internals/baseCreateCallback', './isArray', './isObject'], function(assign, baseCreateCallback, isArray, isObject) {
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeSlice = arrayRef.slice;
+define(['./assign', '../internals/baseCreateCallback', './isArray', './isObject', '../internals/slice'], function(assign, baseCreateCallback, isArray, isObject, slice) {
 
   /**
    * Creates a clone of `value`. If `deep` is `true` nested objects will also
@@ -61,7 +50,7 @@ define(['./assign', '../internals/baseCreateCallback', './isArray', './isObject'
    */
   function clone(value) {
     return isObject(value)
-      ? (isArray(value) ? nativeSlice.call(value) : assign({}, value))
+      ? (isArray(value) ? slice(value) : assign({}, value))
       : value;
   }
 

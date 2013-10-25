@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNative', './setBindData', '../support'], function(baseCreate, isFunction, isObject, reNative, setBindData, support) {
+define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNative', './setBindData', './slice', '../support'], function(baseCreate, isFunction, isObject, reNative, setBindData, slice, support) {
 
   /**
    * Used for `Array` method references.
@@ -19,14 +19,21 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
   /** Used for native method references */
   var objectProto = Object.prototype;
 
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
   /** Native method shortcuts */
   var push = arrayRef.push,
-      toString = objectProto.toString,
       unshift = arrayRef.unshift;
 
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeBind = reNative.test(nativeBind = toString.bind) && nativeBind,
-      nativeSlice = arrayRef.slice;
+  var nativeBind = (function() {
+    // Narwhal doesn't accept `undefined` as the `thisArg`
+    try {
+      var result = toString.bind;
+      return reNative.test(result) && result.bind() && result;
+    } catch(e) { }
+    return false;
+  }());
 
   /**
    * Creates a function that, when called, either curries or invokes `func`
@@ -72,21 +79,29 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
     }
     var bindData = func && func.__bindData__;
     if (bindData && bindData !== true) {
+      bindData = bindData.slice();
+
+      // set `thisBinding` is not previously bound
       if (isBind && !(bindData[1] & 1)) {
         bindData[4] = thisArg;
       }
+      // set if previously bound but not currently (subsequent curried functions)
       if (!isBind && bindData[1] & 1) {
         bitmask |= 8;
       }
+      // set curried arity if not yet set
       if (isCurry && !(bindData[1] & 4)) {
         bindData[5] = arity;
       }
+      // append partial left arguments
       if (isPartial) {
         push.apply(bindData[2] || (bindData[2] = []), partialArgs);
       }
+      // append partial right arguments
       if (isPartialRight) {
         push.apply(bindData[3] || (bindData[3] = []), partialRightArgs);
       }
+      // merge flags
       bindData[1] |= bitmask;
       return createBound.apply(null, bindData);
     }
@@ -110,7 +125,7 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
             thisBinding = isBind ? thisArg : this;
 
         if (isCurry || isPartial || isPartialRight) {
-          args = nativeSlice.call(args);
+          args = slice(args);
           if (isPartial) {
             unshift.apply(args, partialArgs);
           }
@@ -137,7 +152,7 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
         return func.apply(thisBinding, args);
       };
     }
-    setBindData(bound, nativeSlice.call(arguments));
+    setBindData(bound, slice(arguments));
     return bound;
   }
 

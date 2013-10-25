@@ -6,18 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound', '../internals/reNative', '../support'], function(createBound, reNative, support) {
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeSlice = arrayRef.slice;
+define(['../internals/createBound', '../internals/reNative', '../internals/slice', '../support'], function(createBound, reNative, slice, support) {
 
   /**
    * Creates a function that, when called, invokes `func` with the `this`
@@ -43,7 +32,7 @@ define(['../internals/createBound', '../internals/reNative', '../support'], func
    */
   function bind(func, thisArg) {
     return arguments.length > 2
-      ? createBound(func, 17, nativeSlice.call(arguments, 2), null, thisArg)
+      ? createBound(func, 17, slice(arguments, 2), null, thisArg)
       : createBound(func, 1, null, null, thisArg);
   }
 

@@ -6,21 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNative'], function(isFunction, objectTypes, reNative) {
+define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNative', '../internals/slice'], function(isFunction, objectTypes, reNative, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeSlice = arrayRef.slice;
 
   /**
    * Defers executing the `func` function until the current call stack has cleared.
@@ -41,7 +30,7 @@ define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNat
     if (!isFunction(func)) {
       throw new TypeError;
     }
-    var args = nativeSlice.call(arguments, 1);
+    var args = slice(arguments, 1);
     return setTimeout(function() { func.apply(undefined, args); }, 1);
   }
 

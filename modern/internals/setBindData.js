@@ -17,6 +17,7 @@ define(['./noop', './reNative'], function(noop, reNative) {
   };
 
   var defineProperty = (function() {
+    // IE 8 that only accepts DOM elements
     try {
       var o = {},
           func = reNative.test(func = Object.defineProperty) && func,

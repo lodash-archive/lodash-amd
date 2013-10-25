@@ -6,18 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isArray', '../objects/isString', './map', '../objects/values'], function(isArray, isString, map, values) {
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeSlice = arrayRef.slice;
+define(['../objects/isArray', './map', '../internals/slice', '../objects/values'], function(isArray, map, slice, values) {
 
   /**
    * Converts the `collection` to an array.
@@ -34,7 +23,7 @@ define(['../objects/isArray', '../objects/isString', './map', '../objects/values
    */
   function toArray(collection) {
     if (isArray(collection)) {
-      return nativeSlice.call(collection);
+      return slice(collection);
     }
     if (collection && typeof collection.length == 'number') {
       return map(collection);

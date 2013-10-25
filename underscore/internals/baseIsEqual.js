@@ -20,9 +20,11 @@ define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './obj
   /** Used for native method references */
   var objectProto = Object.prototype;
 
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
   /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty,
-      toString = objectProto.toString;
+  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
    * The base implementation of `_.isEqual`, without support for `thisArg` binding,

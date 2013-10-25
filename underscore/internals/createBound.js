@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNative', '../support'], function(baseCreate, isFunction, isObject, reNative, support) {
+define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNative', './slice', '../support'], function(baseCreate, isFunction, isObject, reNative, slice, support) {
 
   /**
    * Used for `Array` method references.
@@ -19,14 +19,21 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
   /** Used for native method references */
   var objectProto = Object.prototype;
 
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
   /** Native method shortcuts */
   var push = arrayRef.push,
-      toString = objectProto.toString,
       unshift = arrayRef.unshift;
 
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeBind = reNative.test(nativeBind = toString.bind) && nativeBind,
-      nativeSlice = arrayRef.slice;
+  var nativeBind = (function() {
+    // Narwhal doesn't accept `undefined` as the `thisArg`
+    try {
+      var result = toString.bind;
+      return reNative.test(result) && result.bind() && result;
+    } catch(e) { }
+    return false;
+  }());
 
   /**
    * Creates a function that, when called, either curries or invokes `func`
@@ -90,7 +97,7 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './reNat
             thisBinding = isBind ? thisArg : this;
 
         if (isCurry || isPartial || isPartialRight) {
-          args = nativeSlice.call(args);
+          args = slice(args);
           if (isPartial) {
             unshift.apply(args, partialArgs);
           }

@@ -6,18 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound'], function(createBound) {
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeSlice = arrayRef.slice;
+define(['../internals/createBound', '../internals/slice'], function(createBound, slice) {
 
   /**
    * Creates a function that, when called, invokes `func` with any additional
@@ -38,7 +27,7 @@ define(['../internals/createBound'], function(createBound) {
    * // => 'hi fred'
    */
   function partial(func) {
-    return createBound(func, 16, nativeSlice.call(arguments, 1));
+    return createBound(func, 16, slice(arguments, 1));
   }
 
   return partial;

@@ -6,18 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./difference'], function(difference) {
-
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeSlice = arrayRef.slice;
+define(['./difference', '../internals/slice'], function(difference, slice) {
 
   /**
    * Creates an array excluding all provided values using strict equality for
@@ -35,7 +24,7 @@ define(['./difference'], function(difference) {
    * // => [2, 3, 4]
    */
   function without(array) {
-    return difference(array, nativeSlice.call(arguments, 1));
+    return difference(array, slice(arguments, 1));
   }
 
   return without;

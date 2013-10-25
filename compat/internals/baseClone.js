@@ -33,9 +33,11 @@ define(['../objects/assign', './baseEach', '../objects/forOwn', './getArray', '.
   /** Used for native method references */
   var objectProto = Object.prototype;
 
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
   /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty,
-      toString = objectProto.toString;
+  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /** Used to lookup a built-in constructor by [[Class]] */
   var ctorByClass = {};

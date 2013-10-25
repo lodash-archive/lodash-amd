@@ -14,9 +14,11 @@ define(['../objects/forIn', '../objects/isFunction'], function(forIn, isFunction
   /** Used for native method references */
   var objectProto = Object.prototype;
 
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
   /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty,
-      toString = objectProto.toString;
+  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
    * A fallback implementation of `isPlainObject` which checks if a given value

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNative'], function(isFunction, objectTypes, reNative) {
+define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNative', '../internals/slice'], function(isFunction, objectTypes, reNative, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -20,23 +20,20 @@ define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNat
   /** Detect the popular CommonJS extension `module.exports` */
   var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
 
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
-
   /** Used for native method references */
   var objectProto = Object.prototype;
 
-  /** Native method shortcuts */
+  /** Used to resolve the internal [[Class]] of values */
   var toString = objectProto.toString;
 
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeBind = reNative.test(nativeBind = toString.bind) && nativeBind,
-      nativeSlice = arrayRef.slice;
+  var nativeBind = (function() {
+    // Narwhal doesn't accept `undefined` as the `thisArg`
+    try {
+      var result = toString.bind;
+      return reNative.test(result) && result.bind() && result;
+    } catch(e) { }
+    return false;
+  }());
 
   /** Detect various environments */
   var isIeOpera = reNative.test(window.attachEvent),
@@ -61,7 +58,7 @@ define(['../objects/isFunction', '../internals/objectTypes', '../internals/reNat
     if (!isFunction(func)) {
       throw new TypeError;
     }
-    var args = nativeSlice.call(arguments, 1);
+    var args = slice(arguments, 1);
     return setTimeout(function() { func.apply(undefined, args); }, 1);
   }
   // use `setImmediate` if available in Node.js

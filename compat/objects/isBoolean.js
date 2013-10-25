@@ -14,7 +14,7 @@ define([], function() {
   /** Used for native method references */
   var objectProto = Object.prototype;
 
-  /** Native method shortcuts */
+  /** Used to resolve the internal [[Class]] of values */
   var toString = objectProto.toString;
 
   /**
