@@ -8,9 +8,8 @@
  */
 define(['./nativeBind', './reNative'], function(nativeBind, reNative) {
 
-  /** Detect various environments */
-  var isIeOpera = reNative.test(window.attachEvent),
-      isV8 = nativeBind && !/\n|true/.test(nativeBind + isIeOpera);
+  /** Used to enable optimizations for V8 */
+  var isV8 = nativeBind && !/\n/.test(nativeBind) && !reNative.test(window.attachEvent);
 
   return isV8;
 });
