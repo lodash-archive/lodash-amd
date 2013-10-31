@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../internals/createBound', '../objects/functions'], function(baseFlatten, createBound, functions) {
+define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/functions'], function(baseFlatten, createWrapper, functions) {
 
   /**
    * Binds methods of an object to the object itself, overwriting the existing
@@ -39,7 +39,7 @@ define(['../internals/baseFlatten', '../internals/createBound', '../objects/func
 
     while (++index < length) {
       var key = funcs[index];
-      object[key] = createBound(object[key], 1, null, null, object);
+      object[key] = createWrapper(object[key], 1, null, null, object);
     }
     return object;
   }

@@ -6,13 +6,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./utilities/escape', './utilities/identity', './utilities/mixin', './utilities/noConflict', './utilities/parseInt', './utilities/random', './utilities/result', './utilities/template', './utilities/templateSettings', './utilities/times', './utilities/unescape', './utilities/uniqueId'], function(escape, identity, mixin, noConflict, parseInt, random, result, template, templateSettings, times, unescape, uniqueId) {
+define(['./utilities/escape', './utilities/identity', './utilities/mixin', './utilities/noConflict', './utilities/noop', './utilities/parseInt', './utilities/random', './utilities/result', './utilities/template', './utilities/templateSettings', './utilities/times', './utilities/unescape', './utilities/uniqueId'], function(escape, identity, mixin, noConflict, noop, parseInt, random, result, template, templateSettings, times, unescape, uniqueId) {
 
   return {
     'escape': escape,
     'identity': identity,
     'mixin': mixin,
     'noConflict': noConflict,
+    'noop': noop,
     'parseInt': parseInt,
     'random': random,
     'result': result,

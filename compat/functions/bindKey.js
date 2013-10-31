@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound', '../internals/slice'], function(createBound, slice) {
+define(['../internals/createWrapper', '../internals/slice'], function(createWrapper, slice) {
 
   /**
    * Creates a function that, when called, invokes the method at `object[key]`
@@ -44,8 +44,8 @@ define(['../internals/createBound', '../internals/slice'], function(createBound,
    */
   function bindKey(object, key) {
     return arguments.length > 2
-      ? createBound(key, 19, slice(arguments, 2), null, object)
-      : createBound(key, 3, null, null, object);
+      ? createWrapper(key, 19, slice(arguments, 2), null, object)
+      : createWrapper(key, 3, null, null, object);
   }
 
   return bindKey;

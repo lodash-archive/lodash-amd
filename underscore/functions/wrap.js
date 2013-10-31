@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound'], function(createBound) {
+define(['../internals/createWrapper'], function(createWrapper) {
 
   /**
    * Creates a function that provides `value` to the wrapper function as its
@@ -30,7 +30,7 @@ define(['../internals/createBound'], function(createBound) {
    * // => '<p>Fred, Wilma, &amp; Pebbles</p>'
    */
   function wrap(value, wrapper) {
-    return createBound(wrapper, 16, [value]);
+    return createWrapper(wrapper, 16, [value]);
   }
 
   return wrap;

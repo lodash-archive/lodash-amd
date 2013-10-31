@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './internals/baseEach', './objects/forOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, utilities, baseEach, forOwn, isArray, lodashWrapper, mixin, support) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './internals/baseEach', './objects/forOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, baseEach, forOwn, isArray, lodashWrapper, mixin, support, templateSettings) {
 
   /**
    * Used for `Array` method references.
@@ -227,6 +227,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.lastIndexOf = arrays.lastIndexOf;
   lodash.mixin = mixin;
   lodash.noConflict = utilities.noConflict;
+  lodash.noop = utilities.noop;
   lodash.parseInt = utilities.parseInt;
   lodash.random = utilities.random;
   lodash.reduce = collections.reduce;

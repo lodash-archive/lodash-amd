@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../internals/isV8', '../internals/slice'], function(isFunction, isV8, slice) {
+define(['../objects/isFunction', '../internals/slice'], function(isFunction, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;

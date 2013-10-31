@@ -56,7 +56,7 @@ define(['../internals/baseUniq', '../functions/createCallback'], function(baseUn
     // juggle arguments
     if (typeof isSorted != 'boolean' && isSorted != null) {
       thisArg = callback;
-      callback = !(thisArg && thisArg[isSorted] === array) ? isSorted : null;
+      callback = (typeof isSorted != 'function' && thisArg && thisArg[isSorted] === array) ? null : isSorted;
       isSorted = false;
     }
     if (callback != null) {

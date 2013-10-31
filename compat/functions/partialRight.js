@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound', '../internals/slice'], function(createBound, slice) {
+define(['../internals/createWrapper', '../internals/slice'], function(createWrapper, slice) {
 
   /**
    * This method is like `_.partial` except that `partial` arguments are
@@ -36,7 +36,7 @@ define(['../internals/createBound', '../internals/slice'], function(createBound,
    * // => { '_': _, 'jq': $ }
    */
   function partialRight(func) {
-    return createBound(func, 32, null, slice(arguments, 1));
+    return createWrapper(func, 32, null, slice(arguments, 1));
   }
 
   return partialRight;

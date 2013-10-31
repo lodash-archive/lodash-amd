@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound', '../internals/reNative', '../internals/slice', '../support'], function(createBound, reNative, slice, support) {
+define(['../internals/createWrapper', '../internals/reNative', '../internals/slice', '../support'], function(createWrapper, reNative, slice, support) {
 
   /**
    * Creates a function that, when called, invokes `func` with the `this`
@@ -32,8 +32,8 @@ define(['../internals/createBound', '../internals/reNative', '../internals/slice
    */
   function bind(func, thisArg) {
     return arguments.length > 2
-      ? createBound(func, 17, slice(arguments, 2), null, thisArg)
-      : createBound(func, 1, null, null, thisArg);
+      ? createWrapper(func, 17, slice(arguments, 2), null, thisArg)
+      : createWrapper(func, 1, null, null, thisArg);
   }
 
   return bind;

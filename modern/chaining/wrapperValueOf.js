@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../collections/forEach'], function(forEach) {
+define(['../collections/forEach', '../support'], function(forEach, support) {
 
   /**
    * Extracts the wrapped value.

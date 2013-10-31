@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createBound', '../internals/slice'], function(createBound, slice) {
+define(['../internals/createWrapper', '../internals/slice'], function(createWrapper, slice) {
 
   /**
    * Creates a function that, when called, invokes `func` with any additional
@@ -27,7 +27,7 @@ define(['../internals/createBound', '../internals/slice'], function(createBound,
    * // => 'hi fred'
    */
   function partial(func) {
-    return createBound(func, 16, slice(arguments, 1));
+    return createWrapper(func, 16, slice(arguments, 1));
   }
 
   return partial;

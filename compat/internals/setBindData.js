@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./noop', './reNative'], function(noop, reNative) {
+define(['../utilities/noop', './reNative'], function(noop, reNative) {
 
   /** Used as the property descriptor for `__bindData__` */
   var descriptor = {
@@ -16,8 +16,9 @@ define(['./noop', './reNative'], function(noop, reNative) {
     'writable': false
   };
 
+  /** Used to set meta data */
   var defineProperty = (function() {
-    // IE 8 that only accepts DOM elements
+    // IE 8 only accepts DOM elements
     try {
       var o = {},
           func = reNative.test(func = Object.defineProperty) && func,
@@ -31,7 +32,7 @@ define(['./noop', './reNative'], function(noop, reNative) {
    *
    * @private
    * @param {Function} func The function to set data on.
-   * @param {*} value The value to set.
+   * @param {Array} value The data array to set.
    */
   var setBindData = !defineProperty ? noop : function(func, value) {
     descriptor.value = value;

@@ -53,7 +53,7 @@ define(['../internals/baseFlatten', '../collections/map'], function(baseFlatten,
     // juggle arguments
     if (typeof isShallow != 'boolean' && isShallow != null) {
       thisArg = callback;
-      callback = !(thisArg && thisArg[isShallow] === array) ? isShallow : null;
+      callback = (typeof isShallow != 'function' && thisArg && thisArg[isShallow] === array) ? null : isShallow;
       isShallow = false;
     }
     if (callback != null) {

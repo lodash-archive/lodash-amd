@@ -6,19 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../internals/isV8', '../internals/nativeBind', '../internals/objectTypes', '../internals/reNative', '../internals/slice'], function(isFunction, isV8, nativeBind, objectTypes, reNative, slice) {
+define(['../objects/isFunction', '../internals/slice'], function(isFunction, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
-
-  /** Detect free variable `exports` */
-  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-
-  /** Detect free variable `module` */
-  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-
-  /** Detect the popular CommonJS extension `module.exports` */
-  var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
 
   /**
    * Defers executing the `func` function until the current call stack has cleared.
@@ -41,15 +32,6 @@ define(['../objects/isFunction', '../internals/isV8', '../internals/nativeBind',
     }
     var args = slice(arguments, 1);
     return setTimeout(function() { func.apply(undefined, args); }, 1);
-  }
-  // use `setImmediate` if available in Node.js
-  if (isV8 && moduleExports && typeof setImmediate == 'function') {
-    defer = function(func) {
-      if (!isFunction(func)) {
-        throw new TypeError;
-      }
-      return setImmediate.apply(root, arguments);
-    };
   }
 
   return defer;

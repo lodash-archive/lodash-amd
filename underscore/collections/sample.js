@@ -23,8 +23,8 @@ define(['../internals/baseRandom', '../objects/isString', './shuffle', '../objec
    * @category Collections
    * @param {Array|Object|string} collection The collection to sample.
    * @param {number} [n] The number of elements to sample.
-   * @param- {Object} [guard] Allows working with functions, like `_.map`,
-   *  without using their `key` and `object` arguments as sources.
+   * @param- {Object} [guard] Allows working with functions like `_.map`
+   *  without using their `index` arguments as `n`.
    * @returns {Array} Returns the random sample(s) of `collection`.
    * @example
    *

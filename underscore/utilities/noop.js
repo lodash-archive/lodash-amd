@@ -6,10 +6,23 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./nativeBind', './reNative'], function(nativeBind, reNative) {
+define([], function() {
 
-  /** Used to enable optimizations for V8 */
-  var isV8 = nativeBind && !/\n/.test(nativeBind) && !reNative.test(window.attachEvent);
+  /**
+   * A no-operation function.
+   *
+   * @static
+   * @memberOf _
+   * @category Utilities
+   * @example
+   *
+   * var object = { 'name': 'fred' };
+   * _.noop(object) === undefined;
+   * // => true
+   */
+  function noop() {
+    // no operation performed
+  }
 
-  return isV8;
+  return noop;
 });

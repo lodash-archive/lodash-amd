@@ -1,12 +1,12 @@
 /**
  * Lo-Dash 2.2.1 (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize exports="amd" -o ./compat/`
+ * Build: `lodash modularize modern exports="amd" -o ./modern/`
  * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './nativeBind', './reNative', './setBindData', './slice', '../support'], function(baseCreate, isFunction, isObject, nativeBind, reNative, setBindData, slice, support) {
+define(['./baseBind', './baseCreateWrapper', '../objects/isFunction'], function(baseBind, baseCreateWrapper, isFunction) {
 
   /**
    * Used for `Array` method references.
@@ -17,8 +17,7 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './nativ
   var arrayRef = [];
 
   /** Native method shortcuts */
-  var push = arrayRef.push,
-      unshift = arrayRef.unshift;
+  var push = arrayRef.push;
 
   /**
    * Creates a function that, when called, either curries or invokes `func`
@@ -40,16 +39,15 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './nativ
    *  provided to the new function.
    * @param {*} [thisArg] The `this` binding of `func`.
    * @param {number} [arity] The arity of `func`.
-   * @returns {Function} Returns the new bound function.
+   * @returns {Function} Returns the new function.
    */
-  function createBound(func, bitmask, partialArgs, partialRightArgs, thisArg, arity) {
+  function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, arity) {
     var isBind = bitmask & 1,
         isBindKey = bitmask & 2,
         isCurry = bitmask & 4,
         isCurryBound = bitmask & 8,
         isPartial = bitmask & 16,
-        isPartialRight = bitmask & 32,
-        key = func;
+        isPartialRight = bitmask & 32;
 
     if (!isBindKey && !isFunction(func)) {
       throw new TypeError;
@@ -88,58 +86,12 @@ define(['./baseCreate', '../objects/isFunction', '../objects/isObject', './nativ
       }
       // merge flags
       bindData[1] |= bitmask;
-      return createBound.apply(null, bindData);
+      return createWrapper.apply(null, bindData);
     }
-    // use `Function#bind` if it exists and is fast
-    // (in V8 `Function#bind` is slower except when partially applied)
-    if (isBind && !(isBindKey || isCurry || isPartialRight) &&
-        (support.fastBind || (nativeBind && isPartial))) {
-      if (isPartial) {
-        var args = [thisArg];
-        push.apply(args, partialArgs);
-      }
-      var bound = isPartial
-        ? nativeBind.apply(func, args)
-        : nativeBind.call(func, thisArg);
-    }
-    else {
-      bound = function() {
-        // `Function#bind` spec
-        // http://es5.github.io/#x15.3.4.5
-        var args = arguments,
-            thisBinding = isBind ? thisArg : this;
-
-        if (isCurry || isPartial || isPartialRight) {
-          args = slice(args);
-          if (isPartial) {
-            unshift.apply(args, partialArgs);
-          }
-          if (isPartialRight) {
-            push.apply(args, partialRightArgs);
-          }
-          if (isCurry && args.length < arity) {
-            bitmask |= 16 & ~32;
-            return createBound(func, (isCurryBound ? bitmask : bitmask & ~3), args, null, thisArg, arity);
-          }
-        }
-        if (isBindKey) {
-          func = thisBinding[key];
-        }
-        if (this instanceof bound) {
-          // ensure `new bound` is an instance of `func`
-          thisBinding = baseCreate(func.prototype);
-
-          // mimic the constructor's `return` behavior
-          // http://es5.github.io/#x13.2.2
-          var result = func.apply(thisBinding, args);
-          return isObject(result) ? result : thisBinding;
-        }
-        return func.apply(thisBinding, args);
-      };
-    }
-    setBindData(bound, slice(arguments));
-    return bound;
+    // fast path for `_.bind`
+    var creater = (bitmask == 1 || bitmask === 17) ? baseBind : baseCreateWrapper;
+    return creater([func, bitmask, partialArgs, partialRightArgs, thisArg, arity]);
   }
 
-  return createBound;
+  return createWrapper;
 });
