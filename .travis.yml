@@ -1,7 +1,5 @@
 language: node_js
 node_js:
-  - "0.6"
-  - "0.8"
   - "0.10"
 env:
   global:
@@ -21,22 +19,10 @@ env:
     - BUILD="mobile" LOADER="curl"
     - BUILD="mobile" LOADER="dojo"
     - BUILD="mobile" LOADER="requirejs"
-    - SAUCELABS=true LOADER="curl"
-    - SAUCELABS=true LOADER="dojo"
-    - SAUCELABS=true LOADER="requirejs"
-    - SAUCELABS=true BUILD="modern" LOADER="curl"
-    - SAUCELABS=true BUILD="modern" LOADER="dojo"
-    - SAUCELABS=true BUILD="modern" LOADER="requirejs"
-    - SAUCELABS=true BUILD="legacy" LOADER="curl"
-    - SAUCELABS=true BUILD="legacy" LOADER="dojo"
-    - SAUCELABS=true BUILD="legacy" LOADER="requirejs"
-    - SAUCELABS=true BUILD="mobile" LOADER="curl"
-    - SAUCELABS=true BUILD="mobile" LOADER="dojo"
-    - SAUCELABS=true BUILD="mobile" LOADER="requirejs"
 matrix:
   include:
-    - node_js: "0.10"
-      env: SAUCELABS=true
+    - node_js: "0.8"
+      env: SAUCELABS=true MAKE=true
 git:
   depth: 10
 branches:
@@ -48,8 +34,26 @@ before_install:
   - "[ $SAUCELABS != false ] && npm i ecstatic request sauce-tunnel || true"
   - "[ $MAKE != false ] && git clone --depth=10 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
   - "[ $MAKE != false ] && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../ || true"
-  - "[ $MAKE != false ] && node ./node_modules/lodash-cli/bin/lodash modularize $BUILD exports=amd -o ./$BUILD || true"
+  - "[ $SAUCELABS == false ] && [ $MAKE != false ] && node ./node_modules/lodash-cli/bin/lodash modularize $BUILD exports=amd -o ./$BUILD || true"
+  - "[ $SAUCELABS != false ] && node ./node_modules/lodash-cli/bin/lodash modularize legacy exports=amd -o ./legacy || true"
+  - "[ $SAUCELABS != false ] && node ./node_modules/lodash-cli/bin/lodash modularize mobile exports=amd -o ./mobile || true"
 script:
   - "[ $SAUCELABS != false ] && true || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\""
-  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\""
-  - "[ $SAUCELABS == false ] && [ $BUILD != 'mobile' ] && [ $BUILD != 'modern' ] && true || node ./node_modules/lodash/test/saucelabs.js \"/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../compat/main.js&loader=curl\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../compat/main.js&loader=curl&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../compat/main.js&loader=dojo\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../compat/main.js&loader=dojo&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../compat/main.js&loader=requirejs\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../compat/main.js&loader=requirejs&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../modern/main.js&loader=curl\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../modern/main.js&loader=dojo\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../modern/main.js&loader=requirejs\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../legacy/main.js&loader=curl\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../legacy/main.js&loader=curl&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../legacy/main.js&loader=dojo\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../legacy/main.js&loader=dojo&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../legacy/main.js&loader=requirejs\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../legacy/main.js&loader=requirejs&compat=7\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../mobile/main.js&loader=curl\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../mobile/main.js&loader=dojo\""
+  - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../mobile/main.js&loader=requirejs\""
