@@ -7,7 +7,7 @@ env:
   global:
     - BUILD="compat" MAKE=false SAUCELABS=false
     - SAUCE_USERNAME="jdalton"
-    - secure: "woILQltl1pI3DgadZ5NrcqntdPvnRmQBwIVNZL91Ht5d9snIhgyAixI6xNAS8F8BzD9RzqzVPHay5sHfn+GhNaojcaiHs1nXAbdyclevMyfP+3MQ1HGfMSU0bv1GdT35LJ+C0u4Y3SuuZSbBlNEeLXRPMngPZahf4xL8RsZz/is="
+    - secure: "eY5rJdhdRseArRr++JAEcixtRuvkw6blajJI75z/LzEWNJLRo0N17iG0QTzbAdCrzM+FB0ZgDglt9wAGJfVUK+WIfLPnORQHlhsRqkag9y6BzZ3o1SylLBqQtvvz8Ft67PjpGtVRhIECPEhGf6uQwb/p+AjGoUYl4XqPOJ+OLug="
   matrix:
     - LOADER="curl"
     - LOADER="dojo"
@@ -43,14 +43,13 @@ branches:
   only:
     - master
 before_install:
-    - "[ $SAUCELABS != false ] && npm i ecstatic request sauce-tunnel || true"
-before_script:
-  - "git clone --depth=1 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
-script:
+  - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
   - "[ $BUILD != 'compat' ] && [ $BUILD != 'modern' ] && MAKE=true || true"
-  - "[ $MAKE != false ] && git clone --depth=1 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
+  - "[ $SAUCELABS != false ] && npm i ecstatic request sauce-tunnel || true"
+  - "[ $MAKE != false ] && git clone --depth=10 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
   - "[ $MAKE != false ] && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../ || true"
   - "[ $MAKE != false ] && node ./node_modules/lodash-cli/bin/lodash modularize $BUILD exports=amd -o ./$BUILD || true"
+script:
   - "[ $SAUCELABS != false ] && true || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\""
   - "[ $SAUCELABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\""
   - "[ $SAUCELABS == false ] && [ $BUILD != 'mobile' ] && [ $BUILD != 'modern' ] && true || node ./node_modules/lodash/test/saucelabs.js \"/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&compat=7\""
