@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', './forEachRight'], function(baseCreateCallback, forEachRight) {
+define(['../functions/createCallback', './forEachRight'], function(createCallback, forEachRight) {
 
   /**
    * This method is like `_.reduce` except that it iterates over elements
@@ -29,7 +29,7 @@ define(['../internals/baseCreateCallback', './forEachRight'], function(baseCreat
    */
   function reduceRight(collection, callback, accumulator, thisArg) {
     var noaccum = arguments.length < 3;
-    callback = baseCreateCallback(callback, thisArg, 4);
+    callback = createCallback(callback, thisArg, 4);
     forEachRight(collection, function(value, index, collection) {
       accumulator = noaccum
         ? (noaccum = false, value)
