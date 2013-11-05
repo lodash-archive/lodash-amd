@@ -29,6 +29,8 @@ matrix:
       env: SAUCE_LABS=true BUILD="legacy"
     - node_js: "0.8"
       env: SAUCE_LABS=true BUILD="mobile"
+    - node_js: "0.8"
+      env: SAUCE_LABS=true BUILD="underscore"
 git:
   depth: 10
 branches:
@@ -36,15 +38,18 @@ branches:
     - master
 before_install:
   - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
-  - "[ $BUILD != 'compat' ] && [ $BUILD != 'modern' ] && MAKE=true || true"
-  - "[ $BUILD != 'mobile' ] && [ $BUILD != 'modern' ] && COMPAT=true || true"
+  - "([ $BUILD == 'legacy' ] || [ $BUILD == 'mobile' ]) && MAKE=true || true"
+  - "([ $BUILD == 'compat' ] || [ $BUILD == 'legacy' ]) && COMPAT=true || true"
   - "[ $SAUCE_LABS != false ] && npm i ecstatic@\"~0.4.0\" request@\"~2.27.0\" sauce-tunnel@\"~1.1.0\" || true"
   - "[ $MAKE != false ] && git clone --depth=10 --branch=master git://github.com/lodash/lodash-cli.git ./node_modules/lodash-cli || true"
   - "[ $MAKE != false ] && mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../ || true"
   - "[ $MAKE != false ] && node ./node_modules/lodash-cli/bin/lodash modularize $BUILD exports=amd -o ./$BUILD || true"
 script:
   - "[ $SAUCE_LABS != false ] && true || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\""
-  - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=requirejs\""
-  - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=curl\""
-  - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=dojo\""
+  - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=requirejs\""
+  - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=curl\""
+  - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=dojo\""
+  - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/underscore.html?build=../../../$BUILD/main.js&loader=requirejs\""
+  - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/underscore.html?build=../../../$BUILD/main.js&loader=curl\""
+  - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/underscore.html?build=../../../$BUILD/main.js&loader=dojo\""
   - "([ $SAUCE_LABS == false ] || [ $COMPAT == false ]) && true || node ./node_modules/lodash/test/saucelabs.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=requirejs&compat=7\""
