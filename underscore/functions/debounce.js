@@ -91,6 +91,9 @@ define(['../objects/isFunction', '../objects/isObject', '../internals/reNative']
         if (isCalled) {
           lastCalled = now();
           result = func.apply(thisArg, args);
+          if (!timeoutId && !maxTimeoutId) {
+            args = thisArg = null;
+          }
         }
       } else {
         timeoutId = setTimeout(delayed, remaining);
@@ -105,6 +108,9 @@ define(['../objects/isFunction', '../objects/isObject', '../internals/reNative']
       if (trailing || (maxWait !== wait)) {
         lastCalled = now();
         result = func.apply(thisArg, args);
+        if (!timeoutId && !maxTimeoutId) {
+          args = thisArg = null;
+        }
       }
     };
 
@@ -120,8 +126,10 @@ define(['../objects/isFunction', '../objects/isObject', '../internals/reNative']
         if (!maxTimeoutId && !leading) {
           lastCalled = stamp;
         }
-        var remaining = maxWait - (stamp - lastCalled);
-        if (remaining <= 0) {
+        var remaining = maxWait - (stamp - lastCalled),
+            isCalled = remaining <= 0;
+
+        if (isCalled) {
           if (maxTimeoutId) {
             maxTimeoutId = clearTimeout(maxTimeoutId);
           }
@@ -132,11 +140,18 @@ define(['../objects/isFunction', '../objects/isObject', '../internals/reNative']
           maxTimeoutId = setTimeout(maxDelayed, remaining);
         }
       }
-      if (!timeoutId && wait !== maxWait) {
+      if (isCalled && timeoutId) {
+        timeoutId = clearTimeout(timeoutId);
+      }
+      else if (!timeoutId && wait !== maxWait) {
         timeoutId = setTimeout(delayed, wait);
       }
       if (leadingCall) {
+        isCalled = true;
         result = func.apply(thisArg, args);
+      }
+      if (isCalled && !timeoutId && !maxTimeoutId) {
+        args = thisArg = null;
       }
       return result;
     };
