@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../internals/baseIndexOf', '../functions/createCallback', './forIn'], function(baseFlatten, baseIndexOf, createCallback, forIn) {
+define(['../internals/baseFlatten', '../functions/createCallback', '../arrays/difference', './forIn'], function(baseFlatten, createCallback, difference, forIn) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
@@ -35,23 +35,29 @@ define(['../internals/baseFlatten', '../internals/baseIndexOf', '../functions/cr
    * // => { 'name': 'fred' }
    */
   function omit(object, callback, thisArg) {
-    var indexOf = baseIndexOf,
-        isFunc = typeof callback == 'function',
-        result = {};
+    var result = {};
+    if (typeof callback != 'function') {
+      var props = [];
+      forIn(object, function(value, key) {
+        props.push(key);
+      });
+      props = difference(props, baseFlatten(arguments, true, false, 1));
 
-    if (isFunc) {
-      callback = createCallback(callback, thisArg, 3);
-    } else {
-      var props = baseFlatten(arguments, true, false, 1);
-    }
-    forIn(object, function(value, key, object) {
-      if (isFunc
-            ? !callback(value, key, object)
-            : indexOf(props, key) < 0
-          ) {
-        result[key] = value;
+      var index = -1,
+          length = props.length;
+
+      while (++index < length) {
+        var key = props[index];
+        result[key] = object[key];
       }
-    });
+    } else {
+      callback = createCallback(callback, thisArg, 3);
+      forIn(object, function(value, key, object) {
+        if (!callback(value, key, object)) {
+          result[key] = value;
+        }
+      });
+    }
     return result;
   }
 
