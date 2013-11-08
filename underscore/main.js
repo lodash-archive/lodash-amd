@@ -102,15 +102,12 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // add functions that return wrapped values when chaining
   lodash.after = functions.after;
-  lodash.at = collections.at;
   lodash.bind = functions.bind;
   lodash.bindAll = functions.bindAll;
-  lodash.bindKey = functions.bindKey;
   lodash.chain = chaining.chain;
   lodash.compact = arrays.compact;
   lodash.compose = functions.compose;
   lodash.countBy = collections.countBy;
-  lodash.curry = functions.curry;
   lodash.debounce = functions.debounce;
   lodash.defaults = objects.defaults;
   lodash.defer = functions.defer;
@@ -119,8 +116,6 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.filter = collections.filter;
   lodash.flatten = arrays.flatten;
   lodash.forEach = forEach;
-  lodash.forInRight = objects.forInRight;
-  lodash.forOwnRight = objects.forOwnRight;
   lodash.functions = objects.functions;
   lodash.groupBy = collections.groupBy;
   lodash.indexBy = collections.indexBy;
@@ -132,19 +127,15 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.map = collections.map;
   lodash.max = collections.max;
   lodash.memoize = functions.memoize;
-  lodash.merge = objects.merge;
   lodash.min = collections.min;
   lodash.omit = objects.omit;
   lodash.once = functions.once;
   lodash.pairs = objects.pairs;
   lodash.partial = functions.partial;
-  lodash.partialRight = functions.partialRight;
   lodash.pick = objects.pick;
   lodash.pluck = collections.pluck;
-  lodash.pull = arrays.pull;
   lodash.range = arrays.range;
   lodash.reject = collections.reject;
-  lodash.remove = arrays.remove;
   lodash.rest = arrays.rest;
   lodash.shuffle = collections.shuffle;
   lodash.sortBy = collections.sortBy;
@@ -152,7 +143,6 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.throttle = functions.throttle;
   lodash.times = utilities.times;
   lodash.toArray = collections.toArray;
-  lodash.transform = objects.transform;
   lodash.union = arrays.union;
   lodash.uniq = arrays.uniq;
   lodash.values = objects.values;
@@ -174,16 +164,10 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // add functions that return unwrapped values when chaining
   lodash.clone = objects.clone;
-  lodash.cloneDeep = objects.cloneDeep;
   lodash.contains = collections.contains;
   lodash.escape = utilities.escape;
   lodash.every = collections.every;
   lodash.find = collections.find;
-  lodash.findIndex = arrays.findIndex;
-  lodash.findKey = objects.findKey;
-  lodash.findLast = collections.findLast;
-  lodash.findLastIndex = arrays.findLastIndex;
-  lodash.findLastKey = objects.findLastKey;
   lodash.has = objects.has;
   lodash.identity = utilities.identity;
   lodash.indexOf = arrays.indexOf;
@@ -207,7 +191,6 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.mixin = mixin;
   lodash.noConflict = utilities.noConflict;
   lodash.noop = utilities.noop;
-  lodash.parseInt = utilities.parseInt;
   lodash.random = utilities.random;
   lodash.reduce = collections.reduce;
   lodash.reduceRight = collections.reduceRight;
