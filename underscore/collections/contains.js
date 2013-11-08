@@ -32,7 +32,7 @@ define(['../internals/baseIndexOf', '../objects/forOwn', '../internals/indicator
    * _.contains({ 'name': 'fred', 'age': 40 }, 'fred');
    * // => true
    *
-   * _.contains('pebbles', 'ur');
+   * _.contains('pebbles', 'eb');
    * // => true
    */
   function contains(collection, target) {

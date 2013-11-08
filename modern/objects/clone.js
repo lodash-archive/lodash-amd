@@ -9,7 +9,7 @@
 define(['../internals/baseClone', '../internals/baseCreateCallback'], function(baseClone, baseCreateCallback) {
 
   /**
-   * Creates a clone of `value`. If `deep` is `true` nested objects will also
+   * Creates a clone of `value`. If `isDeep` is `true` nested objects will also
    * be cloned, otherwise they will be assigned by reference. If a callback
    * is provided it will be executed to produce the cloned values. If the
    * callback returns `undefined` cloning will be handled by the method instead.
@@ -19,7 +19,7 @@ define(['../internals/baseClone', '../internals/baseCreateCallback'], function(b
    * @memberOf _
    * @category Objects
    * @param {*} value The value to clone.
-   * @param {boolean} [deep=false] Specify a deep clone.
+   * @param {boolean} [isDeep=false] Specify a deep clone.
    * @param {Function} [callback] The function to customize cloning values.
    * @param {*} [thisArg] The `this` binding of `callback`.
    * @returns {*} Returns the cloned value.
@@ -48,15 +48,15 @@ define(['../internals/baseClone', '../internals/baseCreateCallback'], function(b
    * clone.childNodes.length;
    * // => 0
    */
-  function clone(value, deep, callback, thisArg) {
+  function clone(value, isDeep, callback, thisArg) {
     // allows working with "Collections" methods without using their `index`
-    // and `collection` arguments for `deep` and `callback`
-    if (typeof deep != 'boolean' && deep != null) {
+    // and `collection` arguments for `isDeep` and `callback`
+    if (typeof isDeep != 'boolean' && isDeep != null) {
       thisArg = callback;
-      callback = deep;
-      deep = false;
+      callback = isDeep;
+      isDeep = false;
     }
-    return baseClone(value, deep, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));
+    return baseClone(value, isDeep, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));
   }
 
   return clone;

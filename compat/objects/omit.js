@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../functions/createCallback', '../arrays/difference', './forIn'], function(baseFlatten, createCallback, difference, forIn) {
+define(['../internals/baseDifference', '../internals/baseFlatten', '../functions/createCallback', './forIn'], function(baseDifference, baseFlatten, createCallback, forIn) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
@@ -41,7 +41,7 @@ define(['../internals/baseFlatten', '../functions/createCallback', '../arrays/di
       forIn(object, function(value, key) {
         props.push(key);
       });
-      props = difference(props, baseFlatten(arguments, true, false, 1));
+      props = baseDifference(props, baseFlatten(arguments, true, false, 1));
 
       var index = -1,
           length = props.length;
