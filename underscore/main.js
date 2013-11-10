@@ -190,7 +190,6 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.lastIndexOf = arrays.lastIndexOf;
   lodash.mixin = mixin;
   lodash.noConflict = utilities.noConflict;
-  lodash.noop = utilities.noop;
   lodash.random = utilities.random;
   lodash.reduce = collections.reduce;
   lodash.reduceRight = collections.reduceRight;
