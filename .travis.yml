@@ -4,8 +4,8 @@ node_js:
 env:
   global:
     - BUILD="compat" COMPAT=false MAKE=false SAUCE_LABS=false
-    - SAUCE_USERNAME="jdalton"
-    - secure: "eY5rJdhdRseArRr++JAEcixtRuvkw6blajJI75z/LzEWNJLRo0N17iG0QTzbAdCrzM+FB0ZgDglt9wAGJfVUK+WIfLPnORQHlhsRqkag9y6BzZ3o1SylLBqQtvvz8Ft67PjpGtVRhIECPEhGf6uQwb/p+AjGoUYl4XqPOJ+OLug="
+    - SAUCE_USERNAME="lodash"
+    - secure: "b1Id0bcgTs4c31K5SMoH6glrbuxafSPu3mV0pzVf6dMr75FSwtnAhR0hO02YhKdyqHPqq01IfoGOy5x1t6zPY4az1Wkg7yt0qae4ckv1/0KMO8sOahsNQoTxspuBRwj1RSKJwCR/xn41jQJsAVIMezJa1i+iiBXpAVeenl5Yi7U="
   matrix:
     - LOADER="curl"
     - LOADER="dojo"
