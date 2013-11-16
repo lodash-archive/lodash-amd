@@ -74,8 +74,8 @@ define(['../objects/defaults', './escape', '../internals/escapeStringChar', '../
    * // => 'hello mustache!'
    *
    * // using the `imports` option to import jQuery
-   * var list = '<% $.each(people, function(name) { %><li><%- name %></li><% }); %>';
-   * _.template(list, { 'people': ['fred', 'barney'] }, { 'imports': { '$': jQuery } });
+   * var list = '<% jq.each(people, function(name) { %><li><%- name %></li><% }); %>';
+   * _.template(list, { 'people': ['fred', 'barney'] }, { 'imports': { 'jq': jQuery } });
    * // => '<li>fred</li><li>barney</li>'
    *
    * // using the `sourceURL` option to specify a custom sourceURL for the template

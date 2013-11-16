@@ -24,8 +24,8 @@ define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/fu
    * @example
    *
    * var view = {
-   *  'label': 'docs',
-   *  'onClick': function() { console.log('clicked ' + this.label); }
+   *   'label': 'docs',
+   *   'onClick': function() { console.log('clicked ' + this.label); }
    * };
    *
    * _.bindAll(view);
