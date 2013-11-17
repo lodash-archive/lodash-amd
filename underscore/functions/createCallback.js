@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/keys'], function(baseCreateCallback, keys) {
+define(['../internals/baseCreateCallback', '../objects/keys', './property'], function(baseCreateCallback, keys, property) {
 
   /**
    * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -46,9 +46,7 @@ define(['../internals/baseCreateCallback', '../objects/keys'], function(baseCrea
     }
     // handle "_.pluck" style callback shorthands
     if (type != 'object') {
-      return function(object) {
-        return object[func];
-      };
+      return property(func);
     }
     var props = keys(func);
     return function(object) {

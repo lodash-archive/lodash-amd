@@ -155,6 +155,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.partialRight = functions.partialRight;
   lodash.pick = objects.pick;
   lodash.pluck = collections.pluck;
+  lodash.property = functions.property;
   lodash.pull = arrays.pull;
   lodash.range = arrays.range;
   lodash.reject = collections.reject;

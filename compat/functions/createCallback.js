@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], function(baseCreateCallback, baseIsEqual, isObject, keys) {
+define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objects/isObject', '../objects/keys', './property'], function(baseCreateCallback, baseIsEqual, isObject, keys, property) {
 
   /**
    * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -46,9 +46,7 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objec
     }
     // handle "_.pluck" style callback shorthands
     if (type != 'object') {
-      return function(object) {
-        return object[func];
-      };
+      return property(func);
     }
     var props = keys(func),
         key = props[0],

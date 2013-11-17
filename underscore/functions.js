@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./functions/after', './functions/bind', './functions/bindAll', './functions/compose', './functions/createCallback', './functions/debounce', './functions/defer', './functions/delay', './functions/memoize', './functions/once', './functions/partial', './functions/throttle', './functions/wrap'], function(after, bind, bindAll, compose, createCallback, debounce, defer, delay, memoize, once, partial, throttle, wrap) {
+define(['./functions/after', './functions/bind', './functions/bindAll', './functions/compose', './functions/createCallback', './functions/debounce', './functions/defer', './functions/delay', './functions/memoize', './functions/once', './functions/partial', './functions/property', './functions/throttle', './functions/wrap'], function(after, bind, bindAll, compose, createCallback, debounce, defer, delay, memoize, once, partial, property, throttle, wrap) {
 
   return {
     'after': after,
@@ -20,6 +20,7 @@ define(['./functions/after', './functions/bind', './functions/bindAll', './funct
     'memoize': memoize,
     'once': once,
     'partial': partial,
+    'property': property,
     'throttle': throttle,
     'wrap': wrap
   };
