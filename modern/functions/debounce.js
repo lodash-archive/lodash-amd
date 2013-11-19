@@ -6,13 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../objects/isObject', '../internals/reNative'], function(isFunction, isObject, reNative) {
+define(['../objects/isFunction', '../objects/isObject', '../utilities/now', '../internals/reNative'], function(isFunction, isObject, now, reNative) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
-
-  /** Native method shortcuts */
-  var now = reNative.test(now = Date.now) && now || function() { return +new Date; };
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeMax = Math.max;
