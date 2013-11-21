@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/keys', './property'], function(baseCreateCallback, keys, property) {
+define(['../internals/baseCreateCallback', '../objects/keys', '../utilities/property'], function(baseCreateCallback, keys, property) {
 
   /**
    * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -16,7 +16,7 @@ define(['../internals/baseCreateCallback', '../objects/keys', './property'], fun
    *
    * @static
    * @memberOf _
-   * @category Functions
+   * @category Utilities
    * @param {*} [func=identity] The value to convert to a callback.
    * @param {*} [thisArg] The `this` binding of the created callback.
    * @param {number} [argCount] The number of arguments the callback accepts.

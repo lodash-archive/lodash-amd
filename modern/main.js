@@ -118,6 +118,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.chain = chaining.chain;
   lodash.compact = arrays.compact;
   lodash.compose = functions.compose;
+  lodash.constant = utilities.constant;
   lodash.countBy = collections.countBy;
   lodash.create = objects.create;
   lodash.createCallback = functions.createCallback;
@@ -144,6 +145,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.invoke = collections.invoke;
   lodash.keys = objects.keys;
   lodash.map = collections.map;
+  lodash.mapValues = objects.mapValues;
   lodash.max = collections.max;
   lodash.memoize = functions.memoize;
   lodash.merge = objects.merge;
@@ -155,7 +157,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.partialRight = functions.partialRight;
   lodash.pick = objects.pick;
   lodash.pluck = collections.pluck;
-  lodash.property = functions.property;
+  lodash.property = utilities.property;
   lodash.pull = arrays.pull;
   lodash.range = arrays.range;
   lodash.reject = collections.reject;
@@ -174,6 +176,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.where = collections.where;
   lodash.without = arrays.without;
   lodash.wrap = functions.wrap;
+  lodash.xor = arrays.xor;
   lodash.zip = arrays.zip;
   lodash.zipObject = arrays.zipObject;
 
