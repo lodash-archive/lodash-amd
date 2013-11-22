@@ -39,7 +39,7 @@ define(['../collections/forEach', '../objects/functions', '../objects/isFunction
    * _.capitalize('fred');
    * // => 'Fred'
    *
-   * _('fred').capitalize();
+   * _('fred').capitalize().value();
    * // => 'Fred'
    */
   function mixin(object, source) {
