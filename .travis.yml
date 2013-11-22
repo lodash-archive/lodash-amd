@@ -67,5 +67,5 @@ before_install:
 script:
   - "[ $SAUCE_LABS != false ] && true || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
   - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) && true || node ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development\""
-  - "([ $SAUCE_LABS == false ] || [ $COMPAT == false ])       && true || node ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,ie-compat-mode\" compatMode=7"
+  - "([ $SAUCE_LABS == false ] || [ $COMPAT == false ])       && true || node ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,ie-compat\" compatMode=7"
   - "[ $SAUCE_LABS == false ] && true || node ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/underscore.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,underscore\""
