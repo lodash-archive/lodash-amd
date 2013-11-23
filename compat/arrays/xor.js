@@ -26,17 +26,18 @@ define(['../internals/baseDifference', '../internals/baseUniq', '../objects/isAr
    * // => [1, 4, 5]
    */
   function xor() {
-    var index = 0,
-        length = arguments.length,
-        result = arguments[0] || [];
+    var index = -1,
+        length = arguments.length;
 
     while (++index < length) {
       var array = arguments[index];
       if (isArray(array) || isArguments(array)) {
-        result = baseUniq(baseDifference(result, array).concat(baseDifference(array, result)));
+        var result = result
+          ? baseUniq(baseDifference(result, array).concat(baseDifference(array, result)))
+          : array;
       }
     }
-    return result;
+    return result || [];
   }
 
   return xor;

@@ -30,7 +30,7 @@ define([], function() {
    * _(characters).chain()
    *   .first()
    *   .pick('age')
-   *   .value()
+   *   .value();
    * // => { 'age': 36 }
    */
   function wrapperChain() {
