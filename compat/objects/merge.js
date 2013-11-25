@@ -66,7 +66,6 @@ define(['../internals/baseCreateCallback', '../internals/baseMerge', '../interna
     if (!isObject(object)) {
       return object;
     }
-
     // allows working with `_.reduce` and `_.reduceRight` without using
     // their `index` and `collection` arguments
     if (typeof args[2] != 'number') {
