@@ -9,7 +9,7 @@
 define(['../internals/baseDifference', '../internals/baseUniq', '../objects/isArguments', '../objects/isArray'], function(baseDifference, baseUniq, isArguments, isArray) {
 
   /**
-   * Creates an array that is the smymetric difference of the provided arrays.
+   * Creates an array that is the symmetric difference of the provided arrays.
    * See http://en.wikipedia.org/wiki/Symmetric_difference.
    *
    * @static
