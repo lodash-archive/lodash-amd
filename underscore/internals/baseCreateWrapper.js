@@ -44,7 +44,7 @@ define(['./baseCreate', '../objects/isObject', './slice'], function(baseCreate, 
     function bound() {
       var thisBinding = isBind ? thisArg : this;
       if (partialArgs) {
-        var args = partialArgs.slice();
+        var args = slice(partialArgs);
         push.apply(args, arguments);
       }
       if (partialRightArgs || isCurry) {

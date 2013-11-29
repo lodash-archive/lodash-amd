@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isObject', './setBindData'], function(baseCreate, isObject, setBindData) {
+define(['./baseCreate', '../objects/isObject', './setBindData', './slice'], function(baseCreate, isObject, setBindData, slice) {
 
   /**
    * Used for `Array` method references.
@@ -36,7 +36,7 @@ define(['./baseCreate', '../objects/isObject', './setBindData'], function(baseCr
       // `Function#bind` spec
       // http://es5.github.io/#x15.3.4.5
       if (partialArgs) {
-        var args = partialArgs.slice();
+        var args = slice(partialArgs);
         push.apply(args, arguments);
       }
       // mimic the constructor's `return` behavior

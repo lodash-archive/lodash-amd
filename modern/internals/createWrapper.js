@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseBind', './baseCreateWrapper', '../objects/isFunction'], function(baseBind, baseCreateWrapper, isFunction) {
+define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', './slice'], function(baseBind, baseCreateWrapper, isFunction, slice) {
 
   /**
    * Used for `Array` method references.
@@ -17,7 +17,8 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction'], function(
   var arrayRef = [];
 
   /** Native method shortcuts */
-  var push = arrayRef.push;
+  var push = arrayRef.push,
+      unshift = arrayRef.unshift;
 
   /**
    * Creates a function that, when called, either curries or invokes `func`
@@ -62,8 +63,14 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction'], function(
     }
     var bindData = func && func.__bindData__;
     if (bindData && bindData !== true) {
-      bindData = bindData.slice();
-
+      // clone `bindData`
+      bindData = slice(bindData);
+      if (bindData[2]) {
+        bindData[2] = slice(bindData[2]);
+      }
+      if (bindData[3]) {
+        bindData[3] = slice(bindData[3]);
+      }
       // set `thisBinding` is not previously bound
       if (isBind && !(bindData[1] & 1)) {
         bindData[4] = thisArg;
@@ -82,7 +89,7 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction'], function(
       }
       // append partial right arguments
       if (isPartialRight) {
-        push.apply(bindData[3] || (bindData[3] = []), partialRightArgs);
+        unshift.apply(bindData[3] || (bindData[3] = []), partialRightArgs);
       }
       // merge flags
       bindData[1] |= bitmask;
