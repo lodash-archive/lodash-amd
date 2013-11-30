@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isFunction', '../objects/isObject', '../utilities/now', '../internals/reNative'], function(isFunction, isObject, now, reNative) {
+define(['../objects/isFunction', '../objects/isObject', '../utilities/now'], function(isFunction, isObject, now) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;

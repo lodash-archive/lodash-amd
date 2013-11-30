@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArguments', '../internals/reNative', '../internals/shimIsPlainObject', '../support'], function(isArguments, reNative, shimIsPlainObject, support) {
+define(['./isArguments', '../internals/isNative', '../internals/shimIsPlainObject', '../support'], function(isArguments, isNative, shimIsPlainObject, support) {
 
   /** `Object#toString` result shortcuts */
   var objectClass = '[object Object]';
@@ -18,7 +18,7 @@ define(['./isArguments', '../internals/reNative', '../internals/shimIsPlainObjec
   var toString = objectProto.toString;
 
   /** Native method shortcuts */
-  var getPrototypeOf = reNative.test(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf;
+  var getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf;
 
   /**
    * Checks if `value` is an object created by the `Object` constructor.
@@ -49,7 +49,7 @@ define(['./isArguments', '../internals/reNative', '../internals/shimIsPlainObjec
       return false;
     }
     var valueOf = value.valueOf,
-        objProto = typeof valueOf == 'function' && (objProto = getPrototypeOf(valueOf)) && getPrototypeOf(objProto);
+        objProto = isNative(valueOf) && (objProto = getPrototypeOf(valueOf)) && getPrototypeOf(objProto);
 
     return objProto
       ? (value == objProto || getPrototypeOf(value) == objProto)

@@ -21,5 +21,16 @@ define([], function() {
       .replace(/toString| for [^\]]+/g, '.*?') + '$'
   );
 
-  return reNative;
+  /**
+   * Checks if `value` is a native function.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if the `value` is a native function, else `false`.
+   */
+  function isNative(value) {
+    return typeof value == 'function' && reNative.test(value);
+  }
+
+  return isNative;
 });

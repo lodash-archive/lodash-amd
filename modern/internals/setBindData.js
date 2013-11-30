@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../utilities/noop', './reNative'], function(noop, reNative) {
+define(['./isNative', '../utilities/noop'], function(isNative, noop) {
 
   /** Used as the property descriptor for `__bindData__` */
   var descriptor = {
@@ -21,7 +21,7 @@ define(['../utilities/noop', './reNative'], function(noop, reNative) {
     // IE 8 only accepts DOM elements
     try {
       var o = {},
-          func = reNative.test(func = Object.defineProperty) && func,
+          func = isNative(func = Object.defineProperty) && func,
           result = func(o, o, o) && func;
     } catch(e) { }
     return result;

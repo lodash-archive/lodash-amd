@@ -1,6 +1,6 @@
 /**
  * Lo-Dash 2.4.0 (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize underscore exports="amd" -o ./underscore/`
+ * Build: `lodash modularize modern exports="amd" -o ./modern/`
  * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -21,5 +21,16 @@ define([], function() {
       .replace(/toString| for [^\]]+/g, '.*?') + '$'
   );
 
-  return reNative;
+  /**
+   * Checks if `value` is a native function.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if the `value` is a native function, else `false`.
+   */
+  function isNative(value) {
+    return typeof value == 'function' && reNative.test(value);
+  }
+
+  return isNative;
 });

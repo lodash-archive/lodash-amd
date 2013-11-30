@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createWrapper', '../internals/reNative', '../internals/slice', '../support'], function(createWrapper, reNative, slice, support) {
+define(['../internals/createWrapper', '../internals/slice', '../support'], function(createWrapper, slice, support) {
 
   /**
    * Creates a function that, when called, invokes `func` with the `this`
