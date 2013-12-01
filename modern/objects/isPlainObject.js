@@ -1,5 +1,5 @@
 /**
- * Lo-Dash 2.4.0 (Custom Build) <http://lodash.com/>
+ * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="amd" -o ./modern/`
  * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
@@ -44,7 +44,7 @@ define(['../internals/isNative', '../internals/shimIsPlainObject'], function(isN
    * _.isPlainObject({ 'x': 0, 'y': 0 });
    * // => true
    */
-  var isPlainObject = function(value) {
+  var isPlainObject = !getPrototypeOf ? shimIsPlainObject : function(value) {
     if (!(value && toString.call(value) == objectClass)) {
       return false;
     }
