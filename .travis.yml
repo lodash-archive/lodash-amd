@@ -3,8 +3,7 @@ node_js:
   - "0.10"
 env:
   global:
-    - BUILD="compat" COMPAT=false MAKE=false SAUCE_LABS=false
-    - SAUCE_USERNAME="lodash"
+    - BUILD="compat" COMPAT=false MAKE=false SAUCE_LABS=false SAUCE_USERNAME="lodash"
     - secure: "b1Id0bcgTs4c31K5SMoH6glrbuxafSPu3mV0pzVf6dMr75FSwtnAhR0hO02YhKdyqHPqq01IfoGOy5x1t6zPY4az1Wkg7yt0qae4ckv1/0KMO8sOahsNQoTxspuBRwj1RSKJwCR/xn41jQJsAVIMezJa1i+iiBXpAVeenl5Yi7U="
   matrix:
     - LOADER="curl"
