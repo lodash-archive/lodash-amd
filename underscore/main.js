@@ -7,7 +7,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './collections/forEach', './objects/forOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, forEach, forOwn, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, lodashWrapper, mixin, support, templateSettings) {
 
   /**
    * Used for `Array` method references.
@@ -156,7 +156,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.collect = collections.map;
   lodash.drop = arrays.rest;
   lodash.each = forEach;
-  lodash.extend = objects.assign;
+  lodash.extend = assign;
   lodash.methods = objects.functions;
   lodash.object = arrays.zipObject;
   lodash.select = collections.filter;
@@ -222,7 +222,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.head = arrays.first;
 
   // add functions to `lodash.prototype`
-  mixin(lodash);
+  mixin(assign({}, lodash));
 
   /**
    * The semantic version number.
