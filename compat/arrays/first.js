@@ -44,9 +44,11 @@ define(['../functions/createCallback', '../internals/slice'], function(createCal
    * _.first([1, 2, 3]);
    * // => 1
    *
+   * // returns the first two elements
    * _.first([1, 2, 3], 2);
    * // => [1, 2]
    *
+   * // returns elements from the beginning until the callback result is falsey
    * _.first([1, 2, 3], function(num) {
    *   return num < 3;
    * });

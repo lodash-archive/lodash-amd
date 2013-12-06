@@ -39,12 +39,15 @@ define(['../internals/baseUniq', '../functions/createCallback'], function(baseUn
    * _.uniq([1, 2, 1, 3, 1]);
    * // => [1, 2, 3]
    *
+   * // using `isSorted`
    * _.uniq([1, 1, 2, 2, 3], true);
    * // => [1, 2, 3]
    *
+   * // using `callback`
    * _.uniq(['A', 'b', 'C', 'a', 'B', 'c'], function(letter) { return letter.toLowerCase(); });
    * // => ['A', 'b', 'C']
    *
+   * // using `callback` with `thisArg`
    * _.uniq([1, 2.5, 3, 1.5, 2, 3.5], function(num) { return this.floor(num); }, Math);
    * // => [1, 2.5, 3]
    *

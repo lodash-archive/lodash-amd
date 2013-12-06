@@ -41,9 +41,11 @@ define(['../functions/createCallback', '../internals/slice'], function(createCal
    * _.rest([1, 2, 3]);
    * // => [2, 3]
    *
+   * // excludes the first two elements
    * _.rest([1, 2, 3], 2);
    * // => [3]
    *
+   * // excludes elements from the beginning until the callback fails
    * _.rest([1, 2, 3], function(num) {
    *   return num < 3;
    * });
