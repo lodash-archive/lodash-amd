@@ -33,11 +33,11 @@ define(['../internals/baseDifference', '../internals/baseUniq', '../objects/isAr
       var array = arguments[index];
       if (isArray(array) || isArguments(array)) {
         var result = result
-          ? baseUniq(baseDifference(result, array).concat(baseDifference(array, result)))
+          ? baseDifference(result, array).concat(baseDifference(array, result))
           : array;
       }
     }
-    return result || [];
+    return result ? baseUniq(result) : [];
   }
 
   return xor;
