@@ -1,4 +1,5 @@
 .*
+*.log
 *.md
 bower.json
 legacy
