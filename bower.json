@@ -4,7 +4,9 @@
   "main": "compat/main.js",
   "ignore": [
     ".*",
+    "*.log",
     "*.md",
+    "coverage",
     "node_modules"
   ]
 }

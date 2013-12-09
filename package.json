@@ -19,8 +19,10 @@
     "type": "directory",
     "ignore": [
       ".*",
+      "*.log",
       "*.md",
       "bower.json",
+      "coverage",
       "node_modules"
     ]
   }
