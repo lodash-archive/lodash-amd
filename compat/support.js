@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./internals/isNative'], function(isNative) {
+define(['./internals/isNative', './internals/reNative'], function(isNative, reNative) {
 
   /** Used to detect functions containing a `this` reference */
   var reThis = /\bthis\b/;
@@ -26,6 +26,9 @@ define(['./internals/isNative'], function(isNative) {
   /** Used for native method references */
   var errorProto = Error.prototype,
       objectProto = Object.prototype;
+
+  /** Used to detect DOM support */
+  var document = (document = window.window) && document.document;
 
   /** Used to resolve the internal [[Class]] of values */
   var toString = objectProto.toString;
@@ -66,6 +69,14 @@ define(['./internals/isNative'], function(isNative) {
      * @type boolean
      */
     support.argsObject = arguments.constructor == Object && !(arguments instanceof Array);
+
+    /**
+     * Detect if the DOM is supported.
+     *
+     * @memberOf _.support
+     * @type boolean
+     */
+    support.dom = !!document && typeof document == 'object' && reNative.test(clearTimeout) && reNative.test(setTimeout);
 
     /**
      * Detect if `name` or `message` properties of `Error.prototype` are
