@@ -24,14 +24,14 @@ define(['./objectTypes'], function(objectTypes) {
    * @returns {Array} Returns an array of property names.
    */
   var shimKeys = function(object) {
-    var index, iterable = object, result = [];
-    if (!iterable) return result;
+    var result = [];
+    if (!(object && objectTypes[typeof object])) return result;
     if (!(objectTypes[typeof object])) return result;
-      for (index in iterable) {
-        if (hasOwnProperty.call(iterable, index)) {
-          result.push(index);
+    for (var key in object) {
+        if (hasOwnProperty.call(object, key)) {
+        result.push(key);
         }
-      }
+    }
     return result
   };
 

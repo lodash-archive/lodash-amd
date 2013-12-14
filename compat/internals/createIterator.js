@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreateCallback', './indicatorObject', '../objects/isArguments', '../objects/isArray', '../objects/isString', './iteratorTemplate', './objectTypes'], function(baseCreateCallback, indicatorObject, isArguments, isArray, isString, iteratorTemplate, objectTypes) {
+define(['./baseCreateCallback', './indicatorObject', '../objects/isArguments', './iteratorTemplate', './objectTypes'], function(baseCreateCallback, indicatorObject, isArguments, iteratorTemplate, objectTypes) {
 
   /** Used to fix the JScript [[DontEnum]] bug */
   var shadowedProps = [
@@ -24,21 +24,6 @@ define(['./baseCreateCallback', './indicatorObject', '../objects/isArguments', '
       objectClass = '[object Object]',
       regexpClass = '[object RegExp]',
       stringClass = '[object String]';
-
-  /** Used as the data object for `iteratorTemplate` */
-  var iteratorData = {
-    'args': '',
-    'array': null,
-    'bottom': '',
-    'firstArg': '',
-    'init': '',
-    'keys': null,
-    'loop': '',
-    'shadowedProps': null,
-    'support': null,
-    'top': '',
-    'useHas': false
-  };
 
   /** Used for native method references */
   var errorProto = Error.prototype,
@@ -74,47 +59,27 @@ define(['./baseCreateCallback', './indicatorObject', '../objects/isArguments', '
    * Creates compiled iteration functions.
    *
    * @private
-   * @param {...Object} [options] The compile options object(s).
-   * @param {string} [options.array] Code to determine if the iterable is an array or array-like.
-   * @param {boolean} [options.useHas] Specify using `hasOwnProperty` checks in the object loop.
-   * @param {Function} [options.keys] A reference to `_.keys` for use in own property iteration.
+   * @param {Object} [options] The compile options object.
    * @param {string} [options.args] A comma separated string of iteration function arguments.
    * @param {string} [options.top] Code to execute before the iteration branches.
    * @param {string} [options.loop] Code to execute in the object loop.
-   * @param {string} [options.bottom] Code to execute after the iteration branches.
+   * @param {boolean} [options.useHas] Specify using `hasOwnProperty` checks in the object loop.
    * @returns {Function} Returns the compiled function.
    */
-  function createIterator() {
-    // data properties
-    iteratorData.shadowedProps = shadowedProps;
-
-    // iterator options
-    iteratorData.array = iteratorData.bottom = iteratorData.loop = iteratorData.top = '';
-    iteratorData.init = 'iterable';
-    iteratorData.useHas = true;
-
-    // merge options into a template data object
-    for (var object, index = 0; object = arguments[index]; index++) {
-      for (var key in object) {
-        iteratorData[key] = object[key];
-      }
-    }
-    var args = iteratorData.args;
-    iteratorData.firstArg = /^[^,]+/.exec(args)[0];
+  function createIterator(options) {
+    options.shadowedProps = shadowedProps;
 
     // create the function factory
     var factory = Function(
-        'baseCreateCallback, errorClass, errorProto, hasOwnProperty, ' +
-        'indicatorObject, isArguments, isArray, isString, keys, objectProto, ' +
-        'objectTypes, nonEnumProps, stringClass, stringProto, toString',
-      'return function(' + args + ') {\n' + iteratorTemplate(iteratorData) + '\n}'
+        'baseCreateCallback, errorClass, errorProto, hasOwnProperty, isArguments, ' +
+        'objectProto, objectTypes, nonEnumProps, stringClass, stringProto, toString',
+      'return function(' + options.args + ') {\n' + iteratorTemplate(options) + '\n}'
     );
 
     // return the compiled function
     return factory(
-      baseCreateCallback, errorClass, errorProto, hasOwnProperty,
-      indicatorObject, isArguments, isArray, isString, iteratorData.keys, objectProto,
-      objectTypes, nonEnumProps, stringClass, stringProto, toString
+      baseCreateCallback, errorClass, errorProto, hasOwnProperty, isArguments,
+      objectProto, objectTypes, nonEnumProps, stringClass, stringProto, toString
     );
   }
 

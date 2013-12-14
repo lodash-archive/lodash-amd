@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./createIterator'], function(createIterator) {
+define(['./createIterator', './objectTypes'], function(createIterator, objectTypes) {
 
   /**
    * A fallback implementation of `Object.keys` which produces an array of the
@@ -21,7 +21,8 @@ define(['./createIterator'], function(createIterator) {
     'args': 'object',
     'init': '[]',
     'top': 'if (!(objectTypes[typeof object])) return result',
-    'loop': 'result.push(index)'
+    'loop': 'result.push(key)',
+    'useHas': true
   });
 
   return shimKeys;
