@@ -9,7 +9,7 @@
 define(['../functions/createCallback', './filter'], function(createCallback, filter) {
 
   /**
-   * The opposite of `_.filter` this method returns the elements of a
+   * The opposite of `_.filter`; this method returns the elements of a
    * collection that the callback does **not** return truey for.
    *
    * If a property name is provided for `callback` the created "_.pluck" style

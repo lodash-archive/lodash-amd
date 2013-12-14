@@ -10,7 +10,7 @@ define(['../internals/baseRandom', './forEach'], function(baseRandom, forEach) {
 
   /**
    * Creates an array of shuffled values, using a version of the Fisher-Yates
-   * shuffle. See http://en.wikipedia.org/wiki/Fisher-Yates_shuffle.
+   * shuffle. See [Wikipedia](http://en.wikipedia.org/wiki/Fisher-Yates_shuffle) for more details.
    *
    * @static
    * @memberOf _

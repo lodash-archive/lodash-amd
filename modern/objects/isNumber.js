@@ -20,7 +20,8 @@ define([], function() {
   /**
    * Checks if `value` is a number.
    *
-   * Note: `NaN` is considered a number. See http://es5.github.io/#x8.5.
+   * Note: `NaN` is considered a number. See the [ES5 spec](http://es5.github.io/#x8.5)
+   * for more details.
    *
    * @static
    * @memberOf _

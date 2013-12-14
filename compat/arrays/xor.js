@@ -10,7 +10,7 @@ define(['../internals/baseDifference', '../internals/baseUniq', '../objects/isAr
 
   /**
    * Creates an array that is the symmetric difference of the provided arrays.
-   * See http://en.wikipedia.org/wiki/Symmetric_difference.
+   * See [Wikipedia](http://en.wikipedia.org/wiki/Symmetric_difference) for more details.
    *
    * @static
    * @memberOf _
