@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createIterator', '../internals/eachIteratorOptions', '../internals/forOwnIteratorOptions'], function(createIterator, eachIteratorOptions, forOwnIteratorOptions) {
+define(['../internals/createIterator', '../internals/objectTypes'], function(createIterator, objectTypes) {
 
   /**
    * Iterates over own and inherited enumerable properties of an object,
@@ -39,7 +39,11 @@ define(['../internals/createIterator', '../internals/eachIteratorOptions', '../i
    * });
    * // => logs 'x', 'y', and 'move' (property order is not guaranteed across environments)
    */
-  var forIn = createIterator(eachIteratorOptions, forOwnIteratorOptions, {
+  var forIn = createIterator({
+    'args': 'object, callback, thisArg',
+    'init': 'object',
+    'top': "callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3)",
+    'loop': 'if (callback(object[key], key, object) === false) return result',
     'useHas': false
   });
 

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createIterator', '../internals/defaultsIteratorOptions'], function(createIterator, defaultsIteratorOptions) {
+define(['./isObject', './keys'], function(isObject, keys) {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination
@@ -15,7 +15,6 @@ define(['../internals/createIterator', '../internals/defaultsIteratorOptions'], 
    *
    * @static
    * @memberOf _
-   * @type Function
    * @category Objects
    * @param {Object} object The destination object.
    * @param {...Object} [source] The source objects.
@@ -28,7 +27,28 @@ define(['../internals/createIterator', '../internals/defaultsIteratorOptions'], 
    * _.defaults(object, { 'name': 'fred', 'employer': 'slate' });
    * // => { 'name': 'barney', 'employer': 'slate' }
    */
-  var defaults = createIterator(defaultsIteratorOptions);
+  function defaults(object, source, guard) {
+    var args = arguments,
+        argsIndex = 0,
+        argsLength = typeof guard == 'number' ? 2 : args.length;
+
+    while (++argsIndex < argsLength) {
+      source = args[argsIndex];
+      if (isObject(source)) {
+        var index = -1,
+            props = keys(source),
+            length = props.length;
+
+        while (++index < length) {
+          var key = props[index];
+          if (typeof object[key] == 'undefined') {
+            object[key] = source[key];
+          }
+        }
+      }
+    }
+    return object;
+  }
 
   return defaults;
 });

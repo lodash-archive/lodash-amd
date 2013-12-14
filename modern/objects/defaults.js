@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./keys', '../internals/objectTypes'], function(keys, objectTypes) {
+define(['./isObject', './keys'], function(isObject, keys) {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination
@@ -15,7 +15,6 @@ define(['./keys', '../internals/objectTypes'], function(keys, objectTypes) {
    *
    * @static
    * @memberOf _
-   * @type Function
    * @category Objects
    * @param {Object} object The destination object.
    * @param {...Object} [source] The source objects.
@@ -28,27 +27,28 @@ define(['./keys', '../internals/objectTypes'], function(keys, objectTypes) {
    * _.defaults(object, { 'name': 'fred', 'employer': 'slate' });
    * // => { 'name': 'barney', 'employer': 'slate' }
    */
-  var defaults = function(object, source, guard) {
-    var index, iterable = object, result = iterable;
-    if (!iterable) return result;
+  function defaults(object, source, guard) {
     var args = arguments,
         argsIndex = 0,
         argsLength = typeof guard == 'number' ? 2 : args.length;
-    while (++argsIndex < argsLength) {
-      iterable = args[argsIndex];
-      if (iterable && objectTypes[typeof iterable]) {
-      var ownIndex = -1,
-          ownProps = objectTypes[typeof iterable] && keys(iterable),
-          length = ownProps ? ownProps.length : 0;
 
-      while (++ownIndex < length) {
-        index = ownProps[ownIndex];
-        if (typeof result[index] == 'undefined') result[index] = iterable[index];
-      }
+    while (++argsIndex < argsLength) {
+      source = args[argsIndex];
+      if (isObject(source)) {
+        var index = -1,
+            props = keys(source),
+            length = props.length;
+
+        while (++index < length) {
+          var key = props[index];
+          if (typeof object[key] == 'undefined') {
+            object[key] = source[key];
+          }
+        }
       }
     }
-    return result
-  };
+    return object;
+  }
 
   return defaults;
 });

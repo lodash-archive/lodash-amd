@@ -6,13 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/indicatorObject', './keys', '../internals/objectTypes'], function(baseCreateCallback, indicatorObject, keys, objectTypes) {
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
+define(['../internals/baseCreateCallback', '../internals/indicatorObject', './keys'], function(baseCreateCallback, indicatorObject, keys) {
 
   /**
    * Iterates over own enumerable properties of an object, executing the callback
@@ -22,7 +16,6 @@ define(['../internals/baseCreateCallback', '../internals/indicatorObject', './ke
    *
    * @static
    * @memberOf _
-   * @type Function
    * @category Objects
    * @param {Object} object The object to iterate over.
    * @param {Function} [callback=identity] The function called per iteration.
@@ -35,17 +28,19 @@ define(['../internals/baseCreateCallback', '../internals/indicatorObject', './ke
    * });
    * // => logs '0', '1', and 'length' (property order is not guaranteed across environments)
    */
-  var forOwn = function(collection, callback) {
-    var index, iterable = collection, result = iterable;
-    if (!iterable) return result;
-    if (!objectTypes[typeof iterable]) return result;
-      for (index in iterable) {
-        if (hasOwnProperty.call(iterable, index)) {
-          if (callback(iterable[index], index, collection) === indicatorObject) return result;
-        }
+  function forOwn(object, callback) {
+    var index = -1,
+        props = keys(object),
+        length = props.length;
+
+    while (++index < length) {
+      var key = props[index];
+      if (callback(object[key], key, object) === indicatorObject) {
+        break;
       }
-    return result
-  };
+    }
+    return object;
+  }
 
   return forOwn;
 });
