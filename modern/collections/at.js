@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../objects/isString'], function(baseFlatten, isString) {
+define(['../internals/baseFlatten'], function(baseFlatten) {
 
   /**
    * Creates an array of elements from the specified indexes, or keys, of the

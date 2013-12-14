@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseRandom', '../objects/isString', './shuffle', '../objects/values'], function(baseRandom, isString, shuffle, values) {
+define(['../internals/baseRandom', './shuffle', '../objects/values'], function(baseRandom, shuffle, values) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;

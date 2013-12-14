@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/forOwn', '../objects/isArray', '../objects/isString', '../objects/keys'], function(baseCreateCallback, forOwn, isArray, isString, keys) {
+define(['../internals/baseCreateCallback', '../objects/forOwn', '../objects/isArray', '../objects/keys'], function(baseCreateCallback, forOwn, isArray, keys) {
 
   /**
    * This method is like `_.forEach` except that it iterates over elements
