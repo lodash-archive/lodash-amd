@@ -6,7 +6,13 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define([], function() {
+define(['../internals/isNode', './isPlainObject', '../support'], function(isNode, isPlainObject, support) {
+
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
 
   /**
    * Checks if `value` is a DOM element.
@@ -22,7 +28,15 @@ define([], function() {
    * // => true
    */
   function isElement(value) {
-    return value && value.nodeType === 1 || false;
+    return value && typeof value == 'object' && value.nodeType === 1 &&
+      (support.nodeClass ? toString.call(value).indexOf('Element') > -1 : isNode(value)) || false;
+  }
+  // fallback for environments without DOM support
+  if (!support.dom) {
+    isElement = function(value) {
+      return value && typeof value == 'object' && value.nodeType === 1 &&
+        !isPlainObject(value) || false;
+    };
   }
 
   return isElement;
