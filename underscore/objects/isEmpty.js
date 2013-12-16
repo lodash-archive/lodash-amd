@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArray', './isString', '../internals/toString'], function(isArray, isString, toString) {
+define(['../internals/hasOwnProperty', './isArray', './isString'], function(hasOwnProperty, isArray, isString) {
 
   /**
    * Checks if `value` is empty. Arrays, strings, or `arguments` objects with a
