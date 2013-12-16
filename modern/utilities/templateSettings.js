@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./escape', '../internals/reInterpolate'], function(escape, reInterpolate) {
+define(['./escape', '../internals/reEscape', '../internals/reEvaluate', '../internals/reInterpolate'], function(escape, reEscape, reEvaluate, reInterpolate) {
 
   /**
    * By default, the template delimiters used by Lo-Dash are similar to those in
@@ -25,7 +25,7 @@ define(['./escape', '../internals/reInterpolate'], function(escape, reInterpolat
      * @memberOf _.templateSettings
      * @type RegExp
      */
-    'escape': /<%-([\s\S]+?)%>/g,
+    'escape': reEscape,
 
     /**
      * Used to detect code to be evaluated.
@@ -33,7 +33,7 @@ define(['./escape', '../internals/reInterpolate'], function(escape, reInterpolat
      * @memberOf _.templateSettings
      * @type RegExp
      */
-    'evaluate': /<%([\s\S]+?)%>/g,
+    'evaluate': reEvaluate,
 
     /**
      * Used to detect `data` property values to inject.
