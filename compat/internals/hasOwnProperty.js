@@ -8,8 +8,11 @@
  */
 define([], function() {
 
-  /** Used to match template delimiters */
-  var reInterpolate = /<%=([\s\S]+?)%>/g;
+  /** Used for native method references */
+  var objectProto = Object.prototype;
 
-  return reInterpolate;
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  return hasOwnProperty;
 });

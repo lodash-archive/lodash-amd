@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', './getArray', '../objects/isArguments', '../objects/isFunction', './isNode', './objectTypes', './releaseArray', '../support'], function(forIn, getArray, isArguments, isFunction, isNode, objectTypes, releaseArray, support) {
+define(['../objects/forIn', './getArray', './hasOwnProperty', '../objects/isArguments', '../objects/isFunction', './isNode', './objectTypes', './releaseArray', '../support', './toString'], function(forIn, getArray, hasOwnProperty, isArguments, isFunction, isNode, objectTypes, releaseArray, support, toString) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
@@ -17,15 +17,6 @@ define(['../objects/forIn', './getArray', '../objects/isArguments', '../objects/
       objectClass = '[object Object]',
       regexpClass = '[object RegExp]',
       stringClass = '[object String]';
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
    * The base implementation of `_.isEqual`, without support for `thisArg` binding,

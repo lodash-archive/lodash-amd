@@ -6,13 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./objectTypes'], function(objectTypes) {
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
+define(['./hasOwnProperty', './objectTypes'], function(hasOwnProperty, objectTypes) {
 
   /**
    * A fallback implementation of `Object.keys` which produces an array of the
@@ -25,14 +19,15 @@ define(['./objectTypes'], function(objectTypes) {
    */
   var shimKeys = function(object) {
     var result = [];
-    if (!(object && objectTypes[typeof object])) return result;
-    if (!(objectTypes[typeof object])) return result;
-    for (var key in object) {
-        if (hasOwnProperty.call(object, key)) {
-        result.push(key);
-        }
+    if (!(object && objectTypes[typeof object])) {
+      return result;
     }
-    return result
+    for (var key in object) {
+      if (hasOwnProperty.call(object, key)) {
+        result.push(key);
+      }
+    }
+    return result;
   };
 
   return shimKeys;

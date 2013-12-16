@@ -19,13 +19,13 @@ define(['../support'], function(support) {
 
     var __p = 'var result = ' +
     (obj.init) +
-    ';\nif (!(object && objectTypes[typeof object])) return result;\n' +
+    ';\nif (!(object && objectTypes[typeof object])) {\n  return result;\n}\n' +
     (obj.top) +
     ';';
      if (support.nonEnumArgs) {
     __p += '\nvar length = object.length;\nif (length && isArguments(object)) {\n  key = -1;\n  while (++key < length) {\n    key += \'\';\n    ' +
     (obj.loop) +
-    ';\n  }\n  return result\n}';
+    ';\n  }\n  return result;\n}';
      }
 
      if (support.enumPrototypes) {
@@ -42,7 +42,7 @@ define(['../support'], function(support) {
     __p += '\nfor (var key in object) {\n';
       if (obj.useHas) { conditions.push('hasOwnProperty.call(object, key)'); }
       if (conditions.length) {
-    __p += '    if (' +
+    __p += '  if (' +
     (conditions.join(' && ')) +
     ') {\n  ';
      }
@@ -50,11 +50,11 @@ define(['../support'], function(support) {
     (obj.loop) +
     ';  ';
      if (conditions.length) {
-    __p += '\n    }';
+    __p += '\n  }';
      }
     __p += '\n}\n';
      if (support.nonEnumShadows) {
-    __p += '\nif (object !== objectProto) {\n  var ctor = object.constructor,\n      isProto = object === (ctor && ctor.prototype),\n      className = object === stringProto ? stringClass : object === errorProto ? errorClass : toString.call(object),\n      nonEnum = nonEnumProps[className];\n    ';
+    __p += '\nif (object !== objectProto) {\n  var ctor = object.constructor,\n      isProto = object === (ctor && ctor.prototype),\n      className = object === stringProto ? stringClass : object === errorProto ? errorClass : toString.call(object),\n      nonEnum = nonEnumProps[className];\n  ';
      for (var index = 0; index < 7; index++) {
     __p += '\n  key = \'' +
     (obj.shadowedProps[index]) +
@@ -64,11 +64,11 @@ define(['../support'], function(support) {
      }
     __p += ') {\n    ' +
     (obj.loop) +
-    ';\n  }    ';
+    ';\n  }  ';
      }
     __p += '\n}';
      }
-    __p += '\nreturn result';
+    __p += '\nreturn result;';
 
     return __p
   };

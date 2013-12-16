@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './objectTypes'], function(forIn, indicatorObject, isFunction, objectTypes) {
+define(['../objects/forIn', './hasOwnProperty', './indicatorObject', '../objects/isFunction', './objectTypes', './toString'], function(forIn, hasOwnProperty, indicatorObject, isFunction, objectTypes, toString) {
 
   /** `Object#toString` result shortcuts */
   var arrayClass = '[object Array]',
@@ -16,15 +16,6 @@ define(['../objects/forIn', './indicatorObject', '../objects/isFunction', './obj
       objectClass = '[object Object]',
       regexpClass = '[object RegExp]',
       stringClass = '[object String]';
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
    * The base implementation of `_.isEqual`, without support for `thisArg` binding,

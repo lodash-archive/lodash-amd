@@ -41,11 +41,15 @@ define(['../internals/baseCreateCallback', '../internals/indicatorObject', '../i
    */
   var forIn = function(object, callback) {
     var result = object;
-    if (!(object && objectTypes[typeof object])) return result;
-    for (var key in object) {
-      if (callback(object[key], key, object) === indicatorObject) return result;
+    if (!(object && objectTypes[typeof object])) {
+      return result;
     }
-    return result
+    for (var key in object) {
+      if (callback(object[key], key, object) === indicatorObject) {
+        return result;
+      }
+    }
+    return result;
   };
 
   return forIn;

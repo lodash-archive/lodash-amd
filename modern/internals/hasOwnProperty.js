@@ -1,6 +1,6 @@
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize exports="amd" -o ./compat/`
+ * Build: `lodash modularize modern exports="amd" -o ./modern/`
  * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -8,8 +8,11 @@
  */
 define([], function() {
 
-  /** Used to match template delimiters */
-  var reInterpolate = /<%=([\s\S]+?)%>/g;
+  /** Used for native method references */
+  var objectProto = Object.prototype;
 
-  return reInterpolate;
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  return hasOwnProperty;
 });

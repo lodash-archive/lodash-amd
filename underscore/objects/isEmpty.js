@@ -6,13 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArray', './isString'], function(isArray, isString) {
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
+define(['./isArray', './isString', '../internals/toString'], function(isArray, isString, toString) {
 
   /**
    * Checks if `value` is empty. Arrays, strings, or `arguments` objects with a

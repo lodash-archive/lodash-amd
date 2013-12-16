@@ -6,19 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', '../objects/isArguments', '../objects/isFunction', './isNode', '../support'], function(forIn, isArguments, isFunction, isNode, support) {
+define(['../objects/forIn', './hasOwnProperty', '../objects/isArguments', '../objects/isFunction', './isNode', '../support', './toString'], function(forIn, hasOwnProperty, isArguments, isFunction, isNode, support, toString) {
 
   /** `Object#toString` result shortcuts */
   var objectClass = '[object Object]';
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
    * A fallback implementation of `isPlainObject` which checks if a given value

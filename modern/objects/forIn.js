@@ -41,12 +41,16 @@ define(['../internals/baseCreateCallback', '../internals/objectTypes'], function
    */
   var forIn = function(object, callback, thisArg) {
     var result = object;
-    if (!(object && objectTypes[typeof object])) return result;
+    if (!(object && objectTypes[typeof object])) {
+      return result;
+    }
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
     for (var key in object) {
-      if (callback(object[key], key, object) === false) return result;
+      if (callback(object[key], key, object) === false) {
+        return result;
+      }
     }
-    return result
+    return result;
   };
 
   return forIn;

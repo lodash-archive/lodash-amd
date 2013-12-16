@@ -8,7 +8,7 @@
  */
 define([], function() {
 
-  /** Used to match "interpolate" template delimiters */
+  /** Used to match template delimiters */
   var reInterpolate = /<%=([\s\S]+?)%>/g;
 
   return reInterpolate;

@@ -7,7 +7,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/hasOwnProperty', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, hasOwnProperty, lodashWrapper, mixin, support, templateSettings) {
 
   /**
    * Used for `Array` method references.
@@ -30,16 +30,16 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    *
    * The chainable wrapper functions are:
    * `after`, `assign`, `bind`, `bindAll`, `bindKey`, `chain`, `compact`,
-   * `compose`, `concat`, `countBy`, `create`, `createCallback`, `curry`,
-   * `debounce`, `defaults`, `defer`, `delay`, `difference`, `filter`, `flatten`,
-   * `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`, `forOwnRight`,
-   * `functions`, `groupBy`, `indexBy`, `initial`, `intersection`, `invert`,
-   * `invoke`, `keys`, `map`, `max`, `memoize`, `merge`, `min`, `object`, `omit`,
-   * `once`, `pairs`, `partial`, `partialRight`, `pick`, `pluck`, `pull`, `push`,
-   * `range`, `reject`, `remove`, `rest`, `reverse`, `shuffle`, `slice`, `sort`,
-   * `sortBy`, `splice`, `tap`, `throttle`, `times`, `toArray`, `transform`,
-   * `union`, `uniq`, `unshift`, `unzip`, `values`, `where`, `without`, `wrap`,
-   * and `zip`
+   * `compose`, `concat`, `constant`, `countBy`, `create`, `createCallback`,
+   * `curry`, `debounce`, `defaults`, `defer`, `delay`, `difference`, `filter`,
+   * `flatten`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
+   * `forOwnRight`, `functions`, `groupBy`, `indexBy`, `initial`, `intersection`,
+   * `invert`, `invoke`, `keys`, `map`, `mapValues`, `max`, `memoize`, `merge`,
+   * `min`, `noop`, `object`, `omit`, `once`, `pairs`, `partial`, `partialRight`,
+   * `pick`, `pluck`, `property`, `pull`, `push`, `range`, `reject`, `remove`,
+   * `rest`, `reverse`, `shuffle`, `slice`, `sort`, `sortBy`, `splice`, `tap`,
+   * `throttle`, `times`, `toArray`, `transform`, `union`, `uniq`, `unshift`,
+   * `unzip`, `values`, `where`, `without`, `wrap`, `xor`, and `zip`
    *
    * The non-chainable wrapper functions are:
    * `clone`, `cloneDeep`, `contains`, `escape`, `every`, `find`, `findIndex`,
@@ -47,12 +47,12 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    * `indexOf`, `isArguments`, `isArray`, `isBoolean`, `isDate`, `isElement`,
    * `isEmpty`, `isEqual`, `isFinite`, `isFunction`, `isNaN`, `isNull`, `isNumber`,
    * `isObject`, `isPlainObject`, `isRegExp`, `isString`, `isUndefined`, `join`,
-   * `lastIndexOf`, `mixin`, `noConflict`, `parseInt`, `pop`, `random`, `reduce`,
-   * `reduceRight`, `result`, `shift`, `size`, `some`, `sortedIndex`, `runInContext`,
-   * `template`, `unescape`, `uniqueId`, and `value`
+   * `lastIndexOf`, `mixin`, `noConflict`, `now`, `parseInt`, `pop`, `random`,
+   * `reduce`, `reduceRight`, `result`, `shift`, `size`, `some`, `sortedIndex`,
+   * `runInContext`, `template`, `unescape`, `uniqueId`, and `value`
    *
-   * The wrapper functions `first` and `last` return wrapped values when `n` is
-   * provided, otherwise they return unwrapped values.
+   * The wrapper functions `first`, `last`, and `sample` return wrapped values
+   * when `n` is provided, otherwise they return unwrapped values.
    *
    * Explicit chaining can be enabled by using the `_.chain` method.
    *

@@ -6,13 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/isNode', './isPlainObject', '../support'], function(isNode, isPlainObject, support) {
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the internal [[Class]] of values */
-  var toString = objectProto.toString;
+define(['../internals/isNode', './isPlainObject', '../support', '../internals/toString'], function(isNode, isPlainObject, support, toString) {
 
   /**
    * Checks if `value` is a DOM element.
