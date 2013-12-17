@@ -12,7 +12,7 @@ define(['./toString'], function(toString) {
   var reNative = RegExp('^' +
     String(toString)
       .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-      .replace(/toString| for [^\]]+/g, '.*?') + '$'
+      .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
   );
 
   return reNative;
