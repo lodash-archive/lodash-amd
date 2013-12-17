@@ -24,14 +24,6 @@ define(['./internals/isNative', './internals/reNative', './internals/toString'],
   var support = {};
 
   /**
-   * Detect if the DOM is supported.
-   *
-   * @memberOf _.support
-   * @type boolean
-   */
-  support.dom = !!document && typeof document == 'object' && reNative.test(clearTimeout) && reNative.test(setTimeout);
-
-  /**
    * Detect if functions can be decompiled by `Function#toString`
    * (all but PS3 and older Opera mobile browsers & avoided in Windows 8 apps).
    *
@@ -47,6 +39,18 @@ define(['./internals/isNative', './internals/reNative', './internals/toString'],
    * @type boolean
    */
   support.funcNames = typeof Function.name == 'string';
+
+  /**
+   * Detect if the DOM is supported.
+   *
+   * @memberOf _.support
+   * @type boolean
+   */
+  try {
+    support.dom = document.createDocumentFragment().nodeType === 11;
+  } catch(e) {
+    support.dom = false;
+  }
 
   return support;
 });
