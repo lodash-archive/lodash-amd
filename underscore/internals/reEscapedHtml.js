@@ -9,7 +9,7 @@
 define([], function() {
 
   /** Used to match HTML entities and HTML characters */
-  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g;
+  var reEscapedHtml = /&(?:amp|lt|gt|quot|#x27);/g;
 
   return reEscapedHtml;
 });
