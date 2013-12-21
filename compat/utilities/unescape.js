@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/keys', '../internals/reEscapedHtml', '../internals/unescapeHtmlChar'], function(keys, reEscapedHtml, unescapeHtmlChar) {
+define(['../internals/reEscapedHtml', '../internals/unescapeHtmlChar'], function(reEscapedHtml, unescapeHtmlChar) {
 
   /**
    * The inverse of `_.escape`; this method converts the HTML entities

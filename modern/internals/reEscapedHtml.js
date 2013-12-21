@@ -6,10 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./htmlUnescapes', '../objects/keys'], function(htmlUnescapes, keys) {
+define([], function() {
 
   /** Used to match HTML entities and HTML characters */
-  var reEscapedHtml = RegExp('(' + keys(htmlUnescapes).join('|') + ')', 'g');
+  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g;
 
   return reEscapedHtml;
 });

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/escapeHtmlChar', '../objects/keys', '../internals/reUnescapedHtml'], function(escapeHtmlChar, keys, reUnescapedHtml) {
+define(['../internals/escapeHtmlChar', '../internals/reUnescapedHtml'], function(escapeHtmlChar, reUnescapedHtml) {
 
   /**
    * Converts the characters `&`, `<`, `>`, `"`, and `'` in `string` to their
