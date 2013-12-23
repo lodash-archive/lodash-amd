@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objects/isObject', '../objects/keys', '../utilities/property'], function(baseCreateCallback, baseIsEqual, isObject, keys, property) {
+define(['../internals/baseCreateCallback', '../utilities/match', '../utilities/property'], function(baseCreateCallback, match, property) {
 
   /**
    * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -44,34 +44,8 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual', '../objec
     if (func == null || type == 'function') {
       return baseCreateCallback(func, thisArg, argCount);
     }
-    // handle "_.pluck" style callback shorthands
-    if (type != 'object') {
-      return property(func);
-    }
-    var props = keys(func),
-        key = props[0],
-        a = func[key];
-
-    // handle "_.where" style callback shorthands
-    if (props.length == 1 && a === a && !isObject(a)) {
-      // fast path the common case of providing an object with a single
-      // property containing a primitive value
-      return function(object) {
-        var b = object[key];
-        return a === b && (a !== 0 || (1 / a == 1 / b));
-      };
-    }
-    return function(object) {
-      var length = props.length,
-          result = false;
-
-      while (length--) {
-        if (!(result = baseIsEqual(object[props[length]], func[props[length]], null, true))) {
-          break;
-        }
-      }
-      return result;
-    };
+    // handle "_.pluck" and "_.where" style callback shorthands
+    return type != 'object' ? property(func) : match(func);
   }
 
   return createCallback;

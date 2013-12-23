@@ -12,8 +12,8 @@ define(['./filter', './find', '../objects/isEmpty'], function(filter, find, isEm
   var undefined;
 
   /**
-   * Performs a deep comparison of each element in a `collection` to the given
-   * `properties` object, returning an array of all elements that have equivalent
+   * Performs a deep comparison between each element in `collection` and the
+   * `props` object, returning an array of all elements that have equivalent
    * property values.
    *
    * @static
