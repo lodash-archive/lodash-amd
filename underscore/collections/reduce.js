@@ -46,7 +46,7 @@ define(['../functions/createCallback', '../objects/forOwn'], function(createCall
         length = collection ? collection.length : 0;
 
     if (typeof length == 'number') {
-      if (noaccum) {
+      if (noaccum && length) {
         accumulator = collection[++index];
       }
       while (++index < length) {
