@@ -39,12 +39,11 @@ define(['../functions/createCallback', '../objects/forOwn'], function(createCall
    * // => { 'a': 3, 'b': 6, 'c': 9 }
    */
   function reduce(collection, callback, accumulator, thisArg) {
-    if (!collection) return accumulator;
     var noaccum = arguments.length < 3;
     callback = createCallback(callback, thisArg, 4);
 
     var index = -1,
-        length = collection.length;
+        length = collection ? collection.length : 0;
 
     if (typeof length == 'number') {
       if (noaccum) {
