@@ -9,8 +9,9 @@
 define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], function(baseIsEqual, isObject, keys) {
 
   /**
-   * Creates a "_.where" style function, which returns `true` for a given object
-   * if it has the equivalent property values of the `props` object, else `false`.
+   * Creates a "_.where" style function, which performs a deep comparison
+   * between a given object and the `props` object, returning `true` if the
+   * given object has equivalent property values, else `false`.
    *
    * @static
    * @memberOf _
