@@ -46,7 +46,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
       var index = -1,
           length = collection.length;
 
-      if (noaccum) {
+      if (noaccum && length) {
         accumulator = collection[++index];
       }
       while (++index < length) {
