@@ -32,6 +32,7 @@ define(['../internals/baseRandom', './forEach'], function(baseRandom, forEach) {
       result[index] = result[rand];
       result[rand] = value;
     });
+
     return result;
   }
 
