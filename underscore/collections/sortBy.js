@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/compareAscending', '../functions/createCallback', './forEach', '../objects/isArray', './map'], function(compareAscending, createCallback, forEach, isArray, map) {
+define(['../internals/compareAscending', '../functions/createCallback', './forEach'], function(compareAscending, createCallback, forEach) {
 
   /**
    * Creates an array of elements, sorted in ascending order by the results of
@@ -65,7 +65,7 @@ define(['../internals/compareAscending', '../functions/createCallback', './forEa
     callback = createCallback(callback, thisArg, 3);
     forEach(collection, function(value, key, collection) {
       result[++index] = {
-        'criteria': [callback(value, key, collection)],
+        'criteria': callback(value, key, collection),
         'index': index,
         'value': value
       };

@@ -6,20 +6,28 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCompareAscending'], function(baseCompareAscending) {
+define([], function() {
 
   /**
-   * Used by `sortBy` to compare transformed elements of a collection and stable
-   * sort them in ascending order.
+   * The base implementation of `compareAscending` used to compare values and
+   * sort them in ascending order without guaranteeing a stable sort.
    *
    * @private
-   * @param {Object} a The object to compare to `b`.
-   * @param {Object} b The object to compare to `a`.
+   * @param {*} a The value to compare to `b`.
+   * @param {*} b The value to compare to `a`.
    * @returns {number} Returns the sort order indicator for `a`.
    */
-  function compareAscending(a, b) {
-    return baseCompareAscending(a.criteria, b.criteria) || a.index - b.index;
+  function baseCompareAscending(a, b) {
+    if (a !== b) {
+      if (a > b || typeof a == 'undefined') {
+        return 1;
+      }
+      if (a < b || typeof b == 'undefined') {
+        return -1;
+      }
+    }
+    return 0;
   }
 
-  return compareAscending;
+  return baseCompareAscending;
 });
