@@ -2,20 +2,15 @@
  * @license
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="amd" -o ./modern/`
- * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
+ * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
 define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/hasOwnProperty', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, hasOwnProperty, isArray, lodashWrapper, mixin, support, templateSettings) {
 
-  /**
-   * Used for `Array` method references.
-   *
-   * Normally `Array.prototype` would suffice, however, using an array literal
-   * avoids issues in Narwhal.
-   */
-  var arrayRef = [];
+  /** Used for native method references */
+  var arrayRef = Array.prototype;
 
   /**
    * Creates a `lodash` object which wraps the given value to enable intuitive
