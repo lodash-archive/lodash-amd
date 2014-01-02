@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../collections/forEach', '../objects/functions', '../objects/isFunction', '../objects/isObject'], function(forEach, functions, isFunction, isObject) {
+define(['../objects/functions', '../objects/isFunction', '../objects/isObject'], function(functions, isFunction, isObject) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;
@@ -51,30 +51,35 @@ define(['../collections/forEach', '../objects/functions', '../objects/isFunction
     } else if (isObject(options) && 'chain' in options) {
       chain = options.chain;
     }
-    var ctor = object,
-        isFunc = isFunction(ctor);
+    var index = -1,
+        isFunc = isFunction(object),
+        length = methodNames ? methodNames.length : 0;
 
-    forEach(methodNames, function(methodName) {
-      var func = object[methodName] = source[methodName];
+    while (++index < length) {
+      var methodName = methodNames[index],
+          func = object[methodName] = source[methodName];
+
       if (isFunc) {
-        ctor.prototype[methodName] = function() {
-          var chainAll = this.__chain__,
-              value = this.__wrapped__,
-              args = [value];
+        object.prototype[methodName] = (function(func) {
+          return function() {
+            var chainAll = this.__chain__,
+                value = this.__wrapped__,
+                args = [value];
 
-          push.apply(args, arguments);
-          var result = func.apply(object, args);
-          if (chain || chainAll) {
-            if (value === result && isObject(result)) {
-              return this;
+            push.apply(args, arguments);
+            var result = func.apply(object, args);
+            if (chain || chainAll) {
+              if (value === result && isObject(result)) {
+                return this;
+              }
+              result = new object(result);
+              result.__chain__ = chainAll;
             }
-            result = new ctor(result);
-            result.__chain__ = chainAll;
-          }
-          return result;
-        };
+            return result;
+          };
+        }(func));
       }
-    });
+    }
   }
 
   return mixin;

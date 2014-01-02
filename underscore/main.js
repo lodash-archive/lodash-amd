@@ -87,13 +87,13 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodashWrapper.prototype = lodash.prototype;
 
   // wrap `_.mixin` so it works when provided only one argument
-  mixin = (function(fn) {
+  mixin = (function(func) {
     return function(object, source) {
       if (!source) {
         source = object;
         object = lodash;
       }
-      return fn(object, source);
+      return func(object, source);
     };
   }(mixin));
 
