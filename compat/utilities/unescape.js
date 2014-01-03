@@ -18,13 +18,13 @@ define(['../internals/reEscapedHtml', '../internals/unescapeHtmlChar'], function
    *
    * @static
    * @memberOf _
-   * @category Utilities
+   * @category Strings
    * @param {string} string The string to unescape.
    * @returns {string} Returns the unescaped string.
    * @example
    *
-   * _.unescape('Fred, Barney &amp; Pebbles');
-   * // => 'Fred, Barney & Pebbles'
+   * _.unescape('fred, barney &amp; pebbles');
+   * // => 'fred, barney & pebbles'
    */
   function unescape(string) {
     if (string == null) {

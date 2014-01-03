@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/trim'], function(trim) {
+define(['../strings/trim'], function(trim) {
 
   /** Used to detect and test whitespace (unicode 6.3.0) */
   var whitespace = (
