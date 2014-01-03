@@ -26,8 +26,8 @@ define(['../internals/createWrapper'], function(createWrapper) {
    *   return '<p>' + func(text) + '</p>';
    * });
    *
-   * p('Fred, Wilma, & Pebbles');
-   * // => '<p>Fred, Wilma, &amp; Pebbles</p>'
+   * p('fred, barney, & pebbles');
+   * // => '<p>fred, barney, &amp; pebbles</p>'
    */
   function wrap(value, wrapper) {
     return createWrapper(wrapper, 16, [value]);
