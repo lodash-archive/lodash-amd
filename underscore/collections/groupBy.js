@@ -44,7 +44,11 @@ define(['../internals/createAggregator', '../internals/hasOwnProperty'], functio
    * // => { '3': ['one', 'two'], '5': ['three'] }
    */
   var groupBy = createAggregator(function(result, value, key) {
-    (hasOwnProperty.call(result, key) ? result[key] : result[key] = []).push(value);
+    if (hasOwnProperty.call(result, key)) {
+      result[key].push(value);
+    } else {
+      result[key] = [value];
+    }
   });
 
   return groupBy;
