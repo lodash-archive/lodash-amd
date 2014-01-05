@@ -6,9 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./utilities/escape', './utilities/template', './utilities/templateSettings', './strings/trim', './strings/trimLeft', './strings/trimRight', './utilities/unescape'], function(escape, template, templateSettings, trim, trimLeft, trimRight, unescape) {
+define(['./strings/capitalize', './utilities/escape', './utilities/template', './utilities/templateSettings', './strings/trim', './strings/trimLeft', './strings/trimRight', './utilities/unescape'], function(capitalize, escape, template, templateSettings, trim, trimLeft, trimRight, unescape) {
 
   return {
+    'capitalize': capitalize,
     'escape': escape,
     'template': template,
     'templateSettings': templateSettings,
