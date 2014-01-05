@@ -9,7 +9,7 @@
 define(['./maxPoolSize', './objectPool'], function(maxPoolSize, objectPool) {
 
   /**
-   * Releases the given object back to the object pool.
+   * Releases `object` back to the object pool.
    *
    * @private
    * @param {Object} [object] The object to release.

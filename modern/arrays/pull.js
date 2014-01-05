@@ -15,7 +15,7 @@ define([], function() {
   var splice = arrayRef.splice;
 
   /**
-   * Removes all provided values from the given array using strict equality for
+   * Removes all provided values from `array` using strict equality for
    * comparisons, i.e. `===`.
    *
    * @static

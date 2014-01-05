@@ -8,7 +8,7 @@
  */
 define(['../internals/isNative', '../internals/trimmedLeftIndex', '../internals/trimmedRightIndex'], function(isNative, trimmedLeftIndex, trimmedRightIndex) {
 
-  /** Used to detect and test whitespace (unicode 6.3.0) */
+  /** Used to detect and test whitespace */
   var whitespace = (
     // whitespace
     ' \t\x0B\f\xA0\ufeff' +
@@ -27,7 +27,7 @@ define(['../internals/isNative', '../internals/trimmedLeftIndex', '../internals/
   var nativeTrim = isNative(nativeTrim = stringProto.trim) && nativeTrim;
 
   /**
-   * Removes leading and trailing whitespace from a given string.
+   * Removes leading and trailing whitespace from `string`.
    *
    * @static
    * @memberOf _
