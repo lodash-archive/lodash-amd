@@ -9,7 +9,7 @@
 define([], function() {
 
   /** Used to prefix keys to avoid issues with `__proto__` and properties on `Object.prototype` */
-  var keyPrefix = +new Date + '';
+  var keyPrefix = '__1335248838000__';
 
   return keyPrefix;
 });
