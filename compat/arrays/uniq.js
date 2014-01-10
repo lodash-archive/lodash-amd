@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseUniq', '../functions/createCallback'], function(baseUniq, createCallback) {
+define(['../internals/baseUniq', '../functions/createCallback', '../internals/indexTypes'], function(baseUniq, createCallback, indexTypes) {
 
   /**
    * Creates a duplicate-value-free version of an array using strict equality
@@ -59,7 +59,7 @@ define(['../internals/baseUniq', '../functions/createCallback'], function(baseUn
     // juggle arguments
     if (typeof isSorted != 'boolean' && isSorted != null) {
       thisArg = callback;
-      callback = (typeof isSorted != 'function' && thisArg && thisArg[isSorted] === array) ? null : isSorted;
+      callback = (indexTypes[typeof isSorted] && thisArg && thisArg[isSorted] === array) ? null : isSorted;
       isSorted = false;
     }
     if (callback != null) {

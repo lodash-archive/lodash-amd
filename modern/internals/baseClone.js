@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/assign', '../collections/forEach', '../objects/forOwn', './getArray', './hasOwnProperty', '../objects/isArray', '../objects/isObject', './releaseArray', './slice', './toString'], function(assign, forEach, forOwn, getArray, hasOwnProperty, isArray, isObject, releaseArray, slice, toString) {
+define(['../objects/assign', '../collections/forEach', '../objects/forOwn', './getArray', './hasOwnProperty', '../objects/isArray', '../objects/isObject', './releaseArray', '../arrays/slice', './toString'], function(assign, forEach, forOwn, getArray, hasOwnProperty, isArray, isObject, releaseArray, slice, toString) {
 
   /** Used to match regexp flags from their coerced string values */
   var reFlags = /\w*$/;

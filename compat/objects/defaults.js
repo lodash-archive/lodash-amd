@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isObject', './keys'], function(isObject, keys) {
+define(['../internals/indexTypes', './isObject', './keys'], function(indexTypes, isObject, keys) {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination
@@ -30,7 +30,7 @@ define(['./isObject', './keys'], function(isObject, keys) {
   function defaults(object, source, guard) {
     var args = arguments,
         argsIndex = 0,
-        argsLength = typeof guard == 'number' ? 2 : args.length;
+        argsLength = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
 
     while (++argsIndex < argsLength) {
       source = args[argsIndex];

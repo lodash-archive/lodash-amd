@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../internals/charAtCallback', '../functions/createCallback', '../objects/isArray', '../objects/isString'], function(baseEach, charAtCallback, createCallback, isArray, isString) {
+define(['../internals/baseEach', '../internals/charAtCallback', '../functions/createCallback', '../internals/indexTypes', '../objects/isArray', '../objects/isString'], function(baseEach, charAtCallback, createCallback, indexTypes, isArray, isString) {
 
   /**
    * Retrieves the maximum value of a collection. If the collection is empty or
@@ -54,7 +54,7 @@ define(['../internals/baseEach', '../internals/charAtCallback', '../functions/cr
 
     // allows working with functions like `_.map` without using
     // their `index` argument as a callback
-    if (typeof callback != 'function' && thisArg && thisArg[callback] === collection) {
+    if (indexTypes[typeof callback] && thisArg && thisArg[callback] === collection) {
       callback = null;
     }
     if (callback == null && isArray(collection)) {

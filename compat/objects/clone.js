@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseClone', '../internals/baseCreateCallback'], function(baseClone, baseCreateCallback) {
+define(['../internals/baseClone', '../internals/baseCreateCallback', '../internals/indexTypes'], function(baseClone, baseCreateCallback, indexTypes) {
 
   /**
    * Creates a clone of `value`. If `isDeep` is `true` nested objects will also
@@ -49,11 +49,10 @@ define(['../internals/baseClone', '../internals/baseCreateCallback'], function(b
    * // => 0
    */
   function clone(value, isDeep, callback, thisArg) {
-    // allows working with "Collections" methods without using their `index`
-    // and `collection` arguments for `isDeep` and `callback`
+    // juggle arguments
     if (typeof isDeep != 'boolean' && isDeep != null) {
       thisArg = callback;
-      callback = isDeep;
+      callback = (indexTypes[typeof isDeep] && thisArg && thisArg[isDeep] === value) ? null : isDeep;
       isDeep = false;
     }
     return baseClone(value, isDeep, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));

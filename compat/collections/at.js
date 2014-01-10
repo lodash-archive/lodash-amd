@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../objects/isString', '../support'], function(baseFlatten, isString, support) {
+define(['../internals/baseFlatten', '../internals/indexTypes', '../objects/isString', '../support'], function(baseFlatten, indexTypes, isString, support) {
 
   /**
    * Creates an array of elements from the specified indexes, or keys, of the
@@ -29,11 +29,11 @@ define(['../internals/baseFlatten', '../objects/isString', '../support'], functi
    * _.at(['fred', 'barney', 'pebbles'], 0, 2);
    * // => ['fred', 'pebbles']
    */
-  function at(collection) {
+  function at(collection, guard) {
     var args = arguments,
         index = -1,
         props = baseFlatten(args, true, false, 1),
-        length = (args[2] && args[2][args[1]] === collection) ? 1 : props.length,
+        length = (indexTypes[typeof guard] && args[2] && args[2][guard] === collection) ? 1 : props.length,
         result = Array(length);
 
     if (support.unindexedChars && isString(collection)) {

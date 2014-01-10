@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseMerge', '../internals/getArray', './isObject', '../internals/releaseArray', '../internals/slice'], function(baseCreateCallback, baseMerge, getArray, isObject, releaseArray, slice) {
+define(['../internals/baseCreateCallback', '../internals/baseMerge', '../internals/getArray', '../internals/indexTypes', './isObject', '../internals/releaseArray', '../arrays/slice'], function(baseCreateCallback, baseMerge, getArray, indexTypes, isObject, releaseArray, slice) {
 
   /**
    * Recursively merges own enumerable properties of the source object(s), that
@@ -59,18 +59,14 @@ define(['../internals/baseCreateCallback', '../internals/baseMerge', '../interna
    * });
    * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot] }
    */
-  function merge(object) {
-    var args = arguments,
-        length = 2;
-
+  function merge(object, source, guard) {
     if (!isObject(object)) {
       return object;
     }
-    // allows working with `_.reduce` and `_.reduceRight` without using
-    // their `index` and `collection` arguments
-    if (typeof args[2] != 'number') {
-      length = args.length;
-    }
+    var args = arguments,
+        length = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+
+    // juggle arguments
     if (length > 3 && typeof args[length - 2] == 'function') {
       var callback = baseCreateCallback(args[--length - 1], args[length--], 2);
     } else if (length > 2 && typeof args[length - 1] == 'function') {

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./assign', '../internals/baseCreateCallback', './isArray', './isObject', '../internals/slice'], function(assign, baseCreateCallback, isArray, isObject, slice) {
+define(['./assign', '../internals/baseCreateCallback', './isArray', './isObject', '../arrays/slice'], function(assign, baseCreateCallback, isArray, isObject, slice) {
 
   /**
    * Creates a clone of `value`. If `isDeep` is `true` nested objects will also

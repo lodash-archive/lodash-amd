@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../collections/map'], function(baseFlatten, map) {
+define(['../internals/baseFlatten', '../internals/indexTypes', '../collections/map'], function(baseFlatten, indexTypes, map) {
 
   /**
    * Flattens a nested array (the nesting can be to any depth). If `isShallow`
@@ -54,7 +54,7 @@ define(['../internals/baseFlatten', '../collections/map'], function(baseFlatten,
     // juggle arguments
     if (typeof isShallow != 'boolean' && isShallow != null) {
       thisArg = callback;
-      callback = (typeof isShallow != 'function' && thisArg && thisArg[isShallow] === array) ? null : isShallow;
+      callback = (indexTypes[typeof isShallow] && thisArg && thisArg[isShallow] === array) ? null : isShallow;
       isShallow = false;
     }
     if (callback != null) {
