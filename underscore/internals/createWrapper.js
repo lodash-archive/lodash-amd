@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', './slice'], function(baseBind, baseCreateWrapper, isFunction, slice) {
+define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], function(baseBind, baseCreateWrapper, isFunction, slice) {
 
   /**
    * Creates a function that, when called, either curries or invokes `func`

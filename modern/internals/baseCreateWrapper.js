@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isObject', './setBindData', './slice'], function(baseCreate, isObject, setBindData, slice) {
+define(['./baseCreate', '../objects/isObject', './setBindData', '../arrays/slice'], function(baseCreate, isObject, setBindData, slice) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;

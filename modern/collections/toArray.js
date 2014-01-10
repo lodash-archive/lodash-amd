@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/slice', '../objects/values'], function(slice, values) {
+define(['../arrays/slice', '../objects/values'], function(slice, values) {
 
   /**
    * Converts the `collection` to an array.

@@ -6,11 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../internals/slice'], function(createCallback, slice) {
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeMax = Math.max,
-      nativeMin = Math.min;
+define(['../functions/createCallback', './slice'], function(createCallback, slice) {
 
   /**
    * Gets all but the last element or last `n` elements of an array. If a
@@ -77,7 +73,8 @@ define(['../functions/createCallback', '../internals/slice'], function(createCal
     } else {
       n = (callback == null || thisArg) ? 1 : callback || n;
     }
-    return slice(array, 0, nativeMin(nativeMax(0, length - n), length));
+    n = length - n;
+    return slice(array, 0, n > 0 ? n : 0);
   }
 
   return initial;

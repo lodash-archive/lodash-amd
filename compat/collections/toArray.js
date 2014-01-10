@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isString', '../internals/slice', '../support', '../objects/values'], function(isString, slice, support, values) {
+define(['../objects/isString', '../arrays/slice', '../support', '../objects/values'], function(isString, slice, support, values) {
 
   /**
    * Converts the `collection` to an array.

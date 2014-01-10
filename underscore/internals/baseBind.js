@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isObject', './slice'], function(baseCreate, isObject, slice) {
+define(['./baseCreate', '../objects/isObject', '../arrays/slice'], function(baseCreate, isObject, slice) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;

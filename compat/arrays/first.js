@@ -6,14 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../internals/slice'], function(createCallback, slice) {
+define(['../functions/createCallback', './slice'], function(createCallback, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeMax = Math.max,
-      nativeMin = Math.min;
 
   /**
    * Gets the first element or first `n` elements of an array. If a callback
@@ -84,7 +80,7 @@ define(['../functions/createCallback', '../internals/slice'], function(createCal
         return array ? array[0] : undefined;
       }
     }
-    return slice(array, 0, nativeMin(nativeMax(0, n), length));
+    return slice(array, 0, n > 0 ? n : 0);
   }
 
   return first;

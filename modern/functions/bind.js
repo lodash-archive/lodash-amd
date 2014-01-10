@@ -6,12 +6,15 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createWrapper', '../internals/slice'], function(createWrapper, slice) {
+define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper, slice) {
 
   /**
    * Creates a function that, when called, invokes `func` with the `this`
    * binding of `thisArg` and prepends any additional `bind` arguments to those
    * provided to the bound function.
+   *
+   * Note: Unlike native `Function#bind` this method does not set the `length`
+   * property of bound functions.
    *
    * @static
    * @memberOf _

@@ -6,11 +6,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createWrapper', '../internals/slice'], function(createWrapper, slice) {
+define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper, slice) {
 
   /**
    * This method is like `_.partial` except that `partial` arguments are
    * appended to those provided to the new function.
+   *
+   * Note: This method does not set the `length` property of partially applied
+   * functions.
    *
    * @static
    * @memberOf _

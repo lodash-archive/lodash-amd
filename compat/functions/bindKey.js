@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createWrapper', '../internals/slice'], function(createWrapper, slice) {
+define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper, slice) {
 
   /**
    * Creates a function that, when called, invokes the method at `object[key]`

@@ -6,10 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../internals/slice'], function(createCallback, slice) {
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeMax = Math.max;
+define(['../functions/createCallback', './slice'], function(createCallback, slice) {
 
   /**
    * The opposite of `_.initial`; this method gets all but the first element or
@@ -75,8 +72,10 @@ define(['../functions/createCallback', '../internals/slice'], function(createCal
       while (++index < length && callback(array[index], index, array)) {
         n++;
       }
+    } else if (callback == null || thisArg) {
+      n = 1;
     } else {
-      n = (callback == null || thisArg) ? 1 : nativeMax(0, callback);
+      n = callback > 0 ? callback : 0;
     }
     return slice(array, n);
   }

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/slice'], function(baseDifference, slice) {
+define(['../internals/baseDifference', './slice'], function(baseDifference, slice) {
 
   /**
    * Creates an array excluding all provided values using strict equality for

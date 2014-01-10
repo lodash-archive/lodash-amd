@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forEach', '../internals/slice'], function(forEach, slice) {
+define(['./forEach', '../arrays/slice'], function(forEach, slice) {
 
   /**
    * Invokes the method named by `methodName` on each element in the `collection`
