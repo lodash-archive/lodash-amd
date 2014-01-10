@@ -15,6 +15,8 @@ define(['../internals/createWrapper'], function(createWrapper) {
    * remaining `func` arguments, and so on. The arity of `func` can be specified
    * if `func.length` is not sufficient.
    *
+   * Note: This method does not set the `length` property of curried functions.
+   *
    * @static
    * @memberOf _
    * @category Functions
