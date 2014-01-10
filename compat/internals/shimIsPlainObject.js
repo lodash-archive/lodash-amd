@@ -27,7 +27,8 @@ define(['../objects/forIn', './hasOwnProperty', '../objects/isArguments', '../ob
 
     // avoid non Object objects, `arguments` objects, and DOM elements
     if (!(value && toString.call(value) == objectClass) ||
-        (ctor = value.constructor, isFunction(ctor) && !(ctor instanceof ctor)) ||
+        (!hasOwnProperty.call(value, 'constructor') &&
+          (ctor = value.constructor, isFunction(ctor) && !(ctor instanceof ctor))) ||
         (!support.argsClass && isArguments(value)) ||
         (!support.nodeClass && isNode(value))) {
       return false;
