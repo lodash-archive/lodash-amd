@@ -110,6 +110,7 @@ define(['../objects/forIn', './getArray', './hasOwnProperty', '../objects/isFunc
 
       // non `Object` object instances with different constructors are not equal
       if (ctorA != ctorB &&
+            !(hasOwnProperty.call(a, 'constructor') && hasOwnProperty.call(b, 'constructor')) &&
             !(isFunction(ctorA) && ctorA instanceof ctorA && isFunction(ctorB) && ctorB instanceof ctorB) &&
             ('constructor' in a && 'constructor' in b)
           ) {
