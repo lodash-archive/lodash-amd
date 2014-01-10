@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/isNative', '../internals/trimmedLeftIndex'], function(isNative, trimmedLeftIndex) {
+define(['../internals/isNative', '../internals/shimTrimLeft'], function(isNative, shimTrimLeft) {
 
   /** Used to detect and test whitespace */
   var whitespace = (
@@ -24,33 +24,31 @@ define(['../internals/isNative', '../internals/trimmedLeftIndex'], function(isNa
   var stringProto = String.prototype;
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeTrimLeft = isNative(nativeTrimLeft = stringProto.trimLeft) && nativeTrimLeft;
+  var nativeTrimLeft = isNative(nativeTrimLeft = stringProto.trimLeft) && !nativeTrimLeft.call(whitespace) && nativeTrimLeft;
 
   /**
-   * Removes leading whitespace from `string`.
+   * Removes leading whitespace or specified characters from `string`.
    *
    * @static
    * @memberOf _
    * @category Strings
    * @param {string} string The string to trim.
+   * @param {string} [chars=whitespace] The characters to trim.
    * @returns {string} Returns the trimmed string.
    * @example
    *
    * _.trimLeft('  fred  ');
    * // => 'fred  '
+   *
+   * _.trimLeft('-_-fred-_-', '_-');
+   * // => 'fred-_-'
    */
-  function trimLeft(string) {
-    return string == null ? '' : nativeTrimLeft.call(string);
-  }
-  // fallback for environments without a proper `String#trimLeft`
-  if (!nativeTrimLeft || nativeTrimLeft.call(whitespace)) {
-    trimLeft = function(string) {
-      string = string == null ? '' : String(string);
-      return string
-        ? string.slice(trimmedLeftIndex(string))
-        : string;
-    };
-  }
+  var trimLeft = !nativeTrimLeft ? shimTrimLeft : function(string, chars) {
+    if (string == null) {
+      return '';
+    }
+    return chars == null ? nativeTrimLeft.call(string) : shimTrimLeft(string, chars);
+  };
 
   return trimLeft;
 });
