@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/hasOwnProperty', './isArray', './isString'], function(hasOwnProperty, isArray, isString) {
+define(['./isArray', './isString'], function(isArray, isString) {
 
   /** Used for native method references */
   var objectProto = Object.prototype;

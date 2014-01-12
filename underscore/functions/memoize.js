@@ -54,7 +54,7 @@ define(['../objects/isFunction'], function(isFunction) {
   function memoize(func, resolver) {
     var cache = {};
     return function() {
-      var key = resolver ? resolver.apply(this, arguments) : keyPrefix + arguments[0];
+      var key = resolver ? resolver.apply(this, arguments) : '_' + arguments[0];
       return hasOwnProperty.call(cache, key)
         ? cache[key]
         : (cache[key] = func.apply(this, arguments));
