@@ -9,8 +9,7 @@
 define([], function() {
 
   /**
-   * The base implementation of `_.indexOf` without support for binary searches
-   * or `fromIndex` constraints.
+   * The base implementation of `_.indexOf` without support for binary searches.
    *
    * @private
    * @param {Array} array The array to search.

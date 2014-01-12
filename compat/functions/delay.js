@@ -20,7 +20,7 @@ define(['../objects/isFunction', '../arrays/slice'], function(isFunction, slice)
    * @category Functions
    * @param {Function} func The function to delay.
    * @param {number} wait The number of milliseconds to delay execution.
-   * @param {...*} [arg] Arguments to invoke the function with.
+   * @param {...*} [args] Arguments to invoke the function with.
    * @returns {number} Returns the timer id.
    * @example
    *

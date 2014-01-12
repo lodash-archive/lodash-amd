@@ -13,7 +13,7 @@ define([], function() {
    *
    * @private
    * @param {*} value The value to wrap in a `lodash` instance.
-   * @param {boolean} chainAll A flag to enable chaining for all methods
+   * @param {boolean} [chainAll=false] A flag to enable chaining for all methods
    * @returns {Object} Returns a `lodash` instance.
    */
   function lodashWrapper(value, chainAll) {

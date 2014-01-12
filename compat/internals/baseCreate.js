@@ -19,7 +19,7 @@ define(['./isNative', '../objects/isObject', '../utilities/noop'], function(isNa
    * @param {Object} prototype The object to inherit from.
    * @returns {Object} Returns the new object.
    */
-  function baseCreate(prototype, properties) {
+  function baseCreate(prototype) {
     return isObject(prototype) ? nativeCreate(prototype) : {};
   }
   // fallback for environments without `Object.create`
