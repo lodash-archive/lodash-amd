@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/indicatorObject', '../internals/objectTypes'], function(baseCreateCallback, indicatorObject, objectTypes) {
+define(['../internals/baseCreateCallback', '../internals/objectTypes'], function(baseCreateCallback, objectTypes) {
+
+  /** Used by methods to exit iteration */
+  var breakIndicator = '__lodash_break_1335248838000__';
 
   /**
    * Iterates over own and inherited enumerable properties of an object,
@@ -45,7 +48,7 @@ define(['../internals/baseCreateCallback', '../internals/indicatorObject', '../i
       return result;
     }
     for (var key in object) {
-      if (callback(object[key], key, object) === indicatorObject) {
+      if (callback(object[key], key, object) === breakIndicator) {
         return result;
       }
     }

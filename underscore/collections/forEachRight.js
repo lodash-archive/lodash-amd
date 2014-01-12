@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/forOwn', '../internals/indicatorObject', '../objects/keys'], function(baseCreateCallback, forOwn, indicatorObject, keys) {
+define(['../internals/baseCreateCallback', '../objects/forOwn', '../objects/keys'], function(baseCreateCallback, forOwn, keys) {
+
+  /** Used by methods to exit iteration */
+  var breakIndicator = '__lodash_break_1335248838000__';
 
   /**
    * This method is like `_.forEach` except that it iterates over elements
@@ -38,7 +41,7 @@ define(['../internals/baseCreateCallback', '../objects/forOwn', '../internals/in
       length = props.length;
       forOwn(collection, function(value, key, collection) {
         key = props ? props[--length] : --length;
-        return callback(collection[key], key, collection) === false && indicatorObject;
+        return callback(collection[key], key, collection) === false && breakIndicator;
       });
     }
   }

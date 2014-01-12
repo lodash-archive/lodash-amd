@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/forOwn', '../internals/indicatorObject'], function(baseCreateCallback, forOwn, indicatorObject) {
+define(['../internals/baseCreateCallback', '../objects/forOwn'], function(baseCreateCallback, forOwn) {
+
+  /** Used by methods to exit iteration */
+  var breakIndicator = '__lodash_break_1335248838000__';
 
   /**
    * Iterates over elements of a collection, executing the callback for each
@@ -41,7 +44,7 @@ define(['../internals/baseCreateCallback', '../objects/forOwn', '../internals/in
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
     if (typeof length == 'number') {
       while (++index < length) {
-        if (callback(collection[index], index, collection) === indicatorObject) {
+        if (callback(collection[index], index, collection) === breakIndicator) {
           break;
         }
       }
