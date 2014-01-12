@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/assign', '../collections/forEach', '../objects/forOwn', './getArray', './hasOwnProperty', '../objects/isArray', '../objects/isObject', './releaseArray', '../arrays/slice', './toString'], function(assign, forEach, forOwn, getArray, hasOwnProperty, isArray, isObject, releaseArray, slice, toString) {
+define(['../objects/assign', '../collections/forEach', '../objects/forOwn', './getArray', '../objects/isArray', '../objects/isObject', './releaseArray', '../arrays/slice'], function(assign, forEach, forOwn, getArray, isArray, isObject, releaseArray, slice) {
 
   /** Used to match regexp flags from their coerced string values */
   var reFlags = /\w*$/;
@@ -29,6 +29,15 @@ define(['../objects/assign', '../collections/forEach', '../objects/forOwn', './g
   cloneableClasses[boolClass] = cloneableClasses[dateClass] =
   cloneableClasses[numberClass] = cloneableClasses[objectClass] =
   cloneableClasses[regexpClass] = cloneableClasses[stringClass] = true;
+
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /** Used to lookup a built-in constructor by [[Class]] */
   var ctorByClass = {};

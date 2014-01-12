@@ -6,13 +6,16 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrayPool', './maxPoolSize'], function(arrayPool, maxPoolSize) {
+define(['./arrayPool'], function(arrayPool) {
+
+  /** Used as the max size of the `arrayPool` and `objectPool` */
+  var maxPoolSize = 40;
 
   /**
    * Releases `array` back to the array pool.
    *
    * @private
-   * @param {Array} [array] The array to release.
+   * @param {Array} array The array to release.
    */
   function releaseArray(array) {
     array.length = 0;

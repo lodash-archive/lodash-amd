@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../objects/forOwn', '../internals/indicatorObject'], function(createCallback, forOwn, indicatorObject) {
+define(['../functions/createCallback', '../objects/forOwn'], function(createCallback, forOwn) {
+
+  /** Used by methods to exit iteration */
+  var breakIndicator = '__lodash_break_1335248838000__';
 
   /**
    * Checks if the callback returns truey value for **all** elements of a
@@ -64,7 +67,7 @@ define(['../functions/createCallback', '../objects/forOwn', '../internals/indica
       }
     } else {
       forOwn(collection, function(value, index, collection) {
-        return !(result = !!callback(value, index, collection)) && indicatorObject;
+        return !(result = !!callback(value, index, collection)) && breakIndicator;
       });
     }
     return result;

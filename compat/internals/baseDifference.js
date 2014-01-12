@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseIndexOf', './cacheIndexOf', './createCache', './largeArraySize', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, largeArraySize, releaseObject) {
+define(['./baseIndexOf', './cacheIndexOf', './createCache', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, releaseObject) {
+
+  /** Used as the size when optimizations are enabled for large arrays */
+  var largeArraySize = 75;
 
   /**
    * The base implementation of `_.difference` that accepts a single array

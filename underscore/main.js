@@ -7,7 +7,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/hasOwnProperty', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, hasOwnProperty, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;

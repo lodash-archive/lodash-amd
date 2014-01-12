@@ -8,6 +8,12 @@
  */
 define(['./hasOwnProperty', './objectTypes'], function(hasOwnProperty, objectTypes) {
 
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
   /**
    * A fallback implementation of `Object.keys` which produces an array of the
    * given object's own enumerable property names.

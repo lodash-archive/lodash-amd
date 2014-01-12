@@ -7,10 +7,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/hasOwnProperty', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, forEach, forOwn, hasOwnProperty, isArray, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, forEach, forOwn, isArray, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used for native method references */
-  var arrayRef = Array.prototype;
+  var arrayRef = Array.prototype,
+      objectProto = Object.prototype;
+
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
    * Creates a `lodash` object which wraps the given value to enable intuitive

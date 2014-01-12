@@ -6,13 +6,19 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forOwn', './isArguments', './isFunction', '../support', '../internals/toString'], function(forOwn, isArguments, isFunction, support, toString) {
+define(['./forOwn', './isArguments', './isFunction', '../support'], function(forOwn, isArguments, isFunction, support) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
       arrayClass = '[object Array]',
       objectClass = '[object Object]',
       stringClass = '[object String]';
+
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
 
   /**
    * Checks if `value` is empty. Arrays, strings, or `arguments` objects with a

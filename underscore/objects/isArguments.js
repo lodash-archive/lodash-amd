@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/hasOwnProperty', '../internals/toString'], function(hasOwnProperty, toString) {
+define([], function() {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]';
@@ -14,8 +14,12 @@ define(['../internals/hasOwnProperty', '../internals/toString'], function(hasOwn
   /** Used for native method references */
   var objectProto = Object.prototype;
 
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
   /** Native method shortcuts */
-  var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+  var hasOwnProperty = objectProto.hasOwnProperty,
+      propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
   /**
    * Checks if `value` is an `arguments` object.

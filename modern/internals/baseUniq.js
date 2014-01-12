@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './largeArraySize', './releaseArray', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, getArray, largeArraySize, releaseArray, releaseObject) {
+define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './releaseArray', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, getArray, releaseArray, releaseObject) {
+
+  /** Used as the size when optimizations are enabled for large arrays */
+  var largeArraySize = 75;
 
   /**
    * The base implementation of `_.uniq` without support for callback shorthands

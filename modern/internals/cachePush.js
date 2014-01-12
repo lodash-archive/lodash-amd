@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./keyPrefix'], function(keyPrefix) {
+define([], function() {
 
   /**
    * Adds a given value to the corresponding cache object.
@@ -24,7 +24,7 @@ define(['./keyPrefix'], function(keyPrefix) {
       if (type != 'number' && type != 'string') {
         type = 'object';
       }
-      var key = type == 'number' ? value : keyPrefix + value,
+      var key = type == 'number' ? value : '_' + value,
           typeCache = cache[type] || (cache[type] = {});
 
       if (type == 'object') {

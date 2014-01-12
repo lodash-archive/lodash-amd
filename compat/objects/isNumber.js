@@ -6,10 +6,16 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/toString'], function(toString) {
+define([], function() {
 
   /** `Object#toString` result shortcuts */
   var numberClass = '[object Number]';
+
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
 
   /**
    * Checks if `value` is a number.

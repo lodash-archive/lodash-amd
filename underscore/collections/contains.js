@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseIndexOf', '../objects/forOwn', '../internals/indicatorObject'], function(baseIndexOf, forOwn, indicatorObject) {
+define(['../internals/baseIndexOf', '../objects/forOwn'], function(baseIndexOf, forOwn) {
+
+  /** Used by methods to exit iteration */
+  var breakIndicator = '__lodash_break_1335248838000__';
 
   /**
    * Checks if a given value is present in a collection using strict equality
@@ -43,7 +46,7 @@ define(['../internals/baseIndexOf', '../objects/forOwn', '../internals/indicator
       result = indexOf(collection, target) > -1;
     } else {
       forOwn(collection, function(value) {
-        return (result = value === target) && indicatorObject;
+        return (result = value === target) && breakIndicator;
       });
     }
     return result;

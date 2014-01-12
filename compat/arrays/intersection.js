@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../internals/getArray', '../objects/isArguments', '../objects/isArray', '../internals/largeArraySize', '../internals/releaseArray', '../internals/releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, getArray, isArguments, isArray, largeArraySize, releaseArray, releaseObject) {
+define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../internals/getArray', '../objects/isArguments', '../objects/isArray', '../internals/releaseArray', '../internals/releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, getArray, isArguments, isArray, releaseArray, releaseObject) {
+
+  /** Used as the size when optimizations are enabled for large arrays */
+  var largeArraySize = 75;
 
   /**
    * Creates an array of unique values present in all provided arrays using

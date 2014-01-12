@@ -6,10 +6,16 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArguments', '../internals/isNative', '../internals/shimIsPlainObject', '../support', '../internals/toString'], function(isArguments, isNative, shimIsPlainObject, support, toString) {
+define(['./isArguments', '../internals/isNative', '../internals/shimIsPlainObject', '../support'], function(isArguments, isNative, shimIsPlainObject, support) {
 
   /** `Object#toString` result shortcuts */
   var objectClass = '[object Object]';
+
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
 
   /** Native method shortcuts */
   var getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf;

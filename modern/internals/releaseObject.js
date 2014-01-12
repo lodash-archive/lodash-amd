@@ -6,13 +6,16 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./maxPoolSize', './objectPool'], function(maxPoolSize, objectPool) {
+define(['./objectPool'], function(objectPool) {
+
+  /** Used as the max size of the `arrayPool` and `objectPool` */
+  var maxPoolSize = 40;
 
   /**
    * Releases `object` back to the object pool.
    *
    * @private
-   * @param {Object} [object] The object to release.
+   * @param {Object} object The object to release.
    */
   function releaseObject(object) {
     var cache = object.cache;

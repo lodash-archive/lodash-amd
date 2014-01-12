@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseIndexOf', './keyPrefix'], function(baseIndexOf, keyPrefix) {
+define(['./baseIndexOf'], function(baseIndexOf) {
 
   /**
    * An implementation of `_.contains` for cache objects that mimics the return
@@ -27,7 +27,7 @@ define(['./baseIndexOf', './keyPrefix'], function(baseIndexOf, keyPrefix) {
     if (type != 'number' && type != 'string') {
       type = 'object';
     }
-    var key = type == 'number' ? value : keyPrefix + value;
+    var key = type == 'number' ? value : '_' + value;
     cache = (cache = cache[type]) && cache[key];
 
     return type == 'object'

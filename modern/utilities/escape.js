@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/escapeHtmlChar', '../internals/reUnescapedHtml'], function(escapeHtmlChar, reUnescapedHtml) {
+define(['../internals/escapeHtmlChar'], function(escapeHtmlChar) {
+
+  /** Used to match HTML entities and HTML characters */
+  var reUnescapedHtml = /[&<>"']/g;
 
   /**
    * Converts the characters `&`, `<`, `>`, `"`, and `'` in `string` to

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./internals/isNative', './internals/reNative', './internals/toString'], function(isNative, reNative, toString) {
+define(['./internals/isNative'], function(isNative) {
 
   /** Used to detect functions containing a `this` reference */
   var reThis = /\bthis\b/;
@@ -22,6 +22,9 @@ define(['./internals/isNative', './internals/reNative', './internals/toString'],
 
   /** Used to detect DOM support */
   var document = (document = window.window) && document.document;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
 
   /** Native method shortcuts */
   var propertyIsEnumerable = objectProto.propertyIsEnumerable,

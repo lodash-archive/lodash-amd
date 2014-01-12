@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreateCallback', './hasOwnProperty', './indicatorObject', '../objects/isArguments', './iteratorTemplate', './objectTypes', './toString'], function(baseCreateCallback, hasOwnProperty, indicatorObject, isArguments, iteratorTemplate, objectTypes, toString) {
+define(['./baseCreateCallback', '../objects/isArguments', './iteratorTemplate', './objectTypes'], function(baseCreateCallback, isArguments, iteratorTemplate, objectTypes) {
 
   /** Used to fix the JScript [[DontEnum]] bug */
   var shadowedProps = [
@@ -29,6 +29,12 @@ define(['./baseCreateCallback', './hasOwnProperty', './indicatorObject', '../obj
   var errorProto = Error.prototype,
       objectProto = Object.prototype,
       stringProto = String.prototype;
+
+  /** Used to resolve the internal [[Class]] of values */
+  var toString = objectProto.toString;
+
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
 
   /** Used to avoid iterating non-enumerable properties in IE < 9 */
   var nonEnumProps = {};
