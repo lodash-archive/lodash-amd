@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/indexTypes', './isObject', './keys'], function(baseCreateCallback, indexTypes, isObject, keys) {
+define(['../internals/baseCreateCallback', './isObject', './keys'], function(baseCreateCallback, isObject, keys) {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination
@@ -40,8 +40,14 @@ define(['../internals/baseCreateCallback', '../internals/indexTypes', './isObjec
   function assign(object, source, guard) {
     var args = arguments,
         argsIndex = 0,
-        argsLength = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+        argsLength = args.length,
+        type = typeof guard;
 
+    // allows working with functions like `_.reduce` without using their
+    // `key` and `object` arguments as sources
+    if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
+      argsLength = 2;
+    }
     // juggle arguments
     if (argsLength > 3 && typeof args[argsLength - 2] == 'function') {
       var callback = baseCreateCallback(args[--argsLength - 1], args[argsLength--], 2);

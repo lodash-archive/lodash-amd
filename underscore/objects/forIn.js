@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/objectTypes'], function(baseCreateCallback, objectTypes) {
+define(['../internals/baseCreateCallback', './isObject'], function(baseCreateCallback, isObject) {
 
   /** Used by methods to exit iteration */
   var breakIndicator = '__lodash_break_1335248838000__';
@@ -44,7 +44,7 @@ define(['../internals/baseCreateCallback', '../internals/objectTypes'], function
    */
   var forIn = function(object, callback) {
     var result = object;
-    if (!(object && objectTypes[typeof object])) {
+    if (!isObject(object)) {
       return result;
     }
     for (var key in object) {

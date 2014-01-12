@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', '../objects/isFunction', './objectTypes'], function(forIn, isFunction, objectTypes) {
+define(['../objects/forIn', '../objects/isFunction'], function(forIn, isFunction) {
 
   /** Used by methods to exit iteration */
   var breakIndicator = '__lodash_break_1335248838000__';
@@ -50,8 +50,8 @@ define(['../objects/forIn', '../objects/isFunction', './objectTypes'], function(
         otherType = typeof b;
 
     if (a === a &&
-        !(a && objectTypes[type]) &&
-        !(b && objectTypes[otherType])) {
+        !(a && (type == 'function' || type == 'object')) &&
+        !(b && (otherType == 'function' || otherType == 'object'))) {
       return false;
     }
     if (a == null || b == null) {

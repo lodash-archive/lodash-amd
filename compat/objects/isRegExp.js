@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/objectTypes'], function(objectTypes) {
+define([], function() {
 
   /** `Object#toString` result shortcuts */
   var regexpClass = '[object RegExp]';
@@ -31,7 +31,9 @@ define(['../internals/objectTypes'], function(objectTypes) {
    * // => true
    */
   function isRegExp(value) {
-    return value && objectTypes[typeof value] && toString.call(value) == regexpClass || false;
+    var type = typeof value;
+    return value && (type == 'function' || type == 'object') &&
+      toString.call(value) == regexpClass || false;
   }
 
   return isRegExp;

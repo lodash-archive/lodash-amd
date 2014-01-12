@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', './getArray', '../objects/isArguments', '../objects/isFunction', './isNode', './objectTypes', './releaseArray', '../support'], function(forIn, getArray, isArguments, isFunction, isNode, objectTypes, releaseArray, support) {
+define(['../objects/forIn', './getArray', '../objects/isArguments', '../objects/isFunction', './isNode', './releaseArray', '../support'], function(forIn, getArray, isArguments, isFunction, isNode, releaseArray, support) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
@@ -58,8 +58,8 @@ define(['../objects/forIn', './getArray', '../objects/isArguments', '../objects/
 
     // exit early for unlike primitive values
     if (a === a &&
-        !(a && objectTypes[type]) &&
-        !(b && objectTypes[otherType])) {
+        !(a && (type == 'function' || type == 'object')) &&
+        !(b && (otherType == 'function' || otherType == 'object'))) {
       return false;
     }
     // exit early for `null` and `undefined` avoiding ES3's Function#call behavior

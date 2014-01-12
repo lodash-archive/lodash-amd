@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../internals/indexTypes', '../collections/map'], function(baseFlatten, indexTypes, map) {
+define(['../internals/baseFlatten', '../collections/map'], function(baseFlatten, map) {
 
   /**
    * Flattens a nested array (the nesting can be to any depth). If `isShallow`
@@ -51,11 +51,19 @@ define(['../internals/baseFlatten', '../internals/indexTypes', '../collections/m
    * // => ['hoppy', 'baby puss', 'dino']
    */
   function flatten(array, isShallow, callback, thisArg) {
+    var type = typeof isShallow;
+
     // juggle arguments
-    if (typeof isShallow != 'boolean' && isShallow != null) {
+    if (type != 'boolean' && isShallow != null) {
       thisArg = callback;
-      callback = (indexTypes[typeof isShallow] && thisArg && thisArg[isShallow] === array) ? null : isShallow;
+      callback = isShallow;
       isShallow = false;
+
+      // allows working with functions like `_.map` without using
+      // their `index` argument as a callback
+      if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === array) {
+        callback = null;
+      }
     }
     if (callback != null) {
       array = map(array, callback, thisArg);

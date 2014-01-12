@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseMerge', '../internals/getArray', '../internals/indexTypes', './isObject', '../internals/releaseArray', '../arrays/slice'], function(baseCreateCallback, baseMerge, getArray, indexTypes, isObject, releaseArray, slice) {
+define(['../internals/baseCreateCallback', '../internals/baseMerge', '../internals/getArray', './isObject', '../internals/releaseArray', '../arrays/slice'], function(baseCreateCallback, baseMerge, getArray, isObject, releaseArray, slice) {
 
   /**
    * Recursively merges own enumerable properties of the source object(s), that
@@ -64,8 +64,14 @@ define(['../internals/baseCreateCallback', '../internals/baseMerge', '../interna
       return object;
     }
     var args = arguments,
-        length = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+        length = args.length,
+        type = typeof guard;
 
+    // allows working with functions like `_.reduce` without using their
+    // `key` and `object` arguments as sources
+    if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
+      length = 2;
+    }
     // juggle arguments
     if (length > 3 && typeof args[length - 2] == 'function') {
       var callback = baseCreateCallback(args[--length - 1], args[length--], 2);

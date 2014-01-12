@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreateCallback', '../objects/isArguments', './iteratorTemplate', './objectTypes'], function(baseCreateCallback, isArguments, iteratorTemplate, objectTypes) {
+define(['./baseCreateCallback', '../objects/isArguments', '../objects/isObject', './iteratorTemplate'], function(baseCreateCallback, isArguments, isObject, iteratorTemplate) {
 
   /** Used to fix the JScript [[DontEnum]] bug */
   var shadowedProps = [
@@ -73,14 +73,14 @@ define(['./baseCreateCallback', '../objects/isArguments', './iteratorTemplate', 
     // create the function factory
     var factory = Function(
         'baseCreateCallback, errorClass, errorProto, hasOwnProperty, isArguments, ' +
-        'objectProto, objectTypes, nonEnumProps, stringClass, stringProto, toString',
+        'isObject, objectProto, nonEnumProps, stringClass, stringProto, toString',
       'return function(' + options.args + ') {\n' + iteratorTemplate(options) + '\n}'
     );
 
     // return the compiled function
     return factory(
       baseCreateCallback, errorClass, errorProto, hasOwnProperty, isArguments,
-      objectProto, objectTypes, nonEnumProps, stringClass, stringProto, toString
+      isObject, objectProto, nonEnumProps, stringClass, stringProto, toString
     );
   }
 

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/objectTypes'], function(baseCreateCallback, objectTypes) {
+define(['../internals/baseCreateCallback', './isObject'], function(baseCreateCallback, isObject) {
 
   /**
    * Iterates over own and inherited enumerable properties of an object,
@@ -41,7 +41,7 @@ define(['../internals/baseCreateCallback', '../internals/objectTypes'], function
    */
   var forIn = function(object, callback, thisArg) {
     var result = object;
-    if (!(object && objectTypes[typeof object])) {
+    if (!isObject(object)) {
       return result;
     }
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', './forEach', '../objects/forOwn', '../internals/indexTypes'], function(createCallback, forEach, forOwn, indexTypes) {
+define(['../functions/createCallback', './forEach', '../objects/forOwn'], function(createCallback, forEach, forOwn) {
 
   /**
    * Retrieves the maximum value of a collection. If the collection is empty or
@@ -50,11 +50,12 @@ define(['../functions/createCallback', './forEach', '../objects/forOwn', '../int
    */
   function max(collection, callback, thisArg) {
     var computed = -Infinity,
-        result = computed;
+        result = computed,
+        type = typeof callback;
 
     // allows working with functions like `_.map` without using
     // their `index` argument as a callback
-    if (indexTypes[typeof callback] && thisArg && thisArg[callback] === collection) {
+    if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === collection) {
       callback = null;
     }
     var index = -1,

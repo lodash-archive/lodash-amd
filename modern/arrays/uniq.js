@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseUniq', '../functions/createCallback', '../internals/indexTypes'], function(baseUniq, createCallback, indexTypes) {
+define(['../internals/baseUniq', '../functions/createCallback'], function(baseUniq, createCallback) {
 
   /**
    * Creates a duplicate-value-free version of an array using strict equality
@@ -56,11 +56,19 @@ define(['../internals/baseUniq', '../functions/createCallback', '../internals/in
    * // => [{ 'x': 1 }, { 'x': 2 }]
    */
   function uniq(array, isSorted, callback, thisArg) {
+    var type = typeof isSorted;
+
     // juggle arguments
-    if (typeof isSorted != 'boolean' && isSorted != null) {
+    if (type != 'boolean' && isSorted != null) {
       thisArg = callback;
-      callback = (indexTypes[typeof isSorted] && thisArg && thisArg[isSorted] === array) ? null : isSorted;
+      callback = isSorted;
       isSorted = false;
+
+      // allows working with functions like `_.map` without using
+      // their `index` argument as a callback
+      if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === array) {
+        callback = null;
+      }
     }
     if (callback != null) {
       callback = createCallback(callback, thisArg, 3);
