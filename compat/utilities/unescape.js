@@ -6,10 +6,30 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/unescapeHtmlChar'], function(unescapeHtmlChar) {
+define([], function() {
 
   /** Used to match HTML entities and HTML characters */
   var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g;
+
+  /** Used to convert HTML entities to characters */
+  var htmlUnescapes = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'"
+  };
+
+  /**
+   * Used by `unescape` to convert HTML entities to characters.
+   *
+   * @private
+   * @param {string} match The matched character to unescape.
+   * @returns {string} Returns the unescaped character.
+   */
+  function unescapeHtmlChar(match) {
+    return htmlUnescapes[match];
+  }
 
   /**
    * The inverse of `_.escape`; this method converts the HTML entities

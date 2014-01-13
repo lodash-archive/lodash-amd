@@ -6,10 +6,27 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArguments', '../internals/isNative', './isObject', '../internals/shimKeys', '../support'], function(isArguments, isNative, isObject, shimKeys, support) {
+define(['../internals/createIterator', './isArguments', '../internals/isNative', './isObject', '../support'], function(createIterator, isArguments, isNative, isObject, support) {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
+
+  /**
+   * A fallback implementation of `Object.keys` which produces an array of the
+   * given object's own enumerable property names.
+   *
+   * @private
+   * @type Function
+   * @param {Object} object The object to inspect.
+   * @returns {Array} Returns an array of property names.
+   */
+  var shimKeys = createIterator({
+    'args': 'object',
+    'init': '[]',
+    'top': '',
+    'loop': 'result.push(key)',
+    'useHas': true
+  });
 
   /**
    * Creates an array composed of the own enumerable property names of an object.

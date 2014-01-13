@@ -6,13 +6,36 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/defaults', './escape', '../internals/escapeStringChar', '../internals/reInterpolate', './templateSettings'], function(defaults, escape, escapeStringChar, reInterpolate, templateSettings) {
+define(['../objects/defaults', './escape', '../internals/reInterpolate', './templateSettings'], function(defaults, escape, reInterpolate, templateSettings) {
 
   /** Used to ensure capturing order of template delimiters */
   var reNoMatch = /($^)/;
 
   /** Used to match unescaped characters in compiled string literals */
   var reUnescapedString = /['\n\r\t\u2028\u2029\\]/g;
+
+  /** Used to escape characters for inclusion in compiled string literals */
+  var stringEscapes = {
+    '\\': '\\',
+    "'": "'",
+    '\n': 'n',
+    '\r': 'r',
+    '\t': 't',
+    '\u2028': 'u2028',
+    '\u2029': 'u2029'
+  };
+
+  /**
+   * Used by `template` to escape characters for inclusion in compiled
+   * string literals.
+   *
+   * @private
+   * @param {string} match The matched character to escape.
+   * @returns {string} Returns the escaped character.
+   */
+  function escapeStringChar(match) {
+    return '\\' + stringEscapes[match];
+  }
 
   /**
    * A micro-templating method that handles arbitrary delimiters, preserves

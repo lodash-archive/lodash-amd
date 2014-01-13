@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/defaults', './escape', '../internals/escapeStringChar', '../objects/keys', '../internals/reInterpolate', './templateSettings', '../objects/values'], function(defaults, escape, escapeStringChar, keys, reInterpolate, templateSettings, values) {
+define(['../objects/defaults', './escape', '../objects/keys', '../internals/reInterpolate', './templateSettings', '../objects/values'], function(defaults, escape, keys, reInterpolate, templateSettings, values) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -27,6 +27,29 @@ define(['../objects/defaults', './escape', '../internals/escapeStringChar', '../
 
   /** Used to match unescaped characters in compiled string literals */
   var reUnescapedString = /['\n\r\t\u2028\u2029\\]/g;
+
+  /** Used to escape characters for inclusion in compiled string literals */
+  var stringEscapes = {
+    '\\': '\\',
+    "'": "'",
+    '\n': 'n',
+    '\r': 'r',
+    '\t': 't',
+    '\u2028': 'u2028',
+    '\u2029': 'u2029'
+  };
+
+  /**
+   * Used by `template` to escape characters for inclusion in compiled
+   * string literals.
+   *
+   * @private
+   * @param {string} match The matched character to escape.
+   * @returns {string} Returns the escaped character.
+   */
+  function escapeStringChar(match) {
+    return '\\' + stringEscapes[match];
+  }
 
   /**
    * A micro-templating method that handles arbitrary delimiters, preserves

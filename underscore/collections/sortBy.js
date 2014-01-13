@@ -6,7 +6,20 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/compareAscending', '../functions/createCallback', './forEach'], function(compareAscending, createCallback, forEach) {
+define(['../internals/baseCompareAscending', '../functions/createCallback', './forEach'], function(baseCompareAscending, createCallback, forEach) {
+
+  /**
+   * Used by `sortBy` to compare transformed elements of a collection and stable
+   * sort them in ascending order.
+   *
+   * @private
+   * @param {Object} a The object to compare to `b`.
+   * @param {Object} b The object to compare to `a`.
+   * @returns {number} Returns the sort order indicator for `a`.
+   */
+  function compareAscending(a, b) {
+    return baseCompareAscending(a.criteria, b.criteria) || a.index - b.index;
+  }
 
   /**
    * Creates an array of elements, sorted in ascending order by the results of
