@@ -21,7 +21,7 @@ env:
 matrix:
   include:
     - node_js: "0.10"
-      env: ISTANBUL=true BUILD="modern-coverage" LOADER="requirejs"
+      env: ISTANBUL=true   BUILD="modern-coverage" LOADER="requirejs"
     - node_js: "0.10"
       env: SAUCE_LABS=true LOADER="curl"
     - node_js: "0.10"
@@ -68,9 +68,9 @@ before_install:
   - "[ $MAKE == false ] || (mkdir ./node_modules/lodash-cli/node_modules && cd ./node_modules/lodash-cli/node_modules/ && ln -s ../../lodash ./lodash && cd ../../../)"
   - "[ $MAKE == false ] || node ./node_modules/lodash-cli/bin/lodash modularize $BUILD exports=amd -o ./$BUILD"
 script:
-  - "[ $ISTANBUL == false ]  || istanbul instrument --output ./$BUILD ./modern"
-  - "[ $SAUCE_LABS == true ] || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
-  - "[ $ISTANBUL == false ]  || (istanbul report lcovonly && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage)"
+  - "[ $ISTANBUL == false ]    || istanbul instrument --output ./$BUILD ./modern"
+  - "[ $SAUCE_LABS == true ]   || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
+  - "[ $ISTANBUL == false ]    || (istanbul report lcovonly && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage)"
   - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) || $BIN ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development\""
   - "([ $SAUCE_LABS == false ] || [ $COMPAT == false ])       || $BIN ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,ie-compat\" compatMode=7"
   - "[ $SAUCE_LABS == false ]  || $BIN ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/underscore.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,underscore\""
