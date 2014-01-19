@@ -8,6 +8,9 @@
  */
 define(['../functions/bind', '../utilities/identity', './setBindData', '../support'], function(bind, identity, setBindData, support) {
 
+  /** Used to compose bitmasks for `__bindData__` */
+  var BIND_FLAG = 1;
+
   /** Used to detected named functions */
   var reFuncName = /^\s*function[ \n\r\t]+\w/;
 
@@ -54,7 +57,7 @@ define(['../functions/bind', '../utilities/identity', './setBindData', '../suppo
       }
     }
     // exit early if there are no `this` references or `func` is bound
-    if (bindData === false || (bindData !== true && bindData[1] & 1)) {
+    if (bindData === false || (bindData !== true && bindData[1] & BIND_FLAG)) {
       return func;
     }
     switch (argCount) {

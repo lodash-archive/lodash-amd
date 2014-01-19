@@ -9,7 +9,7 @@
 define(['./baseIndexOf', './cacheIndexOf', './createCache', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, releaseObject) {
 
   /** Used as the size when optimizations are enabled for large arrays */
-  var largeArraySize = 75;
+  var LARGE_ARRAY_SIZE = 75;
 
   /**
    * The base implementation of `_.difference` that accepts a single array
@@ -24,7 +24,7 @@ define(['./baseIndexOf', './cacheIndexOf', './createCache', './releaseObject'], 
     var index = -1,
         indexOf = baseIndexOf,
         length = array ? array.length : 0,
-        isLarge = length >= largeArraySize,
+        isLarge = length >= LARGE_ARRAY_SIZE,
         result = [];
 
     if (isLarge) {

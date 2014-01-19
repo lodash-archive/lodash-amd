@@ -8,6 +8,11 @@
  */
 define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper, slice) {
 
+  /** Used to compose bitmasks for `__bindData__` */
+  var BIND_FLAG = 1,
+      BIND_KEY_FLAG = 2,
+      PARTIAL_FLAG = 16;
+
   /**
    * Creates a function that, when called, invokes the method at `object[key]`
    * and prepends any additional `bindKey` arguments to those provided to the bound
@@ -45,8 +50,8 @@ define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper
    */
   function bindKey(object, key) {
     return arguments.length > 2
-      ? createWrapper(key, 19, slice(arguments, 2), null, object)
-      : createWrapper(key, 3, null, null, object);
+      ? createWrapper(key, BIND_FLAG | BIND_KEY_FLAG | PARTIAL_FLAG, slice(arguments, 2), null, object)
+      : createWrapper(key, BIND_FLAG | BIND_KEY_FLAG, null, null, object);
   }
 
   return bindKey;

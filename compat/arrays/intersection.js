@@ -9,7 +9,7 @@
 define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../internals/getArray', '../objects/isArguments', '../objects/isArray', '../internals/releaseArray', '../internals/releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, getArray, isArguments, isArray, releaseArray, releaseObject) {
 
   /** Used as the size when optimizations are enabled for large arrays */
-  var largeArraySize = 75;
+  var LARGE_ARRAY_SIZE = 75;
 
   /**
    * Creates an array of unique values present in all provided arrays using
@@ -38,7 +38,7 @@ define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/c
       var value = arguments[argsIndex];
       if (isArray(value) || isArguments(value)) {
         args.push(value);
-        caches.push(trustIndexOf && value.length >= largeArraySize &&
+        caches.push(trustIndexOf && value.length >= LARGE_ARRAY_SIZE &&
           createCache(argsIndex ? args[argsIndex] : seen));
       }
     }
