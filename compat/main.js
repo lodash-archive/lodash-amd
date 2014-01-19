@@ -7,7 +7,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './internals/baseEach', './objects/forOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, baseEach, forOwn, isArray, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, baseEach, baseForOwn, isArray, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype,
@@ -133,7 +133,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.forEachRight = collections.forEachRight;
   lodash.forIn = objects.forIn;
   lodash.forInRight = objects.forInRight;
-  lodash.forOwn = forOwn;
+  lodash.forOwn = objects.forOwn;
   lodash.forOwnRight = objects.forOwnRight;
   lodash.functions = objects.functions;
   lodash.groupBy = collections.groupBy;
@@ -262,7 +262,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   mixin(function() {
     var source = {}
-    forOwn(lodash, function(func, methodName) {
+    baseForOwn(lodash, function(func, methodName) {
       if (!lodash.prototype[methodName]) {
         source[methodName] = func;
       }
@@ -279,7 +279,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.take = arrays.first;
   lodash.head = arrays.first;
 
-  forOwn(lodash, function(func, methodName) {
+  baseForOwn(lodash, function(func, methodName) {
     var callbackable = methodName !== 'sample';
     if (!lodash.prototype[methodName]) {
       lodash.prototype[methodName]= function(n, guard) {

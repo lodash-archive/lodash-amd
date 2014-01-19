@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/charAtCallback', '../functions/createCallback', './forEach', '../objects/forOwn', '../objects/isArray', '../objects/isString'], function(charAtCallback, createCallback, forEach, forOwn, isArray, isString) {
+define(['../internals/baseEach', '../internals/charAtCallback', '../functions/createCallback', '../objects/isArray', '../objects/isString'], function(baseEach, charAtCallback, createCallback, isArray, isString) {
 
   /**
    * Retrieves the maximum value of a collection. If the collection is empty or
@@ -73,7 +73,7 @@ define(['../internals/charAtCallback', '../functions/createCallback', './forEach
         ? charAtCallback
         : createCallback(callback, thisArg, 3);
 
-      forEach(collection, function(value, index, collection) {
+      baseEach(collection, function(value, index, collection) {
         var current = callback(value, index, collection);
         if (current > computed) {
           computed = current;

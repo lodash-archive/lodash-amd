@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', '../objects/isFunction'], function(forIn, isFunction) {
+define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction) {
 
   /** Used by methods to exit iteration */
   var breakIndicator = '__lodash_break_1335248838000__';
@@ -134,7 +134,7 @@ define(['../objects/forIn', '../objects/isFunction'], function(forIn, isFunction
       }
     }
     else {
-      forIn(b, function(value, key, b) {
+      baseForIn(b, function(value, key, b) {
         if (hasOwnProperty.call(b, key)) {
           size++;
           return !(result = hasOwnProperty.call(a, key) && baseIsEqual(a[key], value, stackA, stackB)) && breakIndicator;
@@ -142,7 +142,7 @@ define(['../objects/forIn', '../objects/isFunction'], function(forIn, isFunction
       });
 
       if (result) {
-        forIn(a, function(value, key, a) {
+        baseForIn(a, function(value, key, a) {
           if (hasOwnProperty.call(a, key)) {
             return !(result = --size > -1) && breakIndicator;
           }

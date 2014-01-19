@@ -7,7 +7,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './collections/forEach', './objects/forOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, forEach, forOwn, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, baseEach, baseForOwn, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;
@@ -113,7 +113,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.difference = arrays.difference;
   lodash.filter = collections.filter;
   lodash.flatten = arrays.flatten;
-  lodash.forEach = forEach;
+  lodash.forEach = collections.forEach;
   lodash.functions = objects.functions;
   lodash.groupBy = collections.groupBy;
   lodash.indexBy = collections.indexBy;
@@ -152,7 +152,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   // add aliases
   lodash.collect = collections.map;
   lodash.drop = arrays.rest;
-  lodash.each = forEach;
+  lodash.each = collections.forEach;
   lodash.extend = assign;
   lodash.methods = objects.functions;
   lodash.object = arrays.zipObject;
@@ -235,7 +235,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.prototype.value = chaining.wrapperValueOf;
 
     // add `Array` mutator functions to the wrapper
-    forEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+    baseEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
       var func = arrayRef[methodName];
       lodash.prototype[methodName] = function() {
         var value = this.__wrapped__;
@@ -251,7 +251,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
     });
 
     // add `Array` accessor functions to the wrapper
-    forEach(['concat', 'join', 'slice'], function(methodName) {
+    baseEach(['concat', 'join', 'slice'], function(methodName) {
       var func = arrayRef[methodName];
       lodash.prototype[methodName] = function() {
         var value = this.__wrapped__,

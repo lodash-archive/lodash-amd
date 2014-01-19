@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forIn', './isFunction'], function(forIn, isFunction) {
+define(['../internals/baseForIn', './isFunction'], function(baseForIn, isFunction) {
 
   /**
    * Creates a sorted array of property names of all enumerable properties,
@@ -25,7 +25,7 @@ define(['./forIn', './isFunction'], function(forIn, isFunction) {
    */
   function functions(object) {
     var result = [];
-    forIn(object, function(value, key) {
+    baseForIn(object, function(value, key) {
       if (isFunction(value)) {
         result.push(key);
       }

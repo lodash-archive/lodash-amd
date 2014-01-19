@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseIndexOf', './cacheIndexOf', './createCache', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, releaseObject) {
+define(['./baseIndexOf', './cacheIndexOf', './createCache'], function(baseIndexOf, cacheIndexOf, createCache) {
 
   /** Used as the size when optimizations are enabled for large arrays */
   var LARGE_ARRAY_SIZE = 75;
@@ -24,26 +24,17 @@ define(['./baseIndexOf', './cacheIndexOf', './createCache', './releaseObject'], 
     var index = -1,
         indexOf = baseIndexOf,
         length = array ? array.length : 0,
-        isLarge = length >= LARGE_ARRAY_SIZE,
         result = [];
 
-    if (isLarge) {
-      var cache = createCache(values);
-      if (cache) {
-        indexOf = cacheIndexOf;
-        values = cache;
-      } else {
-        isLarge = false;
-      }
+    if (createCache && length >= LARGE_ARRAY_SIZE) {
+      indexOf = cacheIndexOf;
+      values = createCache(values);
     }
     while (++index < length) {
       var value = array[index];
       if (indexOf(values, value) < 0) {
         result.push(value);
       }
-    }
-    if (isLarge) {
-      releaseObject(values);
     }
     return result;
   }

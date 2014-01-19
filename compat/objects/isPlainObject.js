@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forIn', './isArguments', './isFunction', '../internals/isNative', '../internals/isNode', '../support'], function(forIn, isArguments, isFunction, isNative, isNode, support) {
+define(['../internals/baseForIn', './isArguments', './isFunction', '../internals/isNative', '../internals/isNode', '../support'], function(baseForIn, isArguments, isFunction, isNative, isNode, support) {
 
   /** `Object#toString` result shortcuts */
   var objectClass = '[object Object]';
@@ -47,7 +47,7 @@ define(['./forIn', './isArguments', './isFunction', '../internals/isNative', '..
     // iterated property is an object's own property then there are no inherited
     // enumerable properties.
     if (support.ownLast) {
-      forIn(value, function(value, key, object) {
+      baseForIn(value, function(value, key, object) {
         result = hasOwnProperty.call(object, key);
         return false;
       });
@@ -56,7 +56,7 @@ define(['./forIn', './isArguments', './isFunction', '../internals/isNative', '..
     // In most environments an object's own properties are iterated before
     // its inherited properties. If the last iterated property is an object's
     // own property then there are no inherited enumerable properties.
-    forIn(value, function(value, key) {
+    baseForIn(value, function(value, key) {
       result = key;
     });
     return typeof result == 'undefined' || hasOwnProperty.call(value, result);

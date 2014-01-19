@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../objects/forOwn'], function(createCallback, forOwn) {
+define(['./baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
   /**
    * Creates a function that aggregates a collection, creating an object composed
@@ -32,7 +32,7 @@ define(['../functions/createCallback', '../objects/forOwn'], function(createCall
           setter(result, value, callback(value, index, collection), collection);
         }
       } else {
-        forOwn(collection, function(value, key, collection) {
+        baseEach(collection, function(value, key, collection) {
           setter(result, value, callback(value, key, collection), collection);
         });
       }

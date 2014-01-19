@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './releaseArray', './releaseObject'], function(baseIndexOf, cacheIndexOf, createCache, getArray, releaseArray, releaseObject) {
+define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './releaseArray'], function(baseIndexOf, cacheIndexOf, createCache, getArray, releaseArray) {
 
   /** Used as the size when optimizations are enabled for large arrays */
   var LARGE_ARRAY_SIZE = 75;
@@ -25,15 +25,14 @@ define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './rel
     var index = -1,
         indexOf = baseIndexOf,
         length = array ? array.length : 0,
+        isLarge = createCache && !isSorted && length >= LARGE_ARRAY_SIZE,
         result = [];
 
-    var isLarge = !isSorted && length >= LARGE_ARRAY_SIZE,
-        seen = (callback || isLarge) ? getArray() : result;
-
     if (isLarge) {
-      var cache = createCache(seen);
+      var seen = createCache();
       indexOf = cacheIndexOf;
-      seen = cache;
+    } else {
+      seen = callback ? getArray() : result;
     }
     while (++index < length) {
       var value = array[index],
@@ -49,10 +48,7 @@ define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './rel
         result.push(value);
       }
     }
-    if (isLarge) {
-      releaseArray(seen.array);
-      releaseObject(seen);
-    } else if (callback) {
+    if (!isLarge && callback) {
       releaseArray(seen);
     }
     return result;

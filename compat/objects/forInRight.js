@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', './forIn'], function(baseCreateCallback, forIn) {
+define(['../internals/baseCreateCallback', '../internals/baseForIn'], function(baseCreateCallback, baseForIn) {
 
   /**
    * This method is like `_.forIn` except that it iterates over elements
@@ -39,7 +39,7 @@ define(['../internals/baseCreateCallback', './forIn'], function(baseCreateCallba
   function forInRight(object, callback, thisArg) {
     var pairs = [];
 
-    forIn(object, function(value, key) {
+    baseForIn(object, function(value, key) {
       pairs.push(key, value);
     });
 

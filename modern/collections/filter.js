@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../objects/forOwn'], function(createCallback, forOwn) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
   /**
    * Iterates over elements of a collection, returning an array of all elements
@@ -63,7 +63,7 @@ define(['../functions/createCallback', '../objects/forOwn'], function(createCall
         }
       }
     } else {
-      forOwn(collection, function(value, index, collection) {
+      baseEach(collection, function(value, index, collection) {
         if (callback(value, index, collection)) {
           result.push(value);
         }

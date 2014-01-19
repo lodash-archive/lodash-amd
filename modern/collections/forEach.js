@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/forOwn'], function(baseCreateCallback, forOwn) {
+define(['../internals/baseCreateCallback', '../internals/baseEach'], function(baseCreateCallback, baseEach) {
 
   /**
    * Iterates over elements of a collection, executing the callback for each
@@ -46,7 +46,7 @@ define(['../internals/baseCreateCallback', '../objects/forOwn'], function(baseCr
         }
       }
     } else {
-      forOwn(collection, callback);
+      baseEach(collection, callback);
     }
     return collection;
   }

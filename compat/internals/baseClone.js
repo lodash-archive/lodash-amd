@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/assign', './baseEach', '../objects/forOwn', './getArray', '../objects/isArray', './isNode', '../objects/isObject', './releaseArray', '../arrays/slice', '../support'], function(assign, baseEach, forOwn, getArray, isArray, isNode, isObject, releaseArray, slice, support) {
+define(['../objects/assign', './baseEach', './baseForOwn', './getArray', '../objects/isArray', './isNode', '../objects/isObject', './releaseArray', '../arrays/slice', '../support'], function(assign, baseEach, baseForOwn, getArray, isArray, isNode, isObject, releaseArray, slice, support) {
 
   /** Used to match regexp flags from their coerced string values */
   var reFlags = /\w*$/;
@@ -131,7 +131,7 @@ define(['../objects/assign', './baseEach', '../objects/forOwn', './getArray', '.
     stackB.push(result);
 
     // recursively populate clone (susceptible to call stack limits)
-    (isArr ? baseEach : forOwn)(value, function(objValue, key) {
+    (isArr ? baseEach : baseForOwn)(value, function(objValue, key) {
       result[key] = baseClone(objValue, isDeep, callback, stackA, stackB);
     });
 

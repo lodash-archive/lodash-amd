@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/baseFlatten', '../functions/createCallback', './forIn'], function(baseDifference, baseFlatten, createCallback, forIn) {
+define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback'], function(baseDifference, baseFlatten, baseForIn, createCallback) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
@@ -38,7 +38,7 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../functions
     var result = {};
     if (typeof callback != 'function') {
       var props = [];
-      forIn(object, function(value, key) {
+      baseForIn(object, function(value, key) {
         props.push(key);
       });
       props = baseDifference(props, baseFlatten(arguments, true, false, 1));
@@ -52,7 +52,7 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../functions
       }
     } else {
       callback = createCallback(callback, thisArg, 3);
-      forIn(object, function(value, key, object) {
+      baseForIn(object, function(value, key, object) {
         if (!callback(value, key, object)) {
           result[key] = value;
         }

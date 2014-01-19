@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', './keys'], function(baseCreateCallback, keys) {
+define(['../internals/baseCreateCallback', '../internals/baseForOwn'], function(baseCreateCallback, baseForOwn) {
 
   /**
    * Iterates over own enumerable properties of an object, executing the callback
@@ -29,18 +29,8 @@ define(['../internals/baseCreateCallback', './keys'], function(baseCreateCallbac
    * // => logs '0', '1', and 'length' (property order is not guaranteed across environments)
    */
   function forOwn(object, callback, thisArg) {
-    var index = -1,
-        props = keys(object),
-        length = props.length;
-
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    while (++index < length) {
-      var key = props[index];
-      if (callback(object[key], key, object) === false) {
-        break;
-      }
-    }
-    return object;
+    return baseForOwn(object, callback);
   }
 
   return forOwn;

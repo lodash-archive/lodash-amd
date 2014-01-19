@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../objects/forOwn', '../objects/isArray'], function(createCallback, forOwn, isArray) {
+define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray'], function(baseEach, createCallback, isArray) {
 
   /**
    * Checks if the callback returns a truey value for **any** element of a
@@ -64,7 +64,7 @@ define(['../functions/createCallback', '../objects/forOwn', '../objects/isArray'
         }
       }
     } else {
-      forOwn(collection, function(value, index, collection) {
+      baseEach(collection, function(value, index, collection) {
         return !(result = callback(value, index, collection));
       });
     }

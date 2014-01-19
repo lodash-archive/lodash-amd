@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forIn', './isFunction', '../internals/isNative'], function(forIn, isFunction, isNative) {
+define(['../internals/baseForIn', './isFunction', '../internals/isNative'], function(baseForIn, isFunction, isNative) {
 
   /** `Object#toString` result shortcuts */
   var objectClass = '[object Object]';
@@ -44,7 +44,7 @@ define(['./forIn', './isFunction', '../internals/isNative'], function(forIn, isF
     // In most environments an object's own properties are iterated before
     // its inherited properties. If the last iterated property is an object's
     // own property then there are no inherited enumerable properties.
-    forIn(value, function(value, key) {
+    baseForIn(value, function(value, key) {
       result = key;
     });
     return typeof result == 'undefined' || hasOwnProperty.call(value, result);

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../functions/createCallback', './forIn', './isObject'], function(baseFlatten, createCallback, forIn, isObject) {
+define(['../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback', './isObject'], function(baseFlatten, baseForIn, createCallback, isObject) {
 
   /**
    * Creates a shallow clone of `object` composed of the specified properties.
@@ -50,7 +50,7 @@ define(['../internals/baseFlatten', '../functions/createCallback', './forIn', '.
       }
     } else {
       callback = createCallback(callback, thisArg, 3);
-      forIn(object, function(value, key, object) {
+      baseForIn(object, function(value, key, object) {
         if (callback(value, key, object)) {
           result[key] = value;
         }

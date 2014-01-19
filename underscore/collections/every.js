@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../objects/forOwn'], function(createCallback, forOwn) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
   /** Used by methods to exit iteration */
   var breakIndicator = '__lodash_break_1335248838000__';
@@ -66,7 +66,7 @@ define(['../functions/createCallback', '../objects/forOwn'], function(createCall
         }
       }
     } else {
-      forOwn(collection, function(value, index, collection) {
+      baseEach(collection, function(value, index, collection) {
         return !(result = !!callback(value, index, collection)) && breakIndicator;
       });
     }

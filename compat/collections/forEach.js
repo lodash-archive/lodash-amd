@@ -45,7 +45,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/
         }
       }
     } else {
-      baseEach(collection, callback, thisArg);
+      baseEach(collection, baseCreateCallback(callback, thisArg, 3));
     }
     return collection;
   }

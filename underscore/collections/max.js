@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', './forEach', '../objects/forOwn'], function(createCallback, forEach, forOwn) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
   /**
    * Retrieves the maximum value of a collection. If the collection is empty or
@@ -71,7 +71,7 @@ define(['../functions/createCallback', './forEach', '../objects/forOwn'], functi
     } else {
       callback = createCallback(callback, thisArg, 3);
 
-      forEach(collection, function(value, index, collection) {
+      baseEach(collection, function(value, index, collection) {
         var current = callback(value, index, collection);
         if (current > computed) {
           computed = current;

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../collections/forEach', './forOwn', '../internals/getArray', './isArray', './isObject', './isPlainObject', '../internals/releaseArray', '../arrays/slice'], function(baseCreateCallback, forEach, forOwn, getArray, isArray, isObject, isPlainObject, releaseArray, slice) {
+define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/baseForOwn', '../internals/getArray', './isArray', './isObject', './isPlainObject', '../internals/releaseArray', '../arrays/slice'], function(baseCreateCallback, baseEach, baseForOwn, getArray, isArray, isObject, isPlainObject, releaseArray, slice) {
 
   /**
    * The base implementation of `_.merge` without argument juggling or support
@@ -20,7 +20,7 @@ define(['../internals/baseCreateCallback', '../collections/forEach', './forOwn',
    * @param {Array} [stackB=[]] Associates values with source counterparts.
    */
   function baseMerge(object, source, callback, stackA, stackB) {
-    (isArray(source) ? forEach : forOwn)(source, function(source, key) {
+    (isArray(source) ? baseEach : baseForOwn)(source, function(source, key) {
       var found,
           isArr,
           result = source,

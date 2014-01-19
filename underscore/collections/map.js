@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', '../objects/forOwn'], function(createCallback, forOwn) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
   /**
    * Creates an array of values by running each element in the collection
@@ -59,7 +59,7 @@ define(['../functions/createCallback', '../objects/forOwn'], function(createCall
       }
     } else {
       result = [];
-      forOwn(collection, function(value, key, collection) {
+      baseEach(collection, function(value, key, collection) {
         result[++index] = callback(value, key, collection);
       });
     }

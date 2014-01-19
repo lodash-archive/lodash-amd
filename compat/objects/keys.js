@@ -23,7 +23,6 @@ define(['../internals/createIterator', './isArguments', '../internals/isNative',
   var shimKeys = createIterator({
     'args': 'object',
     'init': '[]',
-    'top': '',
     'loop': 'result.push(key)',
     'useHas': true
   });

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCompareAscending', '../functions/createCallback', './forEach'], function(baseCompareAscending, createCallback, forEach) {
+define(['../internals/baseCompareAscending', '../internals/baseEach', '../functions/createCallback'], function(baseCompareAscending, baseEach, createCallback) {
 
   /**
    * Used by `sortBy` to compare transformed elements of a collection and stable
@@ -76,7 +76,7 @@ define(['../internals/baseCompareAscending', '../functions/createCallback', './f
         result = Array(typeof length == 'number' ? length : 0);
 
     callback = createCallback(callback, thisArg, 3);
-    forEach(collection, function(value, key, collection) {
+    baseEach(collection, function(value, key, collection) {
       result[++index] = {
         'criteria': callback(value, key, collection),
         'index': index,

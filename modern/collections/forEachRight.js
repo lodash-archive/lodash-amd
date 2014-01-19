@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../objects/forOwn', '../objects/keys'], function(baseCreateCallback, forOwn, keys) {
+define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/keys'], function(baseCreateCallback, baseEach, keys) {
 
   /**
    * This method is like `_.forEach` except that it iterates over elements
@@ -37,7 +37,7 @@ define(['../internals/baseCreateCallback', '../objects/forOwn', '../objects/keys
     } else {
       var props = keys(collection);
       length = props.length;
-      forOwn(collection, function(value, key, collection) {
+      baseEach(collection, function(value, key, collection) {
         key = props ? props[--length] : --length;
         return callback(collection[key], key, collection);
       });

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./forOwn', './isArguments', './isFunction', '../support'], function(forOwn, isArguments, isFunction, support) {
+define(['../internals/baseForOwn', './isArguments', './isFunction', '../support'], function(baseForOwn, isArguments, isFunction, support) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
@@ -54,7 +54,7 @@ define(['./forOwn', './isArguments', './isFunction', '../support'], function(for
         (className == objectClass && typeof length == 'number' && isFunction(value.splice))) {
       return !length;
     }
-    forOwn(value, function() {
+    baseForOwn(value, function() {
       return (result = false);
     });
     return result;

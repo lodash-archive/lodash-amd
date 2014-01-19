@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/forIn', './getArray', '../objects/isFunction', './releaseArray'], function(forIn, getArray, isFunction, releaseArray) {
+define(['./baseForIn', './getArray', '../objects/isFunction', './releaseArray'], function(baseForIn, getArray, isFunction, releaseArray) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
@@ -174,7 +174,7 @@ define(['../objects/forIn', './getArray', '../objects/isFunction', './releaseArr
     else {
       // deep compare objects using `forIn`, instead of `forOwn`, to avoid `Object.keys`
       // which, in this case, is more costly
-      forIn(b, function(value, key, b) {
+      baseForIn(b, function(value, key, b) {
         if (hasOwnProperty.call(b, key)) {
           // count the number of properties.
           size++;
@@ -185,7 +185,7 @@ define(['../objects/forIn', './getArray', '../objects/isFunction', './releaseArr
 
       if (result && !isWhere) {
         // ensure both objects have the same number of properties
-        forIn(a, function(value, key, a) {
+        baseForIn(a, function(value, key, a) {
           if (hasOwnProperty.call(a, key)) {
             // `size` will be `-1` if `a` has more properties than `b`
             return (result = --size > -1);
