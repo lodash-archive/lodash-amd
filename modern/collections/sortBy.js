@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray', './map', '../internals/objectPool'], function(baseEach, createCallback, isArray, map, objectPool) {
+define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray', './map'], function(baseEach, createCallback, isArray, map) {
+
+  /** Used to pool arrays and objects used internally */
+  var objectPool = [];
 
   /** Used as the max size of the `arrayPool` and `objectPool` */
   var MAX_POOL_SIZE = 40;
