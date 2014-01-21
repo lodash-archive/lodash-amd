@@ -50,7 +50,11 @@ define(['../internals/baseFlatten'], function(baseFlatten) {
    * _.flatten(characters, 'pets');
    * // => ['hoppy', 'baby puss', 'dino']
    */
-  function flatten(array, isShallow) {
+  function flatten(array, isShallow, guard) {
+    var type = typeof isShallow;
+    if ((type == 'number' || type == 'string') && guard && guard[isShallow] === array) {
+      isShallow = false;
+    }
     return baseFlatten(array, isShallow);
   }
 
