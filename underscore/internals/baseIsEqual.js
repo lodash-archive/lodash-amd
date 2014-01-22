@@ -8,8 +8,14 @@
  */
 define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction) {
 
+  /** Used as the semantic version number */
+  var version = '2.4.1';
+
+  /** Used as the property name for wrapper metadata */
+  var expando = '__lodash@' + version + '__';
+
   /** Used by methods to exit iteration */
-  var breakIndicator = '__lodash_break_1335248838000__';
+  var breakIndicator = expando + 'breaker__';
 
   /** `Object#toString` result shortcuts */
   var arrayClass = '[object Array]',
