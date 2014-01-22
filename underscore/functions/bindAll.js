@@ -8,7 +8,7 @@
  */
 define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/functions'], function(baseFlatten, createWrapper, functions) {
 
-  /** Used to compose bitmasks for `__bindData__` */
+  /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1;
 
   /**
@@ -44,7 +44,7 @@ define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/fu
 
     while (++index < length) {
       var key = funcs[index];
-      object[key] = createWrapper(object[key], BIND_FLAG, null, null, object);
+      object[key] = createWrapper(object[key], BIND_FLAG, null, object);
     }
     return object;
   }

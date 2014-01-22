@@ -8,7 +8,7 @@
  */
 define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper, slice) {
 
-  /** Used to compose bitmasks for `__bindData__` */
+  /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1,
       BIND_KEY_FLAG = 2,
       PARTIAL_FLAG = 16;
@@ -49,9 +49,9 @@ define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper
    * // => 'hiya fred!'
    */
   function bindKey(object, key) {
-    return arguments.length > 2
-      ? createWrapper(key, BIND_FLAG | BIND_KEY_FLAG | PARTIAL_FLAG, slice(arguments, 2), null, object)
-      : createWrapper(key, BIND_FLAG | BIND_KEY_FLAG, null, null, object);
+    return arguments.length < 3
+      ? createWrapper(key, BIND_FLAG | BIND_KEY_FLAG, null, object)
+      : createWrapper(key, BIND_FLAG | BIND_KEY_FLAG | PARTIAL_FLAG, null, object, slice(arguments, 2));
   }
 
   return bindKey;

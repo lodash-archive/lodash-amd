@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isObject', './setBindData', '../arrays/slice'], function(baseCreate, isObject, setBindData, slice) {
+define(['./baseCreate', '../objects/isObject', './setData', '../arrays/slice'], function(baseCreate, isObject, setData, slice) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;
@@ -19,13 +19,13 @@ define(['./baseCreate', '../objects/isObject', './setBindData', '../arrays/slice
    * sets its meta data.
    *
    * @private
-   * @param {Array} bindData The bind data array.
+   * @param {Array} data The metadata array.
    * @returns {Function} Returns the new bound function.
    */
-  function baseBind(bindData) {
-    var func = bindData[0],
-        partialArgs = bindData[2],
-        thisArg = bindData[4];
+  function baseBind(data) {
+    var func = data[0],
+        thisArg = data[3],
+        partialArgs = data[4];
 
     function bound() {
       // `Function#bind` spec
@@ -47,7 +47,7 @@ define(['./baseCreate', '../objects/isObject', './setBindData', '../arrays/slice
       }
       return func.apply(thisArg, args || arguments);
     }
-    setBindData(bound, bindData);
+    setData(bound, data);
     return bound;
   }
 

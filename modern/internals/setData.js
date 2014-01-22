@@ -1,6 +1,6 @@
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize exports="amd" -o ./compat/`
+ * Build: `lodash modularize modern exports="amd" -o ./modern/`
  * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -8,7 +8,13 @@
  */
 define(['./isNative', '../utilities/noop'], function(isNative, noop) {
 
-  /** Used as the property descriptor for `__bindData__` */
+  /** Used as the semantic version number */
+  var version = '2.4.1';
+
+  /** Used as the property name for wrapper metadata */
+  var expando = '__lodash@' + version + '__';
+
+  /** Used as the property descriptor for wrapper metadata */
   var descriptor = {
     'configurable': false,
     'enumerable': false,
@@ -28,16 +34,16 @@ define(['./isNative', '../utilities/noop'], function(isNative, noop) {
   }());
 
   /**
-   * Sets `this` binding data on a given function.
+   * Sets wrapper metadata on a given function.
    *
    * @private
    * @param {Function} func The function to set data on.
    * @param {Array} value The data array to set.
    */
-  var setBindData = !defineProperty ? noop : function(func, value) {
+  var setData = !defineProperty ? noop : function(func, value) {
     descriptor.value = value;
-    defineProperty(func, '__bindData__', descriptor);
+    defineProperty(func, expando, descriptor);
   };
 
-  return setBindData;
+  return setData;
 });
