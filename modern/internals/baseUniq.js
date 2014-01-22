@@ -8,7 +8,7 @@
  */
 define(['./baseIndexOf', './cacheIndexOf', './createCache', './getArray', './releaseArray'], function(baseIndexOf, cacheIndexOf, createCache, getArray, releaseArray) {
 
-  /** Used as the size when optimizations are enabled for large arrays */
+  /** Used as the size when optimizations are enabled for arrays */
   var LARGE_ARRAY_SIZE = 75;
 
   /**

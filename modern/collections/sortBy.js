@@ -8,11 +8,11 @@
  */
 define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray', './map'], function(baseEach, createCallback, isArray, map) {
 
-  /** Used to pool arrays and objects used internally */
-  var objectPool = [];
-
   /** Used as the max size of the `arrayPool` and `objectPool` */
   var MAX_POOL_SIZE = 40;
+
+  /** Used to pool arrays and objects used internally */
+  var objectPool = [];
 
   /**
    * The base implementation of `compareAscending` used to compare values and
