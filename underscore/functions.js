@@ -12,6 +12,7 @@ define(['./functions/after', './functions/bind', './functions/bindAll', './funct
     'after': after,
     'bind': bind,
     'bindAll': bindAll,
+    'callback': createCallback,
     'compose': compose,
     'createCallback': createCallback,
     'debounce': debounce,

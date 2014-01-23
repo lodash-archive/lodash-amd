@@ -9,6 +9,7 @@
 define(['./utilities/constant', './functions/createCallback', './utilities/escape', './utilities/identity', './utilities/match', './utilities/mixin', './utilities/noConflict', './utilities/noop', './utilities/now', './utilities/parseInt', './utilities/property', './utilities/random', './utilities/result', './utilities/template', './utilities/templateSettings', './utilities/times', './utilities/unescape', './utilities/uniqueId'], function(constant, createCallback, escape, identity, match, mixin, noConflict, noop, now, parseInt, property, random, result, template, templateSettings, times, unescape, uniqueId) {
 
   return {
+    'callback': createCallback,
     'constant': constant,
     'createCallback': createCallback,
     'escape': escape,

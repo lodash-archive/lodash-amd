@@ -13,6 +13,7 @@ define(['./functions/after', './functions/bind', './functions/bindAll', './funct
     'bind': bind,
     'bindAll': bindAll,
     'bindKey': bindKey,
+    'callback': createCallback,
     'compose': compose,
     'createCallback': createCallback,
     'curry': curry,
