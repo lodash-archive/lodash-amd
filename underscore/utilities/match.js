@@ -8,6 +8,12 @@
  */
 define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], function(baseIsEqual, isObject, keys) {
 
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
   /**
    * Creates a "_.where" style function, which performs a deep comparison
    * between a given object and the `props` object, returning `true` if the
@@ -42,7 +48,9 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
           result = false;
 
       while (length--) {
-        if (!(result = object[props[length]] === source[props[length]])) {
+        var key = props[length];
+        if (!(result = hasOwnProperty.call(object, key) &&
+              baseIsEqual(object[key], source[key], null, true))) {
           break;
         }
       }
