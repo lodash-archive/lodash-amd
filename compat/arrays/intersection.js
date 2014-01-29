@@ -9,7 +9,7 @@
 define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../internals/getArray', '../objects/isArguments', '../objects/isArray', '../internals/releaseArray'], function(baseIndexOf, cacheIndexOf, createCache, getArray, isArguments, isArray, releaseArray) {
 
   /** Used as the size when optimizations are enabled for arrays */
-  var LARGE_ARRAY_SIZE = 75;
+  var LARGE_ARRAY_SIZE = 40;
 
   /**
    * Creates an array of unique values present in all provided arrays using
