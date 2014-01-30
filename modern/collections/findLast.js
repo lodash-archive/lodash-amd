@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/createCallback', './forEachRight'], function(createCallback, forEachRight) {
+define(['../internals/baseEachRight', '../functions/createCallback'], function(baseEachRight, createCallback) {
 
   /**
    * This method is like `_.find` except that it iterates over elements
@@ -31,7 +31,8 @@ define(['../functions/createCallback', './forEachRight'], function(createCallbac
   function findLast(collection, callback, thisArg) {
     var result;
     callback = createCallback(callback, thisArg, 3);
-    forEachRight(collection, function(value, index, collection) {
+
+    baseEachRight(collection, function(value, index, collection) {
       if (callback(value, index, collection)) {
         result = value;
         return false;

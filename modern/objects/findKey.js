@@ -52,6 +52,7 @@ define(['../internals/baseForOwn', '../functions/createCallback'], function(base
   function findKey(object, callback, thisArg) {
     var result;
     callback = createCallback(callback, thisArg, 3);
+
     baseForOwn(object, function(value, key, object) {
       if (callback(value, key, object)) {
         result = key;

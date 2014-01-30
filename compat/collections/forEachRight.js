@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/isArray', '../objects/isString', '../objects/keys', '../support'], function(baseCreateCallback, baseEach, isArray, isString, keys, support) {
+define(['../internals/baseCreateCallback', '../internals/baseEachRight', '../objects/isArray'], function(baseCreateCallback, baseEachRight, isArray) {
 
   /**
    * This method is like `_.forEach` except that it iterates over elements
@@ -26,27 +26,15 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/
    * // => logs each number from right to left and returns '3,2,1'
    */
   function forEachRight(collection, callback, thisArg) {
-    var iterable = collection,
-        length = collection ? collection.length : 0;
-
-    callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    if (isArray(collection)) {
+    if (callback && typeof thisArg == 'undefined' && isArray(collection)) {
+      var length = collection.length;
       while (length--) {
         if (callback(collection[length], length, collection) === false) {
           break;
         }
       }
     } else {
-      if (typeof length != 'number') {
-        var props = keys(collection);
-        length = props.length;
-      } else if (support.unindexedChars && isString(collection)) {
-        iterable = collection.split('');
-      }
-      baseEach(iterable, function(value, key) {
-        key = props ? props[--length] : --length;
-        return callback(iterable[key], key, collection);
-      });
+      baseEachRight(collection, baseCreateCallback(callback, thisArg, 3));
     }
     return collection;
   }

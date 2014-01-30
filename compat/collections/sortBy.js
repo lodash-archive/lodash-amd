@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray', './map'], function(baseEach, createCallback, isArray, map) {
+define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray'], function(baseEach, createCallback, isArray) {
 
   /** Used as the max size of the `arrayPool` and `objectPool` */
   var MAX_POOL_SIZE = 40;
@@ -164,12 +164,20 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
       callback = createCallback(callback, thisArg, 3);
     }
     baseEach(collection, function(value, key, collection) {
+      if (multi) {
+        var length = callback.length,
+            criteria = Array(length);
+
+        while (length--) {
+          criteria[length] = value[callback[length]];
+        }
+      } else {
+        criteria = callback(value, key, collection);
+      }
       var object = result[++index] = getObject();
+      object.criteria = criteria;
       object.index = index;
       object.value = value;
-      object.criteria = multi
-        ? map(callback, function(key) { return value[key]; })
-        : callback(value, key, collection);
     });
 
     length = result.length;

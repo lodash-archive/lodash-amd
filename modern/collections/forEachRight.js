@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/keys'], function(baseCreateCallback, baseEach, keys) {
+define(['../internals/baseCreateCallback', '../internals/baseEachRight'], function(baseCreateCallback, baseEachRight) {
 
   /**
    * This method is like `_.forEach` except that it iterates over elements
@@ -28,6 +28,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/
   function forEachRight(collection, callback, thisArg) {
     var length = collection ? collection.length : 0;
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
+
     if (typeof length == 'number') {
       while (length--) {
         if (callback(collection[length], length, collection) === false) {
@@ -35,12 +36,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/
         }
       }
     } else {
-      var props = keys(collection);
-      length = props.length;
-      baseEach(collection, function(value, key, collection) {
-        key = props ? props[--length] : --length;
-        return callback(collection[key], key, collection);
-      });
+      baseEachRight(collection, callback);
     }
     return collection;
   }

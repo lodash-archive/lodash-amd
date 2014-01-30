@@ -38,7 +38,6 @@ define(['../internals/baseCreateCallback', '../internals/baseForIn'], function(b
    */
   function forInRight(object, callback, thisArg) {
     var pairs = [];
-
     baseForIn(object, function(value, key) {
       pairs.push(key, value);
     });
