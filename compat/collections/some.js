@@ -52,8 +52,8 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    */
   function some(collection, callback, thisArg) {
     var result;
-    callback = createCallback(callback, thisArg, 3);
 
+    callback = createCallback(callback, thisArg, 3);
     if (isArray(collection)) {
       var index = -1,
           length = collection.length;
