@@ -69,7 +69,7 @@ before_install:
   - "[ $MAKE == false ] || node ./node_modules/lodash-cli/bin/lodash modularize $BUILD exports=amd -o ./$BUILD"
 script:
   - "[ $ISTANBUL == false ]    || istanbul instrument --output ./$BUILD ./modern"
-  - "[ $SAUCE_LABS == true ]   || phantomjs ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
+  - "[ $SAUCE_LABS == true ]   || phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
   - "[ $ISTANBUL == false ]    || istanbul report lcovonly"
   - "[ $ISTANBUL == true ] && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage || true"
   - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) || $BIN ./node_modules/lodash/test/saucelabs.js runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development\""
