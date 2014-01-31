@@ -39,6 +39,7 @@ define(['./baseForOwnRight'], function(baseForOwnRight) {
     } else {
       baseForOwnRight(collection, callback);
     }
+    return collection;
   }
 
   return baseEachRight;

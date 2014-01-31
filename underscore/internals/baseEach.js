@@ -40,6 +40,7 @@ define(['./baseForOwn'], function(baseForOwn) {
     } else {
       baseForOwn(collection, callback);
     }
+    return collection;
   }
 
   return baseEach;
