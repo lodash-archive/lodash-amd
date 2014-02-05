@@ -132,8 +132,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
         length = args.length,
         type = typeof guard;
 
-    // allows working with functions like `_.reduce` without using their
-    // `key` and `object` arguments as sources
+    // enables use as a callback for functions like `_.reduce`
     if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
       length = 2;
     }
