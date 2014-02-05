@@ -6,7 +6,13 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/baseForIn'], function(baseDifference, baseFlatten, baseForIn) {
+define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/baseForIn', '../arrays/slice'], function(baseDifference, baseFlatten, baseForIn, slice) {
+
+  /** Used for native method references */
+  var arrayRef = Array.prototype;
+
+  /** Native method shortcuts */
+  var splice = arrayRef.splice;
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
@@ -20,8 +26,9 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../internals
    * @memberOf _
    * @category Objects
    * @param {Object} object The source object.
-   * @param {Function|...string|string[]} [callback] The properties to omit or the
-   *  function called per iteration.
+   * @param {Function|...string|string[]} [callback] The function called per
+   *  iteration or property names to omit, specified as individual property
+   *  names or arrays of property names.
    * @param {*} [thisArg] The `this` binding of `callback`.
    * @returns {Object} Returns an object without the omitted properties.
    * @example
@@ -34,16 +41,29 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../internals
    * });
    * // => { 'name': 'fred' }
    */
-  function omit(object) {
+  function omit(object, guard) {
+    var args = arguments,
+        result = {},
+        type = typeof guard;
+
+    if ((type == 'number' || type == 'string') && args[2] && args[2][guard] === object) {
+      args = slice(args);
+      splice.call(args, 1, 2);
+    }
+    var omitProps = baseFlatten(args, true, false, 1),
+        length = omitProps.length;
+
+    while (length--) {
+      omitProps[length] = String(omitProps[length]);
+    }
     var props = [];
     baseForIn(object, function(value, key) {
       props.push(key);
     });
-    props = baseDifference(props, baseFlatten(arguments, true, false, 1));
 
-    var index = -1,
-        length = props.length,
-        result = {};
+    var index = -1;
+    props = baseDifference(props, omitProps);
+    length = props.length;
 
     while (++index < length) {
       var key = props[index];
