@@ -68,8 +68,8 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
 
     if (typeof length == 'number') {
       while (++index < length) {
-        if ((result = callback(collection[index], index, collection))) {
-          break;
+        if (callback(collection[index], index, collection)) {
+          return true;
         }
       }
     } else {
