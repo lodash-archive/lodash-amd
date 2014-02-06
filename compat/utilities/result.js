@@ -8,6 +8,9 @@
  */
 define(['../objects/isFunction'], function(isFunction) {
 
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
+
   /**
    * Resolves the value of property `key` on `object`. If `key` is a function
    * it will be invoked with the `this` binding of `object` and its result
@@ -42,10 +45,10 @@ define(['../objects/isFunction'], function(isFunction) {
    * // => 'slate'
    */
   function result(object, key, defaultValue) {
-    if (object == null || typeof object[key] == 'undefined') {
+    var value = object == null ? undefined : object[key];
+    if (typeof value == 'undefined') {
       return defaultValue;
     }
-    var value = object[key];
     return isFunction(value) ? object[key]() : value;
   }
 
