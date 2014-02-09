@@ -158,6 +158,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.pairs = objects.pairs;
   lodash.partial = functions.partial;
   lodash.partialRight = functions.partialRight;
+  lodash.partition = collections.partition;
   lodash.pick = objects.pick;
   lodash.pluck = collections.pluck;
   lodash.property = utilities.property;
