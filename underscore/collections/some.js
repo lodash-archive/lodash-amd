@@ -47,7 +47,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * // => true
    *
    * var characters = [
-   *   { 'name': 'barney', 'age': 36, 'blocked': false },
+   *   { 'name': 'barney', 'age': 36 },
    *   { 'name': 'fred',   'age': 40, 'blocked': true }
    * ];
    *

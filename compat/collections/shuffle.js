@@ -19,8 +19,8 @@ define(['../internals/baseEach', '../internals/baseRandom'], function(baseEach, 
    * @returns {Array} Returns a new shuffled collection.
    * @example
    *
-   * _.shuffle([1, 2, 3, 4, 5, 6]);
-   * // => [4, 1, 6, 3, 5, 2]
+   * _.shuffle([1, 2, 3, 4]);
+   * // => [4, 1, 3, 2]
    */
   function shuffle(collection) {
     var index = -1,

@@ -26,7 +26,7 @@ define(['../internals/baseCreate', '../internals/baseEach', '../internals/baseFo
    * @returns {*} Returns the accumulated value.
    * @example
    *
-   * var squares = _.transform([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function(result, num) {
+   * var squares = _.transform([1, 2, 3, 4, 5, 6, 7, 8], function(result, num) {
    *   num *= num;
    *   if (num % 2) {
    *     return result.push(num) < 3;

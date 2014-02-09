@@ -51,14 +51,14 @@ define(['../functions/createCallback', './slice'], function(createCallback, slic
    * // => [1, 2]
    *
    * var characters = [
-   *   { 'name': 'barney',  'blocked': true,  'employer': 'slate' },
-   *   { 'name': 'fred',    'blocked': false, 'employer': 'slate' },
-   *   { 'name': 'pebbles', 'blocked': true,  'employer': 'na' }
+   *   { 'name': 'barney',  'employer': 'slate', 'blocked': true },
+   *   { 'name': 'fred',    'employer': 'slate' },
+   *   { 'name': 'pebbles', 'employer': 'na',    'blocked': true }
    * ];
    *
    * // using "_.pluck" callback shorthand
    * _.first(characters, 'blocked');
-   * // => [{ 'name': 'barney', 'blocked': true, 'employer': 'slate' }]
+   * // => [{ 'name': 'barney', 'employer': 'slate', 'blocked': true }]
    *
    * // using "_.where" callback shorthand
    * _.pluck(_.first(characters, { 'employer': 'slate' }), 'name');

@@ -20,8 +20,8 @@ define(['../internals/baseDifference', '../internals/baseFlatten'], function(bas
    * @returns {Array} Returns a new array of filtered values.
    * @example
    *
-   * _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
-   * // => [1, 3, 4]
+   * _.difference([1, 2, 3], [5, 2, 10]);
+   * // => [1, 3]
    */
   function difference(array) {
     return baseDifference(array, baseFlatten(arguments, true, true, 1));

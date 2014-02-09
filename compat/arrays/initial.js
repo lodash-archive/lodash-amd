@@ -47,9 +47,9 @@ define(['../functions/createCallback', './slice'], function(createCallback, slic
    * // => [1]
    *
    * var characters = [
-   *   { 'name': 'barney',  'blocked': false, 'employer': 'slate' },
-   *   { 'name': 'fred',    'blocked': true,  'employer': 'slate' },
-   *   { 'name': 'pebbles', 'blocked': true,  'employer': 'na' }
+   *   { 'name': 'barney',  'employer': 'slate' },
+   *   { 'name': 'fred',    'employer': 'slate', 'blocked': true },
+   *   { 'name': 'pebbles', 'employer': 'na',    'blocked': true }
    * ];
    *
    * // using "_.pluck" callback shorthand

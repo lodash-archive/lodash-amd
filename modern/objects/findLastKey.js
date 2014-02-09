@@ -31,9 +31,9 @@ define(['../internals/baseForOwnRight', '../functions/createCallback'], function
    * @example
    *
    * var characters = {
-   *   'barney': {  'age': 36, 'blocked': true },
-   *   'fred': {    'age': 40, 'blocked': false },
-   *   'pebbles': { 'age': 1,  'blocked': true }
+   *   'barney': { 'age': 36, 'blocked': true },
+   *   'fred': { 'age': 40 },
+   *   'pebbles': { 'age': 1, 'blocked': true }
    * };
    *
    * _.findLastKey(characters, function(chr) {

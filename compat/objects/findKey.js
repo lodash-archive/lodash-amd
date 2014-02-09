@@ -31,9 +31,9 @@ define(['../internals/baseForOwn', '../functions/createCallback'], function(base
    * @example
    *
    * var characters = {
-   *   'barney': {  'age': 36, 'blocked': false },
-   *   'fred': {    'age': 40, 'blocked': true },
-   *   'pebbles': { 'age': 1,  'blocked': false }
+   *   'barney': { 'age': 36 },
+   *   'fred': { 'age': 40, 'blocked': true },
+   *   'pebbles': { 'age': 1 }
    * };
    *
    * _.findKey(characters, function(chr) {
