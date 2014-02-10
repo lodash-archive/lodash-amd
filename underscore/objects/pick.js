@@ -8,12 +8,6 @@
  */
 define(['../internals/baseFlatten', '../arrays/slice'], function(baseFlatten, slice) {
 
-  /** Used for native method references */
-  var arrayRef = Array.prototype;
-
-  /** Native method shortcuts */
-  var splice = arrayRef.splice;
-
   /**
    * Creates a shallow clone of `object` composed of the specified properties.
    * Property names may be specified as individual arguments or as arrays of
@@ -41,16 +35,9 @@ define(['../internals/baseFlatten', '../arrays/slice'], function(baseFlatten, sl
    * });
    * // => { 'name': 'fred' }
    */
-  function pick(object, guard) {
-    var args = arguments,
-        type = typeof guard;
-
-    if ((type == 'number' || type == 'string') && args[2] && args[2][guard] === object) {
-      args = slice(args);
-      splice.call(args, 1, 2);
-    }
+  function pick(object) {
     var index = -1,
-        props = baseFlatten(args, true, false, 1),
+        props = baseFlatten(arguments, true, false, 1),
         length = props.length,
         result = {};
 

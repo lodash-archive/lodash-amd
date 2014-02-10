@@ -8,12 +8,6 @@
  */
 define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback', '../arrays/slice'], function(baseDifference, baseFlatten, baseForIn, createCallback, slice) {
 
-  /** Used for native method references */
-  var arrayRef = Array.prototype;
-
-  /** Native method shortcuts */
-  var splice = arrayRef.splice;
-
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
    * Property names may be specified as individual arguments or as arrays of
@@ -42,18 +36,10 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../internals
    * // => { 'name': 'fred' }
    */
   function omit(object, callback, thisArg) {
-    var result = {},
-        type = typeof callback;
+    var result = {};
 
-    if (type != 'function') {
-      // enables use as a callback for functions like `_.map`
-      // when combined with `_.partialRight`
-      var args = arguments;
-      if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === object) {
-        args = slice(args);
-        splice.call(args, 1, 2);
-      }
-      var omitProps = baseFlatten(args, true, false, 1),
+    if (typeof callback != 'function') {
+      var omitProps = baseFlatten(arguments, true, false, 1),
           length = omitProps.length;
 
       while (length--) {
