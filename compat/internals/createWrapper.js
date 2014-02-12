@@ -119,10 +119,10 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
       arity = 0;
     }
     // fast path for `_.bind`
-    var newData = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs];
+    data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs];
     return (bitmask == BIND_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG))
-      ? baseBind(newData)
-      : baseCreateWrapper(newData);
+      ? baseBind(data)
+      : baseCreateWrapper(data);
   }
 
   return createWrapper;
