@@ -32,7 +32,7 @@ define([], function() {
     // check if the value is the ECMAScript language type of Object
     // http://es5.github.io/#x8
     // and avoid a V8 bug
-    // http://code.google.com/p/v8/issues/detail?id=2291
+    // https://code.google.com/p/v8/issues/detail?id=2291
     var type = typeof value;
     return value && (type == 'function' || type == 'object') || false;
   }
