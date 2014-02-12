@@ -6,10 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./filter', './find', '../objects/isEmpty'], function(filter, find, isEmpty) {
-
-  /** Used as a safe reference for `undefined` in pre ES5 environments */
-  var undefined;
+define(['./filter'], function(filter) {
 
   /**
    * Performs a deep comparison between each element in `collection` and the
@@ -36,11 +33,7 @@ define(['./filter', './find', '../objects/isEmpty'], function(filter, find, isEm
    * _.where(characters, { 'pets': ['dino'] });
    * // => [{ 'name': 'fred', 'age': 40, 'pets': ['baby puss', 'dino'] }]
    */
-  function where(collection, properties, first) {
-    return (first && isEmpty(properties))
-      ? undefined
-      : (first ? find : filter)(collection, properties);
-  }
+  var where = filter;
 
   return where;
 });

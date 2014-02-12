@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./collections/contains', './collections/countBy', './collections/every', './collections/filter', './collections/find', './collections/findWhere', './collections/forEach', './collections/groupBy', './collections/indexBy', './collections/invoke', './collections/map', './collections/max', './collections/min', './collections/pluck', './collections/reduce', './collections/reduceRight', './collections/reject', './collections/sample', './collections/shuffle', './collections/size', './collections/some', './collections/sortBy', './collections/toArray', './collections/where'], function(contains, countBy, every, filter, find, findWhere, forEach, groupBy, indexBy, invoke, map, max, min, pluck, reduce, reduceRight, reject, sample, shuffle, size, some, sortBy, toArray, where) {
+define(['./collections/contains', './collections/countBy', './collections/every', './collections/filter', './collections/find', './collections/forEach', './collections/groupBy', './collections/indexBy', './collections/invoke', './collections/map', './collections/max', './collections/min', './collections/partition', './collections/pluck', './collections/reduce', './collections/reduceRight', './collections/reject', './collections/sample', './collections/shuffle', './collections/size', './collections/some', './collections/sortBy', './collections/toArray', './collections/where'], function(contains, countBy, every, filter, find, forEach, groupBy, indexBy, invoke, map, max, min, partition, pluck, reduce, reduceRight, reject, sample, shuffle, size, some, sortBy, toArray, where) {
 
   return {
     'all': every,
@@ -19,7 +19,7 @@ define(['./collections/contains', './collections/countBy', './collections/every'
     'every': every,
     'filter': filter,
     'find': find,
-    'findWhere': findWhere,
+    'findWhere': find,
     'foldl': reduce,
     'foldr': reduceRight,
     'forEach': forEach,
@@ -31,6 +31,7 @@ define(['./collections/contains', './collections/countBy', './collections/every'
     'map': map,
     'max': max,
     'min': min,
+    'partition': partition,
     'pluck': pluck,
     'reduce': reduce,
     'reduceRight': reduceRight,

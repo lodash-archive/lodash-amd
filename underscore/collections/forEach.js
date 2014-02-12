@@ -57,6 +57,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach'], function(ba
     } else {
       baseEach(collection, callback);
     }
+    return collection;
   }
 
   return forEach;
