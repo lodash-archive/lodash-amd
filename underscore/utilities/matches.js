@@ -1,12 +1,12 @@
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize modern exports="amd" -o ./modern/`
+ * Build: `lodash modularize underscore exports="amd" -o ./underscore/`
  * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], function(baseIsEqual, isObject, keys) {
+define(['../objects/keys'], function(keys) {
 
   /** Used for native method references */
   var objectProto = Object.prototype;
@@ -31,40 +31,26 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
    *   { 'name': 'barney', 'age': 36 }
    * ];
    *
-   * var matchAge = _.match({ 'age': 36 });
+   * var matchesAge = _.matches({ 'age': 36 });
    *
-   * _.filter(characters, matchAge);
+   * _.filter(characters, matchesAge);
    * // => [{ 'name': 'barney', 'age': 36 }]
    *
-   * _.find(characters, matchAge);
+   * _.find(characters, matchesAge);
    * // => { 'name': 'barney', 'age': 36 }
    */
-  function match(source) {
+  function matches(source) {
     source || (source = {});
 
-    var props = keys(source),
-        key = props[0],
-        a = source[key];
-
-    // fast path the common case of providing an object with a single
-    // property containing a primitive value
-    if (props.length == 1 && a === a && !isObject(a)) {
-      return function(object) {
-        if (!hasOwnProperty.call(object, key)) {
-          return false;
-        }
-        var b = object[key];
-        return a === b && (a !== 0 || (1 / a == 1 / b));
-      };
-    }
+    var props = keys(source);
     return function(object) {
       var length = props.length,
-          result = false;
+          result = true;
 
       while (length--) {
         var key = props[length];
         if (!(result = hasOwnProperty.call(object, key) &&
-              baseIsEqual(object[key], source[key], null, true))) {
+              object[key] === source[key])) {
           break;
         }
       }
@@ -72,5 +58,5 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
     };
   }
 
-  return match;
+  return matches;
 });

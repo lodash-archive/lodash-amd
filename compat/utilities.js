@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./utilities/constant', './functions/createCallback', './utilities/escape', './utilities/identity', './utilities/match', './utilities/mixin', './utilities/noConflict', './utilities/noop', './utilities/now', './utilities/parseInt', './utilities/property', './utilities/random', './utilities/result', './utilities/template', './utilities/templateSettings', './utilities/times', './utilities/unescape', './utilities/uniqueId'], function(constant, createCallback, escape, identity, match, mixin, noConflict, noop, now, parseInt, property, random, result, template, templateSettings, times, unescape, uniqueId) {
+define(['./utilities/constant', './functions/createCallback', './utilities/escape', './utilities/identity', './utilities/matches', './utilities/mixin', './utilities/noConflict', './utilities/noop', './utilities/now', './utilities/parseInt', './utilities/property', './utilities/random', './utilities/result', './utilities/template', './utilities/templateSettings', './utilities/times', './utilities/unescape', './utilities/uniqueId'], function(constant, createCallback, escape, identity, matches, mixin, noConflict, noop, now, parseInt, property, random, result, template, templateSettings, times, unescape, uniqueId) {
 
   return {
     'callback': createCallback,
@@ -14,7 +14,7 @@ define(['./utilities/constant', './functions/createCallback', './utilities/escap
     'createCallback': createCallback,
     'escape': escape,
     'identity': identity,
-    'match': match,
+    'matches': matches,
     'mixin': mixin,
     'noConflict': noConflict,
     'noop': noop,

@@ -31,15 +31,15 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
    *   { 'name': 'barney', 'age': 36 }
    * ];
    *
-   * var matchAge = _.match({ 'age': 36 });
+   * var matchesAge = _.matches({ 'age': 36 });
    *
-   * _.filter(characters, matchAge);
+   * _.filter(characters, matchesAge);
    * // => [{ 'name': 'barney', 'age': 36 }]
    *
-   * _.find(characters, matchAge);
+   * _.find(characters, matchesAge);
    * // => { 'name': 'barney', 'age': 36 }
    */
-  function match(source) {
+  function matches(source) {
     source || (source = {});
 
     var props = keys(source),
@@ -72,5 +72,5 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
     };
   }
 
-  return match;
+  return matches;
 });

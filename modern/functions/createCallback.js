@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../utilities/match', '../utilities/property'], function(baseCreateCallback, match, property) {
+define(['../internals/baseCreateCallback', '../utilities/matches', '../utilities/property'], function(baseCreateCallback, matches, property) {
 
   /**
    * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -47,7 +47,7 @@ define(['../internals/baseCreateCallback', '../utilities/match', '../utilities/p
         func || baseCreateCallback(func, thisArg, argCount);
     }
     // handle "_.pluck" and "_.where" style callback shorthands
-    return type != 'object' ? property(func) : match(func);
+    return type != 'object' ? property(func) : matches(func);
   }
 
   return createCallback;
