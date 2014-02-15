@@ -48,9 +48,11 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
    *  provided to the new function.
    * @param {Array} [partialRightArgs] An array of arguments to append to those
    *  provided to the new function.
+   * @param {Array} [partialHolders] An array of `partialArgs` placeholder indexes.
+   * @param {Array} [partialRightHolders] An array of `partialRightArgs` placeholder indexes.
    * @returns {Function} Returns the new function.
    */
-  function createWrapper(func, bitmask, arity, thisArg, partialArgs, partialRightArgs) {
+  function createWrapper(func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders) {
     var isBind = bitmask & BIND_FLAG,
         isBindKey = bitmask & BIND_KEY_FLAG,
         isPartial = bitmask & PARTIAL_FLAG,
@@ -118,8 +120,14 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
     } else if (arity < 0) {
       arity = 0;
     }
+    if (isPartial) {
+      partialHolders = [];
+    }
+    if (isPartialRight) {
+      partialRightHolders = [];
+    }
     // fast path for `_.bind`
-    data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs];
+    data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders];
     return (bitmask == BIND_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG))
       ? baseBind(data)
       : baseCreateWrapper(data);

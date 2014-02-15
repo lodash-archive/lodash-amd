@@ -6,13 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', '../objects/isObject', '../arrays/slice'], function(baseCreate, isObject, slice) {
-
-  /** Used for native method references */
-  var arrayRef = Array.prototype;
-
-  /** Native method shortcuts */
-  var push = arrayRef.push;
+define(['./baseCreate', './composeArgs', '../objects/isObject', '../arrays/slice'], function(baseCreate, composeArgs, isObject, slice) {
 
   /**
    * The base implementation of `_.bind` that creates the bound function and
@@ -25,7 +19,8 @@ define(['./baseCreate', '../objects/isObject', '../arrays/slice'], function(base
   function baseBind(data) {
     var func = data[0],
         thisArg = data[3],
-        partialArgs = data[4];
+        partialArgs = data[4],
+        partialHolders = data[6];
 
     function bound() {
       // `Function#bind` spec
@@ -34,8 +29,7 @@ define(['./baseCreate', '../objects/isObject', '../arrays/slice'], function(base
         // avoid `arguments` object deoptimizations by using `slice` instead
         // of `Array.prototype.slice.call` and not assigning `arguments` to a
         // variable as a ternary expression
-        var args = slice(partialArgs);
-        push.apply(args, arguments);
+        var args = composeArgs(partialArgs, partialHolders, arguments);
       }
       // mimic the constructor's `return` behavior
       // http://es5.github.io/#x13.2.2
