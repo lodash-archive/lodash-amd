@@ -18,7 +18,7 @@ define(['./baseForOwnRight'], function(baseForOwnRight) {
   var breakIndicator = expando + 'breaker__';
 
   /**
-   * The base implementation of `_.forEachEach` without support for callback
+   * The base implementation of `_.forEachRight` without support for callback
    * shorthands or `thisArg` binding.
    *
    * @private

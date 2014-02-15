@@ -9,7 +9,7 @@
 define(['./baseForOwnRight', '../objects/isString', '../support'], function(baseForOwnRight, isString, support) {
 
   /**
-   * The base implementation of `_.forEachEach` without support for callback
+   * The base implementation of `_.forEachRight` without support for callback
    * shorthands or `thisArg` binding.
    *
    * @private
