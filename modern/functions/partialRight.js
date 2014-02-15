@@ -18,8 +18,8 @@ define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper
   var expando = '__lodash@' + version + '__';
 
   /**
-   * This method is like `_.partial` except that `partial` arguments are
-   * appended to those provided to the new function.
+   * This method is like `_.partial` except that partially applied arguments
+   * are appended to those provided to the new function.
    *
    * Note: This method does not set the `length` property of partially applied
    * functions.
