@@ -163,10 +163,9 @@ define(['../objects/defaults', './escape', '../internals/reInterpolate', './temp
 
     source += "';\n";
     if (!variable) {
-      variable = 'obj';
-      source = 'with (' + variable + ' || {}) {\n' + source + '\n}\n';
+      source = 'with (obj || {}) {\n' + source + '\n}\n';
     }
-    source = 'function(' + variable + ') {\n' +
+    source = 'function(' + (variable || 'obj') + ') {\n' +
       "var __t, __p = '', __j = Array.prototype.join;\n" +
       "function print() { __p += __j.call(arguments, '') }\n" +
       source +
