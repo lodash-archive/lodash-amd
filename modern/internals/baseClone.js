@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/assign', './baseEach', './baseForOwn', './getArray', '../objects/isArray', '../objects/isObject', './releaseArray', '../arrays/slice'], function(assign, baseEach, baseForOwn, getArray, isArray, isObject, releaseArray, slice) {
+define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray', '../objects/isObject', '../arrays/slice'], function(assign, baseEach, baseForOwn, isArray, isObject, slice) {
 
   /** Used to match regexp flags from their coerced string values */
   var reFlags = /\w*$/;
@@ -98,8 +98,8 @@ define(['../objects/assign', './baseEach', './baseForOwn', './getArray', '../obj
     if (isDeep) {
       // check for circular references and return corresponding clone
       var initedStack = !stackA;
-      stackA || (stackA = getArray());
-      stackB || (stackB = getArray());
+      stackA || (stackA = []);
+      stackB || (stackB = []);
 
       var length = stackA.length;
       while (length--) {
@@ -135,10 +135,6 @@ define(['../objects/assign', './baseEach', './baseForOwn', './getArray', '../obj
       result[key] = baseClone(objValue, isDeep, callback, stackA, stackB);
     });
 
-    if (initedStack) {
-      releaseArray(stackA);
-      releaseArray(stackB);
-    }
     return result;
   }
 

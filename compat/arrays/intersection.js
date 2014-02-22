@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../internals/getArray', '../objects/isArguments', '../objects/isArray', '../internals/releaseArray'], function(baseIndexOf, cacheIndexOf, createCache, getArray, isArguments, isArray, releaseArray) {
+define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../objects/isArguments', '../objects/isArray'], function(baseIndexOf, cacheIndexOf, createCache, isArguments, isArray) {
 
   /** Used as the size when optimizations are enabled for arrays */
   var LARGE_ARRAY_SIZE = 40;
@@ -29,10 +29,10 @@ define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/c
     var args = [],
         argsIndex = -1,
         argsLength = arguments.length,
-        caches = getArray(),
+        caches = [],
         indexOf = baseIndexOf,
         largePrereq = createCache,
-        seen = getArray();
+        seen = [];
 
     while (++argsIndex < argsLength) {
       var value = arguments[argsIndex];
@@ -64,8 +64,6 @@ define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/c
         result.push(value);
       }
     }
-    releaseArray(caches);
-    releaseArray(seen);
     return result;
   }
 

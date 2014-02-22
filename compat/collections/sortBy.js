@@ -8,12 +8,6 @@
  */
 define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray'], function(baseEach, createCallback, isArray) {
 
-  /** Used as the max size of the `arrayPool` and `objectPool` */
-  var MAX_POOL_SIZE = 40;
-
-  /** Used to pool arrays and objects used internally */
-  var objectPool = [];
-
   /**
    * The base implementation of `compareAscending` used to compare values and
    * sort them in ascending order without guaranteeing a stable sort.
@@ -76,33 +70,6 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
     // This also ensures a stable sort in V8 and other engines.
     // See https://code.google.com/p/v8/issues/detail?id=90
     return a.index - b.index;
-  }
-
-  /**
-   * Gets an object from the object pool or creates a new one if the pool is empty.
-   *
-   * @private
-   * @returns {Object} The object from the pool.
-   */
-  function getObject() {
-    return objectPool.pop() || {
-      'criteria': null,
-      'index': 0,
-      'value': null
-    };
-  }
-
-  /**
-   * Releases `object` back to the object pool.
-   *
-   * @private
-   * @param {Object} object The object to release.
-   */
-  function releaseObject(object) {
-    object.criteria = object.value = null;
-    if (objectPool.length < MAX_POOL_SIZE) {
-      objectPool.push(object);
-    }
   }
 
   /**
@@ -174,18 +141,13 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
       } else {
         criteria = callback(value, key, collection);
       }
-      var object = result[++index] = getObject();
-      object.criteria = criteria;
-      object.index = index;
-      object.value = value;
+      result[++index] = { 'criteria': criteria, 'index': index, 'value': value };
     });
 
     length = result.length;
     result.sort(multi ? compareMultipleAscending : compareAscending);
     while (length--) {
-      var object = result[length];
-      result[length] = object.value;
-      releaseObject(object);
+      result[length] = result[length].value;
     }
     return result;
   }

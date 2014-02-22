@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForIn', './getArray', '../objects/isArguments', '../objects/isFunction', './isNode', './releaseArray', '../support'], function(baseForIn, getArray, isArguments, isFunction, isNode, releaseArray, support) {
+define(['./baseForIn', '../objects/isArguments', '../objects/isFunction', './isNode', '../support'], function(baseForIn, isArguments, isFunction, isNode, support) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
@@ -130,8 +130,8 @@ define(['./baseForIn', './getArray', '../objects/isArguments', '../objects/isFun
     // the algorithm for detecting cyclic structures is adapted from ES 5.1
     // section 15.12.3, abstract operation `JO` (http://es5.github.io/#x15.12.3)
     var initedStack = !stackA;
-    stackA || (stackA = getArray());
-    stackB || (stackB = getArray());
+    stackA || (stackA = []);
+    stackB || (stackB = []);
 
     var length = stackA.length;
     while (length--) {
@@ -196,10 +196,6 @@ define(['./baseForIn', './getArray', '../objects/isArguments', '../objects/isFun
     stackA.pop();
     stackB.pop();
 
-    if (initedStack) {
-      releaseArray(stackA);
-      releaseArray(stackB);
-    }
     return result;
   }
 

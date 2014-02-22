@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/baseForOwn', '../internals/getArray', './isArray', './isObject', './isPlainObject', '../internals/releaseArray', '../arrays/slice'], function(baseCreateCallback, baseEach, baseForOwn, getArray, isArray, isObject, isPlainObject, releaseArray, slice) {
+define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/baseForOwn', './isArray', './isObject', './isPlainObject', '../arrays/slice'], function(baseCreateCallback, baseEach, baseForOwn, isArray, isObject, isPlainObject, slice) {
 
   /**
    * The base implementation of `_.merge` without argument juggling or support
@@ -144,14 +144,12 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
     }
     var sources = slice(arguments, 1, length),
         index = -1,
-        stackA = getArray(),
-        stackB = getArray();
+        stackA = [],
+        stackB = [];
 
     while (++index < length) {
       baseMerge(object, sources[index], callback, stackA, stackB);
     }
-    releaseArray(stackA);
-    releaseArray(stackB);
     return object;
   }
 
