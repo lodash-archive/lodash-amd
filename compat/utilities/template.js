@@ -109,10 +109,7 @@ define(['../objects/defaults', './escape', '../objects/keys', '../internals/reIn
    * // => 'hello barney!'
    *
    * // using a custom template delimiters
-   * _.templateSettings = {
-   *   'interpolate': /{{([\s\S]+?)}}/g
-   * };
-   *
+   * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
    * _.template('hello {{ name }}!', { 'name': 'mustache' });
    * // => 'hello mustache!'
    *
