@@ -44,7 +44,7 @@ define(['../internals/createAggregator'], function(createAggregator) {
    * _.indexBy(keys, function(key) { return String.fromCharCode(key.code); });
    * // => { 'a': { 'dir': 'left', 'code': 97 }, 'd': { 'dir': 'right', 'code': 100 } }
    *
-   * _.indexBy(characters, function(key) { this.fromCharCode(key.code); }, String);
+   * _.indexBy(keys, function(key) { return this.fromCharCode(key.code); }, String);
    * // => { 'a': { 'dir': 'left', 'code': 97 }, 'd': { 'dir': 'right', 'code': 100 } }
    */
   var indexBy = createAggregator(function(result, value, key) {
