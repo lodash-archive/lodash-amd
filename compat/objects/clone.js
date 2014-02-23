@@ -68,7 +68,8 @@ define(['../internals/baseClone', '../internals/baseCreateCallback'], function(b
         callback = null;
       }
     }
-    return baseClone(value, isDeep, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));
+    callback = typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1);
+    return baseClone(value, isDeep, callback);
   }
 
   return clone;
