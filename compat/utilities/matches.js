@@ -53,6 +53,7 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
         if (!hasOwnProperty.call(object, key)) {
           return false;
         }
+        // treat `-0` vs. `+0` as not equal
         var b = object[key];
         return a === b && (a !== 0 || (1 / a == 1 / b));
       };

@@ -84,7 +84,7 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
         // treat `NaN` vs. `NaN` as equal
         return (a != +a)
           ? b != +b
-          // but treat `+0` vs. `-0` as not equal
+          // but treat `-0` vs. `+0` as not equal
           : (a == 0 ? (1 / a == 1 / b) : a == +b);
 
       case regexpClass:

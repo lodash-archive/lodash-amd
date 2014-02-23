@@ -52,7 +52,7 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual'], function
     if (!callback) {
       // exit early for identical values
       if (a === b) {
-        // treat `+0` vs. `-0` as not equal
+        // treat `-0` vs. `+0` as not equal
         return a !== 0 || (1 / a == 1 / b);
       }
       var type = typeof a,
