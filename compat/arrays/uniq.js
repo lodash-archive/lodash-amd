@@ -56,9 +56,12 @@ define(['../internals/baseUniq', '../functions/createCallback'], function(baseUn
    * // => [{ 'x': 1 }, { 'x': 2 }]
    */
   function uniq(array, isSorted, callback, thisArg) {
-    var type = typeof isSorted;
-
+    var length = array ? array.length : 0;
+    if (!length) {
+      return [];
+    }
     // juggle arguments
+    var type = typeof isSorted;
     if (type != 'boolean' && isSorted != null) {
       thisArg = callback;
       callback = isSorted;
