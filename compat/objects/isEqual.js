@@ -47,7 +47,24 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual'], function
    * // => true
    */
   function isEqual(a, b, callback, thisArg) {
-    return baseIsEqual(a, b, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 2));
+    callback = typeof callback == 'function' && baseCreateCallback(callback, thisArg, 2);
+
+    if (!callback) {
+      // exit early for identical values
+      if (a === b) {
+        // treat `+0` vs. `-0` as not equal
+        return a !== 0 || (1 / a == 1 / b);
+      }
+      var type = typeof a,
+          otherType = typeof b;
+
+      // exit early for unlike primitive values
+      if (a === a && (a == null || b == null ||
+          (type != 'function' && type != 'object' && otherType != 'function' && otherType != 'object'))) {
+        return false;
+      }
+    }
+    return baseIsEqual(a, b, callback);
   }
 
   return isEqual;
