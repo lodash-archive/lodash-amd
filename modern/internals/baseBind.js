@@ -43,6 +43,7 @@ define(['./baseCreate', './composeArgs', '../objects/isObject', './setData', '..
         // ensure `new bound` is an instance of `func`
         var thisBinding = baseCreate(func.prototype),
             result = func.apply(thisBinding, args || arguments);
+
         return isObject(result) ? result : thisBinding;
       }
       return func.apply(thisArg, args || arguments);
