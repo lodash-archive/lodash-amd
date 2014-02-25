@@ -8,9 +8,6 @@
  */
 define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/createCache', '../objects/isArguments', '../objects/isArray'], function(baseIndexOf, cacheIndexOf, createCache, isArguments, isArray) {
 
-  /** Used as the size when optimizations are enabled for arrays */
-  var LARGE_ARRAY_SIZE = 40;
-
   /**
    * Creates an array of unique values present in all provided arrays using
    * strict equality for comparisons, i.e. `===`.
@@ -31,14 +28,14 @@ define(['../internals/baseIndexOf', '../internals/cacheIndexOf', '../internals/c
         argsLength = arguments.length,
         caches = [],
         indexOf = baseIndexOf,
-        largePrereq = createCache,
+        prereq = createCache,
         seen = [];
 
     while (++argsIndex < argsLength) {
       var value = arguments[argsIndex];
       if (isArray(value) || isArguments(value)) {
         args.push(value);
-        caches.push(largePrereq && value.length >= LARGE_ARRAY_SIZE &&
+        caches.push(prereq && value.length >= 120 &&
           createCache(argsIndex ? args[argsIndex] : seen));
       }
     }
