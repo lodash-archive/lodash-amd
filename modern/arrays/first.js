@@ -65,11 +65,11 @@ define(['../functions/createCallback', './slice'], function(createCallback, slic
    * // => ['barney', 'fred']
    */
   function first(array, callback, thisArg) {
-    var n = 0,
-        length = array ? array.length : 0;
-
     if (typeof callback != 'number' && callback != null) {
-      var index = -1;
+      var index = -1,
+          length = array ? array.length : 0,
+          n = 0;
+
       callback = createCallback(callback, thisArg, 3);
       while (++index < length && callback(array[index], index, array)) {
         n++;
