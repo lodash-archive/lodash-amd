@@ -8,9 +8,6 @@
  */
 define(['./baseIndexOf', './cacheIndexOf', './createCache'], function(baseIndexOf, cacheIndexOf, createCache) {
 
-  /** Used as the size when optimizations are enabled for arrays */
-  var LARGE_ARRAY_SIZE = 40;
-
   /**
    * The base implementation of `_.uniq` without support for callback shorthands
    * or `thisArg` binding.
@@ -28,7 +25,9 @@ define(['./baseIndexOf', './cacheIndexOf', './createCache'], function(baseIndexO
     }
     var index = -1,
         indexOf = baseIndexOf,
-        isLarge = createCache && !isSorted && length >= LARGE_ARRAY_SIZE,
+        prereq = !isSorted,
+        isLarge = prereq && createCache && length >= 200,
+        isCommon = prereq && !isLarge,
         result = [];
 
     if (isLarge) {
@@ -37,16 +36,30 @@ define(['./baseIndexOf', './cacheIndexOf', './createCache'], function(baseIndexO
     } else {
       seen = (callback && !isSorted) ? [] : result;
     }
+    outer:
     while (++index < length) {
       var value = array[index],
           computed = callback ? callback(value, index, array) : value;
 
-      if (isSorted) {
+      if (isCommon) {
+        var seenIndex = seen.length;
+        while (seenIndex--) {
+          if (seen[seenIndex] === computed) {
+            continue outer;
+          }
+        }
+        if (callback) {
+          seen.push(computed);
+        }
+        result.push(value);
+      }
+      else if (isSorted) {
         if (!index || seen !== computed) {
           seen = computed;
           result.push(value);
         }
-      } else if (indexOf(seen, computed) < 0) {
+      }
+      else if (indexOf(seen, computed) < 0) {
         if (callback || isLarge) {
           seen.push(computed);
         }
