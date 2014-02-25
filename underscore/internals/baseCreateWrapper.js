@@ -6,18 +6,13 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', './composeArgs', './composeArgsRight', '../objects/isObject', '../arrays/slice'], function(baseCreate, composeArgs, composeArgsRight, isObject, slice) {
+define(['./baseCreate', './composeArgs', '../objects/isObject', '../arrays/slice'], function(baseCreate, composeArgs, isObject, slice) {
 
   /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1,
       BIND_KEY_FLAG = 2,
       CURRY_FLAG = 4,
-      CURRY_BOUND_FLAG = 8,
-      PARTIAL_FLAG = 16,
-      PARTIAL_RIGHT_FLAG = 32;
-
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeMax = Math.max;
+      CURRY_BOUND_FLAG = 8;
 
   /**
    * The base implementation of `createWrapper` that creates the wrapper and
@@ -54,22 +49,7 @@ define(['./baseCreate', './composeArgs', './composeArgsRight', '../objects/isObj
       if (partialArgs) {
         args = composeArgs(partialArgs, partialHolders, args);
       }
-      if (partialRightArgs) {
-        args = composeArgsRight(partialRightArgs, partialRightHolders, args);
-      }
-      if (isCurry && length < arity) {
-        bitmask |= PARTIAL_FLAG;
-        bitmask &= ~PARTIAL_RIGHT_FLAG
-        if (!isCurryBound) {
-          bitmask &= ~(BIND_FLAG | BIND_KEY_FLAG);
-        }
-        var newArity = nativeMax(0, arity - length);
-        return baseCreateWrapper([func, bitmask, newArity, thisArg, args, null, []]);
-      }
       var thisBinding = isBind ? thisArg : this;
-      if (isBindKey) {
-        func = thisBinding[key];
-      }
       if (this instanceof bound) {
         thisBinding = baseCreate(func.prototype);
         var result = func.apply(thisBinding, args);

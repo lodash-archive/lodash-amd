@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], function(baseBind, baseCreateWrapper, isFunction, slice) {
+define(['./baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], function(baseCreateWrapper, isFunction, slice) {
 
   /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1,
@@ -51,10 +51,6 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
       bitmask &= ~PARTIAL_FLAG;
       isPartial = partialArgs = false;
     }
-    if (isPartialRight && !partialRightArgs.length) {
-      bitmask &= ~PARTIAL_RIGHT_FLAG;
-      isPartialRight = partialRightArgs = false;
-    }
     if (arity == null) {
       arity = isBindKey ? 0 : func.length;
     } else if (arity < 0) {
@@ -63,14 +59,9 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
     if (isPartial) {
       partialHolders = [];
     }
-    if (isPartialRight) {
-      partialRightHolders = [];
-    }
     // fast path for `_.bind`
     var data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders];
-    return (bitmask == BIND_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG))
-      ? baseBind(data)
-      : baseCreateWrapper(data);
+    return baseCreateWrapper(data);
   }
 
   return createWrapper;
