@@ -23,8 +23,8 @@ define(['./baseEach', '../functions/createCallback'], function(baseEach, createC
   function createAggregator(setter, retArray) {
     return function(collection, callback, thisArg) {
       var result = retArray ? [[], []] : {};
-
       callback = createCallback(callback, thisArg, 3);
+
       var index = -1,
           length = collection ? collection.length : 0;
 
