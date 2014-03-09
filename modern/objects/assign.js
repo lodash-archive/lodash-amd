@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', './isObject', './keys'], function(baseCreateCallback, isObject, keys) {
+define(['../internals/baseCreateCallback', './keys'], function(baseCreateCallback, keys) {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination
@@ -37,6 +37,9 @@ define(['../internals/baseCreateCallback', './isObject', './keys'], function(bas
    * // => { 'name': 'barney', 'employer': 'slate' }
    */
   function assign(object, source, guard) {
+    if (!object) {
+      return object;
+    }
     var args = arguments,
         argsIndex = 0,
         argsLength = args.length,
@@ -54,15 +57,13 @@ define(['../internals/baseCreateCallback', './isObject', './keys'], function(bas
     }
     while (++argsIndex < argsLength) {
       source = args[argsIndex];
-      if (isObject(source)) {
-        var index = -1,
-            props = keys(source),
-            length = props.length;
+      var index = -1,
+          props = keys(source),
+          length = props.length;
 
-        while (++index < length) {
-          var key = props[index];
-          object[key] = callback ? callback(object[key], source[key]) : source[key];
-        }
+      while (++index < length) {
+        var key = props[index];
+        object[key] = callback ? callback(object[key], source[key]) : source[key];
       }
     }
     return object;

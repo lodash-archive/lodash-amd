@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isObject', './keys'], function(isObject, keys) {
+define(['./keys'], function(keys) {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination
@@ -39,11 +39,9 @@ define(['./isObject', './keys'], function(isObject, keys) {
     }
     while (++argsIndex < argsLength) {
       source = args[argsIndex];
-      if (source) {
-        for (var key in source) {
-          if (typeof object[key] == 'undefined') {
-            object[key] = source[key];
-          }
+      for (var key in source) {
+        if (typeof object[key] == 'undefined') {
+          object[key] = source[key];
         }
       }
     }
