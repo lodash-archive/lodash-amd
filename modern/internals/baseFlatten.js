@@ -17,7 +17,7 @@ define(['../objects/isArguments', '../objects/isArray'], function(isArguments, i
    * @param {boolean} [isShallow=false] A flag to restrict flattening to a single level.
    * @param {boolean} [isStrict=false] A flag to restrict flattening to arrays and `arguments` objects.
    * @param {number} [fromIndex=0] The index to start from.
-   * @returns {Array} Returns a new flattened array.
+   * @returns {Array} Returns the new flattened array.
    */
   function baseFlatten(array, isShallow, isStrict, fromIndex) {
     var index = (fromIndex || 0) - 1,

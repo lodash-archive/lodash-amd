@@ -24,10 +24,10 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray
    * @memberOf _
    * @alias include
    * @category Collections
-   * @param {Array|Object|string} collection The collection to iterate over.
+   * @param {Array|Object|string} collection The collection to search.
    * @param {*} target The value to check for.
    * @param {number} [fromIndex=0] The index to search from.
-   * @returns {boolean} Returns `true` if the `target` element is found, else `false`.
+   * @returns {boolean} Returns `true` if the target element is found, else `false`.
    * @example
    *
    * _.contains([1, 2, 3], 1);

@@ -9,8 +9,8 @@
 define(['../internals/baseEachRight', '../functions/createCallback'], function(baseEachRight, createCallback) {
 
   /**
-   * This method is like `_.reduce` except that it iterates over elements
-   * of a `collection` from right to left.
+   * This method is like `_.reduce` except that it iterates over elements of a
+   * collection from right to left.
    *
    * @static
    * @memberOf _

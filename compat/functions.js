@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./functions/after', './functions/bind', './functions/bindAll', './functions/bindKey', './functions/compose', './functions/createCallback', './functions/curry', './functions/debounce', './functions/defer', './functions/delay', './functions/memoize', './functions/once', './functions/partial', './functions/partialRight', './functions/throttle', './functions/wrap'], function(after, bind, bindAll, bindKey, compose, createCallback, curry, debounce, defer, delay, memoize, once, partial, partialRight, throttle, wrap) {
+define(['./functions/after', './functions/bind', './functions/bindAll', './functions/bindKey', './functions/compose', './functions/createCallback', './functions/curry', './functions/debounce', './functions/defer', './functions/delay', './functions/memoize', './functions/negate', './functions/once', './functions/partial', './functions/partialRight', './functions/throttle', './functions/wrap'], function(after, bind, bindAll, bindKey, compose, createCallback, curry, debounce, defer, delay, memoize, negate, once, partial, partialRight, throttle, wrap) {
 
   return {
     'after': after,
@@ -21,6 +21,7 @@ define(['./functions/after', './functions/bind', './functions/bindAll', './funct
     'defer': defer,
     'delay': delay,
     'memoize': memoize,
+    'negate': negate,
     'once': once,
     'partial': partial,
     'partialRight': partialRight,

@@ -19,9 +19,9 @@ define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper
   var expando = '__lodash@' + version + '__';
 
   /**
-   * Creates a function that, when called, invokes `func` with the `this`
-   * binding of `thisArg` and prepends any additional `bind` arguments to those
-   * provided to the bound function.
+   * Creates a function that invokes `func` with the `this` binding of `thisArg`
+   * and prepends any additional `bind` arguments to those provided to the bound
+   * function.
    *
    * Note: Unlike native `Function#bind` this method does not set the `length`
    * property of bound functions.

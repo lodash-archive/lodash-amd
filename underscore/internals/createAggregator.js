@@ -10,9 +10,9 @@ define(['./baseEach', '../functions/createCallback'], function(baseEach, createC
 
   /**
    * Creates a function that aggregates a collection, creating an object or
-   * array composed from the results of running each element of the collection
-   * through a callback. The given `setter` function sets the keys and values
-   * of the composed object or array.
+   * array composed from the results of running each element in the collection
+   * through a callback. The given setter function sets the keys and values of
+   * the composed object or array.
    *
    * @private
    * @param {Function} setter The setter function.

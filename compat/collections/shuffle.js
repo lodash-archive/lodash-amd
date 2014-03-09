@@ -10,13 +10,14 @@ define(['../internals/baseEach', '../internals/baseRandom'], function(baseEach, 
 
   /**
    * Creates an array of shuffled values, using a version of the Fisher-Yates
-   * shuffle. See [Wikipedia](http://en.wikipedia.org/wiki/Fisher-Yates_shuffle) for more details.
+   * shuffle. See [Wikipedia](http://en.wikipedia.org/wiki/Fisher-Yates_shuffle)
+   * for more details.
    *
    * @static
    * @memberOf _
    * @category Collections
    * @param {Array|Object|string} collection The collection to shuffle.
-   * @returns {Array} Returns a new shuffled collection.
+   * @returns {Array} Returns the new shuffled array.
    * @example
    *
    * _.shuffle([1, 2, 3, 4]);

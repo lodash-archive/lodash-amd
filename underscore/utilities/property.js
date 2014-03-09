@@ -9,7 +9,7 @@
 define([], function() {
 
   /**
-   * Creates a "_.pluck" style function, which returns the `key` value of a
+   * Creates a "_.pluck" style function which returns the `key` value of a
    * given object.
    *
    * @static

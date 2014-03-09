@@ -16,7 +16,7 @@ define(['./isNative'], function(isNative) {
    *
    * @private
    * @param {Array} [array=[]] The array to search.
-   * @returns {Object} Returns the cache object.
+   * @returns {Object} Returns the new cache object.
    */
   var createCache = Set && function(array) {
     var cache = new Set,

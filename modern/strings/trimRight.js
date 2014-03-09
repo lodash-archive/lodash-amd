@@ -53,7 +53,7 @@ define(['../internals/charsRightIndex', '../internals/isNative', '../internals/t
    * @static
    * @memberOf _
    * @category Strings
-   * @param {string} string The string to trim.
+   * @param {string} [string=''] The string to trim.
    * @param {string} [chars=whitespace] The characters to trim.
    * @returns {string} Returns the trimmed string.
    * @example

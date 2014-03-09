@@ -9,12 +9,12 @@
 define([], function() {
 
   /**
-   * Converts the first character of `string` to upper case.
+   * Capitalizes the first character of `string`.
    *
    * @static
    * @memberOf _
    * @category Strings
-   * @param {string} string The string to capitalize.
+   * @param {string} [string=''] The string to capitalize.
    * @returns {string} Returns the capitalized string.
    * @example
    *

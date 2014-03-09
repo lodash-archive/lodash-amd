@@ -15,9 +15,9 @@ define(['../objects/keys'], function(keys) {
   var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
-   * Creates a "_.where" style function, which performs a deep comparison
-   * between a given object and the `source` object, returning `true` if the
-   * given object has equivalent property values, else `false`.
+   * Creates a "_.where" style predicate function which performs a deep comparison
+   * between a given object and the `source` object, returning `true` if the given
+   * object has equivalent property values, else `false`.
    *
    * @static
    * @memberOf _

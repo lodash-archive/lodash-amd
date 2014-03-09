@@ -9,13 +9,13 @@
 define(['../internals/baseForOwnRight', '../functions/createCallback'], function(baseForOwnRight, createCallback) {
 
   /**
-   * This method is like `_.findKey` except that it iterates over elements
-   * of a `collection` in the opposite order.
+   * This method is like `_.findKey` except that it iterates over elements of
+   * a collection in the opposite order.
    *
-   * If a property name is provided for `callback` the created "_.pluck" style
+   * If a property name is provided for `predicate` the created "_.pluck" style
    * callback will return the property value of the given element.
    *
-   * If an object is provided for `callback` the created "_.where" style callback
+   * If an object is provided for `predicate` the created "_.where" style callback
    * will return `true` for elements that have the properties of the given object,
    * else `false`.
    *
@@ -23,10 +23,10 @@ define(['../internals/baseForOwnRight', '../functions/createCallback'], function
    * @memberOf _
    * @category Objects
    * @param {Object} object The object to search.
-   * @param {Function|Object|string} [callback=identity] The function called per
-   *  iteration. If a property name or object is provided it will be used to
-   *  create a "_.pluck" or "_.where" style callback, respectively.
-   * @param {*} [thisArg] The `this` binding of `callback`.
+   * @param {Function|Object|string} [predicate=identity] The function called
+   *  per iteration. If a property name or object is provided it will be used
+   *  to create a "_.pluck" or "_.where" style callback, respectively.
+   * @param {*} [thisArg] The `this` binding of `predicate`.
    * @returns {string|undefined} Returns the key of the found element, else `undefined`.
    * @example
    *
@@ -49,12 +49,12 @@ define(['../internals/baseForOwnRight', '../functions/createCallback'], function
    * _.findLastKey(characters, 'blocked');
    * // => 'pebbles'
    */
-  function findLastKey(object, callback, thisArg) {
+  function findLastKey(object, predicate, thisArg) {
     var result;
 
-    callback = createCallback(callback, thisArg, 3);
+    predicate = createCallback(predicate, thisArg, 3);
     baseForOwnRight(object, function(value, key, object) {
-      if (callback(value, key, object)) {
+      if (predicate(value, key, object)) {
         result = key;
         return false;
       }

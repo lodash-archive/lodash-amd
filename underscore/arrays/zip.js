@@ -19,7 +19,7 @@ define(['../collections/max', '../collections/pluck'], function(max, pluck) {
    * @alias unzip
    * @category Arrays
    * @param {...Array} [array] The arrays to process.
-   * @returns {Array} Returns a new array of grouped elements.
+   * @returns {Array} Returns the array of grouped elements.
    * @example
    *
    * _.zip(['fred', 'barney'], [30, 40], [true, false]);

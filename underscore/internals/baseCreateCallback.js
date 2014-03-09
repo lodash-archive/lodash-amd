@@ -16,7 +16,7 @@ define(['../functions/bind', '../utilities/identity'], function(bind, identity) 
    * @param {*} [func=identity] The value to convert to a callback.
    * @param {*} [thisArg] The `this` binding of the created callback.
    * @param {number} [argCount] The number of arguments the callback accepts.
-   * @returns {Function} Returns a callback function.
+   * @returns {Function} Returns the new function.
    */
   function baseCreateCallback(func, thisArg, argCount) {
     if (typeof func != 'function') {

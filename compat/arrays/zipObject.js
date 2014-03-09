@@ -19,8 +19,7 @@ define(['../objects/isArray'], function(isArray) {
    * @category Arrays
    * @param {Array} keys The array of keys.
    * @param {Array} [values=[]] The array of values.
-   * @returns {Object} Returns an object composed of the given keys and
-   *  corresponding values.
+   * @returns {Object} Returns the new object.
    * @example
    *
    * _.zipObject(['fred', 'barney'], [30, 40]);

@@ -10,13 +10,14 @@ define(['../internals/baseDifference', '../internals/baseUniq', '../objects/isAr
 
   /**
    * Creates an array that is the symmetric difference of the provided arrays.
-   * See [Wikipedia](http://en.wikipedia.org/wiki/Symmetric_difference) for more details.
+   * See [Wikipedia](http://en.wikipedia.org/wiki/Symmetric_difference) for
+   * more details.
    *
    * @static
    * @memberOf _
    * @category Arrays
    * @param {...Array} [array] The arrays to inspect.
-   * @returns {Array} Returns an array of values.
+   * @returns {Array} Returns the new array of values.
    * @example
    *
    * _.xor([1, 2, 3], [5, 2, 1, 4]);

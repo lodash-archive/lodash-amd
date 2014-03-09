@@ -29,8 +29,8 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
       unshift = arrayRef.unshift;
 
   /**
-   * Creates a function that, when called, either curries or invokes `func`
-   * with an optional `this` binding and partially applied arguments.
+   * Creates a function that either curries or invokes `func` with an optional
+   * `this` binding and partially applied arguments.
    *
    * @private
    * @param {Function|string} func The function or method name to reference.

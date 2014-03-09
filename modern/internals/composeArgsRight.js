@@ -19,7 +19,7 @@ define([], function() {
    * @param {Array} partialRightArg An array of arguments to append to those provided.
    * @param {Array} partialHolders An array of `partialRightArgs` placeholder indexes.
    * @param {Array|Object} args The provided arguments.
-   * @returns {Array} Returns a new array of composed arguments.
+   * @returns {Array} Returns the new array of composed arguments.
    */
   function composeArgsRight(partialRightArgs, partialRightHolders, args) {
     var holdersIndex = -1,

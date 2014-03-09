@@ -17,7 +17,7 @@ define(['../internals/baseDifference', './slice'], function(baseDifference, slic
    * @category Arrays
    * @param {Array} array The array to filter.
    * @param {...*} [value] The values to exclude.
-   * @returns {Array} Returns a new array of filtered values.
+   * @returns {Array} Returns the new array of filtered values.
    * @example
    *
    * _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);

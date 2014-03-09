@@ -9,7 +9,7 @@
 define(['../internals/baseCreateCallback', '../utilities/matches', '../utilities/property'], function(baseCreateCallback, matches, property) {
 
   /**
-   * Produces a callback bound to an optional `thisArg`. If `func` is a property
+   * Creates a function bound to an optional `thisArg`. If `func` is a property
    * name the created callback will return the property value for a given element.
    * If `func` is an object the created callback will return `true` for elements
    * that contain the equivalent object properties, otherwise it will return `false`.
@@ -21,7 +21,7 @@ define(['../internals/baseCreateCallback', '../utilities/matches', '../utilities
    * @param {*} [func=identity] The value to convert to a callback.
    * @param {*} [thisArg] The `this` binding of the created callback.
    * @param {number} [argCount] The number of arguments the callback accepts.
-   * @returns {Function} Returns a callback function.
+   * @returns {Function} Returns the new function.
    * @example
    *
    * var characters = [

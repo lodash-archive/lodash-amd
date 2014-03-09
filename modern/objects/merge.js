@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/baseForOwn', './isArray', './isObject', './isPlainObject', '../arrays/slice'], function(baseCreateCallback, baseEach, baseForOwn, isArray, isObject, isPlainObject, slice) {
+define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/baseForOwn', './isArray', './isPlainObject', '../arrays/slice'], function(baseCreateCallback, baseEach, baseForOwn, isArray, isPlainObject, slice) {
 
   /**
    * The base implementation of `_.merge` without argument juggling or support
@@ -125,7 +125,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
    * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot] }
    */
   function merge(object, source, guard) {
-    if (!isObject(object)) {
+    if (!object) {
       return object;
     }
     var args = arguments,
@@ -142,7 +142,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
     } else if (length > 2 && typeof args[length - 1] == 'function') {
       callback = args[--length];
     }
-    var sources = slice(arguments, 1, length),
+    var sources = slice(args, 1, length),
         index = -1,
         stackA = [],
         stackB = [];
