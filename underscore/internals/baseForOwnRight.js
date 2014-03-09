@@ -6,16 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/keys'], function(keys) {
-
-  /** Used as the semantic version number */
-  var version = '2.4.1';
-
-  /** Used as the property name for wrapper metadata */
-  var expando = '__lodash@' + version + '__';
-
-  /** Used by methods to exit iteration */
-  var breakIndicator = expando + 'breaker__';
+define(['./baseForRight', '../objects/keys'], function(baseForRight, keys) {
 
   /**
    * The base implementation of `_.forOwnRight` without support for callback
@@ -27,16 +18,7 @@ define(['../objects/keys'], function(keys) {
    * @returns {Object} Returns `object`.
    */
   function baseForOwnRight(object, callback) {
-    var props = keys(object),
-        length = props.length;
-
-    while (length--) {
-      var key = props[length];
-      if (callback(object[key], key, object) === breakIndicator) {
-        break;
-      }
-    }
-    return object;
+    return baseForRight(object, callback, keys);
   }
 
   return baseForOwnRight;

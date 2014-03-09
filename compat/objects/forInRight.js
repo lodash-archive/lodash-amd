@@ -6,11 +6,11 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseForIn'], function(baseCreateCallback, baseForIn) {
+define(['../internals/baseCreateCallback', '../internals/baseForRight', './keysIn'], function(baseCreateCallback, baseForRight, keysIn) {
 
   /**
-   * This method is like `_.forIn` except that it iterates over elements
-   * of a `collection` in the opposite order.
+   * This method is like `_.forIn` except that it iterates over elements of a
+   * collection in the opposite order.
    *
    * @static
    * @memberOf _
@@ -26,30 +26,16 @@ define(['../internals/baseCreateCallback', '../internals/baseForIn'], function(b
    *   this.y = 0;
    * }
    *
-   * Shape.prototype.move = function(x, y) {
-   *   this.x += x;
-   *   this.y += y;
-   * };
+   * Shape.prototype.z = 0;
    *
    * _.forInRight(new Shape, function(value, key) {
    *   console.log(key);
    * });
-   * // => logs 'move', 'y', and 'x' assuming `_.forIn ` logs 'x', 'y', and 'move'
+   * // => logs 'z', 'y', and 'x' assuming `_.forIn ` logs 'x', 'y', and 'z'
    */
   function forInRight(object, callback, thisArg) {
-    var pairs = [];
-    baseForIn(object, function(value, key) {
-      pairs.push(key, value);
-    });
-
-    var length = pairs.length;
     callback = baseCreateCallback(callback, thisArg, 3);
-    while (length--) {
-      if (callback(pairs[length--], pairs[length], object) === false) {
-        break;
-      }
-    }
-    return object;
+    return baseForRight(object, callback, keysIn);
   }
 
   return forInRight;

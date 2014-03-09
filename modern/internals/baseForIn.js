@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/isObject'], function(isObject) {
+define(['./baseFor', '../objects/keysIn'], function(baseFor, keysIn) {
 
   /**
    * The base implementation of `_.forIn` without support for callback
@@ -17,18 +17,9 @@ define(['../objects/isObject'], function(isObject) {
    * @param {Function} callback The function called per iteration.
    * @returns {Object} Returns `object`.
    */
-  var baseForIn = function(object, callback) {
-    var result = object;
-    if (!isObject(object)) {
-      return result;
-    }
-    for (var key in object) {
-      if (callback(object[key], key, object) === false) {
-        return result;
-      }
-    }
-    return result;
-  };
+  function baseForIn(object, callback) {
+    return baseFor(object, callback, keysIn);
+  }
 
   return baseForIn;
 });

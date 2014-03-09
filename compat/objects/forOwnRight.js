@@ -6,11 +6,11 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', './keys'], function(baseCreateCallback, keys) {
+define(['../internals/baseCreateCallback', '../internals/baseForRight', './keys'], function(baseCreateCallback, baseForRight, keys) {
 
   /**
-   * This method is like `_.forOwn` except that it iterates over elements
-   * of a `collection` in the opposite order.
+   * This method is like `_.forOwn` except that it iterates over elements of a
+   * collection in the opposite order.
    *
    * @static
    * @memberOf _
@@ -27,17 +27,8 @@ define(['../internals/baseCreateCallback', './keys'], function(baseCreateCallbac
    * // => logs 'length', '1', and '0' assuming `_.forOwn` logs '0', '1', and 'length'
    */
   function forOwnRight(object, callback, thisArg) {
-    var props = keys(object),
-        length = props.length;
-
     callback = baseCreateCallback(callback, thisArg, 3);
-    while (length--) {
-      var key = props[length];
-      if (callback(object[key], key, object) === false) {
-        break;
-      }
-    }
-    return object;
+    return baseForRight(object, callback, keys);
   }
 
   return forOwnRight;

@@ -24,11 +24,11 @@ define([], function() {
    * Used by `unescape` to convert HTML entities to characters.
    *
    * @private
-   * @param {string} match The matched character to unescape.
+   * @param {string} chr The matched character to unescape.
    * @returns {string} Returns the unescaped character.
    */
-  function unescapeHtmlChar(match) {
-    return htmlUnescapes[match];
+  function unescapeHtmlChar(chr) {
+    return htmlUnescapes[chr];
   }
 
   /**
@@ -42,7 +42,7 @@ define([], function() {
    * @static
    * @memberOf _
    * @category Strings
-   * @param {string} string The string to unescape.
+   * @param {string} [string=''] The string to unescape.
    * @returns {string} Returns the unescaped string.
    * @example
    *

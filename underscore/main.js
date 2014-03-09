@@ -7,7 +7,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, utilities, assign, baseEach, baseForOwn, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, baseEach, baseForOwn, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -27,7 +27,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    * implicitly or explicitly included in the build.
    *
    * The chainable wrapper functions are:
-   * `after`, `assign`, `bind`, `bindAll`, `bindKey`, `chain`, `compact`,
+   * `after`, `assign`, `at`, `bind`, `bindAll`, `bindKey`, `chain`, `compact`,
    * `compose`, `concat`, `constant`, `countBy`, `create`, `createCallback`,
    * `curry`, `debounce`, `defaults`, `defer`, `delay`, `difference`, `filter`,
    * `flatten`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
@@ -115,6 +115,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.defer = functions.defer;
   lodash.delay = functions.delay;
   lodash.difference = arrays.difference;
+  lodash.drop = arrays.drop;
   lodash.filter = collections.filter;
   lodash.flatten = arrays.flatten;
   lodash.forEach = collections.forEach;
@@ -158,7 +159,6 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // add aliases
   lodash.collect = collections.map;
-  lodash.drop = arrays.rest;
   lodash.each = collections.forEach;
   lodash.extend = assign;
   lodash.methods = objects.functions;
@@ -221,9 +221,9 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.first = arrays.first;
   lodash.last = arrays.last;
   lodash.sample = collections.sample;
+  lodash.take = arrays.first;
 
   // add aliases
-  lodash.take = arrays.first;
   lodash.head = arrays.first;
 
   // add functions to `lodash.prototype`

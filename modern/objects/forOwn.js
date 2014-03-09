@@ -9,7 +9,7 @@
 define(['../internals/baseCreateCallback', '../internals/baseForOwn'], function(baseCreateCallback, baseForOwn) {
 
   /**
-   * Iterates over own enumerable properties of an object, executing the callback
+   * Iterates over own enumerable properties of an object executing the callback
    * for each property. The callback is bound to `thisArg` and invoked with three
    * arguments; (value, key, object). Callbacks may exit iteration early by
    * explicitly returning `false`.

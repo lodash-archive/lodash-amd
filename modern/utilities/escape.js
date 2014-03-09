@@ -32,11 +32,11 @@ define([], function() {
    * Used by `escape` to convert characters to HTML entities.
    *
    * @private
-   * @param {string} match The matched character to escape.
+   * @param {string} chr The matched character to escape.
    * @returns {string} Returns the escaped character.
    */
-  function escapeHtmlChar(match) {
-    return htmlEscapes[match];
+  function escapeHtmlChar(chr) {
+    return htmlEscapes[chr];
   }
 
   /**
@@ -53,7 +53,7 @@ define([], function() {
    * @static
    * @memberOf _
    * @category Strings
-   * @param {string} string The string to escape.
+   * @param {string} [string=''] The string to escape.
    * @returns {string} Returns the escaped string.
    * @example
    *

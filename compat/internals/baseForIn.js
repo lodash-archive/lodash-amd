@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./createIterator'], function(createIterator) {
+define(['./baseFor', '../objects/keysIn'], function(baseFor, keysIn) {
 
   /**
    * The base implementation of `_.forIn` without support for callback
@@ -17,12 +17,9 @@ define(['./createIterator'], function(createIterator) {
    * @param {Function} callback The function called per iteration.
    * @returns {Object} Returns `object`.
    */
-  var baseForIn = createIterator({
-    'args': 'object, callback',
-    'init': 'object',
-    'loop': 'if (callback(object[key], key, object) === false) {\n    return result;\n  }',
-    'useHas': false
-  });
+  function baseForIn(object, callback) {
+    return baseFor(object, callback, keysIn);
+  }
 
   return baseForIn;
 });

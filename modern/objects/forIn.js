@@ -6,13 +6,13 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseForIn'], function(baseCreateCallback, baseForIn) {
+define(['../internals/baseCreateCallback', '../internals/baseFor', './keysIn'], function(baseCreateCallback, baseFor, keysIn) {
 
   /**
-   * Iterates over own and inherited enumerable properties of an object,
-   * executing the callback for each property. The callback is bound to `thisArg`
-   * and invoked with three arguments; (value, key, object). Callbacks may exit
-   * iteration early by explicitly returning `false`.
+   * Iterates over own and inherited enumerable properties of an object executing
+   * the callback for each property. The callback is bound to `thisArg` and invoked
+   * with three arguments; (value, key, object). Callbacks may exit iteration
+   * early by explicitly returning `false`.
    *
    * @static
    * @memberOf _
@@ -29,19 +29,16 @@ define(['../internals/baseCreateCallback', '../internals/baseForIn'], function(b
    *   this.y = 0;
    * }
    *
-   * Shape.prototype.move = function(x, y) {
-   *   this.x += x;
-   *   this.y += y;
-   * };
+   * Shape.prototype.z = 0;
    *
    * _.forIn(new Shape, function(value, key) {
    *   console.log(key);
    * });
-   * // => logs 'x', 'y', and 'move' (property order is not guaranteed across environments)
+   * // => logs 'x', 'y', and 'z' (property order is not guaranteed across environments)
    */
   function forIn(object, callback, thisArg) {
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    return baseForIn(object, callback);
+    return baseFor(object, callback, keysIn);
   }
 
   return forIn;

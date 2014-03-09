@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define([], function() {
+define(['../strings/escapeRegExp'], function(escapeRegExp) {
 
   /** Used for native method references */
   var objectProto = Object.prototype;
@@ -16,9 +16,8 @@ define([], function() {
 
   /** Used to detect if a method is native */
   var reNative = RegExp('^' +
-    String(toString)
-      .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-      .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+    escapeRegExp(toString)
+    .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
   );
 
   /** Native method shortcuts */

@@ -6,25 +6,25 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback', '../arrays/slice'], function(baseDifference, baseFlatten, baseForIn, createCallback, slice) {
+define(['../internals/baseDifference', '../internals/baseFlatten', '../functions/createCallback', './keysIn', '../functions/negate', './pick'], function(baseDifference, baseFlatten, createCallback, keysIn, negate, pick) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
    * Property names may be specified as individual arguments or as arrays of
-   * property names. If a callback is provided it will be executed for each
-   * property of `object` omitting the properties the callback returns truey
-   * for. The callback is bound to `thisArg` and invoked with three arguments;
+   * property names. If a predicate is provided it will be executed for each
+   * property of `object` omitting the properties the predicate returns truthy
+   * for. The predicate is bound to `thisArg` and invoked with three arguments;
    * (value, key, object).
    *
    * @static
    * @memberOf _
    * @category Objects
    * @param {Object} object The source object.
-   * @param {Function|...string|string[]} [callback] The function called per
+   * @param {Function|...string|string[]} [predicate] The function called per
    *  iteration or property names to omit, specified as individual property
    *  names or arrays of property names.
-   * @param {*} [thisArg] The `this` binding of `callback`.
-   * @returns {Object} Returns an object without the omitted properties.
+   * @param {*} [thisArg] The `this` binding of `predicate`.
+   * @returns {Object} Returns the new object.
    * @example
    *
    * _.omit({ 'name': 'fred', 'age': 40 }, 'age');
@@ -35,38 +35,18 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../internals
    * });
    * // => { 'name': 'fred' }
    */
-  function omit(object, callback, thisArg) {
-    var result = {};
-
-    if (typeof callback != 'function') {
-      var omitProps = baseFlatten(arguments, true, false, 1),
-          length = omitProps.length;
-
-      while (length--) {
-        omitProps[length] = String(omitProps[length]);
-      }
-      var props = [];
-      baseForIn(object, function(value, key) {
-        props.push(key);
-      });
-
-      var index = -1;
-      props = baseDifference(props, omitProps);
-      length = props.length;
-
-      while (++index < length) {
-        var key = props[index];
-        result[key] = object[key];
-      }
-    } else {
-      callback = createCallback(callback, thisArg, 3);
-      baseForIn(object, function(value, key, object) {
-        if (!callback(value, key, object)) {
-          result[key] = value;
-        }
-      });
+  function omit(object, predicate, thisArg) {
+    if (typeof predicate == 'function') {
+      predicate = createCallback(predicate, thisArg, 3);
+      return pick(object, negate(predicate));
     }
-    return result;
+    var omitProps = baseFlatten(arguments, true, false, 1),
+        length = omitProps.length;
+
+    while (length--) {
+      omitProps[length] = String(omitProps[length]);
+    }
+    return pick(object, baseDifference(keysIn(object),  omitProps));
   }
 
   return omit;
