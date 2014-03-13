@@ -27,8 +27,11 @@ define([], function() {
    * @returns {boolean} Returns `true` if the `value` is a string, else `false`.
    * @example
    *
-   * _.isString('fred');
+   * _.isString('abc');
    * // => true
+   *
+   * _.isString(1);
+   * // => false
    */
   function isString(value) {
     return typeof value == 'string' ||

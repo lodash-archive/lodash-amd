@@ -21,7 +21,7 @@ define([], function() {
    * _.isNull(null);
    * // => true
    *
-   * _.isNull(undefined);
+   * _.isNull(void 0);
    * // => false
    */
   function isNull(value) {

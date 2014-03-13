@@ -30,8 +30,14 @@ define([], function() {
    * @returns {boolean} Returns `true` if the `value` is a number, else `false`.
    * @example
    *
-   * _.isNumber(8.4 * 5);
+   * _.isNumber(8.4);
    * // => true
+   *
+   * _.isNumber(NaN);
+   * // => true
+   *
+   * _.isNumber('8.4');
+   * // => false
    */
   function isNumber(value) {
     var type = typeof value;

@@ -26,6 +26,9 @@ define(['../internals/isNode', './isPlainObject', '../support'], function(isNode
    *
    * _.isElement(document.body);
    * // => true
+   *
+   * _.isElement('<body>');
+   * // => false
    */
   function isElement(value) {
     return value && typeof value == 'object' && value.nodeType === 1 &&

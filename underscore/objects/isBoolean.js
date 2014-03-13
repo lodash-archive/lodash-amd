@@ -27,6 +27,9 @@ define([], function() {
    * @returns {boolean} Returns `true` if the `value` is a boolean value, else `false`.
    * @example
    *
+   * _.isBoolean(false);
+   * // => true
+   *
    * _.isBoolean(null);
    * // => false
    */

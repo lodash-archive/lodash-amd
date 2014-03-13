@@ -20,6 +20,9 @@ define([], function() {
    *
    * _.isUndefined(void 0);
    * // => true
+   *
+   * _.isUndefined(null);
+   * // => false
    */
   function isUndefined(value) {
     return typeof value == 'undefined';

@@ -20,6 +20,9 @@ define([], function() {
    *
    * _.isFunction(_);
    * // => true
+   *
+   * _.isFunction(/abc/);
+   * // => false
    */
   function isFunction(value) {
     return typeof value == 'function';

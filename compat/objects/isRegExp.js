@@ -27,8 +27,11 @@ define([], function() {
    * @returns {boolean} Returns `true` if the `value` is a regular expression, else `false`.
    * @example
    *
-   * _.isRegExp(/fred/);
+   * _.isRegExp(/abc/);
    * // => true
+   *
+   * _.isRegExp('/abc/');
+   * // => false
    */
   function isRegExp(value) {
     var type = typeof value;
