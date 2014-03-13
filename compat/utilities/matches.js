@@ -41,14 +41,14 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
    */
   function matches(source) {
     source || (source = {});
-
     var props = keys(source),
+        propsLength = props.length,
         key = props[0],
         a = source[key];
 
     // fast path the common case of providing an object with a single
     // property containing a primitive value
-    if (props.length == 1 && a === a && !isObject(a)) {
+    if (propsLength == 1 && a === a && !isObject(a)) {
       return function(object) {
         if (!hasOwnProperty.call(object, key)) {
           return false;
@@ -59,13 +59,13 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
       };
     }
     return function(object) {
-      var length = props.length,
+      var length = propsLength,
           result = false;
 
       while (length--) {
         var key = props[length];
         if (!(result = hasOwnProperty.call(object, key) &&
-              baseIsEqual(object[key], source[key], null, true))) {
+            baseIsEqual(object[key], source[key], null, true))) {
           break;
         }
       }
