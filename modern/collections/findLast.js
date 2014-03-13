@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEachRight', '../functions/createCallback'], function(baseEachRight, createCallback) {
+define(['../arrays/findLastIndex', '../objects/findLastKey'], function(findLastIndex, findLastKey) {
+
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
 
   /**
    * This method is like `_.find` except that it iterates over elements of a
@@ -29,16 +32,13 @@ define(['../internals/baseEachRight', '../functions/createCallback'], function(b
    * // => 3
    */
   function findLast(collection, predicate, thisArg) {
-    var result;
-
-    predicate = createCallback(predicate, thisArg, 3);
-    baseEachRight(collection, function(value, index, collection) {
-      if (predicate(value, index, collection)) {
-        result = value;
-        return false;
-      }
-    });
-    return result;
+    var length = (collection && collection.length) | 0;
+    if (length > 0) {
+      var index = findLastIndex(collection, predicate, thisArg);
+      return index > -1 ? collection[index] : undefined;
+    }
+    var key = findLastKey(collection, predicate, thisArg);
+    return typeof key == 'string' ? collection[key] : undefined;
   }
 
   return findLast;

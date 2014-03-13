@@ -6,15 +6,11 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKey) {
-
-  /** Used as a safe reference for `undefined` in pre ES5 environments */
-  var undefined;
+define(['../functions/createCallback'], function(createCallback) {
 
   /**
-   * Iterates over elements of a collection, returning the first element that
-   * the predicate returns truthy for. The predicate is bound to `thisArg` and
-   * invoked with three arguments; (value, index|key, collection).
+   * This method is like `_.find` except that it returns the index of the first
+   * element the predicate returns truthy for, instead of the element itself.
    *
    * If a property name is provided for `predicate` the created "_.pluck" style
    * callback will return the property value of the given element.
@@ -25,14 +21,13 @@ define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKe
    *
    * @static
    * @memberOf _
-   * @alias detect, findWhere
-   * @category Collections
-   * @param {Array|Object|string} collection The collection to search.
+   * @category Arrays
+   * @param {Array} array The array to search.
    * @param {Function|Object|string} [predicate=identity] The function called
    *  per iteration. If a property name or object is provided it will be used
    *  to create a "_.pluck" or "_.where" style callback, respectively.
    * @param {*} [thisArg] The `this` binding of `predicate`.
-   * @returns {*} Returns the found element, else `undefined`.
+   * @returns {number} Returns the index of the found element, else `-1`.
    * @example
    *
    * var characters = [
@@ -41,28 +36,31 @@ define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKe
    *   { 'name': 'pebbles', 'age': 1 }
    * ];
    *
-   * _.find(characters, function(chr) {
-   *   return chr.age < 40;
+   * _.findIndex(characters, function(chr) {
+   *   return chr.age < 20;
    * });
-   * // => { 'name': 'barney', 'age': 36 }
+   * // => 2
    *
    * // using "_.where" callback shorthand
-   * _.find(characters, { 'age': 1 });
-   * // =>  { 'name': 'pebbles', 'age': 1 }
+   * _.findIndex(characters, { 'age': 36 });
+   * // => 0
    *
    * // using "_.pluck" callback shorthand
-   * _.find(characters, 'blocked');
-   * // => { 'name': 'fred', 'age': 40, 'blocked': true }
+   * _.findIndex(characters, 'blocked');
+   * // => 1
    */
-  function find(collection, predicate, thisArg) {
-    var length = (collection && collection.length) | 0;
-    if (length > 0) {
-      var index = findIndex(collection, predicate, thisArg);
-      return index > -1 ? collection[index] : undefined;
+  function findIndex(array, predicate, thisArg) {
+    var index = -1,
+        length = array ? array.length : 0;
+
+    predicate = createCallback(predicate, thisArg, 3);
+    while (++index < length) {
+      if (predicate(array[index], index, array)) {
+        return index;
+      }
     }
-    var key = findKey(collection, predicate, thisArg);
-    return typeof key == 'string' ? collection[key] : undefined;
+    return -1;
   }
 
-  return find;
+  return findIndex;
 });

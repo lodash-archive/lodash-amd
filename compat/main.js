@@ -92,6 +92,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
      ? value
      : new lodashWrapper(value);
   }
+
   // ensure `new lodashWrapper` is an instance of `lodash`
   lodashWrapper.prototype = lodash.prototype;
 

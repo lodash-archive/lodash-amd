@@ -6,7 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray'], function(baseEach, createCallback, isArray) {
+define(['../arrays/findIndex', '../objects/findKey', '../objects/isArray'], function(findIndex, findKey, isArray) {
+
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
 
   /**
    * Iterates over elements of a collection, returning the first element that
@@ -52,27 +55,12 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * // => { 'name': 'fred', 'age': 40, 'blocked': true }
    */
   function find(collection, predicate, thisArg) {
-    predicate = createCallback(predicate, thisArg, 3);
     if (isArray(collection)) {
-      var index = -1,
-          length = collection.length;
-
-      while (++index < length) {
-        var value = collection[index];
-        if (predicate(value, index, collection)) {
-          return value;
-        }
-      }
-    } else {
-      var result;
-      baseEach(collection, function(value, index, collection) {
-        if (predicate(value, index, collection)) {
-          result = value;
-          return false;
-        }
-      });
-      return result;
+      var index = findIndex(collection, predicate, thisArg);
+      return index > -1 ? collection[index] : undefined;
     }
+    var key = findKey(collection, predicate, thisArg);
+    return typeof key == 'string' ? collection[key] : undefined;
   }
 
   return find;
