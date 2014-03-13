@@ -37,7 +37,7 @@ define(['../internals/createPad'], function(createPad) {
    */
   function pad(string, length, chars) {
     string = string == null ? '' : String(string);
-    length = +length || 0;
+    length |= 0;
 
     var strLength = string.length;
     if (strLength >= length) {

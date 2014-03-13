@@ -33,7 +33,7 @@ define([], function() {
    */
   function repeat(string, n) {
     var result = '';
-    n = +n || 0;
+    n |= 0;
 
     if (n < 1 || string == null) {
       return result;
@@ -45,7 +45,7 @@ define([], function() {
       }
       n = floor(n / 2);
       string += string;
-    } while (n > 0);
+    } while (n);
     return result;
   }
 

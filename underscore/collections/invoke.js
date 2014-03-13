@@ -34,8 +34,8 @@ define(['../internals/baseEach', '../arrays/slice'], function(baseEach, slice) {
     var args = slice(arguments, 2),
         index = -1,
         isFunc = typeof methodName == 'function',
-        length = collection ? collection.length : 0,
-        result = Array(typeof length == 'number' ? length : 0);
+        length = (collection && collection.length) | 0,
+        result = Array(length < 0 ? 0 : length);
 
     baseEach(collection, function(value) {
       result[++index] = (isFunc ? methodName : value[methodName]).apply(value, args);

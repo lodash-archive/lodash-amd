@@ -45,12 +45,12 @@ define(['../internals/baseRandom'], function(baseRandom) {
     if (min == null && max == null) {
       max = 1;
     }
-    min = +min || 0;
+    min |= 0;
     if (max == null) {
       max = min;
       min = 0;
     } else {
-      max = +max || 0;
+      max |= 0;
     }
     return min + floor(nativeRandom() * (max - min + 1));
   }

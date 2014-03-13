@@ -123,9 +123,9 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    */
   function sortBy(collection, callback, thisArg) {
     var index = -1,
+        length = (collection && collection.length) | 0,
         multi = callback && isArray(callback),
-        length = collection ? collection.length : 0,
-        result = Array(typeof length == 'number' ? length : 0);
+        result = Array(length < 0 ? 0 : length);
 
     if (!multi) {
       callback = createCallback(callback, thisArg, 3);

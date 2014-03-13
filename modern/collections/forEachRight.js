@@ -26,10 +26,10 @@ define(['../internals/baseCreateCallback', '../internals/baseEachRight'], functi
    * // => logs each number from right to left and returns '3,2,1'
    */
   function forEachRight(collection, callback, thisArg) {
-    var length = collection ? collection.length : 0;
+    var length = (collection && collection.length) | 0;
 
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    if (typeof length == 'number') {
+    if (length > 0) {
       while (length--) {
         if (callback(collection[length], length, collection) === false) {
           break;

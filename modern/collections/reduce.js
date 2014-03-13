@@ -43,9 +43,9 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
     callback = createCallback(callback, thisArg, 4);
 
     var index = -1,
-        length = collection ? collection.length : 0;
+        length = (collection && collection.length) | 0;
 
-    if (typeof length == 'number') {
+    if (length > 0) {
       if (noaccum && length) {
         accumulator = collection[++index];
       }

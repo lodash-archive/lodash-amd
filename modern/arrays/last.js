@@ -42,7 +42,7 @@ define(['../functions/createCallback', './slice'], function(createCallback, slic
       }
     }
     n = length - n;
-    return slice(array,  n > 0 ? n : 0);
+    return slice(array,  n < 0 ? 0 : n);
   }
 
   return last;

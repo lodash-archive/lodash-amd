@@ -22,7 +22,8 @@ define(['../objects/isString', '../arrays/slice', '../support', '../objects/valu
    * // => [2, 3, 4]
    */
   function toArray(collection) {
-    if (collection && typeof collection.length == 'number') {
+    var length = collection && collection.length;
+    if (typeof length == 'number' && length > -1) {
       return (support.unindexedChars && isString(collection))
         ? collection.split('')
         : slice(collection);

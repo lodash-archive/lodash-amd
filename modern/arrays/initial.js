@@ -36,7 +36,7 @@ define(['../functions/createCallback', './slice'], function(createCallback, slic
       n = (predicate == null || thisArg) ? 1 : predicate;
     }
     n = length - n;
-    return slice(array, 0, n > 0 ? n : 0);
+    return slice(array, 0, n < 0 ? 0 : n);
   }
 
   return initial;

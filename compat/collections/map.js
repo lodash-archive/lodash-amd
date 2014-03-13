@@ -49,8 +49,8 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    */
   function map(collection, callback, thisArg) {
     var index = -1,
-        length = collection ? collection.length : 0,
-        result = Array(typeof length == 'number' ? length : 0);
+        length = (collection && collection.length) | 0,
+        result = Array(length < 0 ? 0 : length);
 
     callback = createCallback(callback, thisArg, 3);
     if (isArray(collection)) {

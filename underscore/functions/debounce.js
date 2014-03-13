@@ -68,7 +68,7 @@ define(['../objects/isFunction', '../objects/isObject', '../utilities/now'], fun
     if (!isFunction(func)) {
       throw new TypeError;
     }
-    wait = wait > 0 ? wait : 0;
+    wait = wait < 0 ? 0 : wait;
     if (options === true) {
       var leading = true;
       trailing = false;

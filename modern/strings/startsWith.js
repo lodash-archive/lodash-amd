@@ -36,7 +36,7 @@ define([], function() {
    */
   function startsWith(string, target, position) {
     string = string == null ? '' : String(string);
-    position = typeof position == 'number' ? nativeMin(nativeMax(position, 0), string.length) : 0;
+    position = typeof position == 'number' ? nativeMin(nativeMax(position | 0, 0), string.length) : 0;
     return string.lastIndexOf(target, position) == position;
   }
 

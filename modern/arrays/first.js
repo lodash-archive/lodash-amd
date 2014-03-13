@@ -44,7 +44,7 @@ define(['../functions/createCallback', './slice'], function(createCallback, slic
         return array ? array[0] : undefined;
       }
     }
-    return slice(array, 0, n > 0 ? n : 0);
+    return slice(array, 0, n < 0 ? 0 : n);
   }
 
   return first;

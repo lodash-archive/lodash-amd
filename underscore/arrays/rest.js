@@ -26,7 +26,7 @@ define(['./slice'], function(slice) {
     if (n == null || guard) {
       n = 1;
     } else {
-      n = n > 0 ? n : 0;
+      n = n < 0 ? 0 : n;
     }
     return slice(array, n);
   }
