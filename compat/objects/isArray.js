@@ -25,10 +25,9 @@ define(['../internals/isNative'], function(isNative) {
    *
    * @static
    * @memberOf _
-   * @type Function
    * @category Objects
    * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if the `value` is an array, else `false`.
+   * @returns {boolean} Returns `true` if `value` is an array, else `false`.
    * @example
    *
    * _.isArray([1, 2, 3]);

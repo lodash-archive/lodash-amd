@@ -9,7 +9,7 @@
 define(['../objects/isString', '../arrays/slice', '../support', '../objects/values'], function(isString, slice, support, values) {
 
   /**
-   * Converts the `collection` to an array.
+   * Converts `collection` to an array.
    *
    * @static
    * @memberOf _

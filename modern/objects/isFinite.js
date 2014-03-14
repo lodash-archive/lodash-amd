@@ -23,7 +23,7 @@ define([], function() {
    * @memberOf _
    * @category Objects
    * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if the `value` is finite, else `false`.
+   * @returns {boolean} Returns `true` if `value` is finite, else `false`.
    * @example
    *
    * _.isFinite(-101);

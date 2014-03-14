@@ -9,7 +9,7 @@
 define(['../arrays/slice', '../objects/values'], function(slice, values) {
 
   /**
-   * Converts the `collection` to an array.
+   * Converts `collection` to an array.
    *
    * @static
    * @memberOf _

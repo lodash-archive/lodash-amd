@@ -9,7 +9,7 @@
 define(['../objects/keys'], function(keys) {
 
   /**
-   * Gets the size of the `collection` by returning `collection.length` for arrays
+   * Gets the size of the collection by returning `collection.length` for arrays
    * and array-like objects or the number of own enumerable properties for objects.
    *
    * @static

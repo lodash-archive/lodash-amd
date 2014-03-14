@@ -27,7 +27,7 @@ define([], function() {
    * @memberOf _
    * @category Objects
    * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if the `value` is a number, else `false`.
+   * @returns {boolean} Returns `true` if `value` is a number, else `false`.
    * @example
    *
    * _.isNumber(8.4);
