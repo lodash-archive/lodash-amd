@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForOwn', '../objects/isString', '../support'], function(baseForOwn, isString, support) {
+define(['./baseForOwn', '../objects/isString', '../support', './toLength'], function(baseForOwn, isString, support, toLength) {
 
   /**
    * The base implementation of `_.forEach` without support for callback
@@ -22,8 +22,8 @@ define(['./baseForOwn', '../objects/isString', '../support'], function(baseForOw
         iterable = collection,
         length = collection ? collection.length : 0;
 
-    if (typeof length == 'number' && length > -1) {
-      length |= 0;
+    if (typeof length == 'number') {
+      length = toLength(length);
       if (support.unindexedChars && isString(iterable)) {
         iterable = iterable.split('');
       }

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['./baseEach', '../functions/createCallback', './toLength'], function(baseEach, createCallback, toLength) {
 
   /**
    * Creates a function that aggregates a collection, creating an object or
@@ -26,9 +26,9 @@ define(['./baseEach', '../functions/createCallback'], function(baseEach, createC
       callback = createCallback(callback, thisArg, 3);
 
       var index = -1,
-          length = (collection && collection.length) | 0;
+          length = toLength(collection && collection.length);
 
-      if (length > 0) {
+      if (length) {
         while (++index < length) {
           var value = collection[index];
           setter(result, value, callback(value, index, collection), collection);

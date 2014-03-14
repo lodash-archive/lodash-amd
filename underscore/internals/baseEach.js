@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForOwn'], function(baseForOwn) {
+define(['./baseForOwn', './toLength'], function(baseForOwn, toLength) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -31,8 +31,8 @@ define(['./baseForOwn'], function(baseForOwn) {
         iterable = collection,
         length = collection ? collection.length : 0;
 
-    if (typeof length == 'number' && length > -1) {
-      length |= 0;
+    if (typeof length == 'number') {
+      length = toLength(length);
       while (++index < length) {
         if (callback(iterable[index], index, collection) === breakIndicator) {
           break;

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['../internals/baseEach', '../functions/createCallback', '../internals/toLength'], function(baseEach, createCallback, toLength) {
 
   /**
    * Creates an array of values by running each element in the collection
@@ -49,10 +49,10 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    */
   function map(collection, callback, thisArg) {
     var index = -1,
-        length = (collection && collection.length) | 0;
+        length = toLength(collection && collection.length);
 
     callback = createCallback(callback, thisArg, 3);
-    if (length > 0) {
+    if (length) {
       var result = Array(length);
       while (++index < length) {
         result[index] = callback(collection[index], index, collection);

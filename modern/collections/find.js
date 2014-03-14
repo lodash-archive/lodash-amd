@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKey) {
+define(['../arrays/findIndex', '../objects/findKey', '../internals/toLength'], function(findIndex, findKey, toLength) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -55,8 +55,8 @@ define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKe
    * // => { 'name': 'fred', 'age': 40, 'blocked': true }
    */
   function find(collection, predicate, thisArg) {
-    var length = (collection && collection.length) | 0;
-    if (length > 0) {
+    var length = toLength(collection && collection.length);
+    if (length) {
       var index = findIndex(collection, predicate, thisArg);
       return index > -1 ? collection[index] : undefined;
     }

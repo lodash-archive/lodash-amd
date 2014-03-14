@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findLastIndex', '../objects/findLastKey'], function(findLastIndex, findLastKey) {
+define(['../arrays/findLastIndex', '../objects/findLastKey', '../internals/toLength'], function(findLastIndex, findLastKey, toLength) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -32,8 +32,8 @@ define(['../arrays/findLastIndex', '../objects/findLastKey'], function(findLastI
    * // => 3
    */
   function findLast(collection, predicate, thisArg) {
-    var length = (collection && collection.length) | 0;
-    if (length > 0) {
+    var length = toLength(collection && collection.length);
+    if (length) {
       var index = findLastIndex(collection, predicate, thisArg);
       return index > -1 ? collection[index] : undefined;
     }

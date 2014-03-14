@@ -25,8 +25,8 @@ define(['../internals/baseEach', '../internals/baseRandom'], function(baseEach, 
    */
   function shuffle(collection) {
     var index = -1,
-        length = (collection && collection.length) | 0,
-        result = Array(length < 0 ? 0 : length);
+        length = collection && collection.length,
+        result = Array(length < 0 ? 0 : length >>> 0);
 
     baseEach(collection, function(value) {
       var rand = baseRandom(0, ++index);

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseRandom', '../objects/isString', './shuffle', '../support', '../objects/values'], function(baseRandom, isString, shuffle, support, values) {
+define(['../internals/baseRandom', '../objects/isString', './shuffle', '../support', '../internals/toLength', '../objects/values'], function(baseRandom, isString, shuffle, support, toLength, values) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -40,7 +40,7 @@ define(['../internals/baseRandom', '../objects/isString', './shuffle', '../suppo
       collection = collection.split('');
     }
     if (n == null || guard) {
-      var length = (collection && collection.length) | 0;
+      var length = toLength(collection && collection.length);
       return length > 0 ? collection[baseRandom(0, length - 1)] : undefined;
     }
     var result = shuffle(collection);

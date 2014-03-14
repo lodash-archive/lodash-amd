@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForOwnRight', '../objects/isString', '../support'], function(baseForOwnRight, isString, support) {
+define(['./baseForOwnRight', '../objects/isString', '../support', './toLength'], function(baseForOwnRight, isString, support, toLength) {
 
   /**
    * The base implementation of `_.forEachRight` without support for callback
@@ -21,8 +21,8 @@ define(['./baseForOwnRight', '../objects/isString', '../support'], function(base
     var iterable = collection,
         length = collection ? collection.length : 0;
 
-    if (typeof length == 'number' && length > -1) {
-      length = (length |= 0) < 0 ? 0 : length;
+    if (typeof length == 'number') {
+      length = toLength(length);
       if (support.unindexedChars && isString(iterable)) {
         iterable = iterable.split('');
       }

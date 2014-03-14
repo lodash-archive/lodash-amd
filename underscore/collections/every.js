@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['../internals/baseEach', '../functions/createCallback', '../internals/toLength'], function(baseEach, createCallback, toLength) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -63,9 +63,9 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
 
     predicate = createCallback(predicate, thisArg, 3);
     var index = -1,
-        length = (collection && collection.length) | 0;
+        length = toLength(collection && collection.length);
 
-    if (length > 0) {
+    if (length) {
       while (++index < length) {
         if (!predicate(collection[index], index, collection)) {
           return false;

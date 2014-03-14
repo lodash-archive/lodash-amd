@@ -9,10 +9,10 @@
 define(['../internals/baseEach', '../arrays/slice'], function(baseEach, slice) {
 
   /**
-   * Invokes the method named by `methodName` on each element in the `collection`
+   * Invokes the method named by `methodName` on each element in the collection
    * returning an array of the results of each invoked method. Additional arguments
    * will be provided to each invoked method. If `methodName` is a function it
-   * will be invoked for, and `this` bound to, each element in the `collection`.
+   * will be invoked for, and `this` bound to, each element in the collection.
    *
    * @static
    * @memberOf _
@@ -34,8 +34,8 @@ define(['../internals/baseEach', '../arrays/slice'], function(baseEach, slice) {
     var args = slice(arguments, 2),
         index = -1,
         isFunc = typeof methodName == 'function',
-        length = (collection && collection.length) | 0,
-        result = Array(length < 0 ? 0 : length);
+        length = collection && collection.length,
+        result = Array(length < 0 ? 0 : length >>> 0);
 
     baseEach(collection, function(value) {
       result[++index] = (isFunc ? methodName : value[methodName]).apply(value, args);

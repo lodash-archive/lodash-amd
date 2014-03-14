@@ -16,7 +16,6 @@ define(['../internals/baseCreateCallback', '../internals/baseFor', './keysIn'], 
    *
    * @static
    * @memberOf _
-   * @type Function
    * @category Objects
    * @param {Object} object The object to iterate over.
    * @param {Function} [callback=identity] The function called per iteration.

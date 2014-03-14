@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForOwnRight'], function(baseForOwnRight) {
+define(['./baseForOwnRight', './toLength'], function(baseForOwnRight, toLength) {
 
   /**
    * The base implementation of `_.forEachRight` without support for callback
@@ -21,8 +21,8 @@ define(['./baseForOwnRight'], function(baseForOwnRight) {
     var iterable = collection,
         length = collection ? collection.length : 0;
 
-    if (typeof length == 'number' && length > -1) {
-      length = (length |= 0) < 0 ? 0 : length;
+    if (typeof length == 'number') {
+      length = toLength(length);
       while (length--) {
         if (callback(iterable[length], length, collection) === false) {
           break;

@@ -58,9 +58,9 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
       callback = null;
     }
     var index = -1,
-        length = (collection && collection.length) | 0;
+        length = toLength(collection && collection.length);
 
-    if (callback == null && length > 0) {
+    if (callback == null && length) {
       while (++index < length) {
         var value = collection[index];
         if (value < result) {

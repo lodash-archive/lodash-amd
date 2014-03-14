@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../internals/baseIndexOf'], function(baseEach, baseIndexOf) {
+define(['../internals/baseEach', '../internals/baseIndexOf', '../internals/toLength'], function(baseEach, baseIndexOf, toLength) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -46,10 +46,10 @@ define(['../internals/baseEach', '../internals/baseIndexOf'], function(baseEach,
    */
   function contains(collection, target) {
     var indexOf = baseIndexOf,
-        length = (collection && collection.length) | 0,
+        length = toLength(collection && collection.length),
         result = false;
 
-    if (length > 0) {
+    if (length) {
       return indexOf(collection, target) > -1;
     }
     baseEach(collection, function(value) {

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray', '../internals/isNative', '../objects/isString'], function(baseEach, baseIndexOf, isArray, isNative, isString) {
+define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray', '../internals/isNative', '../objects/isString', '../internals/toLength'], function(baseEach, baseIndexOf, isArray, isNative, isString, toLength) {
 
   /** Used for native method references */
   var stringProto = String.prototype;
@@ -43,10 +43,10 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray
    * // => true
    */
   function contains(collection, target, fromIndex) {
-    var length = collection ? collection.length : 0;
-    fromIndex = (typeof fromIndex == 'number' && fromIndex) | 0;
+    var length = toLength(collection && collection.length);
+    fromIndex = (typeof fromIndex == 'number' && +fromIndex) || 0;
 
-    if (typeof length == 'number' && length > -1) {
+    if (length) {
       if (typeof collection == 'string' || !isArray(collection) && isString(collection)) {
         if (fromIndex >= length) {
           return false;
@@ -56,7 +56,7 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray
           : collection.indexOf(target, fromIndex) > -1;
       }
       var indexOf = baseIndexOf;
-      fromIndex = fromIndex < 0 ? nativeMax(0, (length | 0) + fromIndex) : fromIndex;
+      fromIndex = fromIndex < 0 ? nativeMax(0, length + fromIndex) : fromIndex;
       return indexOf(collection, target, fromIndex) > -1;
     }
     var index = -1,

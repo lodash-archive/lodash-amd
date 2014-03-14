@@ -29,13 +29,13 @@ define([], function() {
     var index = -1,
         length = array ? array.length : 0;
 
-    start |= 0;
+    start = +start || 0;
     if (start < 0) {
       start = nativeMax(length + start, 0);
     } else if (start > length) {
       start = length;
     }
-    end = typeof end == 'undefined' ? length : (end | 0);
+    end = typeof end == 'undefined' ? length : (+end || 0);
     if (end < 0) {
       end = nativeMax(length + end, 0);
     } else if (end > length) {

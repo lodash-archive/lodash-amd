@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['../internals/baseEach', '../functions/createCallback', '../internals/toLength'], function(baseEach, createCallback, toLength) {
 
   /**
    * Reduces a collection to a value which is the accumulated result of running
@@ -43,9 +43,9 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
     callback = createCallback(callback, thisArg, 4);
 
     var index = -1,
-        length = (collection && collection.length) | 0;
+        length = toLength(collection && collection.length);
 
-    if (length > 0) {
+    if (length) {
       if (noaccum && length) {
         accumulator = collection[++index];
       }

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['../internals/baseEach', '../functions/createCallback', '../internals/toLength'], function(baseEach, createCallback, toLength) {
 
   /**
    * Iterates over elements of a collection returning an array of all elements
@@ -53,9 +53,9 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
 
     predicate = createCallback(predicate, thisArg, 3);
     var index = -1,
-        length = (collection && collection.length) | 0;
+        length = toLength(collection && collection.length);
 
-    if (length > 0) {
+    if (length) {
       while (++index < length) {
         var value = collection[index];
         if (predicate(value, index, collection)) {

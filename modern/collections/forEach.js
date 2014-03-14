@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach'], function(baseCreateCallback, baseEach) {
+define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/toLength'], function(baseCreateCallback, baseEach, toLength) {
 
   /**
    * Iterates over elements of a collection executing the callback for each
@@ -36,10 +36,10 @@ define(['../internals/baseCreateCallback', '../internals/baseEach'], function(ba
    */
   function forEach(collection, callback, thisArg) {
     var index = -1,
-        length = (collection && collection.length) | 0;
+        length = toLength(collection && collection.length);
 
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    if (length > 0) {
+    if (length) {
       while (++index < length) {
         if (callback(collection[index], index, collection) === false) {
           break;
