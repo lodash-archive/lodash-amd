@@ -6,10 +6,17 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findIndex', '../objects/findKey', '../objects/isArray'], function(findIndex, findKey, isArray) {
+define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKey) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * Iterates over elements of a collection, returning the first element that
@@ -55,7 +62,9 @@ define(['../arrays/findIndex', '../objects/findKey', '../objects/isArray'], func
    * // => { 'name': 'fred', 'age': 40, 'blocked': true }
    */
   function find(collection, predicate, thisArg) {
-    if (isArray(collection)) {
+    var length = collection ? collection.length : 0;
+
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       var index = findIndex(collection, predicate, thisArg);
       return index > -1 ? collection[index] : undefined;
     }
