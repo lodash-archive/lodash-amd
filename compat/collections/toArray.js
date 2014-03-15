@@ -9,6 +9,13 @@
 define(['../objects/isString', '../arrays/slice', '../support', '../objects/values'], function(isString, slice, support, values) {
 
   /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
+
+  /**
    * Converts `collection` to an array.
    *
    * @static
@@ -23,7 +30,7 @@ define(['../objects/isString', '../arrays/slice', '../support', '../objects/valu
    */
   function toArray(collection) {
     var length = collection && collection.length;
-    if (typeof length == 'number' && length > -1) {
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       return (support.unindexedChars && isString(collection))
         ? collection.split('')
         : slice(collection);

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../internals/baseIndexOf', '../internals/toLength'], function(baseEach, baseIndexOf, toLength) {
+define(['../internals/baseEach', '../internals/baseIndexOf'], function(baseEach, baseIndexOf) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -16,6 +16,13 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../internals/toLen
 
   /** Used by methods to exit iteration */
   var breakIndicator = expando + 'breaker__';
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * Checks if a given value is present in a collection using strict equality
@@ -46,10 +53,10 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../internals/toLen
    */
   function contains(collection, target) {
     var indexOf = baseIndexOf,
-        length = toLength(collection && collection.length),
+        length = collection ? collection.length : 0,
         result = false;
 
-    if (length) {
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       return indexOf(collection, target) > -1;
     }
     baseEach(collection, function(value) {

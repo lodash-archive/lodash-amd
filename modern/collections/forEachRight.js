@@ -6,7 +6,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEachRight', '../internals/toLength'], function(baseCreateCallback, baseEachRight, toLength) {
+define(['../internals/baseCreateCallback', '../internals/baseEachRight'], function(baseCreateCallback, baseEachRight) {
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * This method is like `_.forEach` except that it iterates over elements of
@@ -26,10 +33,10 @@ define(['../internals/baseCreateCallback', '../internals/baseEachRight', '../int
    * // => logs each number from right to left and returns '3,2,1'
    */
   function forEachRight(collection, callback, thisArg) {
-    var length = toLength(collection && collection.length);
+    var length = collection ? collection.length : 0;
 
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    if (length) {
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       while (length--) {
         if (callback(collection[length], length, collection) === false) {
           break;

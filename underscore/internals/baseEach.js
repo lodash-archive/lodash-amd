@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForOwn', './toLength'], function(baseForOwn, toLength) {
+define(['./baseForOwn'], function(baseForOwn) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -16,6 +16,13 @@ define(['./baseForOwn', './toLength'], function(baseForOwn, toLength) {
 
   /** Used by methods to exit iteration */
   var breakIndicator = expando + 'breaker__';
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * The base implementation of `_.forEach` without support for callback
@@ -31,8 +38,7 @@ define(['./baseForOwn', './toLength'], function(baseForOwn, toLength) {
         iterable = collection,
         length = collection ? collection.length : 0;
 
-    if (typeof length == 'number') {
-      length = toLength(length);
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       while (++index < length) {
         if (callback(iterable[index], index, collection) === breakIndicator) {
           break;

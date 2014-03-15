@@ -6,7 +6,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback', '../internals/toLength'], function(baseEach, createCallback, toLength) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * Retrieves the minimum value of a collection. If the collection is empty or
@@ -58,9 +65,9 @@ define(['../internals/baseEach', '../functions/createCallback', '../internals/to
       callback = null;
     }
     var index = -1,
-        length = toLength(collection && collection.length);
+        length = collection ? collection.length : 0;
 
-    if (callback == null && length) {
+    if (callback == null && typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       while (++index < length) {
         var value = collection[index];
         if (value < result) {

@@ -6,7 +6,14 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseEach', '../functions/createCallback', './toLength'], function(baseEach, createCallback, toLength) {
+define(['./baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * Creates a function that aggregates a collection, creating an object or
@@ -26,9 +33,9 @@ define(['./baseEach', '../functions/createCallback', './toLength'], function(bas
       callback = createCallback(callback, thisArg, 3);
 
       var index = -1,
-          length = toLength(collection && collection.length);
+          length = collection ? collection.length : 0;
 
-      if (length) {
+      if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
         while (++index < length) {
           var value = collection[index];
           setter(result, value, callback(value, index, collection), collection);

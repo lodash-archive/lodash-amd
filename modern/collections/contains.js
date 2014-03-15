@@ -6,10 +6,17 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray', '../internals/isNative', '../objects/isString', '../internals/toLength'], function(baseEach, baseIndexOf, isArray, isNative, isString, toLength) {
+define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray', '../internals/isNative', '../objects/isString'], function(baseEach, baseIndexOf, isArray, isNative, isString) {
 
   /** Used for native method references */
   var stringProto = String.prototype;
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeContains = isNative(nativeContains = stringProto.contains) && nativeContains,
@@ -43,10 +50,10 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray
    * // => true
    */
   function contains(collection, target, fromIndex) {
-    var length = toLength(collection && collection.length);
+    var length = collection ? collection.length : 0;
     fromIndex = (typeof fromIndex == 'number' && +fromIndex) || 0;
 
-    if (length) {
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       if (typeof collection == 'string' || !isArray(collection) && isString(collection)) {
         if (fromIndex >= length) {
           return false;

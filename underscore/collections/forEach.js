@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../internals/toLength'], function(baseCreateCallback, baseEach, toLength) {
+define(['../internals/baseCreateCallback', '../internals/baseEach'], function(baseCreateCallback, baseEach) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -16,6 +16,13 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
 
   /** Used by methods to exit iteration */
   var breakIndicator = expando + 'breaker__';
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * Iterates over elements of a collection executing the callback for each
@@ -45,10 +52,10 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
    */
   function forEach(collection, callback, thisArg) {
     var index = -1,
-        length = toLength(collection && collection.length);
+        length = collection ? collection.length : 0;
 
     callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    if (length) {
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       while (++index < length) {
         if (callback(collection[index], index, collection) === breakIndicator) {
           break;

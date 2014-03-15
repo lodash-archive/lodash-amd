@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback', '../internals/toLength'], function(baseEach, createCallback, toLength) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -16,6 +16,13 @@ define(['../internals/baseEach', '../functions/createCallback', '../internals/to
 
   /** Used by methods to exit iteration */
   var breakIndicator = expando + 'breaker__';
+
+  /**
+   * Used as the maximum length an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
 
   /**
    * Checks if the predicate returns truthy for **any** element of a collection.
@@ -64,9 +71,9 @@ define(['../internals/baseEach', '../functions/createCallback', '../internals/to
 
     predicate = createCallback(predicate, thisArg, 3);
     var index = -1,
-        length = toLength(collection && collection.length);
+        length = collection ? collection.length : 0;
 
-    if (length) {
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       while (++index < length) {
         if (predicate(collection[index], index, collection)) {
           return true;
