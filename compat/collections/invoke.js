@@ -8,6 +8,9 @@
  */
 define(['../internals/baseEach', '../arrays/slice'], function(baseEach, slice) {
 
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
+
   /**
    * Invokes the method named by `methodName` on each element in the collection
    * returning an array of the results of each invoked method. Additional arguments
@@ -38,7 +41,8 @@ define(['../internals/baseEach', '../arrays/slice'], function(baseEach, slice) {
         result = Array(length < 0 ? 0 : length >>> 0);
 
     baseEach(collection, function(value) {
-      result[++index] = (isFunc ? methodName : value[methodName]).apply(value, args);
+      var func = isFunc ? methodName : (value != null && value[methodName]);
+      result[++index] = func ? func.apply(value, args) : undefined;
     });
     return result;
   }

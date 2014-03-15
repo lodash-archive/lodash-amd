@@ -8,6 +8,9 @@
  */
 define([], function() {
 
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
+
   /**
    * Creates a "_.pluck" style function which returns the `key` value of a
    * given object.
@@ -34,7 +37,7 @@ define([], function() {
    */
   function property(key) {
     return function(object) {
-      return object[key];
+      return object == null ? undefined : object[key];
     };
   }
 
