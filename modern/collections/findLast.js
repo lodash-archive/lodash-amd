@@ -40,6 +40,7 @@ define(['../arrays/findLastIndex', '../objects/findLastKey'], function(findLastI
    */
   function findLast(collection, predicate, thisArg) {
     var length = collection ? collection.length : 0;
+
     if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       var index = findLastIndex(collection, predicate, thisArg);
       return index > -1 ? collection[index] : undefined;

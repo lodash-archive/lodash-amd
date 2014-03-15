@@ -63,6 +63,7 @@ define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKe
    */
   function find(collection, predicate, thisArg) {
     var length = collection ? collection.length : 0;
+
     if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       var index = findIndex(collection, predicate, thisArg);
       return index > -1 ? collection[index] : undefined;
