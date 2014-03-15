@@ -48,7 +48,7 @@ define([], function() {
    */
   function range(start, end, step) {
     start = +start || 0;
-    step = step == null ? 1 : (+step || 0);
+    step = +step || 1;
 
     if (end == null) {
       end = start;
@@ -59,7 +59,7 @@ define([], function() {
     // use `Array(length)` so engines like Chakra and V8 avoid slower modes
     // http://youtu.be/XAqIpGU8ZZk#t=17m25s
     var index = -1,
-        length = nativeMax(0, ceil((end - start) / step)),
+        length = nativeMax(0, ceil((end - start) / (step || 1))),
         result = Array(length);
 
     while (++index < length) {
