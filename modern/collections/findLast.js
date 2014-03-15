@@ -6,17 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findLastIndex', '../objects/findLastKey'], function(findLastIndex, findLastKey) {
-
-  /** Used as a safe reference for `undefined` in pre ES5 environments */
-  var undefined;
-
-  /**
-   * Used as the maximum length an array-like object.
-   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-   * for more details.
-   */
-  var maxSafeInteger = Math.pow(2, 53) - 1;
+define(['../internals/baseEachRight', '../functions/createCallback'], function(baseEachRight, createCallback) {
 
   /**
    * This method is like `_.find` except that it iterates over elements of a
@@ -39,14 +29,16 @@ define(['../arrays/findLastIndex', '../objects/findLastKey'], function(findLastI
    * // => 3
    */
   function findLast(collection, predicate, thisArg) {
-    var length = collection ? collection.length : 0;
+    var result;
 
-    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-      var index = findLastIndex(collection, predicate, thisArg);
-      return index > -1 ? collection[index] : undefined;
-    }
-    var key = findLastKey(collection, predicate, thisArg);
-    return typeof key == 'string' ? collection[key] : undefined;
+    predicate = createCallback(predicate, thisArg, 3);
+    baseEachRight(collection, function(value, index, collection) {
+      if (predicate(value, index, collection)) {
+        result = value;
+        return false;
+      }
+    });
+    return result;
   }
 
   return findLast;

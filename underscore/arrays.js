@@ -6,13 +6,12 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays/compact', './arrays/difference', './arrays/drop', './arrays/findIndex', './arrays/first', './arrays/flatten', './arrays/indexOf', './arrays/initial', './arrays/intersection', './arrays/last', './arrays/lastIndexOf', './arrays/range', './arrays/rest', './arrays/slice', './arrays/sortedIndex', './arrays/take', './arrays/union', './arrays/uniq', './arrays/without', './arrays/zip', './arrays/zipObject'], function(compact, difference, drop, findIndex, first, flatten, indexOf, initial, intersection, last, lastIndexOf, range, rest, slice, sortedIndex, take, union, uniq, without, zip, zipObject) {
+define(['./arrays/compact', './arrays/difference', './arrays/drop', './arrays/first', './arrays/flatten', './arrays/indexOf', './arrays/initial', './arrays/intersection', './arrays/last', './arrays/lastIndexOf', './arrays/range', './arrays/rest', './arrays/slice', './arrays/sortedIndex', './arrays/take', './arrays/union', './arrays/uniq', './arrays/without', './arrays/zip', './arrays/zipObject'], function(compact, difference, drop, first, flatten, indexOf, initial, intersection, last, lastIndexOf, range, rest, slice, sortedIndex, take, union, uniq, without, zip, zipObject) {
 
   return {
     'compact': compact,
     'difference': difference,
     'drop': drop,
-    'findIndex': findIndex,
     'first': first,
     'flatten': flatten,
     'head': first,

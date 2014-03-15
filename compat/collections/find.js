@@ -6,17 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKey) {
-
-  /** Used as a safe reference for `undefined` in pre ES5 environments */
-  var undefined;
-
-  /**
-   * Used as the maximum length an array-like object.
-   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-   * for more details.
-   */
-  var maxSafeInteger = Math.pow(2, 53) - 1;
+define(['../internals/baseEach', '../functions/createCallback', '../objects/isArray'], function(baseEach, createCallback, isArray) {
 
   /**
    * Iterates over elements of a collection, returning the first element that
@@ -62,14 +52,27 @@ define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKe
    * // => { 'name': 'fred', 'age': 40, 'blocked': true }
    */
   function find(collection, predicate, thisArg) {
-    var length = collection ? collection.length : 0;
+    predicate = createCallback(predicate, thisArg, 3);
+    if (isArray(collection)) {
+      var index = -1,
+          length = collection.length;
 
-    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-      var index = findIndex(collection, predicate, thisArg);
-      return index > -1 ? collection[index] : undefined;
+      while (++index < length) {
+        var value = collection[index];
+        if (predicate(value, index, collection)) {
+          return value;
+        }
+      }
+    } else {
+      var result;
+      baseEach(collection, function(value, index, collection) {
+        if (predicate(value, index, collection)) {
+          result = value;
+          return false;
+        }
+      });
+      return result;
     }
-    var key = findKey(collection, predicate, thisArg);
-    return typeof key == 'string' ? collection[key] : undefined;
   }
 
   return find;

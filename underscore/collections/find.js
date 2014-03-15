@@ -6,10 +6,16 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKey) {
+define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
 
-  /** Used as a safe reference for `undefined` in pre ES5 environments */
-  var undefined;
+  /** Used as the semantic version number */
+  var version = '2.4.1';
+
+  /** Used as the property name for wrapper metadata */
+  var expando = '__lodash@' + version + '__';
+
+  /** Used by methods to exit iteration */
+  var breakIndicator = expando + 'breaker__';
 
   /**
    * Used as the maximum length an array-like object.
@@ -62,14 +68,27 @@ define(['../arrays/findIndex', '../objects/findKey'], function(findIndex, findKe
    * // => { 'name': 'fred', 'age': 40, 'blocked': true }
    */
   function find(collection, predicate, thisArg) {
-    var length = collection ? collection.length : 0;
+    predicate = createCallback(predicate, thisArg, 3);
+    var index = -1,
+        length = collection ? collection.length : 0;
 
     if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-      var index = findIndex(collection, predicate, thisArg);
-      return index > -1 ? collection[index] : undefined;
+      while (++index < length) {
+        var value = collection[index];
+        if (predicate(value, index, collection)) {
+          return value;
+        }
+      }
+    } else {
+      var result;
+      baseEach(collection, function(value, index, collection) {
+        if (predicate(value, index, collection)) {
+          result = value;
+          return breakIndicator;
+        }
+      });
+      return result;
     }
-    var key = findKey(collection, predicate, thisArg);
-    return typeof key == 'string' ? collection[key] : undefined;
   }
 
   return find;
