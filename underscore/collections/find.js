@@ -6,16 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['../internals/baseEach', '../internals/baseFind', '../functions/createCallback', '../arrays/findIndex'], function(baseEach, baseFind, createCallback, findIndex) {
 
-  /** Used as the semantic version number */
-  var version = '2.4.1';
-
-  /** Used as the property name for wrapper metadata */
-  var expando = '__lodash@' + version + '__';
-
-  /** Used by methods to exit iteration */
-  var breakIndicator = expando + 'breaker__';
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
 
   /**
    * Used as the maximum length an array-like object.
@@ -68,27 +62,14 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    * // => { 'name': 'fred', 'age': 40, 'blocked': true }
    */
   function find(collection, predicate, thisArg) {
-    predicate = createCallback(predicate, thisArg, 3);
-    var index = -1,
-        length = collection ? collection.length : 0;
+    var length = collection ? collection.length : 0;
 
     if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-      while (++index < length) {
-        var value = collection[index];
-        if (predicate(value, index, collection)) {
-          return value;
-        }
-      }
-    } else {
-      var result;
-      baseEach(collection, function(value, index, collection) {
-        if (predicate(value, index, collection)) {
-          result = value;
-          return breakIndicator;
-        }
-      });
-      return result;
+      var index = findIndex(collection, predicate, thisArg);
+      return index > -1 ? collection[index] : undefined;
     }
+    predicate = createCallback(predicate, thisArg, 3);
+    return baseFind(collection, predicate, baseEach);
   }
 
   return find;

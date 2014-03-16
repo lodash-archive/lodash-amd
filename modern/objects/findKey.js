@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseForOwn', '../functions/createCallback'], function(baseForOwn, createCallback) {
+define(['../internals/baseFind', '../internals/baseForOwn', '../functions/createCallback'], function(baseFind, baseForOwn, createCallback) {
 
   /**
    * This method is like `_.findIndex` except that it returns the key of the
@@ -50,16 +50,8 @@ define(['../internals/baseForOwn', '../functions/createCallback'], function(base
    * // => 'fred'
    */
   function findKey(object, predicate, thisArg) {
-    var result;
-
     predicate = createCallback(predicate, thisArg, 3);
-    baseForOwn(object, function(value, key, object) {
-      if (predicate(value, key, object)) {
-        result = key;
-        return false;
-      }
-    });
-    return result;
+    return baseFind(object, predicate, baseForOwn, true);
   }
 
   return findKey;

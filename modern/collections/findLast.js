@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEachRight', '../functions/createCallback'], function(baseEachRight, createCallback) {
+define(['../internals/baseEachRight', '../internals/baseFind', '../functions/createCallback'], function(baseEachRight, baseFind, createCallback) {
 
   /**
    * This method is like `_.find` except that it iterates over elements of a
@@ -29,16 +29,8 @@ define(['../internals/baseEachRight', '../functions/createCallback'], function(b
    * // => 3
    */
   function findLast(collection, predicate, thisArg) {
-    var result;
-
     predicate = createCallback(predicate, thisArg, 3);
-    baseEachRight(collection, function(value, index, collection) {
-      if (predicate(value, index, collection)) {
-        result = value;
-        return false;
-      }
-    });
-    return result;
+    return baseFind(collection, predicate, baseEachRight);
   }
 
   return findLast;
