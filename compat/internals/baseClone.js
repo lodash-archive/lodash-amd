@@ -52,7 +52,7 @@ define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray',
 
   /**
    * The base implementation of `_.clone` without argument juggling or support
-   * for `thisArg` binding.
+   * for `this` binding.
    *
    * @private
    * @param {*} value The value to clone.

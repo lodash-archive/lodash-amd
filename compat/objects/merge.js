@@ -10,7 +10,7 @@ define(['../internals/baseCreateCallback', '../internals/baseEach', '../internal
 
   /**
    * The base implementation of `_.merge` without argument juggling or support
-   * for `thisArg` binding.
+   * for `this` binding.
    *
    * @private
    * @param {Object} object The destination object.
