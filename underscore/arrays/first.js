@@ -14,6 +14,9 @@ define(['./slice'], function(slice) {
   /**
    * Gets the first element of `array`.
    *
+   * Note: The `n` and `predicate` arguments are deprecated; replace with
+   * `_.take` and `_.takeWhile` respectively.
+   *
    * @static
    * @memberOf _
    * @alias head

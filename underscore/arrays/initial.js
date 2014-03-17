@@ -11,6 +11,9 @@ define(['./slice'], function(slice) {
   /**
    * Gets all but the last element of `array`.
    *
+   * Note: The `n` and `predicate` arguments are deprecated; replace with
+   * `_.dropRight` and `_.dropRightWhile` respectively.
+   *
    * @static
    * @memberOf _
    * @category Arrays
