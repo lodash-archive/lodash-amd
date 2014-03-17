@@ -95,7 +95,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * @param {Array|Object|string} collection The collection to iterate over.
    * @param {Array|Function|Object|string} [callback=identity] The function
    *  called per iteration. If a property name or object is provided it will
-   *  be used to create a "_.pluck" or "_.where" style callback, respectively.
+   *  be used to create a "_.pluck" or "_.where" style callback respectively.
    * @param {*} [thisArg] The `this` binding of `callback`.
    * @returns {Array} Returns the new sorted array.
    * @example
