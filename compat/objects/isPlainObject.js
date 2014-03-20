@@ -35,7 +35,7 @@ define(['../internals/baseForIn', './isArguments', './isFunction', '../internals
     var ctor,
         result;
 
-    // avoid non Object objects, `arguments` objects, and DOM elements
+    // avoid non `Object` objects, `arguments` objects, and DOM elements
     if (!(value && toString.call(value) == objectClass) ||
         (!hasOwnProperty.call(value, 'constructor') &&
           (ctor = value.constructor, isFunction(ctor) && !(ctor instanceof ctor))) ||
