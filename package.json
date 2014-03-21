@@ -15,6 +15,7 @@
   ],
   "bugs": "https://github.com/lodash/lodash-cli/issues",
   "repository": "lodash/lodash-amd",
+  "scripts": { "test": "echo \"See https://travis-ci.org/lodash/lodash-amd for testing details.\"" },
   "volo": {
     "type": "directory",
     "ignore": [
