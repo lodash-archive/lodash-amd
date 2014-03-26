@@ -19,7 +19,7 @@ define(['../objects/isObject', '../objects/isRegExp'], function(isObject, isRegE
    * @static
    * @memberOf _
    * @category Strings
-   * @param {string} [string=''] The string to trim.
+   * @param {string} [string=''] The string to truncate.
    * @param {Object|number} [options] The options object or maximum string length.
    * @param {number} [options.length=30] The maximum string length.
    * @param {string} [options.omission='...'] The string used to indicate text is omitted.
