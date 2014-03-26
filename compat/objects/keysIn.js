@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArguments', './isObject', '../arrays/slice', '../support'], function(isArguments, isObject, slice, support) {
+define(['./isArguments', './isArray', './isObject', './isString', '../support'], function(isArguments, isArray, isObject, isString, support) {
 
   /** Used to fix the JScript `[[DontEnum]]` bug */
   var shadowedProps = [
@@ -76,19 +76,30 @@ define(['./isArguments', './isObject', '../arrays/slice', '../support'], functio
    * // => ['x', 'y', 'z'] (property order is not guaranteed across environments)
    */
   function keysIn(object) {
-    var result = [];
     if (!isObject(object)) {
-      return result;
+      return [];
     }
-    if (support.nonEnumArgs && object.length && isArguments(object)) {
-      object = slice(object);
-    }
-    var skipProto = support.enumPrototypes && typeof object == 'function',
-        skipErrorProps = support.enumErrorProps && (object === errorProto || object instanceof Error);
+    var length = object.length;
+    length = (typeof length == 'number' && length > 0 &&
+      (isArray(object) || (support.unindexedChars && isString(object)) ||
+        (support.nonEnumArgs && isArguments(object))) && length) >>> 0;
 
+    var maxIndex = length - 1,
+        result = Array(length),
+        skipIndexes = length > 0,
+        skipErrorProps = support.enumErrorProps && (object === errorProto || object instanceof Error),
+        skipProto = support.enumPrototypes && typeof object == 'function';
+
+    if (skipIndexes) {
+      var index = -1;
+      while (++index < length) {
+        result[index] = String(index);
+      }
+    }
     for (var key in object) {
       if (!(skipProto && key == 'prototype') &&
-          !(skipErrorProps && (key == 'message' || key == 'name'))) {
+          !(skipErrorProps && (key == 'message' || key == 'name')) &&
+          !(skipIndexes && key > -1 && key <= maxIndex && key % 1 == 0)) {
         result.push(key);
       }
     }
@@ -97,9 +108,9 @@ define(['./isArguments', './isObject', '../arrays/slice', '../support'], functio
     // attribute of an existing property and the `constructor` property of a
     // prototype defaults to non-enumerable.
     if (support.nonEnumShadows && object !== objectProto) {
-      var ctor = object.constructor,
-          index = -1,
-          length = shadowedProps.length;
+      var ctor = object.constructor;
+      index = -1;
+      length = shadowedProps.length;
 
       if (object === (ctor && ctor.prototype)) {
         var className = object === stringProto ? stringClass : object === errorProto ? errorClass : toString.call(object),
