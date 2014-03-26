@@ -131,8 +131,8 @@ define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray',
     stackB.push(result);
 
     // recursively populate clone (susceptible to call stack limits)
-    (isArr ? baseEach : baseForOwn)(value, function(objValue, key) {
-      result[key] = baseClone(objValue, isDeep, callback, stackA, stackB);
+    (isArr ? baseEach : baseForOwn)(value, function(valValue, key) {
+      result[key] = baseClone(valValue, isDeep, callback, stackA, stackB);
     });
 
     return result;

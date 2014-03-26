@@ -30,8 +30,8 @@ define(['../functions/bind', '../utilities/identity'], function(bind, identity) 
       case 1: return function(value) {
         return func.call(thisArg, value);
       };
-      case 2: return function(a, b) {
-        return func.call(thisArg, a, b);
+      case 2: return function(value, other) {
+        return func.call(thisArg, value, other);
       };
       case 3: return function(value, index, collection) {
         return func.call(thisArg, value, index, collection);
