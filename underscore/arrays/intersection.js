@@ -33,7 +33,7 @@ define(['../internals/baseIndexOf', '../objects/isArguments', '../objects/isArra
          args.push(value);
        }
     }
-    argsLength = args.length
+    argsLength = args.length;
     var array = args[0],
         index = -1,
         indexOf = baseIndexOf,
