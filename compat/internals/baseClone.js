@@ -8,7 +8,7 @@
  */
 define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray', './isNode', '../objects/isObject', '../arrays/slice', '../support'], function(assign, baseEach, baseForOwn, isArray, isNode, isObject, slice, support) {
 
-  /** Used to match regexp flags from their coerced string values */
+  /** Used to match `RegExp` flags from their coerced string values */
   var reFlags = /\w*$/;
 
   /** `Object#toString` result shortcuts */
@@ -33,13 +33,13 @@ define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray',
   /** Used for native method references */
   var objectProto = Object.prototype;
 
-  /** Used to resolve the internal [[Class]] of values */
+  /** Used to resolve the internal `[[Class]]` of values */
   var toString = objectProto.toString;
 
   /** Native method shortcuts */
   var hasOwnProperty = objectProto.hasOwnProperty;
 
-  /** Used to lookup a built-in constructor by [[Class]] */
+  /** Used to lookup a built-in constructor by `[[Class]]` */
   var ctorByClass = {};
   ctorByClass[arrayClass] = Array;
   ctorByClass[boolClass] = Boolean;
@@ -69,7 +69,7 @@ define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray',
         return result;
       }
     }
-    // inspect [[Class]]
+    // inspect `[[Class]]`
     var isObj = isObject(value);
     if (isObj) {
       var className = toString.call(value);

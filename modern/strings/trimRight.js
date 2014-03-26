@@ -21,7 +21,7 @@ define(['../internals/charsRightIndex', '../internals/isNative', '../internals/t
   );
 
   /**
-   * A fallback implementation of `trimRight` to remove trailing whitespace or
+   * A fallback implementation of `String#trimRight` to remove trailing whitespace or
    * specified characters from `string`.
    *
    * @private

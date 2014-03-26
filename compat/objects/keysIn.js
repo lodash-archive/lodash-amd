@@ -8,7 +8,7 @@
  */
 define(['./isArguments', './isObject', '../arrays/slice', '../support'], function(isArguments, isObject, slice, support) {
 
-  /** Used to fix the JScript [[DontEnum]] bug */
+  /** Used to fix the JScript `[[DontEnum]]` bug */
   var shadowedProps = [
     'constructor', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable',
     'toLocaleString', 'toString', 'valueOf'
@@ -30,7 +30,7 @@ define(['./isArguments', './isObject', '../arrays/slice', '../support'], functio
       objectProto = Object.prototype,
       stringProto = String.prototype;
 
-  /** Used to resolve the internal [[Class]] of values */
+  /** Used to resolve the internal `[[Class]]` of values */
   var toString = objectProto.toString;
 
   /** Native method shortcuts */

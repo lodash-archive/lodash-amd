@@ -21,7 +21,7 @@ define([], function() {
   };
 
   /**
-   * Used by `unescape` to convert HTML entities to characters.
+   * Used by `_.unescape` to convert HTML entities to characters.
    *
    * @private
    * @param {string} chr The matched character to unescape.

@@ -41,7 +41,7 @@ define(['../objects/defaults', './escape', '../objects/keys', '../internals/reIn
   };
 
   /**
-   * Used by `template` to escape characters for inclusion in compiled
+   * Used by `_.template` to escape characters for inclusion in compiled
    * string literals.
    *
    * @private

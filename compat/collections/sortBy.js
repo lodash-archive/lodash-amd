@@ -30,7 +30,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
   }
 
   /**
-   * Used by `sortBy` to compare transformed elements of a collection and stable
+   * Used by `_.sortBy` to compare transformed elements of a collection and stable
    * sort them in ascending order.
    *
    * @private
@@ -43,7 +43,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
   }
 
   /**
-   * Used by `sortBy` to compare multiple properties of each element in a
+   * Used by `_.sortBy` to compare multiple properties of each element in a
    * collection and stable sort them in ascending order.
    *
    * @private

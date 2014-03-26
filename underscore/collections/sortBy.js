@@ -9,7 +9,7 @@
 define(['../internals/baseCompareAscending', '../internals/baseEach', '../functions/createCallback'], function(baseCompareAscending, baseEach, createCallback) {
 
   /**
-   * Used by `sortBy` to compare transformed elements of a collection and stable
+   * Used by `_.sortBy` to compare transformed elements of a collection and stable
    * sort them in ascending order.
    *
    * @private

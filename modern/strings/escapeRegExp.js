@@ -9,14 +9,14 @@
 define([], function() {
 
   /**
-   * Used to match RegExp special characters.
-   * See this [article on RegExp characters](http://www.regular-expressions.info/characters.html#special)
+   * Used to match `RegExp` special characters.
+   * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
    * for more details.
    */
   var reRegExpChars = /[.*+?^${}()|[\]\\]/g;
 
   /**
-   * Escapes the RegExp special characters "\", "^", "$", ".", "|", "?", "*",
+   * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
    * "+", "(", ")", "[", "]", "{" and "}" in `string`.
    *
    * @static

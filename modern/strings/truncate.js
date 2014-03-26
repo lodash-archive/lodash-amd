@@ -8,7 +8,7 @@
  */
 define(['../objects/isObject', '../objects/isRegExp'], function(isObject, isRegExp) {
 
-  /** Used to match regexp flags from their coerced string values */
+  /** Used to match `RegExp` flags from their coerced string values */
   var reFlags = /\w*$/;
 
   /**

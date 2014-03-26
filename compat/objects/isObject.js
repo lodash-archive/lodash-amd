@@ -9,7 +9,7 @@
 define([], function() {
 
   /**
-   * Checks if `value` is the language type of Object.
+   * Checks if `value` is the language type of `Object`.
    * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
    *
    * @static
@@ -29,7 +29,7 @@ define([], function() {
    * // => false
    */
   function isObject(value) {
-    // check if the value is the ECMAScript language type of Object
+    // check if the value is the ECMAScript language type of `Object`
     // http://es5.github.io/#x8
     // and avoid a V8 bug
     // https://code.google.com/p/v8/issues/detail?id=2291
