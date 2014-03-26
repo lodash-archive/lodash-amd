@@ -4,7 +4,7 @@
  * Build: `lodash modularize exports="amd" -o ./compat/`
  * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
 define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, baseEach, baseForOwn, isArray, lodashWrapper, mixin, support, templateSettings) {

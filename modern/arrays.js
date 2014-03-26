@@ -3,7 +3,7 @@
  * Build: `lodash modularize modern exports="amd" -o ./modern/`
  * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
 define(['./arrays/compact', './arrays/difference', './arrays/drop', './arrays/dropRight', './arrays/dropRightWhile', './arrays/dropWhile', './arrays/findIndex', './arrays/findLastIndex', './arrays/first', './arrays/flatten', './arrays/indexOf', './arrays/initial', './arrays/intersection', './arrays/last', './arrays/lastIndexOf', './arrays/pull', './arrays/range', './arrays/remove', './arrays/rest', './arrays/slice', './arrays/sortedIndex', './arrays/take', './arrays/takeRight', './arrays/takeRightWhile', './arrays/takeWhile', './arrays/union', './arrays/uniq', './arrays/without', './arrays/xor', './arrays/zip', './arrays/zipObject'], function(compact, difference, drop, dropRight, dropRightWhile, dropWhile, findIndex, findLastIndex, first, flatten, indexOf, initial, intersection, last, lastIndexOf, pull, range, remove, rest, slice, sortedIndex, take, takeRight, takeRightWhile, takeWhile, union, uniq, without, xor, zip, zipObject) {
