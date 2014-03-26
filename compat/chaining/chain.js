@@ -33,9 +33,7 @@ define(['../internals/lodashWrapper'], function(lodashWrapper) {
    * // => 'pebbles is 1'
    */
   function chain(value) {
-    value = new lodashWrapper(value);
-    value.__chain__ = true;
-    return value;
+    return new lodashWrapper(value, true);
   }
 
   return chain;
