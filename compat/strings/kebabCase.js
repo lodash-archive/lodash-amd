@@ -26,7 +26,7 @@ define(['../internals/createCompounder'], function(createCompounder) {
    * _.kebabCase('helloWorld');
    * // => 'hello-world'
    *
-   * _.kebabCase('hello_world');
+   * _.kebabCase('__hello_world__');
    * // => 'hello-world'
    */
   var kebabCase = createCompounder(function(result, word, index) {

@@ -22,7 +22,7 @@ define(['../internals/createCompounder'], function(createCompounder) {
    * _.snakeCase('Hello world');
    * // => 'hello_world'
    *
-   * _.snakeCase('hello-world');
+   * _.snakeCase('--hello-world');
    * // => 'hello_world'
    *
    * _.snakeCase('helloWorld');
