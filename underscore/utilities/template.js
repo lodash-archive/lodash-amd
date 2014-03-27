@@ -12,7 +12,7 @@ define(['../objects/defaults', './escape', '../internals/reInterpolate', './temp
   var reNoMatch = /($^)/;
 
   /** Used to match unescaped characters in compiled string literals */
-  var reUnescapedString = /['\n\r\t\u2028\u2029\\]/g;
+  var reUnescapedString = /['\n\r\u2028\u2029\\]/g;
 
   /** Used to escape characters for inclusion in compiled string literals */
   var stringEscapes = {
@@ -20,7 +20,6 @@ define(['../objects/defaults', './escape', '../internals/reInterpolate', './temp
     "'": "'",
     '\n': 'n',
     '\r': 'r',
-    '\t': 't',
     '\u2028': 'u2028',
     '\u2029': 'u2029'
   };
