@@ -51,7 +51,7 @@ define(['../internals/baseEach', '../internals/baseIndexOf', '../objects/isArray
    */
   function contains(collection, target, fromIndex) {
     var length = collection ? collection.length : 0;
-    fromIndex = (typeof fromIndex == 'number' && +fromIndex) || 0;
+    fromIndex = (typeof fromIndex == 'number' && fromIndex) || 0;
 
     if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
       if (typeof collection == 'string' || !isArray(collection) && isString(collection)) {
