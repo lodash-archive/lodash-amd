@@ -222,7 +222,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.first = arrays.first;
   lodash.last = arrays.last;
   lodash.sample = collections.sample;
-  lodash.take = arrays.first;
+  lodash.take = arrays.take;
 
   // add aliases
   lodash.head = arrays.first;

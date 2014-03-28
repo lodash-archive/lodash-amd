@@ -135,7 +135,6 @@ define(['./baseForIn', '../objects/isArguments', '../objects/isFunction', './isN
     // assume cyclic structures are equal
     // the algorithm for detecting cyclic structures is adapted from ES 5.1
     // section 15.12.3, abstract operation `JO` (http://es5.github.io/#x15.12.3)
-    var initedStack = !stackA;
     stackA || (stackA = []);
     stackB || (stackB = []);
 

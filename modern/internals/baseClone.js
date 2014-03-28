@@ -97,7 +97,6 @@ define(['../objects/assign', './baseEach', './baseForOwn', '../objects/isArray',
     var isArr = isArray(value);
     if (isDeep) {
       // check for circular references and return corresponding clone
-      var initedStack = !stackA;
       stackA || (stackA = []);
       stackB || (stackB = []);
 
