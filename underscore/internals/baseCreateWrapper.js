@@ -29,8 +29,7 @@ define(['./baseCreate', './composeArgs', '../objects/isObject', '../arrays/slice
         thisArg = data[3],
         partialArgs = data[4],
         partialRightArgs = data[5],
-        partialHolders = data[6],
-        partialRightHolders = data[7];
+        partialHolders = data[6];
 
     var isBind = bitmask & BIND_FLAG,
         isBindKey = bitmask & BIND_KEY_FLAG,

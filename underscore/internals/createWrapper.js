@@ -14,6 +14,9 @@ define(['./baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], func
       PARTIAL_FLAG = 16,
       PARTIAL_RIGHT_FLAG = 32;
 
+  /* Native method shortcuts for methods with the same name as other `lodash` methods */
+  var nativeMax = Math.max;
+
   /**
    * Creates a function that either curries or invokes `func` with an optional
    * `this` binding and partially applied arguments.
@@ -34,11 +37,9 @@ define(['./baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], func
    *  provided to the new function.
    * @param {Array} [partialRightArgs] An array of arguments to append to those
    *  provided to the new function.
-   * @param {Array} [partialHolders] An array of `partialArgs` placeholder indexes.
-   * @param {Array} [partialRightHolders] An array of `partialRightArgs` placeholder indexes.
    * @returns {Function} Returns the new function.
    */
-  function createWrapper(func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders) {
+  function createWrapper(func, bitmask, arity, thisArg, partialArgs, partialRightArgs) {
     var isBind = bitmask & BIND_FLAG,
         isBindKey = bitmask & BIND_KEY_FLAG,
         isPartial = bitmask & PARTIAL_FLAG,
@@ -52,10 +53,15 @@ define(['./baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], func
       isPartial = partialArgs = false;
     }
     if (isPartial) {
-      partialHolders = [];
+      var partialHolders = [];
     }
+    if (arity == null) {
+      arity = isBindKey ? 0 : func.length;
+    }
+    arity = nativeMax(arity, 0);
+
     // fast path for `_.bind`
-    var data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders];
+    var data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders];
     return baseCreateWrapper(data);
   }
 

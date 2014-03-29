@@ -28,6 +28,9 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
   var push = arrayRef.push,
       unshift = arrayRef.unshift;
 
+  /* Native method shortcuts for methods with the same name as other `lodash` methods */
+  var nativeMax = Math.max;
+
   /**
    * Creates a function that either curries or invokes `func` with an optional
    * `this` binding and partially applied arguments.
@@ -48,11 +51,9 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
    *  provided to the new function.
    * @param {Array} [partialRightArgs] An array of arguments to append to those
    *  provided to the new function.
-   * @param {Array} [partialHolders] An array of `partialArgs` placeholder indexes.
-   * @param {Array} [partialRightHolders] An array of `partialRightArgs` placeholder indexes.
    * @returns {Function} Returns the new function.
    */
-  function createWrapper(func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders) {
+  function createWrapper(func, bitmask, arity, thisArg, partialArgs, partialRightArgs) {
     var isBind = bitmask & BIND_FLAG,
         isBindKey = bitmask & BIND_KEY_FLAG,
         isPartial = bitmask & PARTIAL_FLAG,
@@ -115,17 +116,17 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
       data[1] |= bitmask;
       return createWrapper.apply(null, data);
     }
-    if (arity == null) {
-      arity = isBindKey ? 0 : func.length;
-    } else if (arity < 0) {
-      arity = 0;
-    }
     if (isPartial) {
-      partialHolders = [];
+      var partialHolders = [];
     }
     if (isPartialRight) {
-      partialRightHolders = [];
+      var partialRightHolders = [];
     }
+    if (arity == null) {
+      arity = isBindKey ? 0 : func.length;
+    }
+    arity = nativeMax(arity, 0);
+
     // fast path for `_.bind`
     data = [func, bitmask, arity, thisArg, partialArgs, partialRightArgs, partialHolders, partialRightHolders];
     return (bitmask == BIND_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG))
