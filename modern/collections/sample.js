@@ -42,7 +42,7 @@ define(['../internals/baseRandom', './shuffle', '../objects/values'], function(b
       return length > 0 ? collection[baseRandom(0, length - 1)] : undefined;
     }
     var result = shuffle(collection);
-    result.length = nativeMin(nativeMax(0, n), result.length);
+    result.length = nativeMin(nativeMax(n, 0), result.length);
     return result;
   }
 
