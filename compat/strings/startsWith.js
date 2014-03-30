@@ -9,8 +9,7 @@
 define([], function() {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeMax = Math.max,
-      nativeMin = Math.min;
+  var nativeMin = Math.min;
 
   /**
    * Checks if `string` starts with a given target string.
@@ -36,7 +35,7 @@ define([], function() {
    */
   function startsWith(string, target, position) {
     string = string == null ? '' : String(string);
-    position = typeof position == 'number' ? nativeMin(nativeMax(+position || 0, 0), string.length) : 0;
+    position = typeof position == 'undefined' ? 0 : nativeMin(position < 0 ? 0 : (+position || 0), string.length);
     return string.lastIndexOf(target, position) == position;
   }
 

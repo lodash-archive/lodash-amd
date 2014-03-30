@@ -74,7 +74,7 @@ define(['../objects/isFunction', '../objects/isObject', '../utilities/now'], fun
       trailing = false;
     } else if (isObject(options)) {
       leading = options.leading;
-      maxWait = 'maxWait' in options && (nativeMax(wait, options.maxWait) || 0);
+      maxWait = 'maxWait' in options && nativeMax(wait, +options.maxWait || 0);
       trailing = 'trailing' in options ? options.trailing : trailing;
     }
     var delayed = function() {

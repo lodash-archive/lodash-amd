@@ -29,7 +29,7 @@ define([], function() {
     var index = -1,
         length = array ? array.length : 0;
 
-    start = +start || 0;
+    start = typeof start == 'undefined' ? 0 : (+start || 0);
     if (start < 0) {
       start = nativeMax(length + start, 0);
     } else if (start > length) {

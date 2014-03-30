@@ -36,8 +36,7 @@ define([], function() {
   function lastIndexOf(array, value, fromIndex) {
     var index = array ? array.length : 0;
     if (typeof fromIndex == 'number') {
-      fromIndex |= 0;
-      index = (fromIndex < 0 ? nativeMax(index + fromIndex, 0) : nativeMin(fromIndex, index - 1)) + 1;
+      index = (fromIndex < 0 ? nativeMax(index + fromIndex, 0) : nativeMin(fromIndex || 0, index - 1)) + 1;
     }
     while (index--) {
       if (array[index] === value) {

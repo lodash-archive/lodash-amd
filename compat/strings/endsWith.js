@@ -9,8 +9,7 @@
 define([], function() {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
-  var nativeMax = Math.max,
-      nativeMin = Math.min;
+  var nativeMin = Math.min;
 
   /**
    * Checks if `string` ends with a given target string.
@@ -39,7 +38,7 @@ define([], function() {
     target = String(target);
 
     var length = string.length;
-    position = (typeof position == 'number' ? nativeMin(nativeMax(+position || 0, 0), length) : length) - target.length;
+    position = (typeof position == 'undefined' ? length : nativeMin(position < 0 ? 0 : (+position || 0), length)) - target.length;
     return position >= 0 && string.indexOf(target, position) == position;
   }
 
