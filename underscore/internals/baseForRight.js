@@ -28,8 +28,7 @@ define([], function() {
    * @returns {Object} Returns `object`.
    */
   function baseForRight(object, callback, keysFunc) {
-    var index = -1,
-        props = keysFunc(object),
+    var props = keysFunc(object),
         length = props.length;
 
     while (length--) {
