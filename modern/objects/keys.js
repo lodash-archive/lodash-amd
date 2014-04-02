@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isArray', '../internals/isNative', './isObject', './keysIn'], function(isArray, isNative, isObject, keysIn) {
+define(['./isArguments', './isArray', '../internals/isNative', './isObject', './keysIn', '../support'], function(isArguments, isArray, isNative, isObject, keysIn, support) {
 
   /** Used for native method references */
   var objectProto = Object.prototype;
@@ -26,17 +26,17 @@ define(['./isArray', '../internals/isNative', './isObject', './keysIn'], functio
    * @returns {Array} Returns the array of property names.
    */
   function shimKeys(object) {
-    var index = -1,
+    var keyIndex,
+        index = -1,
         props = keysIn(object),
         length = props.length,
         objLength = length && object.length,
+        maxIndex = objLength - 1,
         result = [];
 
-    if (typeof objLength == 'number' && objLength > 0) {
-      var keyIndex,
-          allowIndexes = isArray(object),
-          maxIndex = objLength - 1;
-    }
+    var allowIndexes = typeof objLength == 'number' && objLength > 0 &&
+      (isArray(object) || (support.nonEnumArgs && isArguments(object)));
+
     while (++index < length) {
       var key = props[index];
       if ((allowIndexes && (keyIndex = +key, keyIndex > -1 && keyIndex <= maxIndex && keyIndex % 1 == 0)) ||

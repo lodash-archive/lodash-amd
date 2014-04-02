@@ -27,7 +27,8 @@ define(['./internals/isNative'], function(isNative) {
   var toString = objectProto.toString;
 
   /** Native method shortcuts */
-  var propertyIsEnumerable = objectProto.propertyIsEnumerable,
+  var hasOwnProperty = objectProto.hasOwnProperty,
+      propertyIsEnumerable = objectProto.propertyIsEnumerable,
       splice = arrayRef.splice;
 
   /**
@@ -39,7 +40,7 @@ define(['./internals/isNative'], function(isNative) {
    */
   var support = {};
 
-  (function() {
+  (function(x) {
     var ctor = function() { this.x = 1; },
         object = { '0': 1, 'length': 1 },
         props = [];
@@ -50,7 +51,8 @@ define(['./internals/isNative'], function(isNative) {
     for (var strKey in 'x') { }
 
     /**
-     * Detect if an `arguments` object's `[[Class]]` is resolvable (all but Firefox < 4, IE < 9).
+     * Detect if an `arguments` object's `[[Class]]` is resolvable
+     * (all but Firefox < 4, IE < 9).
      *
      * @memberOf _.support
      * @type boolean
@@ -58,7 +60,8 @@ define(['./internals/isNative'], function(isNative) {
     support.argsClass = toString.call(arguments) == argsClass;
 
     /**
-     * Detect if `arguments` objects are `Object` objects (all but Narwhal and Opera < 10.5).
+     * Detect if `arguments` objects are `Object` objects
+     * (all but Narwhal and Opera < 10.5).
      *
      * @memberOf _.support
      * @type boolean
@@ -72,7 +75,8 @@ define(['./internals/isNative'], function(isNative) {
      * @memberOf _.support
      * @type boolean
      */
-    support.enumErrorProps = propertyIsEnumerable.call(errorProto, 'message') || propertyIsEnumerable.call(errorProto, 'name');
+    support.enumErrorProps = propertyIsEnumerable.call(errorProto, 'message') ||
+      propertyIsEnumerable.call(errorProto, 'name');
 
     /**
      * Detect if `prototype` properties are enumerable by default.
@@ -108,13 +112,20 @@ define(['./internals/isNative'], function(isNative) {
      * Detect if `arguments` object indexes are non-enumerable
      * (Firefox < 4, IE < 9, PhantomJS, Safari < 5.1).
      *
+     * Chrome < 25 and Node.js < 0.11.0 will treat `arguments` object indexes
+     * that exceed their function's formal parameters and whose associated
+     * values are `0` as non-enumerable and incorrectly return `false` from
+     * `Object#hasOwnProperty`.
+     *
      * @memberOf _.support
      * @type boolean
      */
-    support.nonEnumArgs = argsKey != '0';
+    support.nonEnumArgs = !(argsKey == '1' && hasOwnProperty.call(arguments, '1') &&
+      propertyIsEnumerable.call(arguments, '1'));
 
     /**
-     * Detect if string indexes are non-enumerable (IE < 9, RingoJS, Rhino, Narwhal).
+     * Detect if string indexes are non-enumerable
+     * (IE < 9, RingoJS, Rhino, Narwhal).
      *
      * @memberOf _.support
      * @type boolean
@@ -122,10 +133,11 @@ define(['./internals/isNative'], function(isNative) {
     support.nonEnumStrings = strKey != '0';
 
     /**
-     * Detect if properties shadowing those on `Object.prototype` are non-enumerable.
+     * Detect if properties shadowing those on `Object.prototype` are
+     * non-enumerable.
      *
-     * In IE < 9 an objects own properties, shadowing non-enumerable ones, are
-     * made non-enumerable as well (a.k.a the JScript `[[DontEnum]]` bug).
+     * In IE < 9 an object's own properties, shadowing non-enumerable ones,
+     * are made non-enumerable as well (a.k.a the JScript `[[DontEnum]]` bug).
      *
      * @memberOf _.support
      * @type boolean
@@ -133,7 +145,8 @@ define(['./internals/isNative'], function(isNative) {
     support.nonEnumShadows = !/valueOf/.test(props);
 
     /**
-     * Detect if own properties are iterated after inherited properties (all but IE < 9).
+     * Detect if own properties are iterated after inherited properties
+     * (all but IE < 9).
      *
      * @memberOf _.support
      * @type boolean
@@ -141,13 +154,15 @@ define(['./internals/isNative'], function(isNative) {
     support.ownLast = props[0] != 'x';
 
     /**
-     * Detect if `Array#shift` and `Array#splice` augment array-like objects correctly.
+     * Detect if `Array#shift` and `Array#splice` augment array-like objects
+     * correctly.
      *
      * Firefox < 10, IE compatibility mode, and IE < 9 have buggy Array `shift()`
      * and `splice()` functions that fail to remove the last element, `value[0]`,
      * of array-like objects even though the `length` property is set to `0`.
      * The `shift()` method is buggy in IE 8 compatibility mode, while `splice()`
-     * is buggy regardless of mode in IE < 9 and buggy in compatibility mode in IE 9.
+     * is buggy regardless of mode in IE < 9 and buggy in compatibility mode
+     * in IE 9.
      *
      * @memberOf _.support
      * @type boolean
@@ -190,7 +205,7 @@ define(['./internals/isNative'], function(isNative) {
     } catch(e) {
       support.nodeClass = true;
     }
-  }(1));
+  }(0, 0));
 
   return support;
 });
