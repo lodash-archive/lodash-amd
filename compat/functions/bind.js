@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createWrapper', '../arrays/slice', '../support'], function(createWrapper, slice, support) {
+define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper, slice) {
 
   /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1,
