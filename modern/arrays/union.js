@@ -15,7 +15,7 @@ define(['../internals/baseFlatten', '../internals/baseUniq'], function(baseFlatt
    * @static
    * @memberOf _
    * @category Arrays
-   * @param {...Array} [array] The arrays to inspect.
+   * @param {...Array} [arrays] The arrays to inspect.
    * @returns {Array} Returns the new array of combined values.
    * @example
    *

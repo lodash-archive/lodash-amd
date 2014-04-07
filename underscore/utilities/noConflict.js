@@ -12,7 +12,7 @@ define([], function() {
   var oldDash = window._;
 
   /**
-   * Reverts the '_' variable to its previous value and returns a reference to
+   * Reverts the `_` variable to its previous value and returns a reference to
    * the `lodash` function.
    *
    * @static

@@ -16,7 +16,7 @@ define(['../internals/baseDifference', './slice'], function(baseDifference, slic
    * @memberOf _
    * @category Arrays
    * @param {Array} array The array to filter.
-   * @param {...*} [value] The values to exclude.
+   * @param {...*} [values] The values to exclude.
    * @returns {Array} Returns the new array of filtered values.
    * @example
    *

@@ -15,7 +15,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * @private
    * @param {*} value The value to compare to `other`.
    * @param {*} other The value to compare to `value`.
-   * @returns {number} Returns the sort order indicator for `a`.
+   * @returns {number} Returns the sort order indicator for `value`.
    */
   function baseCompareAscending(value, other) {
     if (value !== other) {
@@ -34,7 +34,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * sort them in ascending order.
    *
    * @private
-   * @param {Object} value The object to compare to `other`.
+   * @param {Object} object The object to compare to `other`.
    * @param {Object} other The object to compare to `object`.
    * @returns {number} Returns the sort order indicator for `object`.
    */
@@ -47,7 +47,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * collection and stable sort them in ascending order.
    *
    * @private
-   * @param {Object} value The object to compare to `other`.
+   * @param {Object} object The object to compare to `other`.
    * @param {Object} other The object to compare to `object`.
    * @returns {number} Returns the sort order indicator for `object`.
    */
@@ -64,7 +64,7 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
       }
     }
     // Fixes an `Array#sort` bug in the JS engine embedded in Adobe applications
-    // that causes it, under certain circumstances, to provided the same value
+    // that causes it, under certain circumstances, to provide the same value
     // for `object` and `other`. See https://github.com/jashkenas/underscore/pull/1247
     //
     // This also ensures a stable sort in V8 and other engines.

@@ -36,7 +36,7 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
   /** Native method shortcuts */
   var hasOwnProperty = objectProto.hasOwnProperty;
 
-  /** Used to avoid iterating non-enumerable properties in IE < 9 */
+  /** Used to avoid iterating over non-enumerable properties in IE < 9 */
   var nonEnumProps = {};
   nonEnumProps[arrayClass] = nonEnumProps[dateClass] = nonEnumProps[numberClass] = { 'constructor': true, 'toLocaleString': true, 'toString': true, 'valueOf': true };
   nonEnumProps[boolClass] = nonEnumProps[stringClass] = { 'constructor': true, 'toString': true, 'valueOf': true };
