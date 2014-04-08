@@ -11,6 +11,7 @@ define(['./chaining/chain', './chaining/tap', './chaining/wrapperChain', './chai
   return {
     'chain': chain,
     'tap': tap,
+    'toJSON': wrapperValueOf,
     'value': wrapperValueOf,
     'wrapperChain': wrapperChain,
     'wrapperToString': wrapperToString,
