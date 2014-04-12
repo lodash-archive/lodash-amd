@@ -59,8 +59,8 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    */
   function some(collection, predicate, thisArg) {
     var result;
-
     predicate = createCallback(predicate, thisArg, 3);
+
     var index = -1,
         length = collection ? collection.length : 0;
 

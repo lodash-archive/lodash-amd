@@ -51,8 +51,8 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    */
   function every(collection, predicate, thisArg) {
     var result = true;
-
     predicate = createCallback(predicate, thisArg, 3);
+
     if (isArray(collection)) {
       var index = -1,
           length = collection.length;

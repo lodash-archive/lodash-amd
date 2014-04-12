@@ -33,7 +33,6 @@ define(['../internals/baseEach', '../internals/baseRandom'], function(baseEach, 
       result[index] = result[rand];
       result[rand] = value;
     });
-
     return result;
   }
 

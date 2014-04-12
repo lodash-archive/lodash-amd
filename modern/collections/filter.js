@@ -57,8 +57,8 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    */
   function filter(collection, predicate, thisArg) {
     var result = [];
-
     predicate = createCallback(predicate, thisArg, 3);
+
     var index = -1,
         length = collection ? collection.length : 0;
 

@@ -67,8 +67,8 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    */
   function every(collection, predicate, thisArg) {
     var result = true;
-
     predicate = createCallback(predicate, thisArg, 3);
+
     var index = -1,
         length = collection ? collection.length : 0;
 
