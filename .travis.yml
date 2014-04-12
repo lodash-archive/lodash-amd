@@ -42,7 +42,7 @@ branches:
 before_install:
   - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
   - "[ $SAUCE_LABS == false ] || BIN=\"node\""
-  - "[ $SAUCE_LABS == false ] || npm i chalk@\"~0.4.0\" ecstatic@\"~0.4.0\" request@\"~2.34.0\" sauce-tunnel@\"~1.1.0\""
+  - "[ $SAUCE_LABS == false ] || npm i chalk@\"~0.4.0\" ecstatic@\"~0.4.0\" request@\"~2.34.0\" sauce-tunnel-sc3-1@\"~1.0.0\""
   - "[ $ISTANBUL == false ]   || npm i -g coveralls@\"~2.10.0\" istanbul@\"~0.2.0\""
 script:
   - "[ $ISTANBUL == false ]    || istanbul instrument --output ./$BUILD ./modern"
