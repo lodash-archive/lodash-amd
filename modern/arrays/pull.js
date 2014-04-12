@@ -18,6 +18,8 @@ define([], function() {
    * Removes all provided values from `array` using strict equality for
    * comparisons, i.e. `===`.
    *
+   * Note: Unlike `_.without`, this method mutates `array`.
+   *
    * @static
    * @memberOf _
    * @category Arrays
