@@ -9,6 +9,16 @@
 define(['../internals/createAggregator'], function(createAggregator) {
 
   /**
+   * Used by `_.partition` to create partitioned arrays.
+   *
+   * @private
+   * @returns {Array} Returns the new array.
+   */
+  function partitionInitializer() {
+    return [[], []];
+  }
+
+  /**
    * Creates an array of elements split into two groups, the first of which
    * contains elements the predicate returns truthy for, while the second of which
    * contains elements the predicate returns falsey for. The predicate is bound
@@ -54,7 +64,7 @@ define(['../internals/createAggregator'], function(createAggregator) {
    */
   var partition = createAggregator(function(result, value, key) {
     result[key ? 0 : 1].push(value);
-  }, true);
+  }, partitionInitializer);
 
   return partition;
 });
