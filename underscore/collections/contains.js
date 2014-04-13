@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseIndexOf', '../objects/keys'], function(baseIndexOf, keys) {
+define(['../internals/baseIndexOf', '../objects/values'], function(baseIndexOf, values) {
 
   /**
    * Used as the maximum length of an array-like object.
@@ -43,21 +43,13 @@ define(['../internals/baseIndexOf', '../objects/keys'], function(baseIndexOf, ke
    * // => true
    */
   function contains(collection, target) {
-    var length = collection ? collection.length : 0;
-    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-      var indexOf = baseIndexOf;
-      return indexOf(collection, target) > -1;
-    }
-    var props = keys(collection);
-    length = props.length;
+    var indexOf = baseIndexOf,
+        length = collection ? collection.length : 0;
 
-    while (length--) {
-      var value = collection[props[length]];
-      if (value === target) {
-        return true;
-      }
+    if (!(typeof length == 'number' && length > -1 && length <= maxSafeInteger)) {
+      collection = values(collection);
     }
-    return false;
+    return indexOf(collection, target) > -1;
   }
 
   return contains;

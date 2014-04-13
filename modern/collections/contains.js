@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseIndexOf', '../objects/isArray', '../internals/isNative', '../objects/isString', '../objects/keys'], function(baseIndexOf, isArray, isNative, isString, keys) {
+define(['../internals/baseIndexOf', '../objects/isArray', '../internals/isNative', '../objects/isString', '../objects/values'], function(baseIndexOf, isArray, isNative, isString, values) {
 
   /** Used for native method references */
   var stringProto = String.prototype;
@@ -52,22 +52,13 @@ define(['../internals/baseIndexOf', '../objects/isArray', '../internals/isNative
   function contains(collection, target, fromIndex) {
     var length = collection ? collection.length : 0;
     if (!(typeof length == 'number' && length > -1 && length <= maxSafeInteger)) {
-      var props = keys(collection);
-      length = props.length;
+      collection = values(collection);
+      length = collection.length;
     }
     if (typeof fromIndex == 'number') {
       fromIndex = fromIndex < 0 ? nativeMax(length + fromIndex, 0) : (fromIndex || 0);
     } else {
       fromIndex = 0;
-    }
-    if (props) {
-      while (fromIndex < length) {
-        var value = collection[props[fromIndex++]];
-        if (value === target) {
-          return true;
-        }
-      }
-      return false;
     }
     if (typeof collection == 'string' || !isArray(collection) && isString(collection)) {
       if (fromIndex >= length) {
