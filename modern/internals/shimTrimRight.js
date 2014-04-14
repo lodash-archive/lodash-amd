@@ -9,8 +9,8 @@
 define(['./charsRightIndex', './trimmedRightIndex'], function(charsRightIndex, trimmedRightIndex) {
 
   /**
-   * A fallback implementation of `String#trimRight` to remove trailing whitespace or
-   * specified characters from `string`.
+   * A fallback implementation of `String#trimRight` to remove trailing whitespace
+   * or specified characters from `string`.
    *
    * @private
    * @param {string} string The string to trim.

@@ -21,10 +21,12 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
   var hasOwnProperty = objectProto.hasOwnProperty;
 
   /**
-   * A fallback implementation of `_.isPlainObject` which checks if `value` is
-   * an object created by the `Object` constructor, assuming objects created
-   * by the `Object` constructor have no inherited enumerable properties and
-   * that there are no `Object.prototype` extensions.
+   * A fallback implementation of `_.isPlainObject` which checks if `value`
+   * is an object created by the `Object` constructor or has a `[[Prototype]]`
+   * of `null`.
+   *
+   * Note: This method assumes objects created by the `Object` constructor
+   * have no inherited enumerable properties.
    *
    * @private
    * @param {*} value The value to check.

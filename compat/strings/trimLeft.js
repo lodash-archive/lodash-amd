@@ -21,8 +21,8 @@ define(['../internals/charsLeftIndex', '../internals/isNative', '../internals/tr
   );
 
   /**
-   * A fallback implementation of `String#trimLeft` to remove leading whitespace or
-   * specified characters from `string`.
+   * A fallback implementation of `String#trimLeft` to remove leading whitespace
+   * or specified characters from `string`.
    *
    * @private
    * @param {string} string The string to trim.

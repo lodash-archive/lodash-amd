@@ -60,7 +60,6 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
         (valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object'))) {
       return false;
     }
-    // compare `[[Class]]` names
     var valClass = toString.call(value),
         othClass = toString.call(other),
         valIsArg = valClass == argsClass,
