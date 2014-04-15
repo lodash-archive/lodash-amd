@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./filter'], function(filter) {
+define(['./filter', '../objects/isObject'], function(filter, isObject) {
 
   /**
    * Performs a deep comparison between each element in `collection` and the
@@ -15,25 +15,29 @@ define(['./filter'], function(filter) {
    *
    * @static
    * @memberOf _
-   * @type Function
    * @category Collections
-   * @param {Array|Object|string} collection The collection to iterate over.
-   * @param {Object} source The object of property values to filter by.
+   * @param {Array|Object|string} collection The collection to search.
+   * @param {Object} source The object of property values to match.
    * @returns {Array} Returns the new filtered array.
    * @example
    *
    * var characters = [
-   *   { 'name': 'barney', 'age': 36, 'pets': ['hoppy'] },
-   *   { 'name': 'fred',   'age': 40, 'pets': ['baby puss', 'dino'] }
+   *   { 'name': 'barney', 'age': 36, 'employer': 'slate', 'pets': ['hoppy'] },
+   *   { 'name': 'fred',   'age': 40, 'employer': 'slate', 'pets': ['baby puss', 'dino'] }
    * ];
    *
-   * _.where(characters, { 'age': 36 });
-   * // => [{ 'name': 'barney', 'age': 36, 'pets': ['hoppy'] }]
+   * _.pluck(_.where(characters, { 'age': 36 }), 'name');
+   * // => ['barney']
    *
-   * _.where(characters, { 'pets': ['dino'] });
-   * // => [{ 'name': 'fred', 'age': 40, 'pets': ['baby puss', 'dino'] }]
+   * _.pluck(_.where(characters, { 'pets': ['dino'] }), 'name');
+   * // => ['fred']
+   *
+   * _.pluck(_.where(characters, { 'employer': 'slate' }), 'name');
+   * // => ['barney', 'fred']
    */
-  var where = filter;
+  function where(collection, source) {
+    return filter(collection, isObject(source) ? source : {});
+  }
 
   return where;
 });
