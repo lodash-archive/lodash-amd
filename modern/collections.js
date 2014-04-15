@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./collections/at', './collections/contains', './collections/countBy', './collections/every', './collections/filter', './collections/find', './collections/findLast', './collections/forEach', './collections/forEachRight', './collections/groupBy', './collections/indexBy', './collections/invoke', './collections/map', './collections/max', './collections/min', './collections/partition', './collections/pluck', './collections/reduce', './collections/reduceRight', './collections/reject', './collections/sample', './collections/shuffle', './collections/size', './collections/some', './collections/sortBy', './collections/toArray', './collections/where'], function(at, contains, countBy, every, filter, find, findLast, forEach, forEachRight, groupBy, indexBy, invoke, map, max, min, partition, pluck, reduce, reduceRight, reject, sample, shuffle, size, some, sortBy, toArray, where) {
+define(['./collections/at', './collections/contains', './collections/countBy', './collections/every', './collections/filter', './collections/find', './collections/findLast', './collections/findWhere', './collections/forEach', './collections/forEachRight', './collections/groupBy', './collections/indexBy', './collections/invoke', './collections/map', './collections/max', './collections/min', './collections/partition', './collections/pluck', './collections/reduce', './collections/reduceRight', './collections/reject', './collections/sample', './collections/shuffle', './collections/size', './collections/some', './collections/sortBy', './collections/toArray', './collections/where'], function(at, contains, countBy, every, filter, find, findLast, findWhere, forEach, forEachRight, groupBy, indexBy, invoke, map, max, min, partition, pluck, reduce, reduceRight, reject, sample, shuffle, size, some, sortBy, toArray, where) {
 
   return {
     'all': every,
@@ -22,7 +22,7 @@ define(['./collections/at', './collections/contains', './collections/countBy', '
     'filter': filter,
     'find': find,
     'findLast': findLast,
-    'findWhere': find,
+    'findWhere': findWhere,
     'foldl': reduce,
     'foldr': reduceRight,
     'forEach': forEach,

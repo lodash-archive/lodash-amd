@@ -174,6 +174,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.escape = utilities.escape;
   lodash.every = collections.every;
   lodash.find = collections.find;
+  lodash.findWhere = collections.findWhere;
   lodash.has = objects.has;
   lodash.identity = utilities.identity;
   lodash.indexOf = arrays.indexOf;
@@ -212,7 +213,6 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.all = collections.every;
   lodash.any = collections.some;
   lodash.detect = collections.find;
-  lodash.findWhere = collections.find;
   lodash.foldl = collections.reduce;
   lodash.foldr = collections.reduceRight;
   lodash.include = collections.contains;
