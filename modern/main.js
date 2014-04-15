@@ -7,7 +7,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, baseEach, baseForOwn, isArray, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/baseForOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, baseForOwn, isArray, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -336,7 +336,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.prototype.valueOf = chaining.wrapperValueOf;
 
   // add `Array` functions that return unwrapped values
-  baseEach(['join', 'pop', 'shift'], function(methodName) {
+  arrayEach(['join', 'pop', 'shift'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       var chainAll = this.__chain__,
@@ -349,7 +349,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   });
 
   // add `Array` functions that return the existing wrapped value
-  baseEach(['push', 'reverse', 'sort', 'unshift'], function(methodName) {
+  arrayEach(['push', 'reverse', 'sort', 'unshift'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       func.apply(this.__wrapped__, arguments);
@@ -358,7 +358,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   });
 
   // add `Array` functions that return new wrapped values
-  baseEach(['concat', 'splice'], function(methodName) {
+  arrayEach(['concat', 'splice'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       return new lodashWrapper(func.apply(this.__wrapped__, arguments), this.__chain__);

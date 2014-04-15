@@ -7,7 +7,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './objects/assign', './internals/baseEach', './internals/baseForOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, assign, baseEach, baseForOwn, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/baseForOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, baseForOwn, lodashWrapper, mixin, support, templateSettings) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -244,7 +244,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.prototype.value = chaining.wrapperValueOf;
 
     // add `Array` mutator functions to the wrapper
-    baseEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+    arrayEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
       var func = arrayRef[methodName];
       lodash.prototype[methodName] = function() {
         var value = this.__wrapped__;
@@ -260,7 +260,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
     });
 
     // add `Array` accessor functions to the wrapper
-    baseEach(['concat', 'join', 'slice'], function(methodName) {
+    arrayEach(['concat', 'join', 'slice'], function(methodName) {
       var func = arrayRef[methodName];
       lodash.prototype[methodName] = function() {
         var value = this.__wrapped__,

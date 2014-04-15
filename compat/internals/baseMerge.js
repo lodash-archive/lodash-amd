@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseEach', './baseForOwn', '../objects/isArray', '../objects/isPlainObject'], function(baseEach, baseForOwn, isArray, isPlainObject) {
+define(['./arrayEach', './baseForOwn', '../objects/isArray', '../objects/isPlainObject'], function(arrayEach, baseForOwn, isArray, isPlainObject) {
 
   /**
    * The base implementation of `_.merge` without argument juggling or support
@@ -20,7 +20,7 @@ define(['./baseEach', './baseForOwn', '../objects/isArray', '../objects/isPlainO
    * @param {Array} [stackB=[]] Associates values with source counterparts.
    */
   function baseMerge(object, source, callback, stackA, stackB) {
-    (isArray(source) ? baseEach : baseForOwn)(source, function(source, key) {
+    (isArray(source) ? arrayEach : baseForOwn)(source, function(source, key) {
       var found,
           isArr,
           result = source,

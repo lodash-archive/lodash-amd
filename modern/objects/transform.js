@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreate', '../internals/baseEach', '../internals/baseForOwn', '../functions/createCallback', './isArray'], function(baseCreate, baseEach, baseForOwn, createCallback, isArray) {
+define(['../internals/arrayEach', '../internals/baseCreate', '../internals/baseForOwn', '../functions/createCallback', './isArray'], function(arrayEach, baseCreate, baseForOwn, createCallback, isArray) {
 
   /**
    * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -53,7 +53,7 @@ define(['../internals/baseCreate', '../internals/baseEach', '../internals/baseFo
     }
     if (callback) {
       callback = createCallback(callback, thisArg, 4);
-      (isArr ? baseEach : baseForOwn)(object, function(value, index, object) {
+      (isArr ? arrayEach : baseForOwn)(object, function(value, index, object) {
         return callback(accumulator, value, index, object);
       });
     }

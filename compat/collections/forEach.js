@@ -6,28 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach', '../objects/isArray'], function(baseCreateCallback, baseEach, isArray) {
-
-  /**
-   * A specialized version of `_.forEach` for arrays without support for
-   * callback shorthands or `this` binding.
-   *
-   * @private
-   * @param {Array} array The array to iterate over.
-   * @param {Function} callback The function called per iteration.
-   * @returns {Array} Returns `array`.
-   */
-  function arrayEach(array, callback) {
-    var index = -1,
-        length = array ? array.length : 0;
-
-    while (++index < length) {
-      if (callback(array[index], index, array) === false) {
-        break;
-      }
-    }
-    return array;
-  }
+define(['../internals/arrayEach', '../internals/baseCreateCallback', '../internals/baseEach', '../objects/isArray'], function(arrayEach, baseCreateCallback, baseEach, isArray) {
 
   /**
    * Iterates over elements of a collection executing the callback for each

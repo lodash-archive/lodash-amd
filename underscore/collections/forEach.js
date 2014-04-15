@@ -6,16 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', '../internals/baseEach'], function(baseCreateCallback, baseEach) {
-
-  /** Used as the semantic version number */
-  var version = '2.4.1';
-
-  /** Used as the property name for wrapper metadata */
-  var expando = '__lodash@' + version + '__';
-
-  /** Used by methods to exit iteration */
-  var breakIndicator = expando + 'breaker__';
+define(['../internals/arrayEach', '../internals/baseCreateCallback', '../internals/baseEach'], function(arrayEach, baseCreateCallback, baseEach) {
 
   /**
    * Used as the maximum length of an array-like object.
@@ -23,27 +14,6 @@ define(['../internals/baseCreateCallback', '../internals/baseEach'], function(ba
    * for more details.
    */
   var maxSafeInteger = Math.pow(2, 53) - 1;
-
-  /**
-   * A specialized version of `_.forEach` for arrays without support for
-   * callback shorthands or `this` binding.
-   *
-   * @private
-   * @param {Array} array The array to iterate over.
-   * @param {Function} callback The function called per iteration.
-   * @returns {Array} Returns `array`.
-   */
-  function arrayEach(array, callback) {
-    var index = -1,
-        length = array ? array.length : 0;
-
-    while (++index < length) {
-      if (callback(array[index], index, array) === breakIndicator) {
-        break;
-      }
-    }
-    return array;
-  }
 
   /**
    * Iterates over elements of a collection executing the callback for each
