@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./filter'], function(filter) {
+define(['./filter', '../utilities/matches'], function(filter, matches) {
 
   /**
    * Performs a deep comparison between each element in `collection` and the
@@ -36,7 +36,7 @@ define(['./filter'], function(filter) {
    * // => ['barney', 'fred']
    */
   function where(collection, source) {
-    return filter(collection, Object(source));
+    return filter(collection, matches(source));
   }
 
   return where;
