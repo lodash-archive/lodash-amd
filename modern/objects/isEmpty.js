@@ -6,16 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseForOwn', './isFunction'], function(baseForOwn, isFunction) {
-
-  /** `Object#toString` result shortcuts */
-  var argsClass = '[object Arguments]',
-      arrayClass = '[object Array]',
-      objectClass = '[object Object]',
-      stringClass = '[object String]';
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
+define(['../internals/baseForOwn', './isArguments', './isArray', './isFunction', './isString'], function(baseForOwn, isArguments, isArray, isFunction, isString) {
 
   /**
    * Used as the maximum length of an array-like object.
@@ -23,9 +14,6 @@ define(['../internals/baseForOwn', './isFunction'], function(baseForOwn, isFunct
    * for more details.
    */
   var maxSafeInteger = Math.pow(2, 53) - 1;
-
-  /** Used to resolve the internal `[[Class]]` of values */
-  var toString = objectProto.toString;
 
   /**
    * Checks if a collection is empty. A value is considered empty unless it is
@@ -59,13 +47,10 @@ define(['../internals/baseForOwn', './isFunction'], function(baseForOwn, isFunct
     if (!value) {
       return result;
     }
-    var className = toString.call(value),
-        length = value.length;
-
-    if (length > -1 && length <= maxSafeInteger && (
-          (className == arrayClass || className == stringClass || className == argsClass) ||
-          (className == objectClass && isFunction(value.splice))
-        )) {
+    var length = value.length;
+    if (length > -1 && length <= maxSafeInteger &&
+        (isArray(value) || isString(value) || isArguments(value) ||
+          (typeof value == 'object' && isFunction(value.splice)))) {
       return !length;
     }
     baseForOwn(value, function() {
