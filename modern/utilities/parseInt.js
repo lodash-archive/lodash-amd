@@ -14,7 +14,7 @@ define(['../strings/trim'], function(trim) {
   /** Used to detect and test whitespace */
   var whitespace = (
     // whitespace
-    ' \t\x0B\f\xA0\ufeff' +
+    ' \t\x0B\f\x85\xA0\ufeff' +
 
     // line terminators
     '\n\r\u2028\u2029' +
