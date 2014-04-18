@@ -21,6 +21,9 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
   /** Used as the property name for wrapper metadata */
   var expando = '__lodash@' + version + '__';
 
+  /** Used as the TypeError message for "Functions" methods */
+  var funcErrorText = 'Expected a function';
+
   /** Used for native method references */
   var arrayRef = Array.prototype;
 
@@ -60,7 +63,7 @@ define(['./baseBind', './baseCreateWrapper', '../objects/isFunction', '../arrays
         isPartialRight = bitmask & PARTIAL_RIGHT_FLAG;
 
     if (!isBindKey && !isFunction(func)) {
-      throw new TypeError;
+      throw new TypeError(funcErrorText);
     }
     if (isPartial && !partialArgs.length) {
       bitmask &= ~PARTIAL_FLAG;

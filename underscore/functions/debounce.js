@@ -11,6 +11,9 @@ define(['../objects/isFunction', '../objects/isObject', '../utilities/now'], fun
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
 
+  /** Used as the TypeError message for "Functions" methods */
+  var funcErrorText = 'Expected a function';
+
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeMax = Math.max;
 
@@ -66,7 +69,7 @@ define(['../objects/isFunction', '../objects/isObject', '../utilities/now'], fun
         trailing = true;
 
     if (!isFunction(func)) {
-      throw new TypeError;
+      throw new TypeError(funcErrorText);
     }
     wait = wait < 0 ? 0 : wait;
     if (options === true) {

@@ -8,6 +8,9 @@
  */
 define(['./debounce', '../objects/isFunction', '../objects/isObject'], function(debounce, isFunction, isObject) {
 
+  /** Used as the TypeError message for "Functions" methods */
+  var funcErrorText = 'Expected a function';
+
   /** Used as an internal `_.debounce` options object by `_.throttle` */
   var debounceOptions = {
     'leading': false,
@@ -51,7 +54,7 @@ define(['./debounce', '../objects/isFunction', '../objects/isObject'], function(
         trailing = true;
 
     if (!isFunction(func)) {
-      throw new TypeError;
+      throw new TypeError(funcErrorText);
     }
     if (options === false) {
       leading = false;

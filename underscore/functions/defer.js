@@ -11,6 +11,9 @@ define(['../objects/isFunction', '../arrays/slice'], function(isFunction, slice)
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
 
+  /** Used as the TypeError message for "Functions" methods */
+  var funcErrorText = 'Expected a function';
+
   /**
    * Defers executing the `func` function until the current call stack has cleared.
    * Additional arguments will be provided to `func` when it is invoked.
@@ -28,7 +31,7 @@ define(['../objects/isFunction', '../arrays/slice'], function(isFunction, slice)
    */
   function defer(func) {
     if (!isFunction(func)) {
-      throw new TypeError;
+      throw new TypeError(funcErrorText);
     }
     var args = slice(arguments, 1);
     return setTimeout(function() { func.apply(undefined, args); }, 1);

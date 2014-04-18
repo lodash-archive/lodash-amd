@@ -8,6 +8,9 @@
  */
 define(['./debounce', '../objects/isFunction', '../objects/isObject'], function(debounce, isFunction, isObject) {
 
+  /** Used as the TypeError message for "Functions" methods */
+  var funcErrorText = 'Expected a function';
+
   /**
    * Creates a function that, when executed, will only call the `func` function
    * at most once per every `wait` milliseconds. Provide an options object to
@@ -44,7 +47,7 @@ define(['./debounce', '../objects/isFunction', '../objects/isObject'], function(
         trailing = true;
 
     if (!isFunction(func)) {
-      throw new TypeError;
+      throw new TypeError(funcErrorText);
     }
     if (options === false) {
       leading = false;
