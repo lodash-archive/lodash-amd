@@ -31,14 +31,14 @@ define(['./isPlainObject', '../support'], function(isPlainObject, support) {
    * // => false
    */
   function isElement(value) {
-    return value && typeof value == 'object' && value.nodeType === 1 &&
-      toString.call(value).indexOf('Element') > -1 || false;
+    return (value && typeof value == 'object' && value.nodeType === 1 &&
+      toString.call(value).indexOf('Element') > -1) || false;
   }
   // fallback for environments without DOM support
   if (!support.dom) {
     isElement = function(value) {
-      return value && typeof value == 'object' && value.nodeType === 1 &&
-        !isPlainObject(value) || false;
+      return (value && typeof value == 'object' && value.nodeType === 1 &&
+        !isPlainObject(value)) || false;
     };
   }
 

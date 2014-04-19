@@ -35,7 +35,7 @@ define([], function() {
    * // => false
    */
   function isError(value) {
-    return value && typeof value == 'object' && toString.call(value) == errorClass || false;
+    return (value && typeof value == 'object' && toString.call(value) == errorClass) || false;
   }
 
   return isError;

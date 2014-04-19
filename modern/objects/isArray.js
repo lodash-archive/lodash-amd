@@ -37,8 +37,8 @@ define(['../internals/isNative'], function(isNative) {
    * // => false
    */
   var isArray = nativeIsArray || function(value) {
-    return value && typeof value == 'object' && typeof value.length == 'number' &&
-      toString.call(value) == arrayClass || false;
+    return (value && typeof value == 'object' && typeof value.length == 'number' &&
+      toString.call(value) == arrayClass) || false;
   };
 
   return isArray;

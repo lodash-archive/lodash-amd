@@ -48,7 +48,7 @@ define(['../internals/baseForOwn', './isArguments', './isArray', './isFunction',
       return result;
     }
     var length = value.length;
-    if (length > -1 && length <= maxSafeInteger &&
+    if ((length > -1 && length <= maxSafeInteger) &&
         (isArray(value) || isString(value) || isArguments(value) ||
           (typeof value == 'object' && isFunction(value.splice)))) {
       return !length;

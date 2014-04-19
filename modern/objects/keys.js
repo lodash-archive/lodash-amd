@@ -71,7 +71,7 @@ define(['./isArguments', './isArray', '../internals/isNative', './isObject', './
     var ctor = object && object.constructor,
         length = object ? object.length : 0;
 
-    if (typeof length == 'number' && length > 0 ||
+    if ((typeof length == 'number' && length > 0) ||
         (ctor && object === ctor.prototype)) {
       return shimKeys(object);
     }

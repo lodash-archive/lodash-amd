@@ -34,7 +34,7 @@ define([], function() {
    * // => false
    */
   function isDate(value) {
-    return value && typeof value == 'object' && toString.call(value) == dateClass || false;
+    return (value && typeof value == 'object' && toString.call(value) == dateClass) || false;
   }
 
   return isDate;

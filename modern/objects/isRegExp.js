@@ -34,7 +34,7 @@ define([], function() {
    * // => false
    */
   function isRegExp(value) {
-    return value && typeof value == 'object' && toString.call(value) == regexpClass || false;
+    return (value && typeof value == 'object' && toString.call(value) == regexpClass) || false;
   }
 
   return isRegExp;

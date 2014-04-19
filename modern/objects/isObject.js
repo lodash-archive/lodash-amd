@@ -34,7 +34,7 @@ define([], function() {
     // and avoid a V8 bug
     // https://code.google.com/p/v8/issues/detail?id=2291
     var type = typeof value;
-    return value && (type == 'function' || type == 'object') || false;
+    return (value && (type == 'function' || type == 'object')) || false;
   }
 
   return isObject;

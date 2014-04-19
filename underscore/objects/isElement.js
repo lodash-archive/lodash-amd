@@ -25,7 +25,7 @@ define([], function() {
    * // => false
    */
   function isElement(value) {
-    return value && value.nodeType === 1 || false;
+    return (value && value.nodeType === 1) || false;
   }
 
   return isElement;

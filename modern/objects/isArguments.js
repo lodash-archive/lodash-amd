@@ -34,8 +34,8 @@ define([], function() {
    * // => false
    */
   function isArguments(value) {
-    return value && typeof value == 'object' && typeof value.length == 'number' &&
-      toString.call(value) == argsClass || false;
+    return (value && typeof value == 'object' && typeof value.length == 'number' &&
+      toString.call(value) == argsClass) || false;
   }
 
   return isArguments;
