@@ -236,6 +236,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.isElement = objects.isElement;
   lodash.isEmpty = objects.isEmpty;
   lodash.isEqual = objects.isEqual;
+  lodash.isError = objects.isError;
   lodash.isFinite = objects.isFinite;
   lodash.isFunction = objects.isFunction;
   lodash.isNaN = objects.isNaN;
