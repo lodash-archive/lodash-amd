@@ -18,7 +18,7 @@ define([], function() {
   var toString = objectProto.toString;
 
   /**
-   * Checks if `value` is a string.
+   * Checks if `value` is a `String` primitive or object.
    *
    * @static
    * @memberOf _
