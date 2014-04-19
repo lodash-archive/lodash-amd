@@ -85,7 +85,9 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
         (support.nonEnumArgs && isArguments(object))) && length) >>> 0;
 
     var keyIndex,
+        ctor = object.constructor,
         index = -1,
+        isProto = ctor && object === ctor.prototype,
         maxIndex = length - 1,
         result = Array(length),
         skipIndexes = length > 0,
@@ -96,7 +98,8 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
       result[index] = String(index);
     }
     for (var key in object) {
-      if (!(skipProto && key == 'prototype') &&
+      if (!(isProto && key == 'constructor') &&
+          !(skipProto && key == 'prototype') &&
           !(skipErrorProps && (key == 'message' || key == 'name')) &&
           !(skipIndexes && (keyIndex = +key, keyIndex > -1 && keyIndex <= maxIndex && keyIndex % 1 == 0))) {
         result.push(key);
@@ -107,11 +110,10 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
     // attribute of an existing property and the `constructor` property of a
     // prototype defaults to non-enumerable.
     if (support.nonEnumShadows && object !== objectProto) {
-      var ctor = object.constructor;
       index = -1;
       length = shadowedProps.length;
 
-      if (object === (ctor && ctor.prototype)) {
+      if (isProto) {
         var className = object === stringProto ? stringClass : object === errorProto ? errorClass : toString.call(object),
             nonEnum = nonEnumProps[className];
       }
