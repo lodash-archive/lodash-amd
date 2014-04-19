@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseCreateCallback', './keys'], function(baseCreateCallback, keys) {
+define([], function() {
 
   /**
    * Assigns own enumerable properties of source object(s) to the destination

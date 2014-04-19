@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/defaults', '../utilities/escape', '../internals/reInterpolate', '../utilities/templateSettings'], function(defaults, escape, reInterpolate, templateSettings) {
+define(['../objects/defaults', '../utilities/escape', '../utilities/templateSettings'], function(defaults, escape, templateSettings) {
 
   /** Used to ensure capturing order of template delimiters */
   var reNoMatch = /($^)/;

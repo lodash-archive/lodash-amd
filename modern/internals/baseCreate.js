@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./isNative', '../objects/isObject', '../utilities/noop'], function(isNative, isObject, noop) {
+define(['./isNative', '../objects/isObject'], function(isNative, isObject) {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeCreate = isNative(nativeCreate = Object.create) && nativeCreate;

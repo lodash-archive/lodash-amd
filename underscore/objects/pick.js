@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../arrays/slice'], function(baseFlatten, slice) {
+define(['../internals/baseFlatten'], function(baseFlatten) {
 
   /**
    * Creates a shallow clone of `object` composed of the specified properties.

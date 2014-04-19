@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreateWrapper', '../objects/isFunction', '../arrays/slice'], function(baseCreateWrapper, isFunction, slice) {
+define(['./baseCreateWrapper', '../objects/isFunction'], function(baseCreateWrapper, isFunction) {
 
   /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1,

@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', './composeArgs', '../objects/isObject', './setData', '../arrays/slice'], function(baseCreate, composeArgs, isObject, setData, slice) {
+define(['./baseCreate', './composeArgs', '../objects/isObject', './setData'], function(baseCreate, composeArgs, isObject, setData) {
 
   /**
    * The base implementation of `_.bind` that creates the bound function and

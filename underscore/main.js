@@ -7,7 +7,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/baseForOwn', './internals/lodashWrapper', './utilities/mixin', './support', './utilities/templateSettings'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, baseForOwn, lodashWrapper, mixin, support, templateSettings) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, lodashWrapper, mixin, support) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';

@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/baseFlatten', './keysIn', '../functions/negate', './pick'], function(baseDifference, baseFlatten, keysIn, negate, pick) {
+define(['../internals/baseDifference', '../internals/baseFlatten', './keysIn', './pick'], function(baseDifference, baseFlatten, keysIn, pick) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.

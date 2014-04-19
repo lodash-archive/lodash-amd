@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseCreate', './composeArgs', './composeArgsRight', '../objects/isObject', './setData', '../arrays/slice'], function(baseCreate, composeArgs, composeArgsRight, isObject, setData, slice) {
+define(['./baseCreate', './composeArgs', './composeArgsRight', '../objects/isObject', './setData'], function(baseCreate, composeArgs, composeArgsRight, isObject, setData) {
 
   /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1,

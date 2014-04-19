@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback', './isObject', '../arrays/slice'], function(baseFlatten, baseForIn, createCallback, isObject, slice) {
+define(['../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback', './isObject'], function(baseFlatten, baseForIn, createCallback, isObject) {
 
   /**
    * Creates a shallow clone of `object` composed of the specified properties.
