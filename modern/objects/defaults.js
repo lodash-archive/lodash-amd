@@ -38,7 +38,7 @@ define(['./assign', '../arrays/slice'], function(assign, slice) {
    * // => { 'name': 'barney', 'employer': 'slate' }
    */
   function defaults(object) {
-    if (!object || arguments.length < 2) {
+    if (!object) {
       return object;
     }
     var args = slice(arguments);
