@@ -43,6 +43,9 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    * _.min([4, 2, 8, 6]);
    * // => 2
    *
+   * _.min([]);
+   * // => Infinity
+   *
    * var characters = [
    *   { 'name': 'barney', 'age': 36 },
    *   { 'name': 'fred',   'age': 40 }

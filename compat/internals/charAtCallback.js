@@ -9,8 +9,8 @@
 define([], function() {
 
   /**
-   * Used by `_.max` and `_.min` as the default callback when a given
-   * collection is a string value.
+   * Used by `_.max` and `_.min` as the default callback when a given collection
+   * is a string value.
    *
    * @private
    * @param {string} string The string to inspect.
