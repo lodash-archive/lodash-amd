@@ -125,13 +125,13 @@ define(['../internals/arrayEach', '../internals/baseCreateCallback', '../interna
    * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot] }
    */
   function merge(object, source, guard) {
-    if (!object) {
-      return object;
-    }
     var args = arguments,
         length = args.length,
         type = typeof guard;
 
+    if (!object || length < 2) {
+      return object;
+    }
     // enables use as a callback for functions like `_.reduce`
     if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
       length = 2;
