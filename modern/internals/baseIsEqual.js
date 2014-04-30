@@ -165,6 +165,9 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
                 break;
               }
             }
+            if (!result) {
+              break;
+            }
           } else if (!(result = baseIsEqual(value[size], othValue, callback, isWhere, stackA, stackB))) {
             break;
           }
