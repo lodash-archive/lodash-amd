@@ -43,7 +43,7 @@ define(['../internals/baseCreateCallback', '../utilities/matches', '../utilities
   function createCallback(func, thisArg, argCount) {
     var type = typeof func;
     if (type == 'function' || func == null) {
-      return (typeof thisArg == 'undefined' || !('prototype' in func)) &&
+      return (typeof thisArg == 'undefined' || !(func && 'prototype' in func)) &&
         func || baseCreateCallback(func, thisArg, argCount);
     }
     // handle "_.pluck" and "_.where" style callback shorthands
