@@ -23,8 +23,8 @@ define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/fu
    * @memberOf _
    * @category Functions
    * @param {Object} object The object to bind and assign the bound methods to.
-   * @param {...string} [methodName] The object method names to
-   *  bind, specified as individual method names or arrays of method names.
+   * @param {...string} [methodNames] The object method names to bind, specified
+   *  as individual method names or arrays of method names.
    * @returns {Object} Returns `object`.
    * @example
    *
