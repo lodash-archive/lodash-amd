@@ -37,8 +37,8 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    * `flatten`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
    * `forOwnRight`, `functions`, `groupBy`, `indexBy`, `initial`, `intersection`,
    * `invert`, `invoke`, `keys`, `map`, `mapValues`, `matches`, `max`, `memoize`,
-   * `merge`, `min`, `mixin`, `noop`, `object`, `omit`, `once`, `pairs`,
-   * `partial`, `partialRight`, `pick`, `pluck`, `property`, `pull`, `push`,
+   * `merge`, `min`, `mixin`, `noop`, `object`, `omit`, `once`, `pairs`, `partial`,
+   * `partialRight`, `pick`, `pluck`, `property`, `pull`, `pullAt`, `push`,
    * `range`, `reject`, `remove`, `rest`, `reverse`, `shuffle`, `slice`, `sort`,
    * `sortBy`, `splice`, `tap`, `throttle`, `times`, `toArray`, `transform`,
    * `union`, `uniq`, `unshift`, `unzip`, `values`, `where`, `without`, `wrap`,
@@ -171,6 +171,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.pluck = collections.pluck;
   lodash.property = utilities.property;
   lodash.pull = arrays.pull;
+  lodash.pullAt = arrays.pullAt;
   lodash.range = arrays.range;
   lodash.reject = collections.reject;
   lodash.remove = arrays.remove;
