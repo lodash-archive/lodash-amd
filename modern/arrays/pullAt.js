@@ -48,7 +48,7 @@ define(['../internals/baseAt', '../internals/baseCompareAscending', '../internal
     while (length--) {
       var index = indexes[length];
       if (index != previous) {
-        var previous = removal;
+        var previous = index;
         splice.call(array, index, 1);
       }
     }
