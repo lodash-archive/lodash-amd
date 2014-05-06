@@ -304,7 +304,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.takeRightWhile = arrays.takeRightWhile;
   lodash.takeWhile = arrays.takeWhile;
 
-  // add aliases
+  // add alias
   lodash.head = arrays.first;
 
   baseForOwn(lodash, function(func, methodName) {
@@ -329,6 +329,9 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    * @type string
    */
   lodash.VERSION = version;
+
+  lodash.support = support;
+  (lodash.templateSettings = utilities.templateSettings).imports._ = lodash;
 
   // add "Chaining" functions to the wrapper
   lodash.prototype.chain = chaining.wrapperChain;
@@ -367,7 +370,5 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
     };
   });
 
-  lodash.support = support;
-  (lodash.templateSettings = utilities.templateSettings).imports._ = lodash;
   return lodash;
 });

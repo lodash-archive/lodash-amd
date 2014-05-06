@@ -224,7 +224,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.sample = collections.sample;
   lodash.take = arrays.take;
 
-  // add aliases
+  // add alias
   lodash.head = arrays.first;
 
   // add functions to `lodash.prototype`
@@ -238,6 +238,9 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
    * @type string
    */
   lodash.VERSION = version;
+
+  lodash.support = support;
+  (lodash.templateSettings = utilities.templateSettings).imports._ = lodash;
 
   // add "Chaining" functions to the wrapper
   lodash.prototype.chain = chaining.wrapperChain;
@@ -274,7 +277,5 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
     };
   });
 
-  lodash.support = support;
-  (lodash.templateSettings = utilities.templateSettings).imports._ = lodash;
   return lodash;
 });
