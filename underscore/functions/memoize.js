@@ -58,7 +58,10 @@ define(['../objects/isFunction'], function(isFunction) {
     }
     var cache = {};
     return function() {
-      var key = resolver ? resolver.apply(this, arguments) : '_' + arguments[0];
+      var key = resolver ? resolver.apply(this, arguments) : arguments[0];
+      if (key == '__proto__') {
+        return func.apply(this, arguments);
+      }
       return hasOwnProperty.call(cache, key)
         ? cache[key]
         : (cache[key] = func.apply(this, arguments));
