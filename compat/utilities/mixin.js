@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/functions', '../objects/isFunction', '../objects/isObject'], function(functions, isFunction, isObject) {
+define(['../internals/baseFunctions', '../objects/isFunction', '../objects/isObject', '../objects/keys'], function(baseFunctions, isFunction, isObject, keys) {
 
   /** Used for native method references */
   var arrayRef = Array.prototype;
@@ -15,8 +15,9 @@ define(['../objects/functions', '../objects/isFunction', '../objects/isObject'],
   var push = arrayRef.push;
 
   /**
-   * Adds function properties of a source object to the destination object.
-   * If `object` is a function methods will be added to its prototype as well.
+   * Adds all own enumerable function properties of a source object to the
+   * destination object. If `object` is a function methods will be added to
+   * its prototype as well.
    *
    * @static
    * @memberOf _
@@ -48,7 +49,7 @@ define(['../objects/functions', '../objects/isFunction', '../objects/isObject'],
    */
   function mixin(object, source, options) {
     var chain = true,
-        methodNames = source && functions(source);
+        methodNames = source && baseFunctions(source, keys);
 
     if (options === false) {
       chain = false;

@@ -6,10 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseForIn', './isFunction'], function(baseForIn, isFunction) {
+define(['../internals/baseFunctions', './keysIn'], function(baseFunctions, keysIn) {
 
   /**
-   * Creates a sorted array of property names of all enumerable function
+   * Creates a sorted array of function property names from all enumerable
    * properties, own and inherited, of `object`.
    *
    * @static
@@ -24,14 +24,7 @@ define(['../internals/baseForIn', './isFunction'], function(baseForIn, isFunctio
    * // => ['all', 'any', 'bind', 'bindAll', 'clone', 'compact', 'compose', ...]
    */
   function functions(object) {
-    var result = [];
-
-    baseForIn(object, function(value, key) {
-      if (isFunction(value)) {
-        result.push(key);
-      }
-    });
-    return result.sort();
+    return baseFunctions(object, keysIn);
   }
 
   return functions;
