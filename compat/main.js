@@ -7,7 +7,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/baseForOwn', './objects/isArray', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, baseForOwn, isArray, lodashWrapper, mixin, support) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/baseForOwn', './internals/baseFunctions', './objects/isArray', './objects/keys', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, baseForOwn, baseFunctions, isArray, keys, lodashWrapper, mixin, support) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -98,9 +98,8 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // wrap `_.mixin` so it works when provided only one argument
   mixin = (function(func) {
-    var functions = objects.functions;
     return function(object, source, options) {
-      if (!source || (!options && !functions(source).length)) {
+      if (!source || (!options && !baseFunctions(source, keys).length)) {
         if (options == null) {
           options = source;
         }
@@ -150,7 +149,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.intersection = arrays.intersection;
   lodash.invert = objects.invert;
   lodash.invoke = collections.invoke;
-  lodash.keys = objects.keys;
+  lodash.keys = keys;
   lodash.keysIn = objects.keysIn;
   lodash.map = collections.map;
   lodash.mapValues = objects.mapValues;
@@ -285,7 +284,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.include = collections.contains;
   lodash.inject = collections.reduce;
 
-  mixin(lodash, function() {
+  mixin(lodash, (function() {
     var source = {}
     baseForOwn(lodash, function(func, methodName) {
       if (!lodash.prototype[methodName]) {
@@ -293,7 +292,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
       }
     });
     return source;
-  }(), false);
+  }()), false);
 
   // add functions capable of returning wrapped and unwrapped values when chaining
   lodash.first = arrays.first;
