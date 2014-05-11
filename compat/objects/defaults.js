@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/createAssigner'], function(createAssigner) {
+define(['./assign', '../arrays/slice'], function(assign, slice) {
 
   /**
    * Used by `_.defaults` to customize its `_.assign` use.
@@ -40,7 +40,14 @@ define(['../internals/createAssigner'], function(createAssigner) {
    * _.defaults({ 'name': 'barney' }, { 'name': 'fred', 'employer': 'slate' });
    * // => { 'name': 'barney', 'employer': 'slate' }
    */
-  var defaults = createAssigner(assignDefaults);
+  function defaults(object) {
+    if (!object) {
+      return object;
+    }
+    var args = slice(arguments);
+    args.push(assignDefaults);
+    return assign.apply(null, args);
+  }
 
   return defaults;
 });
