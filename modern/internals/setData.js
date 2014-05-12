@@ -43,6 +43,7 @@ define(['./isNative', '../utilities/noop'], function(isNative, noop) {
   var setData = !defineProperty ? noop : function(func, value) {
     descriptor.value = value;
     defineProperty(func, expando, descriptor);
+    descriptor.value = null;
   };
 
   return setData;
