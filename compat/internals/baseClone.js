@@ -8,6 +8,9 @@
  */
 define(['./arrayEach', '../objects/assign', './baseForOwn', '../objects/isArray', './isNode', '../objects/isObject', '../arrays/slice', '../support'], function(arrayEach, assign, baseForOwn, isArray, isNode, isObject, slice, support) {
 
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
+
   /** Used to match `RegExp` flags from their coerced string values */
   var reFlags = /\w*$/;
 
@@ -63,11 +66,9 @@ define(['./arrayEach', '../objects/assign', './baseForOwn', '../objects/isArray'
    * @returns {*} Returns the cloned value.
    */
   function baseClone(value, isDeep, callback, stackA, stackB) {
-    if (callback) {
-      var result = callback(value);
-      if (typeof result != 'undefined') {
-        return result;
-      }
+    var result = callback ? callback(value) : undefined;
+    if (typeof result != 'undefined') {
+      return result;
     }
     var isObj = isObject(value);
     if (isObj) {
@@ -130,7 +131,10 @@ define(['./arrayEach', '../objects/assign', './baseForOwn', '../objects/isArray'
 
     // recursively populate clone (susceptible to call stack limits)
     (isArr ? arrayEach : baseForOwn)(value, function(valValue, key) {
-      result[key] = baseClone(valValue, isDeep, callback, stackA, stackB);
+      var valClone = callback ? callback(valValue, key) : undefined;
+      result[key] = typeof valClone == 'undefined'
+        ? baseClone(valValue, isDeep, null, stackA, stackB)
+        : valClone;
     });
 
     return result;

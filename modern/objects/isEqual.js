@@ -13,7 +13,7 @@ define(['../internals/baseCreateCallback', '../internals/baseIsEqual'], function
    * equivalent. If a callback is provided it will be executed to compare
    * values. If the callback returns `undefined` comparisons will be handled
    * by the method instead. The callback is bound to `thisArg` and invoked
-   * with two arguments; (value, other).
+   * with three arguments; (value, other, key).
    *
    * Note: This method supports comparing arrays, booleans, `Date` objects,
    * numbers, `Object` objects, regexes, and strings. Functions and DOM nodes
