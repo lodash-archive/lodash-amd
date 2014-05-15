@@ -6,7 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/defaults', './escape', './templateSettings'], function(defaults, escape, templateSettings) {
+define(['../objects/assign', './escape', './templateSettings'], function(assign, escape, templateSettings) {
+
+  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  var undefined;
 
   /** Used to ensure capturing order of template delimiters */
   var reNoMatch = /($^)/;
@@ -36,6 +39,57 @@ define(['../objects/defaults', './escape', './templateSettings'], function(defau
     return '\\' + stringEscapes[chr];
   }
 
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Native method shortcuts */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  /**
+   * Used by `_.template` to customize its `_.assign` use.
+   *
+   * Note: This method is like `assignDefaults` except that it ignores
+   * inherited property values when checking if a property is `undefined`.
+   *
+   * @private
+   * @param {*} objectValue The destination object property value.
+   * @param {*} sourceValue The source object property value.
+   * @param {string} key The key associated with the object and source values.
+   * @param {Object} object The destination object.
+   * @returns {*} Returns the value to assign to the destination object.
+   */
+  function assignOwnDefaults(objectValue, sourceValue, key, object) {
+    return (!hasOwnProperty.call(object, key) || typeof objectValue == 'undefined')
+      ? sourceValue
+      : objectValue
+  }
+
+  /**
+   * Compiles a function from `source` using the `varNames` and `varValues`
+   * pairs to import free variables into the compiled function. If `sourceURL`
+   * is provided it will be used as the sourceURL for the compiled function.
+   *
+   * @private
+   * @param {string} source The source to compile.
+   * @param {Array} varNames An array of free variable names.
+   * @param {Array} varValues An array of free variable values.
+   * @param {string} [sourceURL=''] The sourceURL of the source.
+   * @returns {Function} Returns the compiled function.
+   */
+  function compileFunction(source, varNames, varValues, sourceURL) {
+    sourceURL = sourceURL ? ('\n/*\n//# sourceURL=' + sourceURL + '\n*/') : '';
+    try {
+      // provide the compiled function's source by its `toString` method or
+      // the `source` property as a convenience for inlining compiled templates
+      var result = Function(varNames, 'return ' + source + sourceURL).apply(undefined, varValues);
+      result.source = source;
+    } catch(e) {
+      e.source = source;
+      throw e;
+    }
+    return result;
+  }
+
   /**
    * Creates a compiled template function that can interpolate data properties
    * in "interpolate" delimiters, HTML-escaped interpolated data properties in
@@ -45,7 +99,7 @@ define(['../objects/defaults', './escape', './templateSettings'], function(defau
    * settings object is provided it will override `_.templateSettings` for the
    * template.
    *
-   * Note: In the development build, `_.template` utilizes `sourceURL`s for easier debugging.
+   * Note: In the development build, `_.template` utilizes sourceURLs for easier debugging.
    * See the [HTML5 Rocks article on sourcemaps](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/#toc-sourceurl)
    * for more details.
    *
@@ -63,9 +117,9 @@ define(['../objects/defaults', './escape', './templateSettings'], function(defau
    * @param {Object} [options] The options object.
    * @param {RegExp} [options.escape] The HTML "escape" delimiter.
    * @param {RegExp} [options.evaluate] The "evaluate" delimiter.
-   * @param {Object} [options.imports] An object to import into the template as local variables.
+   * @param {Object} [options.imports] An object to import into the template as free variables.
    * @param {RegExp} [options.interpolate] The "interpolate" delimiter.
-   * @param {string} [options.sourceURL] The `sourceURL` of the template's compiled source.
+   * @param {string} [options.sourceURL] The sourceURL of the template's compiled source.
    * @param {string} [options.variable] The data object variable name.
    * @returns {Function|string} Returns the interpolated string if a data object
    *  is provided, else the compiled template function.
@@ -103,7 +157,7 @@ define(['../objects/defaults', './escape', './templateSettings'], function(defau
    * _.template(list, { 'people': ['fred', 'barney'] }, { 'imports': { 'jq': jQuery } });
    * // => '<li>fred</li><li>barney</li>'
    *
-   * // using the `sourceURL` option to specify a custom `sourceURL` for the template
+   * // using the `sourceURL` option to specify a custom sourceURL for the template
    * var compiled = _.template('hello <%= name %>', null, { 'sourceURL': '/basic/greeting.jst' });
    * compiled(data);
    * // => find the source of "greeting.jst" under the Sources tab or Resources panel of the web inspector
@@ -130,7 +184,7 @@ define(['../objects/defaults', './escape', './templateSettings'], function(defau
         settings = _.templateSettings || templateSettings;
 
     string = String(string == null ? '' : string);
-    options = defaults({}, options, settings);
+    options = assign({}, options, settings, assignOwnDefaults);
 
     var index = 0,
         source = "__p += '",
@@ -167,17 +221,8 @@ define(['../objects/defaults', './escape', './templateSettings'], function(defau
       source +
       'return __p\n}';
 
-    try {
-      var result = Function('_', 'return ' + source)(_);
-    } catch(e) {
-      e.source = source;
-      throw e;
-    }
-    if (data) {
-      return result(data);
-    }
-    result.source = source;
-    return result;
+    var result = compileFunction(source, ['_'], [_]);
+    return data ? result(data) : result;
   }
 
   return template;
