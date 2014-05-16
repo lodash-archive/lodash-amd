@@ -13,7 +13,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   var version = '2.4.1';
 
   /** Used for native method references */
-  var arrayRef = Array.prototype;
+  var arrayProto = Array.prototype;
 
   /**
    * Creates a `lodash` object which wraps the given value to enable intuitive
@@ -248,7 +248,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // add `Array` mutator functions to the wrapper
   arrayEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
-    var func = arrayRef[methodName];
+    var func = arrayProto[methodName];
     lodash.prototype[methodName] = function() {
       var value = this.__wrapped__;
       func.apply(value, arguments);
@@ -264,7 +264,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // add `Array` accessor functions to the wrapper
   arrayEach(['concat', 'join', 'slice'], function(methodName) {
-    var func = arrayRef[methodName];
+    var func = arrayProto[methodName];
     lodash.prototype[methodName] = function() {
       var value = this.__wrapped__,
           result = func.apply(value, arguments);

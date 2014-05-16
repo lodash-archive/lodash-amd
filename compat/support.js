@@ -16,7 +16,7 @@ define(['./internals/isNative'], function(isNative) {
       objectClass = '[object Object]';
 
   /** Used for native method references */
-  var arrayRef = Array.prototype,
+  var arrayProto = Array.prototype,
       errorProto = Error.prototype,
       objectProto = Object.prototype;
 
@@ -29,7 +29,7 @@ define(['./internals/isNative'], function(isNative) {
   /** Native method shortcuts */
   var hasOwnProperty = objectProto.hasOwnProperty,
       propertyIsEnumerable = objectProto.propertyIsEnumerable,
-      splice = arrayRef.splice;
+      splice = arrayProto.splice;
 
   /**
    * An object used to flag environments features.

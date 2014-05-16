@@ -9,10 +9,10 @@
 define([], function() {
 
   /** Used for native method references */
-  var arrayRef = Array.prototype;
+  var arrayProto = Array.prototype;
 
   /** Native method shortcuts */
-  var splice = arrayRef.splice;
+  var splice = arrayProto.splice;
 
   /**
    * Removes all provided values from `array` using strict equality for

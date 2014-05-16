@@ -9,10 +9,10 @@
 define(['../functions/createCallback'], function(createCallback) {
 
   /** Used for native method references */
-  var arrayRef = Array.prototype;
+  var arrayProto = Array.prototype;
 
   /** Native method shortcuts */
-  var splice = arrayRef.splice;
+  var splice = arrayProto.splice;
 
   /**
    * Removes all elements from `array` that the predicate returns truthy for

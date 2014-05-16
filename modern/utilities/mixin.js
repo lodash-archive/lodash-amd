@@ -9,10 +9,10 @@
 define(['../internals/baseFunctions', '../objects/isFunction', '../objects/isObject', '../objects/keys'], function(baseFunctions, isFunction, isObject, keys) {
 
   /** Used for native method references */
-  var arrayRef = Array.prototype;
+  var arrayProto = Array.prototype;
 
   /** Native method shortcuts */
-  var push = arrayRef.push;
+  var push = arrayProto.push;
 
   /**
    * Adds all own enumerable function properties of a source object to the
