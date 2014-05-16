@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../objects/assign', './escape', './templateSettings'], function(assign, escape, templateSettings) {
+define(['../objects/defaults', './escape', './templateSettings'], function(defaults, escape, templateSettings) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -37,31 +37,6 @@ define(['../objects/assign', './escape', './templateSettings'], function(assign,
    */
   function escapeStringChar(chr) {
     return '\\' + stringEscapes[chr];
-  }
-
-  /** Used for native method references */
-  var objectProto = Object.prototype;
-
-  /** Native method shortcuts */
-  var hasOwnProperty = objectProto.hasOwnProperty;
-
-  /**
-   * Used by `_.template` to customize its `_.assign` use.
-   *
-   * Note: This method is like `assignDefaults` except that it ignores
-   * inherited property values when checking if a property is `undefined`.
-   *
-   * @private
-   * @param {*} objectValue The destination object property value.
-   * @param {*} sourceValue The source object property value.
-   * @param {string} key The key associated with the object and source values.
-   * @param {Object} object The destination object.
-   * @returns {*} Returns the value to assign to the destination object.
-   */
-  function assignOwnDefaults(objectValue, sourceValue, key, object) {
-    return (!hasOwnProperty.call(object, key) || typeof objectValue == 'undefined')
-      ? sourceValue
-      : objectValue
   }
 
   /**
@@ -184,7 +159,7 @@ define(['../objects/assign', './escape', './templateSettings'], function(assign,
         settings = _.templateSettings || templateSettings;
 
     string = String(string == null ? '' : string);
-    options = assign({}, options, settings, assignOwnDefaults);
+    options = defaults({}, options, settings);
 
     var index = 0,
         source = "__p += '",
