@@ -7,7 +7,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, lodashWrapper, mixin, support) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './internals/baseAssign', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, baseAssign, lodashWrapper, mixin, support) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -162,7 +162,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   // add aliases
   lodash.collect = collections.map;
   lodash.each = collections.forEach;
-  lodash.extend = assign;
+  lodash.extend = objects.assign;
   lodash.methods = objects.functions;
   lodash.object = arrays.zipObject;
   lodash.select = collections.filter;
@@ -228,7 +228,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.head = arrays.first;
 
   // add functions to `lodash.prototype`
-  mixin(assign({}, lodash));
+  mixin(baseAssign({}, lodash));
 
   /**
    * The semantic version number.

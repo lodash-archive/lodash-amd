@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten'], function(baseFlatten) {
+define(['../internals/baseFlatten', '../internals/basePick', './isObject'], function(baseFlatten, basePick, isObject) {
 
   /**
    * Creates a shallow clone of `object` composed of the specified properties.
@@ -36,18 +36,9 @@ define(['../internals/baseFlatten'], function(baseFlatten) {
    * // => { 'name': 'fred' }
    */
   function pick(object) {
-    var index = -1,
-        props = baseFlatten(arguments, true, false, 1),
-        length = props.length,
-        result = {};
-
-    while (++index < length) {
-      var key = props[index];
-      if (key in object) {
-        result[key] = object[key];
-      }
-    }
-    return result;
+    return isObject(object)
+      ? basePick(object, baseFlatten(arguments, true, false, 1))
+      : {};
   }
 
   return pick;

@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseFlatten', '../internals/baseForIn', '../functions/createCallback', './isObject'], function(baseFlatten, baseForIn, createCallback, isObject) {
+define(['../internals/baseFlatten', '../internals/basePick', '../functions/createCallback', './isObject'], function(baseFlatten, basePick, createCallback, isObject) {
 
   /**
    * Creates a shallow clone of `object` composed of the specified properties.
@@ -36,28 +36,12 @@ define(['../internals/baseFlatten', '../internals/baseForIn', '../functions/crea
    * // => { 'name': 'fred' }
    */
   function pick(object, predicate, thisArg) {
-    var result = {};
-
-    if (typeof predicate != 'function') {
-      var index = -1,
-          props = baseFlatten(arguments, true, false, 1),
-          length = isObject(object) ? props.length : 0;
-
-      while (++index < length) {
-        var key = props[index];
-        if (key in object) {
-          result[key] = object[key];
-        }
-      }
-    } else {
-      predicate = createCallback(predicate, thisArg, 3);
-      baseForIn(object, function(value, key, object) {
-        if (predicate(value, key, object)) {
-          result[key] = value;
-        }
-      });
+    if (!isObject(object)) {
+      return {};
     }
-    return result;
+    return basePick(object, typeof predicate == 'function'
+      ? createCallback(predicate, thisArg, 3)
+      : baseFlatten(arguments, true, false, 1));
   }
 
   return pick;

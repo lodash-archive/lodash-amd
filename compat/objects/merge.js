@@ -6,14 +6,14 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/arrayEach', '../internals/baseCreateCallback', '../internals/baseForOwn', './isArray', './isPlainObject', '../arrays/slice'], function(arrayEach, baseCreateCallback, baseForOwn, isArray, isPlainObject, slice) {
+define(['../internals/arrayEach', '../internals/baseForOwn', '../internals/createAssigner', './isArray', './isPlainObject'], function(arrayEach, baseForOwn, createAssigner, isArray, isPlainObject) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
 
   /**
-   * The base implementation of `_.merge` without argument juggling or support
-   * for `this` binding.
+   * The base implementation of `_.merge` without support for argument juggling,
+   * multiple sources, and `this` binding.
    *
    * @private
    * @param {Object} object The destination object.
@@ -21,8 +21,12 @@ define(['../internals/arrayEach', '../internals/baseCreateCallback', '../interna
    * @param {Function} [callback] The function to customize merging properties.
    * @param {Array} [stackA=[]] Tracks traversed source objects.
    * @param {Array} [stackB=[]] Associates values with source counterparts.
+   * @returns {Object} Returns the destination object.
    */
   function baseMerge(object, source, callback, stackA, stackB) {
+    if (!object) {
+      return object;
+    }
     (isArray(source) ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
       var isArr = srcValue && isArray(srcValue),
           isObj = srcValue && isPlainObject(srcValue),
@@ -40,6 +44,9 @@ define(['../internals/arrayEach', '../internals/baseCreateCallback', '../interna
         return;
       }
       // avoid merging previously merged cyclic sources
+      stackA || (stackA = []);
+      stackB || (stackB = []);
+
       var length = stackA.length;
       while (length--) {
         if (stackA[length] == srcValue) {
@@ -67,6 +74,8 @@ define(['../internals/arrayEach', '../internals/baseCreateCallback', '../interna
       }
       object[key] = value;
     });
+
+    return object;
   }
 
   /**
@@ -120,34 +129,7 @@ define(['../internals/arrayEach', '../internals/baseCreateCallback', '../interna
    * });
    * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot] }
    */
-  function merge(object, source, guard) {
-    var args = arguments,
-        length = args.length,
-        type = typeof guard;
-
-    if (!object || length < 2) {
-      return object;
-    }
-    // enables use as a callback for functions like `_.reduce`
-    if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
-      length = 2;
-    }
-    // juggle arguments
-    if (length > 3 && typeof args[length - 2] == 'function') {
-      var callback = baseCreateCallback(args[--length - 1], args[length--], 2);
-    } else if (length > 2 && typeof args[length - 1] == 'function') {
-      callback = args[--length];
-    }
-    var sources = slice(args, 1, length),
-        index = -1,
-        stackA = [],
-        stackB = [];
-
-    while (++index < length) {
-      baseMerge(object, sources[index], callback, stackA, stackB);
-    }
-    return object;
-  }
+  var merge = createAssigner(baseMerge);
 
   return merge;
 });

@@ -15,6 +15,30 @@ define(['../internals/baseAt', '../internals/baseCompareAscending', '../internal
   var splice = arrayProto.splice;
 
   /**
+   * The base implementation of `_.pullAt` without support for individual
+   * index arguments.
+   *
+   * @private
+   * @param {Array} array The array to modify.
+   * @param {number[]} indexes The indexes of elements to remove.
+   * @returns {Array} Returns the new array of removed elements.
+   */
+  function basePullAt(array, indexes) {
+    var length = indexes.length,
+        result = baseAt(array, indexes);
+
+    indexes.sort(baseCompareAscending);
+    while (length--) {
+      var index = parseFloat(indexes[length]);
+      if (index != previous && index > -1 && index % 1 == 0) {
+        var previous = index;
+        splice.call(array, index, 1);
+      }
+    }
+    return result;
+  }
+
+  /**
    * Removes elements from `array` corresponding to the specified indexes and
    * returns an array of removed elements. Indexes may be specified as an array
    * of indexes or as individual arguments.
@@ -25,7 +49,7 @@ define(['../internals/baseAt', '../internals/baseCompareAscending', '../internal
    * @memberOf _
    * @category Arrays
    * @param {Array} array The array to modify.
-   * @param {...(number|number[])} [index] The indexes of values to remove,
+   * @param {...(number|number[])} [indexes] The indexes of elements to remove,
    *  specified as individual indexes or arrays of indexes.
    * @returns {Array} Returns the new array of removed elements.
    * @example
@@ -40,19 +64,7 @@ define(['../internals/baseAt', '../internals/baseCompareAscending', '../internal
    * // => [10, 20]
    */
   function pullAt(array) {
-    var indexes = baseFlatten(arguments, true, false, 1),
-        length = indexes.length,
-        result = baseAt(array, indexes);
-
-    indexes.sort(baseCompareAscending);
-    while (length--) {
-      var index = parseFloat(indexes[length]);
-      if (index != previous && index > -1 && index % 1 == 0) {
-        var previous = index;
-        splice.call(array, index, 1);
-      }
-    }
-    return result;
+    return basePullAt(array, baseFlatten(arguments, true, false, 1));
   }
 
   return pullAt;

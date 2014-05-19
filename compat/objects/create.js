@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./assign', '../internals/baseCreate'], function(assign, baseCreate) {
+define(['../internals/baseAssign', '../internals/baseCreate'], function(baseAssign, baseCreate) {
 
   /**
    * Creates an object that inherits from the given `prototype` object. If a
@@ -41,7 +41,7 @@ define(['./assign', '../internals/baseCreate'], function(assign, baseCreate) {
    */
   function create(prototype, properties) {
     var result = baseCreate(prototype);
-    return properties ? assign(result, properties) : result;
+    return properties ? baseAssign(result, properties) : result;
   }
 
   return create;

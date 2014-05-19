@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrayEach', '../objects/assign', './baseForOwn', '../objects/isArray', '../objects/isObject', '../arrays/slice'], function(arrayEach, assign, baseForOwn, isArray, isObject, slice) {
+define(['./arrayEach', './baseAssign', './baseForOwn', '../objects/isArray', '../objects/isObject', '../arrays/slice'], function(arrayEach, baseAssign, baseForOwn, isArray, isObject, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -54,8 +54,8 @@ define(['./arrayEach', '../objects/assign', './baseForOwn', '../objects/isArray'
   ctorByClass[stringClass] = String;
 
   /**
-   * The base implementation of `_.clone` without argument juggling or support
-   * for `this` binding.
+   * The base implementation of `_.clone` without support for argument juggling
+   * and `this` binding.
    *
    * @private
    * @param {*} value The value to clone.
@@ -109,7 +109,7 @@ define(['./arrayEach', '../objects/assign', './baseForOwn', '../objects/isArray'
       result = isArr ? ctor(value.length) : {};
     }
     else {
-      result = isArr ? slice(value) : assign({}, value);
+      result = isArr ? slice(value) : baseAssign({}, value);
     }
     // add array properties assigned by `RegExp#exec`
     if (isArr) {

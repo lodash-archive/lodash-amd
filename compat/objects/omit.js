@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/baseFlatten', '../functions/createCallback', './keysIn', '../functions/negate', './pick'], function(baseDifference, baseFlatten, createCallback, keysIn, negate, pick) {
+define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/basePick', '../functions/createCallback', './isObject', './keysIn', '../functions/negate'], function(baseDifference, baseFlatten, basePick, createCallback, isObject, keysIn, negate) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
@@ -36,9 +36,11 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../functions
    * // => { 'name': 'fred' }
    */
   function omit(object, predicate, thisArg) {
+    if (!isObject(object)) {
+      return {};
+    }
     if (typeof predicate == 'function') {
-      predicate = createCallback(predicate, thisArg, 3);
-      return pick(object, negate(predicate));
+      return basePick(object, negate(createCallback(predicate, thisArg, 3)));
     }
     var omitProps = baseFlatten(arguments, true, false, 1),
         length = omitProps.length;
@@ -46,7 +48,7 @@ define(['../internals/baseDifference', '../internals/baseFlatten', '../functions
     while (length--) {
       omitProps[length] = String(omitProps[length]);
     }
-    return pick(object, baseDifference(keysIn(object), omitProps));
+    return basePick(object, baseDifference(keysIn(object), omitProps));
   }
 
   return omit;

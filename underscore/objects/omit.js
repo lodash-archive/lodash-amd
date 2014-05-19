@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseDifference', '../internals/baseFlatten', './keysIn', './pick'], function(baseDifference, baseFlatten, keysIn, pick) {
+define(['../internals/baseDifference', '../internals/baseFlatten', '../internals/basePick', './isObject', './keysIn'], function(baseDifference, baseFlatten, basePick, isObject, keysIn) {
 
   /**
    * Creates a shallow clone of `object` excluding the specified properties.
@@ -36,13 +36,16 @@ define(['../internals/baseDifference', '../internals/baseFlatten', './keysIn', '
    * // => { 'name': 'fred' }
    */
   function omit(object) {
+    if (!isObject(object)) {
+      return {};
+    }
     var omitProps = baseFlatten(arguments, true, false, 1),
         length = omitProps.length;
 
     while (length--) {
       omitProps[length] = String(omitProps[length]);
     }
-    return pick(object, baseDifference(keysIn(object), omitProps));
+    return basePick(object, baseDifference(keysIn(object), omitProps));
   }
 
   return omit;

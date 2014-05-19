@@ -7,7 +7,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './objects/assign', './internals/baseForOwn', './internals/baseFunctions', './objects/isArray', './objects/keys', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, assign, baseForOwn, baseFunctions, isArray, keys, lodashWrapper, mixin, support) {
+define(['./arrays', './chaining', './collections', './functions', './objects', './strings', './utilities', './internals/arrayEach', './internals/baseAssign', './internals/baseForOwn', './internals/baseFunctions', './objects/isArray', './objects/keys', './internals/lodashWrapper', './utilities/mixin', './support'], function(arrays, chaining, collections, functions, objects, strings, utilities, arrayEach, baseAssign, baseForOwn, baseFunctions, isArray, keys, lodashWrapper, mixin, support) {
 
   /** Used as the semantic version number */
   var version = '2.4.1';
@@ -112,7 +112,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
 
   // add functions that return wrapped values when chaining
   lodash.after = functions.after;
-  lodash.assign = assign;
+  lodash.assign = objects.assign;
   lodash.at = collections.at;
   lodash.bind = functions.bind;
   lodash.bindAll = functions.bindAll;
@@ -199,7 +199,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.collect = collections.map;
   lodash.each = collections.forEach;
   lodash.eachRight = collections.forEachRight;
-  lodash.extend = assign;
+  lodash.extend = objects.assign;
   lodash.methods = objects.functions;
   lodash.object = arrays.zipObject;
   lodash.select = collections.filter;
@@ -208,7 +208,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.unzip = arrays.zip;
 
   // add functions to `lodash.prototype`
-  mixin(lodash, assign({}, lodash));
+  mixin(lodash, baseAssign({}, lodash));
 
   // add functions that return unwrapped values when chaining
   lodash.camelCase = strings.camelCase;

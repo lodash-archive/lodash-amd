@@ -23,8 +23,8 @@ define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/fu
    * @memberOf _
    * @category Functions
    * @param {Object} object The object to bind and assign the bound methods to.
-   * @param {...string} [methodNames] The object method names to bind, specified
-   *  as individual method names or arrays of method names.
+   * @param {...(string|string[])} [methodNames] The object method names to bind,
+   *  specified as individual method names or arrays of method names.
    * @returns {Object} Returns `object`.
    * @example
    *
@@ -38,12 +38,26 @@ define(['../internals/baseFlatten', '../internals/createWrapper', '../objects/fu
    * // => logs 'clicked docs', when the button is clicked
    */
   function bindAll(object) {
-    var funcs = arguments.length > 1 ? baseFlatten(arguments, true, false, 1) : functions(object),
-        index = -1,
-        length = funcs.length;
+    return baseBindAll(object, arguments.length > 1
+      ? baseFlatten(arguments, true, false, 1)
+      : functions(object));
+  }
+
+  /**
+   * The base implementation of `_.bindAll` without support for individual
+   * method name arguments.
+   *
+   * @private
+   * @param {Object} object The object to bind and assign the bound methods to.
+   * @param {string[]} methodNames The object method names to bind.
+   * @returns {Object} Returns `object`.
+   */
+  function baseBindAll(object, methodNames) {
+    var index = -1,
+        length = methodNames.length;
 
     while (++index < length) {
-      var key = funcs[index];
+      var key = methodNames[index];
       object[key] = createWrapper(object[key], BIND_FLAG, null, object);
     }
     return object;
