@@ -44,11 +44,11 @@ define(['./baseCreate', './composeArgs', './composeArgsRight', '../objects/isObj
         key = func;
 
     function bound() {
-      var index = -1,
-          length = arguments.length,
+      var length = arguments.length,
+          index = length,
           args = Array(length);
 
-      while (++index < length) {
+      while (index--) {
         args[index] = arguments[index];
       }
       if (partialArgs) {
