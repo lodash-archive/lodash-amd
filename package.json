@@ -26,5 +26,8 @@
       "coverage",
       "node_modules"
     ]
+  },
+  "browserify": {
+    "transform": "deamdify"
   }
 }
