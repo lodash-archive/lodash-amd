@@ -9,8 +9,8 @@
 define([], function() {
 
   /**
-   * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`
-   * without support for callback shorthands or `this` binding which iterates
+   * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`,
+   * without support for callback shorthands and `this` binding, which iterates
    * over `collection` using the provided `eachFunc`.
    *
    * @private

@@ -10,7 +10,7 @@ define(['./baseIndexOf'], function(baseIndexOf) {
 
   /**
    * The base implementation of `_.uniq` without support for callback shorthands
-   * or `this` binding.
+   * and `this` binding.
    *
    * @private
    * @param {Array} array The array to process.

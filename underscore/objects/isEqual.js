@@ -37,7 +37,7 @@ define(['../internals/baseForIn', './isFunction'], function(baseForIn, isFunctio
 
   /**
    * The base implementation of `_.isEqual`, without support for `thisArg`
-   * binding, that allows partial "_.where" style comparisons.
+   * binding, which allows partial "_.where" style comparisons.
    *
    * @private
    * @param {*} value The value to compare to `other`.

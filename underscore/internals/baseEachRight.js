@@ -26,7 +26,7 @@ define(['./baseForOwnRight'], function(baseForOwnRight) {
 
   /**
    * The base implementation of `_.forEachRight` without support for callback
-   * shorthands or `this` binding.
+   * shorthands and `this` binding.
    *
    * @private
    * @param {Array|Object|string} collection The collection to iterate over.

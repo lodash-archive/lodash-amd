@@ -10,7 +10,7 @@ define(['./baseForRight', '../objects/keys'], function(baseForRight, keys) {
 
   /**
    * The base implementation of `_.forOwnRight` without support for callback
-   * shorthands or `this` binding.
+   * shorthands and `this` binding.
    *
    * @private
    * @param {Object} object The object to iterate over.
