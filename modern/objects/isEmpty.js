@@ -54,7 +54,8 @@ define(['../internals/baseForOwn', './isArguments', './isArray', './isFunction',
       return !length;
     }
     baseForOwn(value, function() {
-      return (result = false);
+      result = false;
+      return result;
     });
     return result;
   }
