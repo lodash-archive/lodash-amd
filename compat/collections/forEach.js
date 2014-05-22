@@ -35,7 +35,7 @@ define(['../internals/arrayEach', '../internals/baseCreateCallback', '../interna
    * // => logs each number and returns the object (property order is not guaranteed across environments)
    */
   function forEach(collection, callback, thisArg) {
-    return (callback && typeof thisArg == 'undefined' && isArray(collection))
+    return (typeof callback == 'function' && typeof thisArg == 'undefined' && isArray(collection))
       ? arrayEach(collection, callback)
       : baseEach(collection, baseCreateCallback(callback, thisArg, 3));
   }

@@ -51,8 +51,10 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    */
   function every(collection, predicate, thisArg) {
     var result = true;
-    predicate = createCallback(predicate, thisArg, 3);
 
+    if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
+      predicate = createCallback(predicate, thisArg, 3);
+    }
     if (isArray(collection)) {
       var index = -1,
           length = collection.length;
@@ -64,7 +66,8 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
       }
     } else {
       baseEach(collection, function(value, index, collection) {
-        return (result = !!predicate(value, index, collection));
+        result = !!predicate(value, index, collection);
+        return result;
       });
     }
     return result;

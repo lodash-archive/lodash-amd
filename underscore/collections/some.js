@@ -68,8 +68,10 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    */
   function some(collection, predicate, thisArg) {
     var result;
-    predicate = createCallback(predicate, thisArg, 3);
 
+    if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
+      predicate = createCallback(predicate, thisArg, 3);
+    }
     var index = -1,
         length = collection ? collection.length : 0;
 
@@ -81,7 +83,8 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
       }
     } else {
       baseEach(collection, function(value, index, collection) {
-        return (result = predicate(value, index, collection)) && breakIndicator;
+        result = predicate(value, index, collection);
+        return result && breakIndicator;
       });
     }
     return !!result;

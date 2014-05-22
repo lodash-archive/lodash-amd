@@ -53,8 +53,10 @@ define(['../internals/baseCreateCallback', '../internals/baseEachRight'], functi
    */
   function forEachRight(collection, callback, thisArg) {
     var length = collection ? collection.length : 0;
-    callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
 
+    if (typeof callback != 'function' || typeof thisArg != 'undefined') {
+      callback = baseCreateCallback(callback, thisArg, 3);
+    }
     return (typeof length == 'number' && length > -1 && length <= maxSafeInteger)
       ? arrayEachRight(collection, callback)
       : baseEachRight(collection, callback);
