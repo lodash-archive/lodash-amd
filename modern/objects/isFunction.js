@@ -25,7 +25,9 @@ define([], function() {
    * // => false
    */
   function isFunction(value) {
-    return typeof value == 'function';
+    // avoid a Chakra bug in IE 11
+    // https://github.com/jashkenas/underscore/issues/1621
+    return typeof value == 'function' || false;
   }
 
   return isFunction;
