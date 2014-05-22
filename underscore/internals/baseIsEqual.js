@@ -129,7 +129,8 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
 
       if (result) {
         while (size--) {
-          if (!(result = baseIsEqual(value[size], other[size], stackA, stackB))) {
+          result = baseIsEqual(value[size], other[size], stackA, stackB);
+          if (!result) {
             break;
           }
         }
@@ -139,14 +140,16 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
       baseForIn(other, function(othValue, key, other) {
         if (hasOwnProperty.call(other, key)) {
           size++;
-          return !(result = hasOwnProperty.call(value, key) && baseIsEqual(value[key], othValue, stackA, stackB)) && breakIndicator;
+          result = hasOwnProperty.call(value, key) && baseIsEqual(value[key], othValue, stackA, stackB);
+          return result || breakIndicator;
         }
       });
 
       if (result) {
         baseForIn(value, function(valValue, key, value) {
           if (hasOwnProperty.call(value, key)) {
-            return !(result = --size > -1) && breakIndicator;
+            result = --size > -1;
+            return result || breakIndicator;
           }
         });
       }
