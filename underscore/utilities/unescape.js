@@ -9,7 +9,7 @@
 define([], function() {
 
   /** Used to match HTML entities and HTML characters */
-  var reEscapedHtml = /&(?:amp|lt|gt|quot|#x27);/g;
+  var reEscapedHtml = /&(?:amp|lt|gt|quot|#x27|#96);/g;
 
   /** Used to convert HTML entities to characters */
   var htmlUnescapes = {
@@ -17,7 +17,8 @@ define([], function() {
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',
-    '&#x27;': "'"
+    '&#x27;': "'",
+    '&#96;': '`'
   };
 
   /**
