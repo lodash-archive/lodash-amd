@@ -12,7 +12,7 @@ define([], function() {
   var idCounter = 0;
 
   /**
-   * Generates a unique ID. If `prefix` is provided the ID will be appended to it.
+   * Generates a unique ID. If `prefix` is provided the ID is appended to it.
    *
    * @static
    * @memberOf _

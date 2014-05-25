@@ -16,7 +16,7 @@ define(['../internals/baseFunctions', '../objects/isFunction', '../objects/isObj
 
   /**
    * Adds all own enumerable function properties of a source object to the
-   * destination object. If `object` is a function methods will be added to
+   * destination object. If `object` is a function then methods are added to
    * its prototype as well.
    *
    * @static

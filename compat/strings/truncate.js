@@ -13,8 +13,8 @@ define(['../objects/isObject', '../objects/isRegExp'], function(isObject, isRegE
 
   /**
    * Truncates `string` if it is longer than the given maximum string length.
-   * The last characters of the truncated string will be replaced with the
-   * omission string which defaults to "...".
+   * The last characters of the truncated string are replaced with the omission
+   * string which defaults to "...".
    *
    * @static
    * @memberOf _

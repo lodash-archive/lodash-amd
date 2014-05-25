@@ -17,8 +17,8 @@ define(['../internals/baseEachRight', '../internals/baseFind', '../functions/cre
    * @category Collections
    * @param {Array|Object|string} collection The collection to search.
    * @param {Function|Object|string} [predicate=identity] The function called
-   *  per iteration. If a property name or object is provided it will be used
-   *  to create a "_.pluck" or "_.where" style callback respectively.
+   *  per iteration. If a property name or object is provided it is used to
+   *  create a "_.pluck" or "_.where" style callback respectively.
    * @param {*} [thisArg] The `this` binding of `predicate`.
    * @returns {*} Returns the matched element, else `undefined`.
    * @example

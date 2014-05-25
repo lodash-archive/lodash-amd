@@ -19,7 +19,7 @@ define(['./baseEach', '../functions/createCallback'], function(baseEach, createC
    * Creates a function that aggregates a collection, creating an accumulator
    * object composed from the results of running each element in the collection
    * through a callback. The given setter function sets the keys and values of
-   * the accumulator object. If `initializer` is provided it will be used to
+   * the accumulator object. If `initializer` is provided it is used to
    * initialize the accumulator object.
    *
    * @private

@@ -14,7 +14,7 @@ define(['../internals/baseIndexOf', './sortedIndex'], function(baseIndexOf, sort
   /**
    * Gets the index at which the first occurrence of `value` is found using
    * strict equality for comparisons, i.e. `===`. If the array is already sorted
-   * providing `true` for `fromIndex` will run a faster binary search.
+   * providing `true` for `fromIndex` performs a faster binary search.
    *
    * @static
    * @memberOf _

@@ -38,8 +38,8 @@ define(['../internals/baseEach', '../arrays/slice'], function(baseEach, slice) {
   /**
    * Invokes the method named by `methodName` on each element in the collection
    * returning an array of the results of each invoked method. Additional arguments
-   * will be provided to each invoked method. If `methodName` is a function it
-   * will be invoked for, and `this` bound to, each element in the collection.
+   * is provided to each invoked method. If `methodName` is a function it is
+   * invoked for, and `this` bound to, each element in the collection.
    *
    * @static
    * @memberOf _

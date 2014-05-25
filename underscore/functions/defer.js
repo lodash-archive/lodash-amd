@@ -15,8 +15,8 @@ define(['../objects/isFunction', '../arrays/slice'], function(isFunction, slice)
   var funcErrorText = 'Expected a function';
 
   /**
-   * Defers executing the `func` function until the current call stack has cleared.
-   * Additional arguments will be provided to `func` when it is invoked.
+   * Defers executing the `func` function until the current call stack has
+   * cleared. Additional arguments are provided to `func` when it is invoked.
    *
    * @static
    * @memberOf _

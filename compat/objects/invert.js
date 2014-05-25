@@ -17,7 +17,7 @@ define(['./keys'], function(keys) {
   /**
    * Creates an object composed of the inverted keys and values of the given
    * object. If the given object contains duplicate values, subsequent values
-   * will overwrite property assignments of previous values unless `multiValue`
+   * overwrite property assignments of previous values unless `multiValue`
    * is `true`.
    *
    * @static
