@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/arrayEach', '../internals/baseForOwn', '../internals/createAssigner', './isArray', './isPlainObject'], function(arrayEach, baseForOwn, createAssigner, isArray, isPlainObject) {
+define(['../internals/arrayEach', '../internals/baseForOwn', '../internals/createAssigner', './isArray', '../internals/isArrayLike', './isPlainObject'], function(arrayEach, baseForOwn, createAssigner, isArray, isArrayLike, isPlainObject) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -27,8 +27,8 @@ define(['../internals/arrayEach', '../internals/baseForOwn', '../internals/creat
     if (!object) {
       return object;
     }
-    (isArray(source) ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
-      var isArr = srcValue && isArray(srcValue),
+    (isArrayLike(source) ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
+      var isArr = srcValue && isArrayLike(srcValue),
           isObj = srcValue && isPlainObject(srcValue),
           value = object[key];
 

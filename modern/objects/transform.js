@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/arrayEach', '../internals/baseCreate', '../internals/baseForOwn', '../functions/createCallback', './isArray', './isObject'], function(arrayEach, baseCreate, baseForOwn, createCallback, isArray, isObject) {
+define(['../internals/arrayEach', '../internals/baseCreate', '../internals/baseForOwn', '../functions/createCallback', '../internals/isArrayLike', './isObject'], function(arrayEach, baseCreate, baseForOwn, createCallback, isArrayLike, isObject) {
 
   /**
    * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -40,14 +40,14 @@ define(['../internals/arrayEach', '../internals/baseCreate', '../internals/baseF
    * // => { 'a': 3, 'b': 6, 'c': 9 }
    */
   function transform(object, callback, accumulator, thisArg) {
-    var isArr = isArray(object);
+    var isArr = isArrayLike(object);
     if (accumulator == null) {
       if (isArr) {
         accumulator = [];
       } else {
         if (isObject(object)) {
-          var ctor = object.constructor,
-              proto = ctor && ctor.prototype;
+          var Ctor = object.constructor,
+              proto = Ctor && Ctor.prototype;
         }
         accumulator = baseCreate(proto);
       }
