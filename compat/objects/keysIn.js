@@ -85,9 +85,9 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
         (support.nonEnumArgs && isArguments(object))) && length) >>> 0;
 
     var keyIndex,
-        ctor = object.constructor,
+        Ctor = object.constructor,
         index = -1,
-        isProto = ctor && object === ctor.prototype,
+        isProto = Ctor && object === Ctor.prototype,
         maxIndex = length - 1,
         result = Array(length),
         skipIndexes = length > 0,
@@ -97,6 +97,10 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
     while (++index < length) {
       result[index] = String(index);
     }
+    // Lo-Dash skips the `constructor` property when it infers it's iterating
+    // over a `prototype` object because IE < 9 can't set the `[[Enumerable]]`
+    // attribute of an existing property and the `constructor` property of a
+    // prototype defaults to non-enumerable.
     for (var key in object) {
       if (!(isProto && key == 'constructor') &&
           !(skipProto && key == 'prototype') &&
@@ -105,10 +109,6 @@ define(['./isArguments', './isArray', './isObject', './isString', '../support'],
         result.push(key);
       }
     }
-    // Lo-Dash skips the `constructor` property when it infers it's iterating
-    // over a `prototype` object because IE < 9 can't set the `[[Enumerable]]`
-    // attribute of an existing property and the `constructor` property of a
-    // prototype defaults to non-enumerable.
     if (support.nonEnumShadows && object !== objectProto) {
       index = -1;
       length = shadowedProps.length;

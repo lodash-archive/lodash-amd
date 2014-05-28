@@ -31,6 +31,7 @@ define(['./internals/isNative'], function(isNative) {
   var support = {};
 
   (function(x) {
+    var Ctor = function() { this.x = 1; };
 
     for (var argsKey in arguments) { }
 
