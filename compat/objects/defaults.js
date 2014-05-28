@@ -37,8 +37,8 @@ define(['./assign', '../arrays/slice'], function(assign, slice) {
    * @returns {Object} Returns the destination object.
    * @example
    *
-   * _.defaults({ 'name': 'barney' }, { 'name': 'fred', 'employer': 'slate' });
-   * // => { 'name': 'barney', 'employer': 'slate' }
+   * _.defaults({ 'name': 'barney' }, { 'age': 36 }, { 'name': 'fred', 'employer': 'slate' });
+   * // => { 'name': 'barney', 'age': 36, 'employer': 'slate' }
    */
   function defaults(object) {
     if (!object) {
