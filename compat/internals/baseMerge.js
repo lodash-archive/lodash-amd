@@ -24,9 +24,6 @@ define(['./arrayEach', './baseForOwn', '../objects/isArray', './isArrayLike', '.
    * @returns {Object} Returns the destination object.
    */
   function baseMerge(object, source, callback, stackA, stackB) {
-    if (!object) {
-      return object;
-    }
     (isArrayLike(source) ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
       var isArr = srcValue && isArrayLike(srcValue),
           isObj = srcValue && isPlainObject(srcValue),
