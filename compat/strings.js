@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./strings/camelCase', './strings/capitalize', './strings/endsWith', './utilities/escape', './strings/escapeRegExp', './strings/kebabCase', './strings/pad', './strings/padLeft', './strings/padRight', './strings/repeat', './strings/snakeCase', './strings/startsWith', './utilities/template', './utilities/templateSettings', './strings/trim', './strings/trimLeft', './strings/trimRight', './strings/truncate', './utilities/unescape'], function(camelCase, capitalize, endsWith, escape, escapeRegExp, kebabCase, pad, padLeft, padRight, repeat, snakeCase, startsWith, template, templateSettings, trim, trimLeft, trimRight, truncate, unescape) {
+define(['./strings/camelCase', './strings/capitalize', './strings/endsWith', './utilities/escape', './strings/escapeRegExp', './strings/kebabCase', './strings/pad', './strings/padLeft', './strings/padRight', './strings/repeat', './strings/snakeCase', './strings/startsWith', './utilities/template', './utilities/templateSettings', './strings/trim', './strings/trimLeft', './strings/trimRight', './strings/trunc', './utilities/unescape'], function(camelCase, capitalize, endsWith, escape, escapeRegExp, kebabCase, pad, padLeft, padRight, repeat, snakeCase, startsWith, template, templateSettings, trim, trimLeft, trimRight, trunc, unescape) {
 
   return {
     'camelCase': camelCase,
@@ -26,7 +26,7 @@ define(['./strings/camelCase', './strings/capitalize', './strings/endsWith', './
     'trim': trim,
     'trimLeft': trimLeft,
     'trimRight': trimRight,
-    'truncate': truncate,
+    'trunc': trunc,
     'unescape': unescape
   };
 });
