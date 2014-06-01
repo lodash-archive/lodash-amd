@@ -1,5 +1,5 @@
 /**
- * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
+ * Lo-Dash 2.5.0-pre (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize exports="amd" -o ./compat/`
  * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
@@ -12,7 +12,7 @@ define(['../functions/bind', '../utilities/identity', './setData', '../support']
   var BIND_FLAG = 1;
 
   /** Used as the semantic version number */
-  var version = '2.4.1';
+  var version = '2.5.0-pre';
 
   /** Used as the property name for wrapper metadata */
   var expando = '__lodash@' + version + '__';
