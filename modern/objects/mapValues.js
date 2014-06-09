@@ -32,7 +32,7 @@ define(['../internals/baseForOwn', '../functions/createCallback'], function(base
    * @returns {Object} Returns the new mapped object.
    * @example
    *
-   * _.mapValues({ 'a': 1, 'b': 2, 'c': 3} , function(num) { return num * 3; });
+   * _.mapValues({ 'a': 1, 'b': 2, 'c': 3} , function(n) { return n * 3; });
    * // => { 'a': 3, 'b': 6, 'c': 9 }
    *
    * var characters = {

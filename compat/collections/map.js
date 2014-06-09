@@ -52,10 +52,10 @@ define(['../internals/baseEach', '../functions/createCallback', '../objects/isAr
    * @returns {Array} Returns the new mapped array.
    * @example
    *
-   * _.map([1, 2, 3], function(num) { return num * 3; });
+   * _.map([1, 2, 3], function(n) { return n * 3; });
    * // => [3, 6, 9]
    *
-   * _.map({ 'one': 1, 'two': 2, 'three': 3 }, function(num) { return num * 3; });
+   * _.map({ 'one': 1, 'two': 2, 'three': 3 }, function(n) { return n * 3; });
    * // => [3, 6, 9] (property order is not guaranteed across environments)
    *
    * var characters = [

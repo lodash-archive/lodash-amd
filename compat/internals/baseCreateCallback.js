@@ -23,7 +23,7 @@ define(['../functions/bind', '../utilities/identity', './setData', '../support']
   /** Used to detect functions containing a `this` reference */
   var reThis = /\bthis\b/;
 
-  /** Native method shortcuts */
+  /** Used to resolve the decompiled source of functions */
   var fnToString = Function.prototype.toString;
 
   /**
