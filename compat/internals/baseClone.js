@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrayEach', './baseAssign', './baseForOwn', './cloneBuffer', '../objects/isArray', '../objects/isFunction', './isNode', '../objects/isObject', '../arrays/slice', '../support'], function(arrayEach, baseAssign, baseForOwn, cloneBuffer, isArray, isFunction, isNode, isObject, slice, support) {
+define(['./arrayEach', './baseAssign', './baseForOwn', './cloneBuffer', '../objects/isArguments', '../objects/isArray', '../objects/isFunction', './isNode', '../objects/isObject', '../arrays/slice', '../support'], function(arrayEach, baseAssign, baseForOwn, cloneBuffer, isArguments, isArray, isFunction, isNode, isObject, slice, support) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
