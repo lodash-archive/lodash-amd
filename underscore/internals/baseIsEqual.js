@@ -6,16 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction) {
-
-  /** Used as the semantic version number */
-  var version = '2.5.0-pre';
-
-  /** Used as the property name for wrapper metadata */
-  var expando = '__lodash@' + version + '__';
-
-  /** Used by methods to exit iteration */
-  var breakIndicator = expando + 'breaker__';
+define(['../objects/isFunction', '../objects/keys'], function(isFunction, keys) {
 
   /** `Object#toString` result shortcuts */
   var argsClass = '[object Arguments]',
@@ -149,19 +140,16 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
         return stackB[length] == other;
       }
     }
-    var result = true,
-        size = 0;
-
     stackA.push(value);
     stackB.push(other);
 
     if (isArr) {
-      size = other.length;
-      result = size == value.length;
+      length = value.length;
+      var result = length == other.length;
 
       if (result) {
-        while (size--) {
-          result = baseIsEqual(value[size], other[size], stackA, stackB);
+        while (length--) {
+          result = baseIsEqual(value[length], other[length], stackA, stackB);
           if (!result) {
             break;
           }
@@ -169,25 +157,23 @@ define(['./baseForIn', '../objects/isFunction'], function(baseForIn, isFunction)
       }
     }
     else {
-      baseForIn(other, function(othValue, key, other) {
-        if (hasOwnProperty.call(other, key)) {
-          size++;
-          result = hasOwnProperty.call(value, key) && baseIsEqual(value[key], othValue, stackA, stackB);
-          return result || breakIndicator;
-        }
-      });
+      var props = keys(value);
+      length = props.length;
+      result = length == keys(other).length;
 
       if (result) {
-        baseForIn(value, function(valValue, key, value) {
-          if (hasOwnProperty.call(value, key)) {
-            result = --size > -1;
-            return result || breakIndicator;
+        while (length--) {
+          var key = props[length];
+          result = hasOwnProperty.call(other, key) && baseIsEqual(value[key], other[key], stackA, stackB);
+          if (!result) {
+            break;
           }
-        });
+        }
       }
     }
     stackA.pop();
     stackB.pop();
+
     return result;
   }
 

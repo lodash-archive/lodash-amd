@@ -65,7 +65,7 @@ define(['../internals/baseIsEqual', '../objects/isObject', '../objects/keys'], f
       while (length--) {
         var key = props[length];
         if (!(hasOwnProperty.call(object, key) &&
-              baseIsEqual(object[key], source[key], null, true))) {
+              baseIsEqual(source[key], object[key], null, true))) {
           return false;
         }
       }
