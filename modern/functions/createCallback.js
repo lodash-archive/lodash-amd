@@ -44,7 +44,7 @@ define(['../internals/baseCreateCallback', '../utilities/matches', '../utilities
     var type = typeof func,
         isFunc = type == 'function';
 
-    if (isFunc && (typeof thisArg == 'undefined' || !('prototype' in func))) {
+    if (isFunc && typeof thisArg == 'undefined') {
       return func;
     }
     if (isFunc || func == null) {

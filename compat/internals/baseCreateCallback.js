@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../functions/bind', '../utilities/identity', './setData', '../support'], function(bind, identity, setData, support) {
+define(['../functions/bind', '../utilities/identity', './isNative', './setData', '../support'], function(bind, identity, isNative, setData, support) {
 
   /** Used to compose bitmasks for wrapper metadata */
   var BIND_FLAG = 1;
@@ -40,8 +40,7 @@ define(['../functions/bind', '../utilities/identity', './setData', '../support']
     if (typeof func != 'function') {
       return identity;
     }
-    // exit early for no `thisArg` or already bound by `Function#bind`
-    if (typeof thisArg == 'undefined' || !('prototype' in func)) {
+    if (typeof thisArg == 'undefined') {
       return func;
     }
     var data = func[expando];
@@ -57,7 +56,7 @@ define(['../functions/bind', '../utilities/identity', './setData', '../support']
         }
         if (!data) {
           // checks if `func` references the `this` keyword and stores the result
-          data = reThis.test(source);
+          data = reThis.test(source) || isNative(func);
           setData(func, data);
         }
       }
