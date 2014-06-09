@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrayEach', './baseAssign', './baseForOwn', '../objects/isArray', '../objects/isFunction', '../objects/isObject', '../arrays/slice'], function(arrayEach, baseAssign, baseForOwn, isArray, isFunction, isObject, slice) {
+define(['./arrayEach', './baseAssign', './baseForOwn', './cloneBuffer', '../objects/isArray', '../objects/isFunction', '../objects/isObject', '../arrays/slice'], function(arrayEach, baseAssign, baseForOwn, cloneBuffer, isArray, isFunction, isObject, slice) {
 
   /** Used as a safe reference for `undefined` in pre ES5 environments */
   var undefined;
@@ -64,6 +64,18 @@ define(['./arrayEach', './baseAssign', './baseForOwn', '../objects/isArray', '..
   /** Native method shortcuts */
   var hasOwnProperty = objectProto.hasOwnProperty;
 
+  /** Used to lookup a built-in constructor by [[Class]] */
+  var ctorByClass = {};
+  ctorByClass[float32Class] = window.Float32Array;
+  ctorByClass[float64Class] = window.Float64Array;
+  ctorByClass[int8Class] = window.Int8Array;
+  ctorByClass[int16Class] = window.Int16Array;
+  ctorByClass[int32Class] = window.Int32Array;
+  ctorByClass[uint8Class] = window.Uint8Array;
+  ctorByClass[uint8ClampedClass] = window.Uint8ClampedArray;
+  ctorByClass[uint16Class] = window.Uint16Array;
+  ctorByClass[uint32Class] = window.Uint32Array;
+
   /**
    * The base implementation of `_.clone` without support for argument juggling
    * and `this` binding.
@@ -93,7 +105,7 @@ define(['./arrayEach', './baseAssign', './baseForOwn', '../objects/isArray', '..
       }
       switch (className) {
         case arrayBufferClass:
-          return value.slice(0);
+          return cloneBuffer(value);
 
         case boolClass:
         case dateClass:
@@ -105,7 +117,7 @@ define(['./arrayEach', './baseAssign', './baseForOwn', '../objects/isArray', '..
         case float32Class: case float64Class:
         case int8Class: case int16Class: case int32Class:
         case uint8Class: case uint8ClampedClass: case uint16Class: case uint32Class:
-          return value.subarray(0);
+          return new ctorByClass[className](cloneBuffer(value.buffer));
 
         case numberClass:
         case stringClass:
@@ -131,7 +143,7 @@ define(['./arrayEach', './baseAssign', './baseForOwn', '../objects/isArray', '..
           return stackB[length];
         }
       }
-      result = isArr ? Ctor(value.length) : Ctor();
+      result = isArr ? Ctor(value.length) : new Ctor();
     }
     else {
       result = isArr ? slice(value) : baseAssign({}, value);

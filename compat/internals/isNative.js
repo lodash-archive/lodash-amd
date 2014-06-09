@@ -8,8 +8,14 @@
  */
 define(['../strings/escapeRegExp'], function(escapeRegExp) {
 
+  /** Used to detect host constructors (Safari > 5) */
+  var reHostCtor = /^\[object .+?Constructor\]$/;
+
   /** Used for native method references */
   var objectProto = Object.prototype;
+
+  /** Used to resolve the decompiled source of functions */
+  var fnToString = Function.prototype.toString;
 
   /** Used to resolve the internal `[[Class]]` of values */
   var toString = objectProto.toString;
@@ -20,9 +26,6 @@ define(['../strings/escapeRegExp'], function(escapeRegExp) {
     .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
   );
 
-  /** Native method shortcuts */
-  var fnToString = Function.prototype.toString;
-
   /**
    * Checks if `value` is a native function.
    *
@@ -31,7 +34,10 @@ define(['../strings/escapeRegExp'], function(escapeRegExp) {
    * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
    */
   function isNative(value) {
-    return typeof value == 'function' && reNative.test(fnToString.call(value));
+    var type = typeof value;
+    return type == 'function'
+      ? reNative.test(fnToString.call(value))
+      : (value && type == 'object' && reHostCtor.test(toString.call(value))) || false;
   }
 
   return isNative;
