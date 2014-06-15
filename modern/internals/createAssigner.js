@@ -21,7 +21,7 @@ define(['./baseCreateCallback'], function(baseCreateCallback) {
       var args = arguments,
           length = args.length;
 
-      if (!object || length < 2) {
+      if (object == null || length < 2) {
         return object;
       }
       // enables use as a callback for functions like `_.reduce`
