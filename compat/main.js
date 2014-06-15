@@ -114,6 +114,7 @@ define(['./arrays', './chaining', './collections', './functions', './objects', '
   lodash.bindAll = functions.bindAll;
   lodash.bindKey = functions.bindKey;
   lodash.chain = chaining.chain;
+  lodash.chunk = arrays.chunk;
   lodash.compact = arrays.compact;
   lodash.compose = functions.compose;
   lodash.constant = utilities.constant;

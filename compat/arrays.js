@@ -6,9 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['./arrays/compact', './arrays/difference', './arrays/drop', './arrays/dropRight', './arrays/dropRightWhile', './arrays/dropWhile', './arrays/findIndex', './arrays/findLastIndex', './arrays/first', './arrays/flatten', './arrays/indexOf', './arrays/initial', './arrays/intersection', './arrays/last', './arrays/lastIndexOf', './arrays/pull', './arrays/pullAt', './arrays/range', './arrays/remove', './arrays/rest', './arrays/slice', './arrays/sortedIndex', './arrays/take', './arrays/takeRight', './arrays/takeRightWhile', './arrays/takeWhile', './arrays/union', './arrays/uniq', './arrays/without', './arrays/xor', './arrays/zip', './arrays/zipObject'], function(compact, difference, drop, dropRight, dropRightWhile, dropWhile, findIndex, findLastIndex, first, flatten, indexOf, initial, intersection, last, lastIndexOf, pull, pullAt, range, remove, rest, slice, sortedIndex, take, takeRight, takeRightWhile, takeWhile, union, uniq, without, xor, zip, zipObject) {
+define(['./arrays/chunk', './arrays/compact', './arrays/difference', './arrays/drop', './arrays/dropRight', './arrays/dropRightWhile', './arrays/dropWhile', './arrays/findIndex', './arrays/findLastIndex', './arrays/first', './arrays/flatten', './arrays/indexOf', './arrays/initial', './arrays/intersection', './arrays/last', './arrays/lastIndexOf', './arrays/pull', './arrays/pullAt', './arrays/range', './arrays/remove', './arrays/rest', './arrays/slice', './arrays/sortedIndex', './arrays/take', './arrays/takeRight', './arrays/takeRightWhile', './arrays/takeWhile', './arrays/union', './arrays/uniq', './arrays/without', './arrays/xor', './arrays/zip', './arrays/zipObject'], function(chunk, compact, difference, drop, dropRight, dropRightWhile, dropWhile, findIndex, findLastIndex, first, flatten, indexOf, initial, intersection, last, lastIndexOf, pull, pullAt, range, remove, rest, slice, sortedIndex, take, takeRight, takeRightWhile, takeWhile, union, uniq, without, xor, zip, zipObject) {
 
   return {
+    'chunk': chunk,
     'compact': compact,
     'difference': difference,
     'drop': drop,
