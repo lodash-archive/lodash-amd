@@ -32,6 +32,12 @@ define(['../internals/createWrapper', '../arrays/slice'], function(createWrapper
    * @returns {Function} Returns the new partially applied function.
    * @example
    *
+   * var greet = function(greeting, name) { return greeting + ' ' + name; };
+   * var greetFred = _.partialRight(greet, 'fred');
+   * greetFred('hello');
+   * // => 'hello fred'
+   *
+   * // create a deep `_.defaults`
    * var defaultsDeep = _.partialRight(_.merge, function deep(value, other) {
    *   return _.merge(value, other, deep);
    * });
