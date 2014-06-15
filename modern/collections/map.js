@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internals/baseEach', '../functions/createCallback'], function(baseEach, createCallback) {
+define(['../internals/arrayMap', '../internals/baseEach', '../functions/createCallback'], function(arrayMap, baseEach, createCallback) {
 
   /**
    * Used as the maximum length of an array-like object.
@@ -14,26 +14,6 @@ define(['../internals/baseEach', '../functions/createCallback'], function(baseEa
    * for more details.
    */
   var maxSafeInteger = Math.pow(2, 53) - 1;
-
-  /**
-   * A specialized version of `_.map` for arrays without support for callback
-   * shorthands or `this` binding.
-   *
-   * @private
-   * @param {Array} array The array to iterate over.
-   * @param {Function} callback The function called per iteration.
-   * @returns {Array} Returns the new mapped array.
-   */
-  function arrayMap(array, callback) {
-    var index = -1,
-        length = array ? array.length >>> 0 : 0,
-        result = Array(length);
-
-    while (++index < length) {
-      result[index] = callback(array[index], index, array);
-    }
-    return result;
-  }
 
   /**
    * Creates an array of values by running each element in the collection
