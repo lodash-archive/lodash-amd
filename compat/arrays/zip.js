@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../collections/max', '../collections/pluck'], function(max, pluck) {
+define(['../objects/isArray', '../collections/max', '../collections/pluck'], function(isArray, max, pluck) {
 
   /**
    * Creates an array of grouped elements, the first of which contains the first
@@ -31,7 +31,7 @@ define(['../collections/max', '../collections/pluck'], function(max, pluck) {
   function zip() {
     var array = arguments.length > 1 ? arguments : arguments[0],
         index = -1,
-        length = (array && array.length) ? max(array, 'length').length : 0,
+        length = isArray(length = max(array, 'length')) && length.length || 0,
         result = Array(length);
 
     while (++index < length) {
