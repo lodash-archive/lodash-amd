@@ -45,12 +45,12 @@ define(['../objects/keys'], function(keys) {
 
     return function(object) {
       var length = propsLength;
-      if (length && !object) {
+      if (length && object == null) {
         return false;
       }
       while (length--) {
         var key = props[length];
-        if (!(hasOwnProperty.call(object, key) && object[key] === source[key])) {
+        if (!(object[key] === source[key] && hasOwnProperty.call(object, key))) {
           return false
         }
       }
