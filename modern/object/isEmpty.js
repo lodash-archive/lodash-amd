@@ -44,7 +44,7 @@ define(['../internal/baseForOwn', './isArguments', './isArray', './isFunction', 
    */
   function isEmpty(value) {
     var result = true;
-    if (!value) {
+    if (value == null) {
       return result;
     }
     var length = value.length;
