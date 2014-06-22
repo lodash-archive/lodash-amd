@@ -38,7 +38,7 @@ define(['../internal/baseFlatten', '../internal/basePick'], function(baseFlatten
   function pick(object) {
     return object == null
       ? {}
-      : basePick(object, baseFlatten(arguments, false, false, 1));
+      : basePick(Object(object), baseFlatten(arguments, false, false, 1));
   }
 
   return pick;

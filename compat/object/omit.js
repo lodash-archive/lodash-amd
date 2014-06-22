@@ -43,7 +43,7 @@ define(['../internal/arrayMap', '../internal/baseDifference', '../internal/baseF
       return basePick(object, negate(callback(predicate, thisArg, 3)));
     }
     var omitProps = baseFlatten(arguments, false, false, 1);
-    return basePick(object, baseDifference(keysIn(object), arrayMap(omitProps, String)));
+    return basePick(Object(object), baseDifference(keysIn(object), arrayMap(omitProps, String)));
   }
 
   return omit;
