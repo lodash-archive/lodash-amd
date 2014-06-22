@@ -19,6 +19,7 @@ define([], function() {
    */
   function charsRightIndex(string, chars) {
     var index = string.length;
+
     while (index--) {
       if (chars.indexOf(string.charAt(index)) < 0) {
         break;

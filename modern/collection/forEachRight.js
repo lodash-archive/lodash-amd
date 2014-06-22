@@ -26,6 +26,7 @@ define(['../internal/baseCallback', '../internal/baseEachRight'], function(baseC
    */
   function arrayEachRight(array, iterator) {
     var length = array ? array.length : 0;
+
     while (length--) {
       if (iterator(array[length], length, array) === false) {
         break;

@@ -49,6 +49,7 @@ define([], function() {
       n = floor(n / 2);
       string += string;
     } while (n);
+
     return result;
   }
 
