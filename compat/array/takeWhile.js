@@ -49,14 +49,11 @@ define(['../utility/callback', './slice'], function(callback, slice) {
    */
   function takeWhile(array, predicate, thisArg) {
     var index = -1,
-        length = array ? array.length : 0,
-        n = 0;
+        length = array ? array.length : 0;
 
     predicate = callback(predicate, thisArg, 3);
-    while (++index < length && predicate(array[index], index, array)) {
-      n++;
-    }
-    return slice(array, 0, n < 0 ? 0 : n);
+    while (++index < length && predicate(array[index], index, array)) { }
+    return slice(array, 0, index);
   }
 
   return takeWhile;

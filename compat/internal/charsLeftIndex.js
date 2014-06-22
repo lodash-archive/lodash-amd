@@ -21,11 +21,7 @@ define([], function() {
     var index = -1,
         length = string.length;
 
-    while (++index < length) {
-      if (chars.indexOf(string.charAt(index)) < 0) {
-        break;
-      }
-    }
+    while (++index < length && chars.indexOf(string.charAt(index)) > -1) { }
     return index;
   }
 
