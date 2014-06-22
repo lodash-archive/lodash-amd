@@ -46,6 +46,9 @@ define(['../object/isFunction'], function(isFunction) {
         funcsLength = funcs.length,
         length = funcsLength;
 
+    if (!length) {
+      return function() {};
+    }
     while (length--) {
       if (!isFunction(funcs[length])) {
         throw new TypeError(funcErrorText);
