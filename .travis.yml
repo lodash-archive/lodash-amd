@@ -33,9 +33,9 @@ before_install:
   - "[ $SAUCE_LABS == false ] || npm i chalk@\"^0.4.0\" ecstatic@\"^0.5.0\" request@\"^2.36.0\" sauce-tunnel@\"^2.0.0\""
   - "[ $ISTANBUL == false ]   || npm i -g coveralls@\"^2.10.0\" istanbul@\"^0.2.0\""
 script:
-  - "[ $ISTANBUL == false ]    || istanbul instrument --output ./$BUILD ./modern"
-  - "[ $SAUCE_LABS == true ]   || phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
-  - "[ $ISTANBUL == false ]    || istanbul report lcovonly"
+  - "[ $ISTANBUL == false ]  || istanbul instrument --output ./$BUILD ./modern"
+  - "[ $SAUCE_LABS == true ] || phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
+  - "[ $ISTANBUL == false ]  || istanbul report lcovonly"
   - "[ $ISTANBUL == true ] && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage || true"
   - "([ $SAUCE_LABS == false ] || [ $BUILD == 'underscore' ]) || $BIN ./node_modules/lodash/test/saucelabs.js name=\"lodash tests\" runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development\""
   - "([ $SAUCE_LABS == false ] || [ $BUILD != 'compat' ])     || $BIN ./node_modules/lodash/test/saucelabs.js name=\"lodash tests\" runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,ie-compat\" compatMode=7"
