@@ -29,6 +29,9 @@ define(['./isArguments', './isArray', '../support'], function(isArguments, isArr
    * // => ['x', 'y', 'z'] (property order is not guaranteed across environments)
    */
   function keysIn(object) {
+    if (object == null) {
+      return [];
+    }
     object = Object(object);
 
     var length = object.length;
