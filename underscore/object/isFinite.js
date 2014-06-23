@@ -6,11 +6,11 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-define(['../internal/isNative'], function(isNative) {
+define([], function() {
 
   /* Native method shortcuts for methods with the same name as other `lodash` methods */
   var nativeIsFinite = window.isFinite,
-      nativeNumIsFinite = isNative(nativeNumIsFinite = Number.isFinite) && nativeNumIsFinite;
+      nativeIsNaN = window.isNaN;
 
   /**
    * Checks if `value` is a finite number.
@@ -41,9 +41,9 @@ define(['../internal/isNative'], function(isNative) {
    * _.isFinite(Infinity);
    * // => false
    */
-  var isFinite = nativeNumIsFinite || function(value) {
-    return typeof value == 'number' && nativeIsFinite(value);
-  };
+  function isFinite(value) {
+    return nativeIsFinite(value) && !nativeIsNaN(parseFloat(value));
+  }
 
   return isFinite;
 });
