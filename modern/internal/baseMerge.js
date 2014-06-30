@@ -1,19 +1,11 @@
-/**
- * Lo-Dash 3.0.0-pre (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize modern exports="amd" -o ./modern/`
- * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
- * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- * Available under MIT license <http://lodash.com/license>
- */
-define(['./arrayEach', './baseForOwn', '../object/isArray', './isArrayLike', '../object/isPlainObject'], function(arrayEach, baseForOwn, isArray, isArrayLike, isPlainObject) {
+define(['./arrayEach', './baseForOwn', './baseMergeDeep', '../lang/isArray', './isLength', './isObjectLike', '../lang/isTypedArray'], function(arrayEach, baseForOwn, baseMergeDeep, isArray, isLength, isObjectLike, isTypedArray) {
 
-  /** Used as a safe reference for `undefined` in pre ES5 environments */
+  /** Used as a safe reference for `undefined` in pre-ES5 environments. */
   var undefined;
 
   /**
    * The base implementation of `_.merge` without support for argument juggling,
-   * multiple sources, and `this` binding.
+   * multiple sources, and `this` binding `customizer` functions.
    *
    * @private
    * @param {Object} object The destination object.
@@ -24,53 +16,26 @@ define(['./arrayEach', './baseForOwn', '../object/isArray', './isArrayLike', '..
    * @returns {Object} Returns the destination object.
    */
   function baseMerge(object, source, customizer, stackA, stackB) {
-    var isSrcArr = isArrayLike(source);
+    var isSrcArr = isLength(source.length) && (isArray(source) || isTypedArray(source));
+
     (isSrcArr ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
-      var isArr = srcValue && isArrayLike(srcValue),
-          isObj = srcValue && isPlainObject(srcValue),
-          value = object[key];
-
-      if (!(isArr || isObj)) {
-        result = customizer ? customizer(value, srcValue, key, object, source) : undefined;
-        if (typeof result == 'undefined') {
-          result = srcValue;
-        }
-        if (isSrcArr || typeof result != 'undefined') {
-          object[key] = result;
-        }
-        return;
+      if (isObjectLike(srcValue)) {
+        stackA || (stackA = []);
+        stackB || (stackB = []);
+        return baseMergeDeep(object, source, key, baseMerge, customizer, stackA, stackB);
       }
-      // avoid merging previously merged cyclic sources
-      stackA || (stackA = []);
-      stackB || (stackB = []);
+      var value = object[key],
+          result = customizer ? customizer(value, srcValue, key, object, source) : undefined,
+          isCommon = typeof result == 'undefined';
 
-      var length = stackA.length;
-      while (length--) {
-        if (stackA[length] == srcValue) {
-          object[key] = stackB[length];
-          return;
-        }
+      if (isCommon) {
+        result = srcValue;
       }
-      var result = customizer ? customizer(value, srcValue, key, object, source) : undefined,
-          isShallow = typeof result != 'undefined';
-
-      if (!isShallow) {
-        result = isArr
-          ? (isArray(value) ? value : [])
-          : (isPlainObject(value) ? value : {});
+      if ((isSrcArr || typeof result != 'undefined') &&
+          (isCommon || (result === result ? result !== value : value === value))) {
+        object[key] = result;
       }
-      // add the source value to the stack of traversed objects
-      // and associate it with its merged value
-      stackA.push(srcValue);
-      stackB.push(result);
-
-      // recursively merge objects and arrays (susceptible to call stack limits)
-      if (!isShallow) {
-        baseMerge(result, srcValue, customizer, stackA, stackB);
-      }
-      object[key] = result;
     });
-
     return object;
   }
 

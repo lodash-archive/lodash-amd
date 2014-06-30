@@ -1,22 +1,14 @@
-/**
- * Lo-Dash 3.0.0-pre (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize modern exports="amd" -o ./modern/`
- * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
- * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- * Available under MIT license <http://lodash.com/license>
- */
-define([], function() {
+define(['../internal/isIterateeCall'], function(isIterateeCall) {
 
-  /** Native method shortcuts */
+  /** Native method references. */
   var ceil = Math.ceil;
 
-  /* Native method shortcuts for methods with the same name as other `lodash` methods */
+  /* Native method references for those with the same name as other `lodash` methods. */
   var nativeMax = Math.max;
 
   /**
    * Creates an array of numbers (positive and/or negative) progressing from
-   * `start` up to but not including `end`. If `start` is less than `stop` a
+   * `start` up to, but not including, `end`. If `start` is less than `end` a
    * zero-length range is created unless a negative `step` is specified.
    *
    * @static
@@ -47,6 +39,9 @@ define([], function() {
    * // => []
    */
   function range(start, end, step) {
+    if (step && isIterateeCall(start, end, step)) {
+      end = step = null;
+    }
     start = +start || 0;
     step = step == null ? 1 : (+step || 0);
 
@@ -56,8 +51,8 @@ define([], function() {
     } else {
       end = +end || 0;
     }
-    // use `Array(length)` so engines like Chakra and V8 avoid slower modes
-    // http://youtu.be/XAqIpGU8ZZk#t=17m25s
+    // Use `Array(length)` so engines like Chakra and V8 avoid slower modes.
+    // See https://youtu.be/XAqIpGU8ZZk#t=17m25s for more details.
     var index = -1,
         length = nativeMax(ceil((end - start) / (step || 1)), 0),
         result = Array(length);

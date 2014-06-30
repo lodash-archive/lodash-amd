@@ -6,7 +6,6 @@
     ".*",
     "*.log",
     "*.md",
-    "coverage",
     "node_modules"
   ]
 }

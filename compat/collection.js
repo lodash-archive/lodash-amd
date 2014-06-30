@@ -1,36 +1,28 @@
-/**
- * Lo-Dash 3.0.0-pre (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize exports="amd" -o ./compat/`
- * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
- * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- * Available under MIT license <http://lodash.com/license>
- */
-define(['./collection/at', './collection/contains', './collection/countBy', './collection/every', './collection/filter', './collection/find', './collection/findLast', './collection/findWhere', './collection/forEach', './collection/forEachRight', './collection/groupBy', './collection/indexBy', './collection/invoke', './collection/map', './collection/max', './collection/min', './collection/partition', './collection/pluck', './collection/reduce', './collection/reduceRight', './collection/reject', './collection/sample', './collection/shuffle', './collection/size', './collection/some', './collection/sortBy', './collection/toArray', './collection/where'], function(at, contains, countBy, every, filter, find, findLast, findWhere, forEach, forEachRight, groupBy, indexBy, invoke, map, max, min, partition, pluck, reduce, reduceRight, reject, sample, shuffle, size, some, sortBy, toArray, where) {
-
+define(['./collection/all', './collection/any', './collection/at', './collection/collect', './collection/contains', './collection/countBy', './collection/detect', './collection/each', './collection/eachRight', './collection/every', './collection/filter', './collection/find', './collection/findLast', './collection/findWhere', './collection/foldl', './collection/foldr', './collection/forEach', './collection/forEachRight', './collection/groupBy', './collection/include', './collection/includes', './collection/indexBy', './collection/inject', './collection/invoke', './collection/map', './collection/max', './collection/min', './collection/partition', './collection/pluck', './collection/reduce', './collection/reduceRight', './collection/reject', './collection/sample', './collection/select', './collection/shuffle', './collection/size', './collection/some', './collection/sortBy', './collection/sortByAll', './collection/where'], function(all, any, at, collect, contains, countBy, detect, each, eachRight, every, filter, find, findLast, findWhere, foldl, foldr, forEach, forEachRight, groupBy, include, includes, indexBy, inject, invoke, map, max, min, partition, pluck, reduce, reduceRight, reject, sample, select, shuffle, size, some, sortBy, sortByAll, where) {
   return {
-    'all': every,
-    'any': some,
+    'all': all,
+    'any': any,
     'at': at,
-    'collect': map,
+    'collect': collect,
     'contains': contains,
     'countBy': countBy,
-    'detect': find,
-    'each': forEach,
-    'eachRight': forEachRight,
+    'detect': detect,
+    'each': each,
+    'eachRight': eachRight,
     'every': every,
     'filter': filter,
     'find': find,
     'findLast': findLast,
     'findWhere': findWhere,
-    'foldl': reduce,
-    'foldr': reduceRight,
+    'foldl': foldl,
+    'foldr': foldr,
     'forEach': forEach,
     'forEachRight': forEachRight,
     'groupBy': groupBy,
-    'include': contains,
+    'include': include,
+    'includes': includes,
     'indexBy': indexBy,
-    'inject': reduce,
+    'inject': inject,
     'invoke': invoke,
     'map': map,
     'max': max,
@@ -41,12 +33,12 @@ define(['./collection/at', './collection/contains', './collection/countBy', './c
     'reduceRight': reduceRight,
     'reject': reject,
     'sample': sample,
-    'select': filter,
+    'select': select,
     'shuffle': shuffle,
     'size': size,
     'some': some,
     'sortBy': sortBy,
-    'toArray': toArray,
+    'sortByAll': sortByAll,
     'where': where
   };
 });

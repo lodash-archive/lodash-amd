@@ -1,16 +1,8 @@
-/**
- * Lo-Dash 3.0.0-pre (Custom Build) <http://lodash.com/>
- * Build: `lodash modularize modern exports="amd" -o ./modern/`
- * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
- * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- * Available under MIT license <http://lodash.com/license>
- */
-define(['../internal/baseEach', '../internal/baseRandom'], function(baseEach, baseRandom) {
+define(['../internal/baseRandom', '../internal/toIterable'], function(baseRandom, toIterable) {
 
   /**
    * Creates an array of shuffled values, using a version of the Fisher-Yates
-   * shuffle. See [Wikipedia](http://en.wikipedia.org/wiki/Fisher-Yates_shuffle)
+   * shuffle. See [Wikipedia](https://en.wikipedia.org/wiki/Fisher-Yates_shuffle)
    * for more details.
    *
    * @static
@@ -24,15 +16,19 @@ define(['../internal/baseEach', '../internal/baseRandom'], function(baseEach, ba
    * // => [4, 1, 3, 2]
    */
   function shuffle(collection) {
-    var index = -1,
-        length = collection && collection.length,
-        result = Array(length < 0 ? 0 : length >>> 0);
+    collection = toIterable(collection);
 
-    baseEach(collection, function(value) {
-      var rand = baseRandom(0, ++index);
-      result[index] = result[rand];
-      result[rand] = value;
-    });
+    var index = -1,
+        length = collection.length,
+        result = Array(length);
+
+    while (++index < length) {
+      var rand = baseRandom(0, index);
+      if (index != rand) {
+        result[index] = result[rand];
+      }
+      result[rand] = collection[index];
+    }
     return result;
   }
 
