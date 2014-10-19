@@ -9,10 +9,10 @@ env:
     - LOADER="curl"
     - LOADER="dojo"
     - LOADER="requirejs"
-    - BUILD="modern"  LOADER="curl"
-    - BUILD="modern"  LOADER="dojo"
-    - BUILD="modern"  LOADER="requirejs"
-    - ISTANBUL=true   BUILD="modern-coverage" LOADER="requirejs"
+    - BUILD="modern" LOADER="curl"
+    - BUILD="modern" LOADER="dojo"
+    - BUILD="modern" LOADER="requirejs"
+    - BUILD="modern-coverage" ISTANBUL=true LOADER="requirejs"
     - SAUCE_LABS=true LOADER="curl"
     - SAUCE_LABS=true LOADER="dojo"
     - SAUCE_LABS=true LOADER="requirejs"
@@ -28,6 +28,9 @@ branches:
   only:
     - master
 before_install:
+  - "nvm use $TRAVIS_NODE_VERSION"
+  - "npm config set loglevel error"
+  - "npm i -g npm@\"^2.0.0\""
   - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
   - "[ $SAUCE_LABS == false ] || BIN=\"node\""
   - "[ $SAUCE_LABS == false ] || npm i chalk@\"0.5.1\" ecstatic@\"0.5.4\" request@\"^2.0.0\" sauce-tunnel@\"^2.0.0\""
