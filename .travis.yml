@@ -28,9 +28,9 @@ before_install:
   - "nvm use $TRAVIS_NODE_VERSION"
   - "npm config set loglevel error"
   - "npm i -g npm@\"^2.0.0\""
-  - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
+  - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash && cd ./node_modules/lodash && npm i && cd ../../"
   - "[ $SAUCE_LABS == false ] || BIN=\"node\""
-  - "[ $SAUCE_LABS == false ] || npm i chalk@\"0.5.1\" ecstatic@\"0.5.4\" request@\"^2.0.0\" sauce-tunnel@\"^2.0.0\""
+  - "[ $SAUCE_LABS == false ] || npm i chalk@\"0.5.1\" ecstatic@\"0.5.6\" request@\"^2.0.0\" sauce-tunnel@\"^2.0.0\""
   - "[ $ISTANBUL == false ]   || npm i -g coveralls@\"^2.0.0\" istanbul@\"0.3.2\""
 script:
   - "[ $ISTANBUL == false ]  || istanbul instrument --output ./$BUILD ./modern"
