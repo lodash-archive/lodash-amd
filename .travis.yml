@@ -3,22 +3,7 @@ node_js:
   - "0.10"
 env:
   global:
-    - BIN="phantomjs" BUILD="compat" ISTANBUL=false SAUCE_LABS=false SAUCE_USERNAME="lodash"
-    - secure: "X3/H+ZNbvxsD/wxQ0uP0d3KpFh2rJFuzqFbz8fG3KK97ZlZv4SYtgQoVzIx+rDClSHPOddTvbry3NusZ2JNadbcQRIaZCgBOE8FBX10YIR1ESDjxFBTZqRj8APD5/4L3akhyOQ62gEWTL4wT8TojIzRoT2bNzXEr6DyupVGW4qk="
-  matrix:
-    - LOADER="curl"
-    - LOADER="dojo"
-    - LOADER="requirejs"
-    - BUILD="modern" LOADER="curl"
-    - BUILD="modern" LOADER="dojo"
-    - BUILD="modern" LOADER="requirejs"
-    - BUILD="modern-coverage" ISTANBUL=true LOADER="requirejs"
-    - SAUCE_LABS=true LOADER="curl"
-    - SAUCE_LABS=true LOADER="dojo"
-    - SAUCE_LABS=true LOADER="requirejs"
-    - SAUCE_LABS=true BUILD="modern" LOADER="curl"
-    - SAUCE_LABS=true BUILD="modern" LOADER="dojo"
-    - SAUCE_LABS=true BUILD="modern" LOADER="requirejs"
+    - secure: "fBISI40WKTrtHMTbuRV6rYYGkJGAbFYfjIxB7WQMCeuBVHsf7xPqjRRP2mqQOxlm+XfT2ClVslmnlCPMON61VxKWiwFERNObC4STO6j4N79wA2+I0wGTUY47tY9i0ngS9Dhe7BtCBPpIYvY68VV1SvLI+6tNN0MT1PBq3ZKDEuU="
 git:
   depth: 10
 branches:
@@ -29,15 +14,9 @@ before_install:
   - "npm config set loglevel error"
   - "npm i -g npm@\"^2.0.0\""
   - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash && cd ./node_modules/lodash && npm i && cd ../../"
-  - "[ $SAUCE_LABS == false ] || BIN=\"node\""
-  - "[ $SAUCE_LABS == false ] || npm i chalk@\"0.5.1\" ecstatic@\"0.5.6\" request@\"^2.0.0\" sauce-tunnel@\"^2.0.0\""
-  - "[ $ISTANBUL == false ]   || npm i -g coveralls@\"^2.0.0\" istanbul@\"0.3.2\""
+  - "npm i -g coveralls@\"^2.0.0\" istanbul@\"0.3.2\""
 script:
-  - "[ $ISTANBUL == false ]  || istanbul instrument --output ./$BUILD ./modern"
-  - "[ $SAUCE_LABS == true ] || phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
-  - "[ $ISTANBUL == false ]  || istanbul report lcovonly"
-  - "[ $ISTANBUL == true ] && [ $TRAVIS_SECURE_ENV_VARS == true ] && cat ./coverage/lcov.info | coveralls || true"
-  - "[ $SAUCE_LABS == false ]  || $BIN ./node_modules/lodash/test/saucelabs.js name=\"lodash tests\" runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development\""
-  - "([ $SAUCE_LABS == false ] || [ $BUILD != 'compat' ]) || $BIN ./node_modules/lodash/test/saucelabs.js name=\"lodash tests\" runner=\"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,ie-compat\" compatMode=7"
-  - "[ $SAUCE_LABS == false ]  || $BIN ./node_modules/lodash/test/saucelabs.js name=\"backbone tests\"   runner=\"node_modules/lodash/test/backbone.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,backbone\""
-  - "[ $SAUCE_LABS == false ]  || $BIN ./node_modules/lodash/test/saucelabs.js name=\"underscore tests\" runner=\"node_modules/lodash/test/underscore.html?build=../../../$BUILD/main.js&loader=$LOADER\" tags=\"$BUILD,$LOADER,amd,development,underscore\""
+  - "istanbul instrument --output ./modern-coverage ./modern"
+  - "phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../modern-coverage/main.js&loader=requirejs&noglobals=true\""
+  - "istanbul report lcovonly"
+  - "[ $TRAVIS_SECURE_ENV_VARS == true ] && cat ./coverage/lcov.info | coveralls || true"
