@@ -19,4 +19,4 @@ script:
   - "istanbul instrument --output ./modern-coverage ./modern"
   - "phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../modern-coverage/main.js&loader=requirejs&noglobals=true\""
   - "istanbul report lcovonly"
-  - "[ $TRAVIS_SECURE_ENV_VARS == true ] && cat ./coverage/lcov.info | coveralls || true"
+  - "([ $TRAVIS_SECURE_ENV_VARS == true ] && cat ./coverage/lcov.info | coveralls) || true"
