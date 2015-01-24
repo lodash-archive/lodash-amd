@@ -1,4 +1,4 @@
-# lodash-amd v3.0.0-pre
+# lodash-amd v3.0.0
 
 The [compatibility & modern builds](https://github.com/lodash/lodash/wiki/Build-Differences) of [lodash](https://lodash.com/) exported as [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) modules.
 
@@ -21,8 +21,8 @@ require({
   'packages': [
     { 'name': 'lodash', 'location': 'lodash-amd/modern' }
   ]
-}, ['lodash/collection/each'], function(each) {
-  // use `each`
+}, ['lodash/array/chunk'], function(chunk) {
+  // use `chunk`
 });
 ```
 

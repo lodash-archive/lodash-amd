@@ -1,6 +1,6 @@
 {
   "name": "lodash-amd",
-  "version": "3.0.0-pre",
+  "version": "3.0.0",
   "main": "compat/main.js",
   "ignore": [
     ".*",
