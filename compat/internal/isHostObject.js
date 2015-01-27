@@ -1,4 +1,4 @@
-define(['./baseToString'], function(baseToString) {
+define([], function() {
 
   /**
    * Checks if `value` is a host object in IE < 9.
@@ -9,7 +9,7 @@ define(['./baseToString'], function(baseToString) {
    */
   var isHostObject = (function() {
     try {
-      baseToString({ 'toString': 0 });
+      Object({ 'toString': 0 } + '');
     } catch(e) {
       return function() { return false; };
     }
