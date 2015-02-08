@@ -1,4 +1,4 @@
-define(['../internal/arrayEach', '../lang/isArguments', '../lang/isArray', '../internal/isIndex', '../internal/isLength', '../lang/isObject', '../lang/isString', '../support'], function(arrayEach, isArguments, isArray, isIndex, isLength, isObject, isString, support) {
+define(['../internal/arrayEach', '../lang/isArguments', '../lang/isArray', '../lang/isFunction', '../internal/isIndex', '../internal/isLength', '../lang/isObject', '../lang/isString', '../support'], function(arrayEach, isArguments, isArray, isFunction, isIndex, isLength, isObject, isString, support) {
 
   /** `Object#toString` result references. */
   var arrayTag = '[object Array]',
@@ -85,12 +85,12 @@ define(['../internal/arrayEach', '../lang/isArguments', '../lang/isArray', '../i
 
     var Ctor = object.constructor,
         index = -1,
-        proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto,
+        proto = (isFunction(Ctor) && Ctor.prototype) || objectProto,
         isProto = proto === object,
         result = Array(length),
         skipIndexes = length > 0,
         skipErrorProps = support.enumErrorProps && (object === errorProto || object instanceof Error),
-        skipProto = support.enumPrototypes && typeof object == 'function';
+        skipProto = support.enumPrototypes && isFunction(object);
 
     while (++index < length) {
       result[index] = (index + '');
