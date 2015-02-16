@@ -32,7 +32,7 @@ define(['../internal/isLength', '../internal/isObjectLike', '../support'], funct
    * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
    * @example
    *
-   * (function() { return _.isArguments(arguments); })();
+   * _.isArguments(function() { return arguments; }());
    * // => true
    *
    * _.isArguments([1, 2, 3]);
