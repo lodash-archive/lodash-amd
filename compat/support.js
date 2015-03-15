@@ -1,11 +1,8 @@
-define(['./lang/isNative', './internal/root'], function(isNative, root) {
+define(['./internal/root'], function(root) {
 
   /** `Object#toString` result references. */
   var argsTag = '[object Arguments]',
       objectTag = '[object Object]';
-
-  /** Used to detect functions containing a `this` reference. */
-  var reThis = /\bthis\b/;
 
   /** Used for native method references. */
   var arrayProto = Array.prototype,
@@ -16,9 +13,8 @@ define(['./lang/isNative', './internal/root'], function(isNative, root) {
   var document = (document = root.window) && document.document;
 
   /**
-   * Used to resolve the `toStringTag` of values.
-   * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-   * for more details.
+   * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+   * of values.
    */
   var objToString = objectProto.toString;
 
@@ -83,7 +79,7 @@ define(['./lang/isNative', './internal/root'], function(isNative, root) {
      * @memberOf _.support
      * @type boolean
      */
-    support.funcDecomp = !isNative(root.WinRTError) && reThis.test(function() { return this; });
+    support.funcDecomp = /\bthis\b/.test(function() { return this; });
 
     /**
      * Detect if `Function#name` is supported (all but IE).
