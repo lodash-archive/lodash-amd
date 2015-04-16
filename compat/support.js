@@ -32,11 +32,11 @@ define(['./internal/root'], function(root) {
   var support = {};
 
   (function(x) {
-    var Ctor = function() { this.x = 1; },
-        object = { '0': 1, 'length': 1 },
+    var Ctor = function() { this.x = x; },
+        object = { '0': x, 'length': x },
         props = [];
 
-    Ctor.prototype = { 'valueOf': 1, 'y': 1 };
+    Ctor.prototype = { 'valueOf': x, 'y': x };
     for (var key in new Ctor) { props.push(key); }
 
     /**
@@ -98,8 +98,7 @@ define(['./internal/root'], function(root) {
     support.nodeTag = objToString.call(document) != objectTag;
 
     /**
-     * Detect if string indexes are non-enumerable
-     * (IE < 9, RingoJS, Rhino, Narwhal).
+     * Detect if string indexes are non-enumerable (IE < 9, RingoJS, Rhino, Narwhal).
      *
      * @memberOf _.support
      * @type boolean
@@ -107,8 +106,7 @@ define(['./internal/root'], function(root) {
     support.nonEnumStrings = !propertyIsEnumerable.call('x', 0);
 
     /**
-     * Detect if properties shadowing those on `Object.prototype` are
-     * non-enumerable.
+     * Detect if properties shadowing those on `Object.prototype` are non-enumerable.
      *
      * In IE < 9 an object's own properties, shadowing non-enumerable ones,
      * are made non-enumerable as well (a.k.a the JScript `[[DontEnum]]` bug).
@@ -130,11 +128,11 @@ define(['./internal/root'], function(root) {
      * Detect if `Array#shift` and `Array#splice` augment array-like objects
      * correctly.
      *
-     * Firefox < 10, compatibility modes of IE 8, and IE < 9 have buggy Array `shift()`
-     * and `splice()` functions that fail to remove the last element, `value[0]`,
-     * of array-like objects even though the `length` property is set to `0`.
-     * The `shift()` method is buggy in compatibility modes of IE 8, while `splice()`
-     * is buggy regardless of mode in IE < 9.
+     * Firefox < 10, compatibility modes of IE 8, and IE < 9 have buggy Array
+     * `shift()` and `splice()` functions that fail to remove the last element,
+     * `value[0]`, of array-like objects even though the "length" property is
+     * set to `0`. The `shift()` method is buggy in compatibility modes of IE 8,
+     * while `splice()` is buggy regardless of mode in IE < 9.
      *
      * @memberOf _.support
      * @type boolean
@@ -170,8 +168,8 @@ define(['./internal/root'], function(root) {
      * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
      * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
      * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-     * checks for indexes that exceed their function's formal parameters with
-     * associated values of `0`.
+     * checks for indexes that exceed the number of function parameters and
+     * whose associated argument values are `0`.
      *
      * @memberOf _.support
      * @type boolean
@@ -181,7 +179,7 @@ define(['./internal/root'], function(root) {
     } catch(e) {
       support.nonEnumArgs = true;
     }
-  }(0, 0));
+  }(1, 0));
 
   return support;
 });

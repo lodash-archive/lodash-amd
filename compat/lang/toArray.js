@@ -1,4 +1,4 @@
-define(['../internal/arrayCopy', '../internal/isLength', './isString', '../support', '../object/values'], function(arrayCopy, isLength, isString, support, values) {
+define(['../internal/arrayCopy', '../internal/getLength', '../internal/isLength', './isString', '../support', '../object/values'], function(arrayCopy, getLength, isLength, isString, support, values) {
 
   /**
    * Converts `value` to an array.
@@ -16,7 +16,7 @@ define(['../internal/arrayCopy', '../internal/isLength', './isString', '../suppo
    * // => [2, 3]
    */
   function toArray(value) {
-    var length = value ? value.length : 0;
+    var length = value ? getLength(value) : 0;
     if (!isLength(length)) {
       return values(value);
     }

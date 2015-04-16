@@ -1,10 +1,10 @@
-define([], function() {
+define(['./toObject'], function(toObject) {
 
   /** Used as a safe reference for `undefined` in pre-ES5 environments. */
   var undefined;
 
   /**
-   * The base implementation of `_.property` which does not coerce `key` to a string.
+   * The base implementation of `_.property` without support for deep paths.
    *
    * @private
    * @param {string} key The key of the property to get.
@@ -12,7 +12,7 @@ define([], function() {
    */
   function baseProperty(key) {
     return function(object) {
-      return object == null ? undefined : object[key];
+      return object == null ? undefined : toObject(object)[key];
     };
   }
 

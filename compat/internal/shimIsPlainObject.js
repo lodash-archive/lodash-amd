@@ -1,5 +1,8 @@
 define(['./baseForIn', '../lang/isArguments', './isHostObject', './isObjectLike', '../support'], function(baseForIn, isArguments, isHostObject, isObjectLike, support) {
 
+  /** Used as a safe reference for `undefined` in pre-ES5 environments. */
+  var undefined;
+
   /** `Object#toString` result references. */
   var objectTag = '[object Object]';
 
@@ -51,7 +54,7 @@ define(['./baseForIn', '../lang/isArguments', './isHostObject', './isObjectLike'
     baseForIn(value, function(subValue, key) {
       result = key;
     });
-    return typeof result == 'undefined' || hasOwnProperty.call(value, result);
+    return result === undefined || hasOwnProperty.call(value, result);
   }
 
   return shimIsPlainObject;
