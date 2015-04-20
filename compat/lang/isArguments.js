@@ -1,7 +1,4 @@
-define(['../internal/isLength', '../internal/isObjectLike', '../support'], function(isLength, isObjectLike, support) {
-
-  /** Used as a safe reference for `undefined` in pre-ES5 environments. */
-  var undefined;
+define(['../internal/isArrayLike', '../internal/isObjectLike', '../support'], function(isArrayLike, isObjectLike, support) {
 
   /** `Object#toString` result references. */
   var argsTag = '[object Arguments]';
@@ -38,15 +35,13 @@ define(['../internal/isLength', '../internal/isObjectLike', '../support'], funct
    * // => false
    */
   function isArguments(value) {
-    var length = isObjectLike(value) ? value.length : undefined;
-    return isLength(length) && objToString.call(value) == argsTag;
+    return isObjectLike(value) && isArrayLike(value) && objToString.call(value) == argsTag;
   }
   // Fallback for environments without a `toStringTag` for `arguments` objects.
   if (!support.argsTag) {
     isArguments = function(value) {
-      var length = isObjectLike(value) ? value.length : undefined;
-      return isLength(length) && hasOwnProperty.call(value, 'callee') &&
-        !propertyIsEnumerable.call(value, 'callee');
+      return isObjectLike(value) && isArrayLike(value) &&
+        hasOwnProperty.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
     };
   }
 

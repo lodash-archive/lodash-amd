@@ -1,4 +1,4 @@
-define(['./getLength', './isLength', '../lang/isObject', '../lang/isString', '../support', '../object/values'], function(getLength, isLength, isObject, isString, support, values) {
+define(['./isArrayLike', '../lang/isObject', '../lang/isString', '../support', '../object/values'], function(isArrayLike, isObject, isString, support, values) {
 
   /**
    * Converts `value` to an array-like object if it is not one.
@@ -11,7 +11,7 @@ define(['./getLength', './isLength', '../lang/isObject', '../lang/isString', '..
     if (value == null) {
       return [];
     }
-    if (!isLength(getLength(value))) {
+    if (!isArrayLike(value)) {
       return values(value);
     }
     if (support.unindexedChars && isString(value)) {

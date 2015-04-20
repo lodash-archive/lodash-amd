@@ -1,4 +1,4 @@
-define(['../internal/isLength', '../lang/isNative', '../lang/isObject', '../internal/shimKeys', '../support'], function(isLength, isNative, isObject, shimKeys, support) {
+define(['../internal/isArrayLike', '../lang/isNative', '../lang/isObject', '../internal/shimKeys', '../support'], function(isArrayLike, isNative, isObject, shimKeys, support) {
 
   /* Native method references for those with the same name as other `lodash` methods. */
   var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
@@ -31,12 +31,9 @@ define(['../internal/isLength', '../lang/isNative', '../lang/isObject', '../inte
    * // => ['0', '1']
    */
   var keys = !nativeKeys ? shimKeys : function(object) {
-    if (object) {
-      var Ctor = object.constructor,
-          length = object.length;
-    }
+    var Ctor = object != null && object.constructor;
     if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-        (typeof object == 'function' ? support.enumPrototypes : isLength(length))) {
+        (typeof object == 'function' ? support.enumPrototypes : isArrayLike(object))) {
       return shimKeys(object);
     }
     return isObject(object) ? nativeKeys(object) : [];
