@@ -1,7 +1,7 @@
 define(['./isArrayLike', '../lang/isObject', '../lang/isString', '../support', '../object/values'], function(isArrayLike, isObject, isString, support, values) {
 
   /**
-   * Converts `value` to an array-like object if it is not one.
+   * Converts `value` to an array-like object if it's not one.
    *
    * @private
    * @param {*} value The value to process.

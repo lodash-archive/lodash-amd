@@ -1,4 +1,4 @@
-define(['./isArguments', './isNative', '../internal/shimIsPlainObject', '../support'], function(isArguments, isNative, shimIsPlainObject, support) {
+define(['../internal/getNative', './isArguments', '../internal/shimIsPlainObject', '../support'], function(getNative, isArguments, shimIsPlainObject, support) {
 
   /** `Object#toString` result references. */
   var objectTag = '[object Object]';
@@ -13,7 +13,7 @@ define(['./isArguments', './isNative', '../internal/shimIsPlainObject', '../supp
   var objToString = objectProto.toString;
 
   /** Native method references. */
-  var getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf;
+  var getPrototypeOf = getNative(Object, 'getPrototypeOf');
 
   /**
    * Checks if `value` is a plain object, that is, an object created by the
@@ -49,8 +49,8 @@ define(['./isArguments', './isNative', '../internal/shimIsPlainObject', '../supp
     if (!(value && objToString.call(value) == objectTag) || (!support.argsTag && isArguments(value))) {
       return false;
     }
-    var valueOf = value.valueOf,
-        objProto = isNative(valueOf) && (objProto = getPrototypeOf(valueOf)) && getPrototypeOf(objProto);
+    var valueOf = getNative(value, 'valueOf'),
+        objProto = valueOf && (objProto = getPrototypeOf(valueOf)) && getPrototypeOf(objProto);
 
     return objProto
       ? (value == objProto || getPrototypeOf(value) == objProto)

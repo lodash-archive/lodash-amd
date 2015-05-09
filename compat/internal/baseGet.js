@@ -21,11 +21,11 @@ define(['./toObject'], function(toObject) {
     if (pathKey !== undefined && pathKey in object) {
       path = [pathKey];
     }
-    var index = -1,
+    var index = 0,
         length = path.length;
 
-    while (object != null && ++index < length) {
-      object = toObject(object)[path[index]];
+    while (object != null && index < length) {
+      object = toObject(object)[path[index++]];
     }
     return (index && index == length) ? object : undefined;
   }

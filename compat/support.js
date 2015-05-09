@@ -10,7 +10,7 @@ define(['./internal/root'], function(root) {
       objectProto = Object.prototype;
 
   /** Used to detect DOM support. */
-  var document = (document = root.window) && document.document;
+  var document = (document = root.window) ? document.document : null;
 
   /**
    * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
@@ -33,7 +33,6 @@ define(['./internal/root'], function(root) {
 
   (function(x) {
     var Ctor = function() { this.x = x; },
-        args = arguments,
         object = { '0': x, 'length': x },
         props = [];
 
@@ -47,7 +46,7 @@ define(['./internal/root'], function(root) {
      * @memberOf _.support
      * @type boolean
      */
-    support.argsTag = objToString.call(args) == argsTag;
+    support.argsTag = objToString.call(arguments) == argsTag;
 
     /**
      * Detect if `name` or `message` properties of `Error.prototype` are
@@ -73,38 +72,12 @@ define(['./internal/root'], function(root) {
     support.enumPrototypes = propertyIsEnumerable.call(Ctor, 'prototype');
 
     /**
-     * Detect if functions can be decompiled by `Function#toString`
-     * (all but Firefox OS certified apps, older Opera mobile browsers, and
-     * the PlayStation 3; forced `false` for Windows 8 apps).
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    support.funcDecomp = /\bthis\b/.test(function() { return this; });
-
-    /**
-     * Detect if `Function#name` is supported (all but IE).
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    support.funcNames = typeof Function.name == 'string';
-
-    /**
      * Detect if the `toStringTag` of DOM nodes is resolvable (all but IE < 9).
      *
      * @memberOf _.support
      * @type boolean
      */
     support.nodeTag = objToString.call(document) != objectTag;
-
-    /**
-     * Detect if string indexes are non-enumerable (IE < 9, RingoJS, Rhino, Narwhal).
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    support.nonEnumStrings = !propertyIsEnumerable.call('x', 0);
 
     /**
      * Detect if properties shadowing those on `Object.prototype` are non-enumerable.
@@ -161,24 +134,6 @@ define(['./internal/root'], function(root) {
       support.dom = document.createDocumentFragment().nodeType === 11;
     } catch(e) {
       support.dom = false;
-    }
-
-    /**
-     * Detect if `arguments` object indexes are non-enumerable.
-     *
-     * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
-     * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
-     * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-     * checks for indexes that exceed the number of function parameters and
-     * whose associated argument values are `0`.
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    try {
-      support.nonEnumArgs = !propertyIsEnumerable.call(args, 1);
-    } catch(e) {
-      support.nonEnumArgs = true;
     }
   }(1, 0));
 

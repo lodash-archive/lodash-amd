@@ -1,7 +1,7 @@
 define(['../lang/isObject', '../lang/isString', '../support'], function(isObject, isString, support) {
 
   /**
-   * Converts `value` to an object if it is not one.
+   * Converts `value` to an object if it's not one.
    *
    * @private
    * @param {*} value The value to process.

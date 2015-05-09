@@ -1,4 +1,4 @@
-define(['../internal/baseGet', '../internal/baseSlice', '../internal/isIndex', '../internal/isKey', '../lang/isString', '../array/last', '../support', '../internal/toPath'], function(baseGet, baseSlice, isIndex, isKey, isString, last, support, toPath) {
+define(['../internal/baseGet', '../internal/baseSlice', '../lang/isArguments', '../lang/isArray', '../internal/isIndex', '../internal/isKey', '../internal/isLength', '../lang/isString', '../array/last', '../internal/toPath'], function(baseGet, baseSlice, isArguments, isArray, isIndex, isKey, isLength, isString, last, toPath) {
 
   /** Used for native method references. */
   var objectProto = Object.prototype;
@@ -36,10 +36,14 @@ define(['../internal/baseGet', '../internal/baseSlice', '../internal/isIndex', '
     if (!result && !isKey(path)) {
       path = toPath(path);
       object = path.length == 1 ? object : baseGet(object, baseSlice(path, 0, -1));
+      if (object == null) {
+        return false;
+      }
       path = last(path);
-      result = object != null && hasOwnProperty.call(object, path);
+      result = hasOwnProperty.call(object, path);
     }
-    return result || (support.nonEnumStrings && isString(object) && isIndex(path, object.length));
+    return result || (isLength(object.length) && isIndex(path, object.length) &&
+      (isArray(object) || isArguments(object) || isString(object)));
   }
 
   return has;
