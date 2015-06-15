@@ -1,22 +1,9 @@
-define(['./internal/root'], function(root) {
-
-  /** `Object#toString` result references. */
-  var argsTag = '[object Arguments]',
-      objectTag = '[object Object]';
+define([], function() {
 
   /** Used for native method references. */
   var arrayProto = Array.prototype,
       errorProto = Error.prototype,
       objectProto = Object.prototype;
-
-  /** Used to detect DOM support. */
-  var document = (document = root.window) ? document.document : null;
-
-  /**
-   * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-   * of values.
-   */
-  var objToString = objectProto.toString;
 
   /** Native method references. */
   var propertyIsEnumerable = objectProto.propertyIsEnumerable,
@@ -40,15 +27,6 @@ define(['./internal/root'], function(root) {
     for (var key in new Ctor) { props.push(key); }
 
     /**
-     * Detect if the `toStringTag` of `arguments` objects is resolvable
-     * (all but Firefox < 4, IE < 9).
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    support.argsTag = objToString.call(arguments) == argsTag;
-
-    /**
      * Detect if `name` or `message` properties of `Error.prototype` are
      * enumerable by default (IE < 9, Safari < 5.1).
      *
@@ -70,14 +48,6 @@ define(['./internal/root'], function(root) {
      * @type boolean
      */
     support.enumPrototypes = propertyIsEnumerable.call(Ctor, 'prototype');
-
-    /**
-     * Detect if the `toStringTag` of DOM nodes is resolvable (all but IE < 9).
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    support.nodeTag = objToString.call(document) != objectTag;
 
     /**
      * Detect if properties shadowing those on `Object.prototype` are non-enumerable.
@@ -123,18 +93,6 @@ define(['./internal/root'], function(root) {
      * @type boolean
      */
     support.unindexedChars = ('x'[0] + Object('x')[0]) != 'xx';
-
-    /**
-     * Detect if the DOM is supported.
-     *
-     * @memberOf _.support
-     * @type boolean
-     */
-    try {
-      support.dom = document.createDocumentFragment().nodeType === 11;
-    } catch(e) {
-      support.dom = false;
-    }
   }(1, 0));
 
   return support;

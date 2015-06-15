@@ -21,6 +21,9 @@ define(['./bufferClone', './root'], function(bufferClone, root) {
   /** Used to match `RegExp` flags from their coerced string values. */
   var reFlags = /\w*$/;
 
+  /** Native method references. */
+  var Uint8Array = root.Uint8Array;
+
   /** Used to lookup a type array constructors by `toStringTag`. */
   var ctorByTag = {};
   ctorByTag[float32Tag] = root.Float32Array;
@@ -28,7 +31,7 @@ define(['./bufferClone', './root'], function(bufferClone, root) {
   ctorByTag[int8Tag] = root.Int8Array;
   ctorByTag[int16Tag] = root.Int16Array;
   ctorByTag[int32Tag] = root.Int32Array;
-  ctorByTag[uint8Tag] = root.Uint8Array;
+  ctorByTag[uint8Tag] = Uint8Array;
   ctorByTag[uint8ClampedTag] = root.Uint8ClampedArray;
   ctorByTag[uint16Tag] = root.Uint16Array;
   ctorByTag[uint32Tag] = root.Uint32Array;

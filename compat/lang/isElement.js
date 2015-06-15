@@ -1,13 +1,4 @@
-define(['../internal/isHostObject', '../internal/isObjectLike', './isPlainObject', '../support'], function(isHostObject, isObjectLike, isPlainObject, support) {
-
-  /** Used for native method references. */
-  var objectProto = Object.prototype;
-
-  /**
-   * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-   * of values.
-   */
-  var objToString = objectProto.toString;
+define(['../internal/isObjectLike', './isPlainObject'], function(isObjectLike, isPlainObject) {
 
   /**
    * Checks if `value` is a DOM element.
@@ -26,14 +17,7 @@ define(['../internal/isHostObject', '../internal/isObjectLike', './isPlainObject
    * // => false
    */
   function isElement(value) {
-    return !!value && value.nodeType === 1 && isObjectLike(value) &&
-      (support.nodeTag ? (objToString.call(value).indexOf('Element') > -1) : isHostObject(value));
-  }
-  // Fallback for environments without DOM support.
-  if (!support.dom) {
-    isElement = function(value) {
-      return !!value && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
-    };
+    return !!value && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
   }
 
   return isElement;
