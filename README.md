@@ -1,16 +1,10 @@
-# lodash-amd v3.10.1
+# lodash-amd v3.10.2
 
-The [compatibility & modern builds](https://github.com/lodash/lodash/wiki/Build-Differences) of [lodash](https://lodash.com/) exported as [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) modules.
+The compatibility & modern builds of [lodash](https://lodash.com/) exported as [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) modules.
 
-Generated using [lodash-cli](https://www.npmjs.com/package/lodash-cli):
-```bash
-$ lodash modularize compat exports=amd -o ./compat && lodash compat exports=amd -d -o ./compat/main.js
-$ lodash modularize modern exports=amd -o ./modern && lodash modern exports=amd -d -o ./modern/main.js
-```
+## Discontinued
 
-## Deprecated
-
-The `lodash-amd` package is deprecated in favor of [lodash@amd](https://github.com/lodash/lodash/tree/3.10.1-amd) & [lodash-compat@amd](https://github.com/lodash/lodash-compat/tree/3.10.1-amd) ≥ v3.0.0.
+This package has been discontinued in favor of [lodash@amd](https://github.com/lodash/lodash/tree/amd).
 
 ## Installation
 
@@ -26,4 +20,4 @@ require({
 });
 ```
 
-See the [package source](https://github.com/lodash/lodash-amd/tree/3.10.1) for more details.
+See the [package source](https://github.com/lodash/lodash-amd/tree/3.10.2) for more details.
